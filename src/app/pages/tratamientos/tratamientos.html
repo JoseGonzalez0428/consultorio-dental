@@ -5,7 +5,7 @@
     <div class="lista-tratamientos">
       @for (tratamiento of tratamientos; track tratamiento.id) {
         <div class="tratamiento-carta" (click)="verTratamiento(tratamiento.id)">
-          <img [src]="'assets/Imagenes/' + tratamiento.imagen" [alt]="tratamiento.nombre">
+          <img [src]="'Imagenes/' + tratamiento.imagen" [alt]="tratamiento.nombre">
           <div>{{ tratamiento.nombre }}</div>
         </div>
       }
