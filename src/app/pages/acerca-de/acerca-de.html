@@ -1,1 +1,54 @@
-<p>acerca-de works!</p>
+<div class="Pagina">
+  <div class="Contenido">
+    <div class="Descripcion">
+      <div class="InfoDescripcion">
+        <div class="TitContenido">Acerca de nosotros</div>
+        <div class="TextoDescripcion">
+          La Dra. Ana Luisa cuenta con más de 25 años de experiencia en el 
+          cuidado de la salud bucal, brindando atención profesional y 
+          personalizada a cada paciente. Se tituló en la Facultad de 
+          Estomatología de la UASLP, donde adquirió los conocimientos y 
+          habilidades que la han distinguido a lo largo de su trayectoria. 
+          Su compromiso es ofrecer tratamientos de alta calidad en un ambiente 
+          cómodo y confiable, priorizando siempre el bienestar y la 
+          satisfacción de sus pacientes.
+        </div>
+      </div>
+      <div id="Doctora">
+        <img src="assets/Imagenes/dra.jpg" alt="Dra. Ana Luisa">
+      </div>
+    </div>
+
+    <div class="Contenido">
+      <h2 style="font-family: Verdana; margin-bottom: 20px;">Solicita informes</h2>
+
+      <div class="campo-formulario">
+        <label>Nombre</label>
+        <input type="text" [(ngModel)]="nombre">
+      </div>
+
+      <div class="campo-formulario">
+        <label>Apellidos</label>
+        <input type="text" [(ngModel)]="apellidos">
+      </div>
+
+      <div class="campo-formulario">
+        <label>Correo electrónico</label>
+        <input type="email" [(ngModel)]="correo" placeholder="email@fakerdomain.net">
+      </div>
+
+      <div class="campo-formulario">
+        <label>Tu mensaje</label>
+        <textarea [(ngModel)]="mensaje" rows="5"></textarea>
+      </div>
+
+      @if (enviado) {
+        <div style="color: green; font-family: Verdana; margin-top: 10px;">
+          ✅ Tu mensaje ha sido enviado, nos pondremos en contacto contigo pronto.
+        </div>
+      }
+
+      <button class="Boton" style="margin-top: 20px;" (click)="enviarMensaje()">Aceptar</button>
+    </div>
+  </div>
+</div>
