@@ -1,0 +1,35 @@
+<div class="Pagina">
+  <div id="MenuDeLogin"></div>
+  <div class="Contenido">
+    <div id="LogoLogin">
+      <img src="Imagenes/logo.png" alt="Logo">
+    </div>
+
+    <div class="CuadroLogin">
+      <div class="TitLogin">Email</div>
+      <div class="Campo">
+        <input type="email" [(ngModel)]="correo" required>
+      </div>
+
+      <div class="TitLogin">Contraseña</div>
+      <div class="Campo">
+        <input type="password" [(ngModel)]="contrasena" required>
+      </div>
+
+      <div id="BotonRegistrar">
+        <input type="submit" value="Iniciar Sesión" (click)="iniciarSesion()">
+        @if (mensajeError) {
+          <div style="color: red; margin-top: 10px; text-align: center;">
+            {{ mensajeError }}
+          </div>
+        }
+      </div>
+
+      <div id="Pregunta">¿No tienes cuenta?</div>
+      <div id="IniciaSesion">
+        <a routerLink="/registro">Regístrate aquí</a>
+      </div>
+    </div>
+  </div>
+  <div id="PieDeLogin"></div>
+</div>

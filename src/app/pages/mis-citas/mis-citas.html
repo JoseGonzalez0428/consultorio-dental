@@ -1,0 +1,77 @@
+<div class="Pagina">
+  <div class="Contenido">
+    <div class="TitContenido">Mis citas</div>
+
+    @if (mensaje) {
+      <div style="color: green; margin-bottom: 15px; font-family: Verdana;">
+        {{ mensaje }}
+      </div>
+    }
+    @if (error) {
+      <div style="color: red; margin-bottom: 15px; font-family: Verdana;">
+        {{ error }}
+      </div>
+    }
+
+    <div class="TablaCitas">
+      <div class="CeldaCitas" id="CeldaTit">Fecha</div>
+      <div class="CeldaCitas" id="CeldaTit">Tratamiento</div>
+      <div class="CeldaCitas" id="CeldaTit">Estado</div>
+
+      @if (citas.length === 0) {
+        <div class="CeldaCitas" style="grid-column: span 3; text-align:center;">
+          No tienes citas registradas.
+        </div>
+      }
+
+      @for (cita of citas; track cita.id_cita) {
+        <div class="CeldaCitas">
+          <div>{{ formatearFecha(cita.fecha) }}</div>
+          <div>{{ cita.hora }} - {{ sumarUnaHora(cita.hora) }}</div>
+        </div>
+        <div class="CeldaCitas">{{ cita.nombre_tratamiento }}</div>
+        <div class="CeldaCitas">
+          <div class="EstadoCita" [id]="'Cita' + cita.estado">
+            <div class="EstatusCita">{{ cita.estado }}</div>
+            @if (cita.estado === 'Pendiente') {
+              <div class="OpcionesCita">
+                <select [(ngModel)]="cita.nueva_fecha" (ngModelChange)="cargarHorasModificacion(cita)">
+                  <option value="">Seleccione fecha</option>
+                  @for (f of fechasDisponibles; track f) {
+                    <option [value]="f">{{ formatearFecha(f) }}</option>
+                  }
+                </select>
+                <select [(ngModel)]="cita.nueva_hora" [disabled]="!cita.nueva_fecha">
+                  <option value="">Seleccione hora</option>
+                  @for (h of cita.horasDisponibles; track h.inicio) {
+                    <option [value]="h.inicio">{{ h.inicio }} - {{ h.fin }}</option>
+                  }
+                </select>
+                <br>
+                <button class="BotonCita" (click)="modificarCita(cita)">Modificar</button>
+                <button class="BotonCita" (click)="cancelarCita(cita.id_cita)">Cancelar</button>
+              </div>
+            }
+          </div>
+        </div>
+      }
+    </div>
+
+    <!-- Paginación -->
+    @if (totalPaginas > 1) {
+      <div class="DesplazarReporte" style="margin-top: 20px; justify-content:center; align-items:center; gap:10px;">
+        <img src="Imagenes/flechaIzq.png" alt="Anterior"
+          [style.opacity]="paginaActual === 1 ? '0.3' : '1'"
+          [style.cursor]="paginaActual === 1 ? 'default' : 'pointer'"
+          (click)="cambiarPagina(paginaActual - 1)">
+        <div id="NoReporte">
+          {{ paginaActual | number:'2.0-0' }}/{{ totalPaginas | number:'2.0-0' }}
+        </div>
+        <img src="Imagenes/flechaDer.png" alt="Siguiente"
+          [style.opacity]="paginaActual === totalPaginas ? '0.3' : '1'"
+          [style.cursor]="paginaActual === totalPaginas ? 'default' : 'pointer'"
+          (click)="cambiarPagina(paginaActual + 1)">
+      </div>
+    }
+  </div>
+</div>

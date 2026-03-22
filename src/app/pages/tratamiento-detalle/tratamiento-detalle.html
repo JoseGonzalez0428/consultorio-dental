@@ -1,0 +1,33 @@
+<div class="Pagina">
+  <div class="Contenido">
+    @if (tratamiento) {
+      <div class="Tratamiento">
+        <div class="ImagenTrat">
+          <img [src]="'Imagenes/' + tratamiento.imagen" [alt]="tratamiento.nombre">
+        </div>
+        <div class="InfoTrat">
+          <div class="TituloTrat">{{ tratamiento.nombre }}</div>
+          <div class="PrecioTrat">{{ tratamiento.precio }}</div>
+          <div class="TextoTrat">{{ tratamiento.descripcion }}</div>
+          <div class="CuadroRecomen">
+            <div class="TituloCuadro">¿Cuándo se recomienda?</div>
+            <div class="TextoCuadro">
+              <ul>
+                @for (recomendacion of tratamiento.recomendaciones; track recomendacion) {
+                  <li>{{ recomendacion }}</li>
+                }
+              </ul>
+            </div>
+          </div>
+          <div style="margin-top: 20px;">
+            <button class="BotonCita" routerLink="/agendar">Agendar cita</button>
+          </div>
+        </div>
+      </div>
+    } @else {
+      <div style="font-family: Verdana; padding: 40px; text-align: center;">
+        Tratamiento no encontrado.
+      </div>
+    }
+  </div>
+</div>

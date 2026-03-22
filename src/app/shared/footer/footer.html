@@ -1,0 +1,37 @@
+<div class="PieDePag">
+  <div id="LogoPie">
+    <img src="Imagenes/logo.png" alt="Logo">
+  </div>
+
+  <div class="ConjPie">
+    @if (!isAuthenticated) {
+      <div class="TextoPie" routerLink="/inicio">Inicio</div>
+      <div class="TextoPie" routerLink="/tratamientos">Tratamientos</div>
+      <div class="TextoPie" routerLink="/agendar">Agendar</div>
+      <div class="TextoPie" routerLink="/horarios">Horarios</div>
+      <div class="TextoPie" routerLink="/acerca">Acerca de nosotros</div>
+    }
+
+    @if (isAuthenticated && tipoUsuario === 'cliente') {
+      <div class="TextoPie" routerLink="/inicio">Inicio</div>
+      <div class="TextoPie" routerLink="/tratamientos">Tratamientos</div>
+      <div class="TextoPie" routerLink="/agendar">Agendar</div>
+      <div class="TextoPie" routerLink="/horarios">Horarios</div>
+      <div class="TextoPie" routerLink="/acerca">Acerca de nosotros</div>
+      <div class="TextoPie" routerLink="/mis-citas">Mis citas</div>
+    }
+
+    @if (isAuthenticated && tipoUsuario === 'admin') {
+      <div class="TextoPie" routerLink="/reportes">Reportes</div>
+      <div class="TextoPie" routerLink="/crear-reporte">Crear reporte</div>
+      <div class="TextoPie" routerLink="/gestionar-citas">Gestionar Citas</div>
+      <div class="TextoPie" routerLink="/gestionar-horarios">Gestionar Horarios</div>
+    }
+  </div>
+
+  <div class="ConjPie">
+    <div class="TextoPie" id="nopointer">Juan Bustamante 39, Abasolo, 79500 Villa de Reyes, S.L.P.</div>
+    <div class="TextoPie" id="nopointer">analuisaflo@hotmail.com</div>
+    <div class="TextoPie" id="nopointer">+52 485 106 0414</div>
+  </div>
+</div>
