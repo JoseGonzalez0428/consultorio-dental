@@ -1,1 +1,55 @@
-<p>crear-reporte works!</p>
+<div class="Pagina">
+  <div class="Contenido" id="ContAgendar">
+    <div class="AgendarIzq">
+      <div class="TitContenido">Crear nuevo reporte</div>
+      <div id="ImgAgendar">
+        <img src="Imagenes/reportes-medicos.jpg" alt="Reportes Médicos">
+      </div>
+    </div>
+
+    <div class="AgendarDer">
+      @if (mensaje) {
+        <p style="margin-bottom: 20px; color: green; font-family: Verdana; font-weight: bold;">
+          {{ mensaje }}
+        </p>
+      }
+      @if (error) {
+        <p style="margin-bottom: 20px; color: red; font-family: Verdana; font-weight: bold;">
+          {{ error }}
+        </p>
+      }
+
+      <div class="TitOpcion">Selecciona la fecha (solo citas pasadas):</div>
+      <div class="Opciones">
+        <div class="TipoOpcion">
+          <input type="date" [(ngModel)]="fechaSeleccionada"
+            [max]="ayer"
+            (ngModelChange)="cargarCitas($event)"
+            required>
+        </div>
+      </div>
+
+      <div class="TitOpcion">Citas disponibles:</div>
+      <div class="Opciones">
+        <select [(ngModel)]="idCitaSeleccionada" required>
+          <option value="">Selecciona una cita</option>
+          @for (cita of citas; track cita.id_cita) {
+            <option [value]="cita.id_cita">
+              {{ cita.hora }} - {{ cita.nombre_paciente }} - {{ cita.nombre_tratamiento }}
+            </option>
+          }
+        </select>
+      </div>
+
+      <div class="TitOpcion">Notas:</div>
+      <div class="Opciones">
+        <textarea [(ngModel)]="notas" rows="6"
+          style="width:100%; font-family: Arial, sans-serif;"
+          required></textarea>
+      </div>
+
+      <br>
+      <button class="BotonCita" (click)="crearReporte()">Crear reporte</button>
+    </div>
+  </div>
+</div>

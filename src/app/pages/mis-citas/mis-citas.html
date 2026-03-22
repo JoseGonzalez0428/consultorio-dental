@@ -60,14 +60,14 @@
     <!-- Paginación -->
     @if (totalPaginas > 1) {
       <div class="DesplazarReporte" style="margin-top: 20px; justify-content:center; align-items:center; gap:10px;">
-        <img src="Imagenes/flechaIzq.png" alt="Anterior"
+        <img src="Imagenes/FlechaIzq.png" alt="Anterior"
           [style.opacity]="paginaActual === 1 ? '0.3' : '1'"
           [style.cursor]="paginaActual === 1 ? 'default' : 'pointer'"
           (click)="cambiarPagina(paginaActual - 1)">
         <div id="NoReporte">
           {{ paginaActual | number:'2.0-0' }}/{{ totalPaginas | number:'2.0-0' }}
         </div>
-        <img src="Imagenes/flechaDer.png" alt="Siguiente"
+        <img src="Imagenes/FlechaDer.png" alt="Siguiente"
           [style.opacity]="paginaActual === totalPaginas ? '0.3' : '1'"
           [style.cursor]="paginaActual === totalPaginas ? 'default' : 'pointer'"
           (click)="cambiarPagina(paginaActual + 1)">

@@ -1,1 +1,47 @@
-<p>reportes works!</p>
+<div class="Pagina">
+  <div class="Contenido">
+    <div class="TitContenido">Reportes</div>
+
+    <div class="TablaReportes">
+      <div id="TituloCelda" class="CeldaReportes">Fecha</div>
+      <div id="TituloCelda" class="CeldaReportes">Tratamiento</div>
+      <div id="TituloCelda" class="CeldaReportes">Notas</div>
+      <div id="TituloCelda" class="CeldaReportes">Paciente</div>
+
+      @if (reportes.length === 0) {
+        <div class="CeldaReportes" style="grid-column: span 4; text-align:center;">
+          No hay reportes disponibles.
+        </div>
+      }
+
+      @for (reporte of reportes; track reporte.id_reporte) {
+        <div class="CeldaReportes">
+          {{ reporte.fecha_cita }} {{ reporte.hora_cita }}
+        </div>
+        <div class="CeldaReportes">{{ reporte.nombre_tratamiento }}</div>
+        <div class="CeldaReportes">{{ reporte.notas }}</div>
+        <div class="CeldaReportes">
+          <div>{{ reporte.nombre_paciente }}</div>
+          <div>Tel: {{ reporte.telefono }}</div>
+        </div>
+      }
+    </div>
+
+    <!-- Paginación -->
+    @if (totalPaginas > 1) {
+      <div class="DesplazarReporte" style="justify-content:center; align-items:center; gap:10px; margin-top:20px;">
+        <img src="Imagenes/FlechaIzq.png" alt="Anterior"
+          [style.opacity]="paginaActual === 1 ? '0.3' : '1'"
+          [style.cursor]="paginaActual === 1 ? 'default' : 'pointer'"
+          (click)="cambiarPagina(paginaActual - 1)">
+        <div id="NoReporte">
+          {{ paginaActual | number:'2.0-0' }}/{{ totalPaginas | number:'2.0-0' }}
+        </div>
+        <img src="Imagenes/FlechaDer.png" alt="Siguiente"
+          [style.opacity]="paginaActual === totalPaginas ? '0.3' : '1'"
+          [style.cursor]="paginaActual === totalPaginas ? 'default' : 'pointer'"
+          (click)="cambiarPagina(paginaActual + 1)">
+      </div>
+    }
+  </div>
+</div>

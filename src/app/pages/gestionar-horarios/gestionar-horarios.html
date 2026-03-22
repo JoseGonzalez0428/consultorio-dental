@@ -1,1 +1,45 @@
-<p>gestionar-horarios works!</p>
+<div class="Pagina">
+  <div class="Contenido" id="ContAgendar">
+    <div class="AgendarIzq">
+      <div class="TitContenido">Gestionar Horarios</div>
+      <div id="ImgAgendar">
+        <img src="Imagenes/Consultorio.jpg" alt="Consultorio">
+      </div>
+    </div>
+
+    <div class="AgendarDer">
+      <div class="TitOpcion">Fecha:</div>
+      <div class="Opciones">
+        <div class="TipoOpcion">Selecciona una fecha</div>
+        <div class="BotonOpcion">
+          <input type="date" [(ngModel)]="fecha" required>
+        </div>
+      </div>
+
+      <div class="TitOpcion">Hora de Inicio:</div>
+      <div class="Opciones">
+        <div class="TipoOpcion">Hora inicial</div>
+        <div class="BotonOpcion">
+          <input type="time" [(ngModel)]="horaInicio" step="3600" required>
+        </div>
+      </div>
+
+      <div class="TitOpcion">Hora de Fin:</div>
+      <div class="Opciones">
+        <div class="TipoOpcion">Hora final</div>
+        <div class="BotonOpcion">
+          <input type="time" [(ngModel)]="horaFin" step="3600" required>
+        </div>
+      </div>
+
+      <br>
+      <button class="BotonCita" (click)="agregarHorario()">Agregar Horario</button>
+
+      @if (mensaje) {
+        <p style="margin-top: 20px; color: #333; font-family: Verdana; font-weight: bold;">
+          {{ mensaje }}
+        </p>
+      }
+    </div>
+  </div>
+</div>
