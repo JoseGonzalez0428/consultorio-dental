@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
-
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router, RouterModule, NavigationEnd } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-navbar',
@@ -9,29 +10,43 @@ import { Router, RouterModule } from '@angular/router';
   templateUrl: './navbar.html',
   styleUrl: './navbar.css',
 })
+export class Navbar implements OnInit, OnDestroy {
 
-export class Navbar implements OnInit{
   isAuthenticated: boolean = false;
   tipoUsuario: string | null = null;
-  nombreUsuario: string  = '';
+  nombreUsuario: string = '';
   saludo: string = '';
 
+  private routerSub: Subscription = new Subscription();
+
   constructor(private router: Router) {}
+
   ngOnInit(): void {
     this.cargarDatosUsuario();
+
+    // Se vuelve a ejecutar cada vez que el usuario navega a una nueva página
+    this.routerSub = this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      this.cargarDatosUsuario();
+    });
   }
 
-  cargarDatosUsuario() {
+  ngOnDestroy(): void {
+    this.routerSub.unsubscribe();
+  }
+
+  cargarDatosUsuario(): void {
     const token = localStorage.getItem('token');
     const tipo = localStorage.getItem('tipo_usuario');
     const nombre = localStorage.getItem('nombre_usuario');
     const sexo = localStorage.getItem('sexo_usuario');
 
-    if(token&&tipo){
+    if (token && tipo) {
       this.isAuthenticated = true;
       this.tipoUsuario = tipo;
-      this.nombreUsuario = nombre ? nombre : '';
-      this.saludo = sexo === 'femenino' ? 'Bienvenida' : 'Bienvenido';
+      this.nombreUsuario = nombre ?? '';
+      this.saludo = sexo === 'Femenino' ? 'Bienvenida' : 'Bienvenido';
     } else {
       this.isAuthenticated = false;
       this.tipoUsuario = null;
@@ -39,17 +54,17 @@ export class Navbar implements OnInit{
   }
 
   toggleMenu(): void {
-      const menu = document.querySelector('Menu');
-      menu?.classList.toggle('MenuAbierto');
-    }
+    const menu = document.getElementById('Menu');
+    menu?.classList.toggle('MenuAbierto');
+  }
 
-    cerrarSesion(): void {
-      localStorage.removeItem('token');
-      localStorage.removeItem('tipo_usuario');
-      localStorage.removeItem('nombre_usuario');
-      localStorage.removeItem('sexo_usuario');
-      this.isAuthenticated = false;
-      this.tipoUsuario = null;
-      this.router.navigate(['/inicio']);
-    }
+  cerrarSesion(): void {
+    localStorage.removeItem('token');
+    localStorage.removeItem('tipo_usuario');
+    localStorage.removeItem('nombre_usuario');
+    localStorage.removeItem('sexo_usuario');
+    this.isAuthenticated = false;
+    this.tipoUsuario = null;
+    this.router.navigate(['/inicio']);
+  }
 }
