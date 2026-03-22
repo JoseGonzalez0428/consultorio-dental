@@ -1,1 +1,71 @@
-<p>registro works!</p>
+<div class="Pagina">
+  <div id="MenuDeLogin"></div>
+  <div class="Contenido">
+    <div id="LogoLogin">
+      <img src="assets/Imagenes/logo.png" alt="Logo">
+    </div>
+
+    <div class="CuadroLogin">
+      <div class="TitLogin">Nombres</div>
+      <div class="Campo">
+        <input type="text" [(ngModel)]="nombres" required>
+      </div>
+
+      <div class="TitLogin">Apellido Paterno</div>
+      <div class="Campo">
+        <input type="text" [(ngModel)]="apellidoPaterno" required>
+      </div>
+
+      <div class="TitLogin">Apellido Materno</div>
+      <div class="Campo">
+        <input type="text" [(ngModel)]="apellidoMaterno">
+      </div>
+
+      <div class="TitLogin">Email</div>
+      <div class="Campo">
+        <input type="email" [(ngModel)]="correo" required>
+      </div>
+
+      <div class="TitLogin">Teléfono</div>
+      <div class="Campo">
+        <input type="text" [(ngModel)]="telefono" required>
+      </div>
+
+      <div class="TitLogin">Contraseña</div>
+      <div class="Campo">
+        <input type="password" [(ngModel)]="contrasena" required>
+      </div>
+
+      <div class="TitLogin">Fecha de Nacimiento</div>
+      <div class="Campo">
+        <input type="date" [(ngModel)]="fechaNacimiento" required>
+      </div>
+
+      <div class="TitLogin">Sexo</div>
+      <div class="Campo" id="CampoSexo">
+        <select [(ngModel)]="sexo" required>
+          <option value="">Selecciona</option>
+          <option value="Masculino">Masculino</option>
+          <option value="Femenino">Femenino</option>
+        </select>
+      </div>
+
+      <div id="BotonRegistrar">
+        <input type="submit" value="Registrarse" (click)="registrarse()">
+      </div>
+
+      @if (mensaje) {
+        <div style="margin-top: 10px; text-align: center; font-family: Verdana;"
+          [style.color]="esError ? 'red' : 'green'">
+          {{ mensaje }}
+        </div>
+      }
+
+      <div id="Pregunta">¿Ya tienes una cuenta?</div>
+      <div id="IniciaSesion">
+        <a routerLink="/login">Inicia Sesión</a>
+      </div>
+    </div>
+  </div>
+  <div id="PieDeLogin"></div>
+</div>
