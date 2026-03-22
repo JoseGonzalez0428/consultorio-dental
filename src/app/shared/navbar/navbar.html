@@ -1,0 +1,49 @@
+<div class="Menu" id="Menu">
+  <div id="LogoMenu">
+    <img src="assets/Imagenes/logo.png" alt="Logo Consultorio">
+  </div>
+
+  @if (!isAuthenticated) {
+    <div class="Hamburguesa" (click)="toggleMenu()">☰</div>
+    <div class="MenuItems">
+      <div class="Boton" routerLink="/inicio">Inicio</div>
+      <div class="Boton" routerLink="/tratamientos">Tratamientos</div>
+      <div class="Boton" routerLink="/agendar">Agendar</div>
+      <div class="Boton" routerLink="/horarios">Horarios</div>
+      <div class="Boton" routerLink="/acerca">Acerca de nosotros</div>
+      <div class="BotonSesion" routerLink="/login">Iniciar sesión</div>
+      <div class="BotonSesion" routerLink="/registro">Registrarse</div>
+    </div>
+  }
+
+  @if (isAuthenticated && tipoUsuario === 'cliente') {
+    <span style="font-family: Verdana; font-size: 14px;">
+      {{ saludo }} {{ nombreUsuario }}
+    </span>
+    <div class="Hamburguesa" (click)="toggleMenu()">☰</div>
+    <div class="MenuItems">
+      <div class="Boton" routerLink="/inicio">Inicio</div>
+      <div class="Boton" routerLink="/tratamientos">Tratamientos</div>
+      <div class="Boton" routerLink="/agendar">Agendar</div>
+      <div class="Boton" routerLink="/horarios">Horarios</div>
+      <div class="Boton" routerLink="/acerca">Acerca de nosotros</div>
+      <div class="Boton" routerLink="/mis-citas">Mis citas</div>
+      <div class="BotonSesion" (click)="cerrarSesion()">Cerrar sesión</div>
+    </div>
+  }
+
+  @if (isAuthenticated && tipoUsuario === 'admin') {
+    <span style="font-family: Verdana; font-size: 14px;">
+      {{ saludo }} {{ nombreUsuario }}
+    </span>
+    <div class="Hamburguesa" (click)="toggleMenu()">☰</div>
+    <div class="MenuItems">
+      <div class="Boton" routerLink="/reportes">Reportes</div>
+      <div class="Boton" routerLink="/crear-reporte">Crear reporte</div>
+      <div class="Boton" routerLink="/gestionar-citas">Gestionar Citas</div>
+      <div class="Boton" routerLink="/gestionar-horarios">Gestionar Horarios</div>
+      <div class="Boton" routerLink="/horarios">Horarios</div>
+      <div class="BotonSesion" (click)="cerrarSesion()">Cerrar sesión</div>
+    </div>
+  }
+</div>
