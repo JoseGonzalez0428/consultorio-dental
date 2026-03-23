@@ -1,3 +1,9 @@
+# Cuenta de administrador
+
+De momento los datos de inicio de sesión están definidos en código hasta unir el baackend
+correo: admin@dental.com
+contraseña: admin123
+
 # ConsultorioDental
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.4.
