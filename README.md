@@ -1,6 +1,6 @@
 # Cuenta de administrador
 
-De momento los datos de inicio de sesión están definidos en código hasta unir el baackend
+De momento los datos de inicio de sesión están definidos en código hasta unir el backend
 correo: admin@dental.com
 contraseña: admin123
 
