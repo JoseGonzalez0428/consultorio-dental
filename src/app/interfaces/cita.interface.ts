@@ -4,7 +4,7 @@ export interface Cita {
     id_tratamiento: string;
     fecha: string;
     hora: string;
-    estado: 'Pendiente' | 'Terminado' | 'Cancelado';
+    estado: 'Pendiente' | 'Terminada' | 'Cancelada';
     nombre_tratamiento?: string;
     nombre_paciente?: string;
     telefono?: string;
