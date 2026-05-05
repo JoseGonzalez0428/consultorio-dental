@@ -1,0 +1,149 @@
+/* Desktop */
+@media screen and (min-width:1025px) {
+    #LogoMenu { margin-left: 2%; margin-right: 2%; }
+    #LogoMenu img { height: 100px; width: auto; }
+
+    .Menu {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 12vh;
+        font-family: Arial, sans-serif;
+        font-weight: bold;
+        font-size: 18px;
+        background-color: #7160E6;
+        padding: 0 1%;
+        position: relative;
+    }
+
+    .MenuItems { display: flex; align-items: center; }
+
+    .Hamburguesa { display: none; font-size: 28px; cursor: pointer; color: white; }
+
+    .Boton, .BotonSesion {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px 16px;
+        border-radius: 30px;
+        margin-left: 1%;
+        cursor: pointer;
+        white-space: nowrap;
+        border: none;
+        font-size: 14px;
+        transition: all 0.3s ease;
+    }
+
+    .Boton { background-color: #ffffff; color: #7160E6; border: 2px solid #7160E6; }
+    .Boton:hover { background-color: #7160E6; color: white; }
+    .BotonSesion { background-color: gray; color: white; }
+    #MiCuenta { background-color: white; color: #7160E6; border: 2px solid #7160E6; border-radius: 20px; padding: 10px 20px; cursor: pointer; }
+    #InicioS:hover, #Registrar:hover, #MiCuenta:hover { background-color: #7160E6; color: black; }
+    .PerfilContainer { display: flex !important; }
+}
+
+/* Tablet */
+@media screen and (min-width:681px) and (max-width:1024px) {
+    #LogoMenu { margin-left: 1%; margin-right: 1%; }
+    #LogoMenu img { height: 80px; width: auto; }
+
+    .Menu {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 12vh;
+        font-family: Arial, sans-serif;
+        font-weight: bold;
+        font-size: 12px;
+        background-color: #7160E6;
+        padding: 0 1%;
+        position: relative;
+    }
+
+    .MenuItems { display: flex; align-items: center; }
+    .Hamburguesa { display: none; font-size: 28px; cursor: pointer; color: white; }
+
+    .Boton, .BotonSesion {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 5px;
+        border-radius: 30px;
+        margin-left: 1%;
+        cursor: pointer;
+        white-space: nowrap;
+        border: none;
+        font-size: 16px;
+        transition: all 0.3s ease;
+    }
+
+    .Boton { background-color: #ffffff; color: #7160E6; border: 2px solid #7160E6; }
+    .Boton:hover { background-color: #7160E6; color: white; }
+    .BotonSesion { background-color: gray; color: white; }
+    #MiCuenta { background-color: white; color: #7160E6; border: 2px solid #7160E6; border-radius: 20px; padding: 10px 20px; cursor: pointer; }
+    #InicioS:hover, #Registrar:hover, #MiCuenta:hover { background-color: #7160E6; color: black; }
+}
+
+/* Mobile */
+@media screen and (min-width:0px) and (max-width:680px) {
+    #LogoMenu { margin-left: 1%; margin-right: 1%; }
+    #LogoMenu img { height: 80px; width: auto; }
+
+    .Menu {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 12vh;
+        font-family: Arial, sans-serif;
+        font-weight: bold;
+        font-size: 14px;
+        background-color: #7160E6;
+        padding: 0 1%;
+        position: relative;
+    }
+
+    .Hamburguesa { font-size: 28px; cursor: pointer; color: white; }
+
+    .Boton, .BotonSesion {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 20px;
+        border-radius: 30px;
+        margin-left: 1%;
+        cursor: pointer;
+        white-space: nowrap;
+        border: none;
+        font-size: 16px;
+        transition: all 0.3s ease;
+    }
+
+    .Boton { background-color: #ffffff; color: #7160E6; border: 2px solid #7160E6; }
+    .Boton:hover { background-color: #7160E6; color: white; }
+    .BotonSesion { background-color: gray; color: white; }
+    #MiCuenta { background-color: white; color: #7160E6; border: 2px solid #7160E6; border-radius: 20px; padding: 10px 20px; cursor: pointer; }
+
+    .MenuItems {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: rgba(113, 96, 230, 0.95);
+        z-index: 10;
+        padding: 20px 0;
+        border-radius: 0 0 20px 20px;
+        box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+        animation: slideDown 0.3s ease;
+    }
+
+    .MenuItems .Boton, .MenuItems .BotonSesion { width: 90%; margin: 10px auto; }
+
+    @keyframes slideDown {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .MenuAbierto .MenuItems { display: flex; }
+}

@@ -1,0 +1,254 @@
+/* Desktop */
+@media screen and (min-width:1025px) {
+    #MenuDeLogin { background-color: #7160E6; height: 80px; }
+    #PieDeLogin { background-color: #C860E6; height: 80px; }
+
+    #LogoLogin { margin-bottom: 30px; }
+    #LogoLogin img { width: 150px; height: auto; display: block; margin: 20px auto; }
+
+    .CuadroLogin {
+        width: 300px;
+        padding: 20px 30px;
+        background-color: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .TitLogin { font-size: 14px; font-weight: bold; color: #333; margin: 10px 0 5px; font-family: Arial; }
+
+    .Campo {
+        width: calc(100% - 5px);
+        height: 35px;
+        background-color: #f5f5f5;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        display: flex;
+        padding-left: 10px;
+        align-items: center;
+        color: #555;
+        box-sizing: border-box;
+        position: relative;
+    }
+
+    .Campo input, .Campo select {
+        width: 100%;
+        background: transparent;
+        border: none;
+        outline: none;
+        font-size: 16px;
+        font-family: Arial;
+        color: #555;
+        appearance: none;
+        -webkit-appearance: none;
+        cursor: pointer;
+    }
+
+    #CampoSexo::after {
+        content: "▼";
+        position: absolute;
+        right: 12px;
+        font-size: 12px;
+        color: #888;
+        pointer-events: none;
+    }
+
+    #BotonRegistrar {
+        background-color: #000;
+        color: #fff;
+        border-radius: 8px;
+        padding: 12px;
+        margin-top: 20px;
+        cursor: pointer;
+        font-size: 16px;
+        font-family: Arial;
+    }
+
+    #BotonRegistrar input[type="submit"] {
+        background-color: #000;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 2px;
+        width: 100%;
+        cursor: pointer;
+        font-size: 16px;
+        font-family: Arial;
+    }
+
+    #BotonRegistrar:hover { background-color: #333; }
+    #Pregunta { margin-top: 15px; color: #777; font-size: 14px; }
+    #IniciaSesion { color: #007bff; font-size: 14px; cursor: pointer; }
+    #IniciaSesion:hover { text-decoration: underline; }
+}
+
+/* Tablet */
+@media screen and (min-width:681px) and (max-width:1024px) {
+    #MenuDeLogin { background-color: #7160E6; height: 80px; }
+    #PieDeLogin { background-color: #C860E6; height: 80px; }
+
+    #LogoLogin { margin-bottom: 30px; }
+    #LogoLogin img { width: 150px; height: auto; display: block; margin: 20px auto; }
+
+    .CuadroLogin {
+        width: 300px;
+        padding: 20px 30px;
+        background-color: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .TitLogin { font-size: 14px; font-weight: bold; color: #333; margin: 10px 0 5px; font-family: Arial; }
+
+    .Campo {
+        width: calc(100% - 5px);
+        height: 35px;
+        background-color: #f5f5f5;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        display: flex;
+        padding-left: 10px;
+        align-items: center;
+        color: #555;
+        box-sizing: border-box;
+        position: relative;
+    }
+
+    .Campo input, .Campo select {
+        width: 100%;
+        background: transparent;
+        border: none;
+        outline: none;
+        font-size: 16px;
+        font-family: Arial;
+        color: #555;
+        appearance: none;
+        -webkit-appearance: none;
+        cursor: pointer;
+    }
+
+    #CampoSexo::after {
+        content: "▼";
+        position: absolute;
+        right: 12px;
+        font-size: 12px;
+        color: #888;
+        pointer-events: none;
+    }
+
+    #BotonRegistrar {
+        background-color: #000;
+        color: #fff;
+        border-radius: 8px;
+        padding: 12px;
+        margin-top: 20px;
+        cursor: pointer;
+        font-size: 16px;
+        font-family: Arial;
+    }
+
+    #BotonRegistrar input[type="submit"] {
+        background-color: #000;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 2px;
+        width: 100%;
+        cursor: pointer;
+        font-size: 16px;
+        font-family: Arial;
+    }
+
+    #BotonRegistrar:hover { background-color: #333; }
+    #Pregunta { margin-top: 15px; color: #777; font-size: 14px; }
+    #IniciaSesion { color: #007bff; font-size: 14px; cursor: pointer; }
+    #IniciaSesion:hover { text-decoration: underline; }
+}
+
+/* Mobile */
+@media screen and (min-width:0px) and (max-width:680px) {
+    #MenuDeLogin { background-color: #7160E6; height: 80px; }
+    #PieDeLogin { background-color: #C860E6; height: 80px; }
+
+    #LogoLogin { margin-bottom: 30px; }
+    #LogoLogin img { width: 150px; height: auto; display: block; margin: 20px auto; }
+
+    .CuadroLogin {
+        width: 300px;
+        padding: 20px 30px;
+        background-color: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .TitLogin { font-size: 14px; font-weight: bold; color: #333; margin: 10px 0 5px; font-family: Arial; }
+
+    .Campo {
+        width: calc(100% - 5px);
+        height: 35px;
+        background-color: #f5f5f5;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        display: flex;
+        padding-left: 10px;
+        align-items: center;
+        color: #555;
+        box-sizing: border-box;
+        position: relative;
+    }
+
+    .Campo input, .Campo select {
+        width: 100%;
+        background: transparent;
+        border: none;
+        outline: none;
+        font-size: 16px;
+        font-family: Arial;
+        color: #555;
+        appearance: none;
+        -webkit-appearance: none;
+        cursor: pointer;
+    }
+
+    #CampoSexo::after {
+        content: "▼";
+        position: absolute;
+        right: 12px;
+        font-size: 12px;
+        color: #888;
+        pointer-events: none;
+    }
+
+    #BotonRegistrar {
+        background-color: #000;
+        color: #fff;
+        border-radius: 8px;
+        padding: 12px;
+        margin-top: 20px;
+        cursor: pointer;
+        font-size: 16px;
+        font-family: Arial;
+    }
+
+    #BotonRegistrar input[type="submit"] {
+        background-color: #000;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 2px;
+        width: 100%;
+        cursor: pointer;
+        font-size: 16px;
+        font-family: Arial;
+    }
+
+    #BotonRegistrar:hover { background-color: #333; }
+    #Pregunta { margin-top: 15px; color: #777; font-size: 14px; }
+    #IniciaSesion { color: #007bff; font-size: 14px; cursor: pointer; }
+    #IniciaSesion:hover { text-decoration: underline; }
+}

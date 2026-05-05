@@ -1,0 +1,194 @@
+/* Desktop */
+@media screen and (min-width:1025px) {
+    .TablaCitas {
+        width: 90%;
+        display: grid;
+        margin-top: 40px;
+        border: 1px solid black;
+        grid-template-columns: 20% 40% 40%;
+    }
+
+    .CeldaCitas {
+        text-align: center;
+        align-content: center;
+        border: 1px solid black;
+        padding: 10px 20px;
+        font-family: sans-serif;
+        font-size: 18px;
+        min-height: 80px;
+    }
+
+    #CeldaTit {
+        background-color: #00A8E8;
+        min-height: 60px;
+        font-size: 24px;
+    }
+
+    .EstatusCita { font-size: 18px; }
+
+    .OpcionesCita {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .BotonCita {
+        background-color: #dbd1f2;
+        padding: 10px 20px;
+        border-radius: 10px;
+        text-align: center;
+        cursor: pointer;
+        font-family: Arial, Helvetica, sans-serif;
+        border: none;
+    }
+
+    .BotonCita:hover { background-color: #0056b3; color: white; }
+
+    #Mod { background-color: #FFEA00; }
+    #Canc { background-color: #FF0000; }
+
+    .DesplazarReporte {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        align-items: center;
+    }
+
+    .DesplazarReporte img { height: 15px; width: auto; }
+
+    #NoReporte {
+        font-family: Arial;
+        font-size: 16px;
+        text-align: center;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+}
+
+/* Tablet */
+@media screen and (min-width:681px) and (max-width:1024px) {
+    .TablaCitas {
+        width: 90%;
+        display: grid;
+        margin-top: 40px;
+        border: 1px solid black;
+        grid-template-columns: 20% 40% 40%;
+    }
+
+    .CeldaCitas {
+        text-align: center;
+        align-content: center;
+        border: 1px solid black;
+        padding: 10px 20px;
+        font-family: sans-serif;
+        font-size: 14px;
+        min-height: 80px;
+    }
+
+    #CeldaTit {
+        background-color: #00A8E8;
+        min-height: 60px;
+        font-size: 20px;
+    }
+
+    .EstatusCita { font-size: 14px; }
+
+    .OpcionesCita {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .BotonCita {
+        background-color: #dbd1f2;
+        padding: 8px 16px;
+        border-radius: 10px;
+        text-align: center;
+        cursor: pointer;
+        font-family: Arial, Helvetica, sans-serif;
+        border: none;
+    }
+
+    .BotonCita:hover { background-color: #0056b3; color: white; }
+
+    .DesplazarReporte {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        align-items: center;
+    }
+
+    .DesplazarReporte img { height: 15px; width: auto; }
+
+    #NoReporte {
+        font-family: Arial;
+        font-size: 16px;
+        text-align: center;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+}
+
+/* Mobile */
+@media screen and (min-width:0px) and (max-width:680px) {
+    .TablaCitas {
+        width: 90%;
+        display: grid;
+        margin-top: 40px;
+        border: 1px solid black;
+        grid-template-columns: 20% 40% 40%;
+    }
+
+    .CeldaCitas {
+        text-align: center;
+        align-content: center;
+        border: 1px solid black;
+        padding: 5px 10px;
+        font-family: sans-serif;
+        font-size: 12px;
+        min-height: 80px;
+    }
+
+    #CeldaTit {
+        background-color: #00A8E8;
+        min-height: 40px;
+        font-size: 16px;
+    }
+
+    .EstatusCita { font-size: 12px; margin-bottom: 5px; margin-top: 5px; }
+
+    .OpcionesCita {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .BotonCita {
+        background-color: #dbd1f2;
+        padding: 6px 12px;
+        border-radius: 10px;
+        text-align: center;
+        cursor: pointer;
+        font-family: Arial, Helvetica, sans-serif;
+        border: none;
+    }
+
+    .BotonCita:hover { background-color: #0056b3; color: white; }
+
+    .DesplazarReporte {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        align-items: center;
+    }
+
+    .DesplazarReporte img { height: 15px; width: auto; }
+
+    #NoReporte {
+        font-family: Arial;
+        font-size: 14px;
+        text-align: center;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+}

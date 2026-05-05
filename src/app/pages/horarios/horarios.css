@@ -1,0 +1,243 @@
+/* Desktop */
+@media screen and (min-width:1025px) {
+    #TitHor { text-align: center; }
+
+    #ContenidoHorarios {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .TablaHorarios {
+        width: 90%;
+        display: grid;
+        margin-top: 40px;
+        border: 1px solid black;
+        grid-template-columns: repeat(7, 1fr);
+    }
+
+    .CeldaMes {
+        align-content: center;
+        justify-content: center;
+        align-items: center;
+        padding: 10px 0;
+        height: 20px;
+        display: flex;
+        grid-column: span 7;
+    }
+
+    .Mes {
+        text-align: center;
+        font-size: 24px;
+        font-family: Arial;
+        width: 100%;
+    }
+
+    .CeldaMes img { height: 20px; margin-left: 20px; cursor: pointer; }
+
+    .CeldaDia {
+        width: 100%;
+        text-align: center;
+        font-weight: bold;
+        padding: 10px 0;
+        border-top: 1px solid black;
+    }
+
+    .CeldaHorario {
+        text-align: center;
+        border: 1px solid black;
+        min-height: 80px;
+    }
+
+    .DiaHorario {
+        font-weight: bold;
+        text-align: right;
+        padding: 0 10px;
+        font-size: 16px;
+        font-family: Verdana;
+        color: skyblue;
+    }
+
+    .CeldaHorarioMat, .CeldaHorarioVes { padding: 5px; }
+
+    .sinHorario {
+        background-color: #e0e0e0;
+        opacity: 0.6;
+        min-height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .sinHorario::after {
+        content: "No disponible";
+        font-size: 10px;
+        color: #777;
+    }
+
+    .disponible { cursor: pointer; }
+}
+
+/* Tablet */
+@media screen and (min-width:681px) and (max-width:1024px) {
+    #TitHor { text-align: center; }
+
+    #ContenidoHorarios {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .TablaHorarios {
+        width: 90%;
+        display: grid;
+        margin-top: 40px;
+        border: 1px solid black;
+        grid-template-columns: repeat(7, 1fr);
+    }
+
+    .CeldaMes {
+        align-content: center;
+        justify-content: center;
+        align-items: center;
+        padding: 10px 0;
+        height: 20px;
+        display: flex;
+        grid-column: span 7;
+    }
+
+    .Mes {
+        text-align: center;
+        font-size: 24px;
+        font-family: Arial;
+        width: 100%;
+    }
+
+    .CeldaMes img { height: 20px; margin-left: 20px; cursor: pointer; }
+
+    .CeldaDia {
+        width: 100%;
+        text-align: center;
+        font-weight: bold;
+        padding: 10px 0;
+        border-top: 1px solid black;
+    }
+
+    .CeldaHorario {
+        text-align: center;
+        border: 1px solid black;
+        min-height: 80px;
+    }
+
+    .DiaHorario {
+        font-weight: bold;
+        text-align: right;
+        padding: 0 10px;
+        font-size: 16px;
+        font-family: Verdana;
+        color: skyblue;
+    }
+
+    .CeldaHorarioMat, .CeldaHorarioVes { padding: 5px; font-size: 12px; }
+
+    .sinHorario {
+        background-color: #e0e0e0;
+        opacity: 0.6;
+        min-height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .sinHorario::after {
+        content: "No disponible";
+        font-size: 10px;
+        color: #777;
+    }
+
+    .disponible { cursor: pointer; }
+}
+
+/* Mobile */
+@media screen and (min-width:0px) and (max-width:680px) {
+    #TitHor { text-align: center; }
+
+    #ContenidoHorarios {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .TablaHorarios {
+        width: 95%;
+        display: grid;
+        margin-top: 40px;
+        border: 1px solid black;
+        grid-template-columns: repeat(7, 1fr);
+    }
+
+    .CeldaMes {
+        align-content: center;
+        justify-content: center;
+        align-items: center;
+        padding: 10px 0;
+        height: 20px;
+        display: flex;
+        grid-column: span 7;
+    }
+
+    .Mes {
+        text-align: center;
+        font-size: 20px;
+        font-family: Arial;
+        width: 100%;
+    }
+
+    .CeldaMes img { height: 20px; margin-left: 20px; cursor: pointer; }
+
+    .CeldaDia {
+        width: 100%;
+        text-align: center;
+        font-weight: bold;
+        padding: 10px 0;
+        border-top: 1px solid black;
+        font-size: 14px;
+    }
+
+    .CeldaHorario {
+        text-align: center;
+        border: 1px solid black;
+        min-height: 60px;
+    }
+
+    .DiaHorario {
+        font-weight: bold;
+        text-align: right;
+        padding: 0 10px;
+        font-size: 14px;
+        font-family: Verdana;
+        color: skyblue;
+    }
+
+    .CeldaHorarioMat, .CeldaHorarioVes { padding: 5px; font-size: 10px; }
+
+    .sinHorario {
+        background-color: #e0e0e0;
+        opacity: 0.6;
+        min-height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .sinHorario::after {
+        content: "No disponible";
+        font-size: 9px;
+        color: #777;
+    }
+
+    .disponible { cursor: pointer; }
+}
