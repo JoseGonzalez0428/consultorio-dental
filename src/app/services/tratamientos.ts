@@ -19,6 +19,7 @@ export class TratamientosService {
 
   public isLoading = signal(false);
   public errorMessage = signal<string | null>(null);
+  public successMessage = signal<string | null>(null);
 
   fetchTratamientos(): void {
     this.isLoading.set(true);
@@ -48,5 +49,70 @@ export class TratamientosService {
         this.isLoading.set(false);
       }
     });
+  }
+
+  crearTratamiento(tratamiento: Tratamiento): void {
+    this.isLoading.set(true);
+    this.successMessage.set(null);
+    this.errorMessage.set(null);
+
+    this.http.post<any>(`${this.BASE_URL}/tratamientos`, tratamiento).subscribe({
+      next: () => {
+        this.successMessage.set('Tratamiento creado correctamente.');
+        this.fetchTratamientos();
+      },
+      error: (error: any) => {
+        this.errorMessage.set(error.error.msg ?? 'Error al crear tratamiento.');
+      },
+      complete: () => {
+        this.isLoading.set(false);
+      }
+    });
+  }
+
+  actualizarTratamiento(id: string, tratamiento: Tratamiento): void {
+    this.isLoading.set(true);
+    this.successMessage.set(null);
+    this.errorMessage.set(null);
+
+    this.http.put<any>(`${this.BASE_URL}/tratamientos/${id}`, tratamiento).subscribe({
+      next: () => {
+        this.successMessage.set('Tratamiento actualizado correctamente.');
+        this.fetchTratamientos();
+      },
+      error: (error: any) => {
+        this.errorMessage.set(error.error.msg ?? 'Error al actualizar tratamiento.');
+      },
+      complete: () => {
+        this.isLoading.set(false);
+      }
+    });
+  }
+
+  eliminarTratamiento(id: string): void {
+    this.isLoading.set(true);
+    this.successMessage.set(null);
+    this.errorMessage.set(null);
+
+    this.http.delete<any>(`${this.BASE_URL}/tratamientos/${id}`).subscribe({
+      next: () => {
+        this.successMessage.set('Tratamiento eliminado correctamente.');
+        this.fetchTratamientos();
+      },
+      error: (error: any) => {
+        this.errorMessage.set(error.error.msg ?? 'Error al eliminar tratamiento.');
+      },
+      complete: () => {
+        this.isLoading.set(false);
+      }
+    });
+  }
+
+  seleccionarTratamiento(tratamiento: Tratamiento): void {
+    this._tratamientoSeleccionado.set(tratamiento);
+  }
+
+  limpiarSeleccion(): void {
+    this._tratamientoSeleccionado.set(null);
   }
 }
