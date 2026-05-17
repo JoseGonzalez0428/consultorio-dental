@@ -77,6 +77,15 @@
     }
 
     .disponible { cursor: pointer; }
+
+    .EliminarFecha {
+        color: red;
+        font-weight: bold;
+        cursor: pointer;
+        font-size: 12px;
+        display: block;
+        margin-top: 4px;
+    }
 }
 
 /* Tablet */
@@ -158,6 +167,15 @@
     }
 
     .disponible { cursor: pointer; }
+
+    .EliminarFecha {
+        color: red;
+        font-weight: bold;
+        cursor: pointer;
+        font-size: 12px;
+        display: block;
+        margin-top: 4px;
+    }
 }
 
 /* Mobile */
@@ -240,4 +258,13 @@
     }
 
     .disponible { cursor: pointer; }
+
+    .EliminarFecha {
+        color: red;
+        font-weight: bold;
+        cursor: pointer;
+        font-size: 12px;
+        display: block;
+        margin-top: 4px;
+    }
 }

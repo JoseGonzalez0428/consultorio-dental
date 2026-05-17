@@ -4,7 +4,7 @@
   </div>
 
   <div class="ConjPie">
-    @if (!isAuthenticated) {
+    @if (!authService.isLoggedIn()) {
       <div class="TextoPie" routerLink="/inicio">Inicio</div>
       <div class="TextoPie" routerLink="/tratamientos">Tratamientos</div>
       <div class="TextoPie" routerLink="/agendar">Agendar</div>
@@ -12,7 +12,7 @@
       <div class="TextoPie" routerLink="/acerca">Acerca de nosotros</div>
     }
 
-    @if (isAuthenticated && tipoUsuario === 'cliente') {
+    @if (authService.isLoggedIn() && authService.tipoUsuario() === 'cliente') {
       <div class="TextoPie" routerLink="/inicio">Inicio</div>
       <div class="TextoPie" routerLink="/tratamientos">Tratamientos</div>
       <div class="TextoPie" routerLink="/agendar">Agendar</div>
@@ -21,12 +21,12 @@
       <div class="TextoPie" routerLink="/mis-citas">Mis citas</div>
     }
 
-    @if (isAuthenticated && tipoUsuario === 'admin') {
+    @if (authService.isLoggedIn() && authService.tipoUsuario() === 'admin') {
       <div class="TextoPie" routerLink="/reportes">Reportes</div>
       <div class="TextoPie" routerLink="/crear-reporte">Crear reporte</div>
       <div class="TextoPie" routerLink="/gestionar-citas">Gestionar Citas</div>
-      <div class="TextoPie" routerLink="/gestionar-tratamientos">Gestionar Tratamientos</div>
       <div class="TextoPie" routerLink="/gestionar-horarios">Gestionar Horarios</div>
+      <div class="TextoPie" routerLink="/gestionar-tratamientos">Gestionar Tratamientos</div>
     }
   </div>
 

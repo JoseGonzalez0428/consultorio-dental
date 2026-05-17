@@ -1,0 +1,267 @@
+/* Desktop */
+@media screen and (min-width:1025px) {
+    .MensajeExito {
+        color: green;
+        margin-bottom: 15px;
+        font-family: Verdana;
+        font-weight: bold;
+    }
+
+    .MensajeError {
+        color: red;
+        margin-bottom: 15px;
+        font-family: Verdana;
+        font-weight: bold;
+    }
+
+    .SeccionFormulario {
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 40px;
+        border: 1px solid #ddd;
+    }
+
+    .TituloFormulario {
+        font-family: Verdana;
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+
+    .CampoFormulario {
+        margin-bottom: 15px;
+    }
+
+    .CampoFormulario input,
+    .CampoFormulario textarea {
+        width: 100%;
+        padding: 8px 10px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        outline: none;
+        box-sizing: border-box;
+    }
+
+    .CampoFormulario input:focus,
+    .CampoFormulario textarea:focus {
+        border-color: #7160E6;
+    }
+
+    .BotonesFormulario {
+        display: flex;
+        gap: 10px;
+        margin-top: 15px;
+    }
+
+    .BotonCancelar {
+        background-color: #ccc;
+        padding: 10px 20px;
+        border-radius: 10px;
+        border: none;
+        cursor: pointer;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .BotonCancelar:hover { background-color: #aaa; }
+
+    .TablaTratamientos {
+        display: grid;
+        grid-template-columns: 40% 20% 40%;
+        border: 1px solid black;
+        margin-top: 20px;
+    }
+
+    .CeldaTratamiento {
+        text-align: center;
+        align-content: center;
+        border: 1px solid black;
+        padding: 10px 20px;
+        font-family: sans-serif;
+        font-size: 18px;
+        min-height: 60px;
+    }
+
+    #CeldaTit {
+        background-color: #00A8E8;
+        min-height: 50px;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .AccionesTratamiento {
+        display: flex;
+        gap: 5px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .BotonEliminar {
+        background-color: #ff4444;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 10px;
+        border: none;
+        cursor: pointer;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .BotonEliminar:hover { background-color: #cc0000; }
+
+    .SinTratamientos {
+        grid-column: span 3;
+        text-align: center;
+        padding: 20px;
+        font-family: sans-serif;
+    }
+}
+
+/* Tablet */
+@media screen and (min-width:681px) and (max-width:1024px) {
+    .MensajeExito { color: green; margin-bottom: 15px; font-family: Verdana; font-weight: bold; }
+    .MensajeError { color: red; margin-bottom: 15px; font-family: Verdana; font-weight: bold; }
+
+    .SeccionFormulario {
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 30px;
+        border: 1px solid #ddd;
+    }
+
+    .TituloFormulario { font-family: Verdana; font-size: 18px; margin-bottom: 15px; }
+
+    .CampoFormulario { margin-bottom: 15px; }
+
+    .CampoFormulario input,
+    .CampoFormulario textarea {
+        width: 100%;
+        padding: 8px 10px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        outline: none;
+        box-sizing: border-box;
+    }
+
+    .BotonesFormulario { display: flex; gap: 10px; margin-top: 15px; }
+
+    .BotonCancelar {
+        background-color: #ccc;
+        padding: 10px 20px;
+        border-radius: 10px;
+        border: none;
+        cursor: pointer;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .TablaTratamientos {
+        display: grid;
+        grid-template-columns: 40% 20% 40%;
+        border: 1px solid black;
+        margin-top: 20px;
+    }
+
+    .CeldaTratamiento {
+        text-align: center;
+        align-content: center;
+        border: 1px solid black;
+        padding: 10px;
+        font-family: sans-serif;
+        font-size: 14px;
+        min-height: 60px;
+    }
+
+    #CeldaTit { background-color: #00A8E8; min-height: 50px; font-size: 18px; font-weight: bold; }
+
+    .AccionesTratamiento { display: flex; gap: 5px; justify-content: center; align-items: center; }
+
+    .BotonEliminar {
+        background-color: #ff4444;
+        color: white;
+        padding: 8px 16px;
+        border-radius: 10px;
+        border: none;
+        cursor: pointer;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .SinTratamientos { grid-column: span 3; text-align: center; padding: 20px; font-family: sans-serif; }
+}
+
+/* Mobile */
+@media screen and (min-width:0px) and (max-width:680px) {
+    .MensajeExito { color: green; margin-bottom: 15px; font-family: Verdana; font-weight: bold; }
+    .MensajeError { color: red; margin-bottom: 15px; font-family: Verdana; font-weight: bold; }
+
+    .SeccionFormulario {
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+    }
+
+    .TituloFormulario { font-family: Verdana; font-size: 16px; margin-bottom: 10px; }
+
+    .CampoFormulario { margin-bottom: 12px; }
+
+    .CampoFormulario input,
+    .CampoFormulario textarea {
+        width: 100%;
+        padding: 8px 10px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        outline: none;
+        box-sizing: border-box;
+    }
+
+    .BotonesFormulario { display: flex; gap: 10px; margin-top: 15px; }
+
+    .BotonCancelar {
+        background-color: #ccc;
+        padding: 8px 16px;
+        border-radius: 10px;
+        border: none;
+        cursor: pointer;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .TablaTratamientos {
+        display: grid;
+        grid-template-columns: 40% 20% 40%;
+        border: 1px solid black;
+        margin-top: 20px;
+    }
+
+    .CeldaTratamiento {
+        text-align: center;
+        align-content: center;
+        border: 1px solid black;
+        padding: 5px;
+        font-family: sans-serif;
+        font-size: 12px;
+        min-height: 50px;
+    }
+
+    #CeldaTit { background-color: #00A8E8; min-height: 40px; font-size: 14px; font-weight: bold; }
+
+    .AccionesTratamiento { display: flex; flex-direction: column; gap: 5px; align-items: center; }
+
+    .BotonEliminar {
+        background-color: #ff4444;
+        color: white;
+        padding: 6px 12px;
+        border-radius: 10px;
+        border: none;
+        cursor: pointer;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 11px;
+    }
+
+    .SinTratamientos { grid-column: span 3; text-align: center; padding: 20px; font-family: sans-serif; }
+}

@@ -77,6 +77,20 @@
     }
 
     .BotonCita:hover { background-color: #0056b3; color: white; }
+
+    .MensajeExito {
+        color: green;
+        margin-top: 20px;
+        font-family: Verdana;
+        font-weight: bold;
+    }
+
+    .MensajeError {
+        color: red;
+        margin-top: 20px;
+        font-family: Verdana;
+        font-weight: bold;
+    }
 }
 
 /* Tablet */
@@ -163,6 +177,20 @@
     }
 
     .BotonCita:hover { background-color: #0056b3; color: white; }
+
+    .MensajeExito {
+        color: green;
+        margin-top: 20px;
+        font-family: Verdana;
+        font-weight: bold;
+    }
+
+    .MensajeError {
+        color: red;
+        margin-top: 20px;
+        font-family: Verdana;
+        font-weight: bold;
+    }
 }
 
 /* Mobile */
@@ -249,4 +277,18 @@
     }
 
     .BotonCita:hover { background-color: #0056b3; color: white; }
+
+    .MensajeExito {
+        color: green;
+        margin-top: 20px;
+        font-family: Verdana;
+        font-weight: bold;
+    }
+
+    .MensajeError {
+        color: red;
+        margin-top: 20px;
+        font-family: Verdana;
+        font-weight: bold;
+    }
 }

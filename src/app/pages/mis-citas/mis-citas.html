@@ -2,14 +2,14 @@
   <div class="Contenido">
     <div class="TitContenido">Mis citas</div>
 
-    @if (mensaje) {
-      <div style="color: green; margin-bottom: 15px; font-family: Verdana;">
-        {{ mensaje }}
+    @if (citasService.successMessage()) {
+      <div class="MensajeExito">
+        {{ citasService.successMessage() }}
       </div>
     }
-    @if (error) {
-      <div style="color: red; margin-bottom: 15px; font-family: Verdana;">
-        {{ error }}
+    @if (citasService.errorMessage()) {
+      <div class="MensajeError">
+        {{ citasService.errorMessage() }}
       </div>
     }
 
@@ -19,12 +19,12 @@
       <div class="CeldaCitas" id="CeldaTit">Estado</div>
 
       @if (citas.length === 0) {
-        <div class="CeldaCitas" style="grid-column: span 3; text-align:center;">
+        <div class="SinCitas">
           No tienes citas registradas.
         </div>
       }
 
-      @for (cita of citas; track cita.id_cita) {
+      @for (cita of citas; track cita._id) {
         <div class="CeldaCitas">
           <div>{{ formatearFecha(cita.fecha) }}</div>
           <div>{{ cita.hora }} - {{ sumarUnaHora(cita.hora) }}</div>
@@ -47,9 +47,10 @@
                     <option [value]="h.inicio">{{ h.inicio }} - {{ h.fin }}</option>
                   }
                 </select>
-                <br>
-                <button class="BotonCita" (click)="modificarCita(cita)">Modificar</button>
-                <button class="BotonCita" (click)="cancelarCita(cita.id_cita)">Cancelar</button>
+                <div class="BotonesCita">
+                  <button class="BotonCita" (click)="modificarCita(cita)">Modificar</button>
+                  <button class="BotonCita" (click)="cancelarCita(cita._id)">Cancelar</button>
+                </div>
               </div>
             }
           </div>
@@ -57,19 +58,16 @@
       }
     </div>
 
-    <!-- Paginación -->
     @if (totalPaginas > 1) {
-      <div class="DesplazarReporte" style="margin-top: 20px; justify-content:center; align-items:center; gap:10px;">
+      <div class="DesplazarReporte">
         <img src="Imagenes/FlechaIzq.png" alt="Anterior"
-          [style.opacity]="paginaActual === 1 ? '0.3' : '1'"
-          [style.cursor]="paginaActual === 1 ? 'default' : 'pointer'"
+          [class.flechaDesactivada]="paginaActual === 1"
           (click)="cambiarPagina(paginaActual - 1)">
         <div id="NoReporte">
-          {{ paginaActual | number:'2.0-0' }}/{{ totalPaginas | number:'2.0-0' }}
+          {{ paginaActual }}/{{ totalPaginas }}
         </div>
         <img src="Imagenes/FlechaDer.png" alt="Siguiente"
-          [style.opacity]="paginaActual === totalPaginas ? '0.3' : '1'"
-          [style.cursor]="paginaActual === totalPaginas ? 'default' : 'pointer'"
+          [class.flechaDesactivada]="paginaActual === totalPaginas"
           (click)="cambiarPagina(paginaActual + 1)">
       </div>
     }

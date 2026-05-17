@@ -1,10 +1,14 @@
 <div class="Pagina">
   <div class="Contenido">
-    <h2 class="TitContenido" style="text-align: center;">Nuestros tratamientos</h2>
+    <h2 class="TitContenido TituloTratamientos">Nuestros tratamientos</h2>
+
+    @if (tratamientosService.isLoading()) {
+      <div class="MensajeCargando">Cargando tratamientos...</div>
+    }
 
     <div class="lista-tratamientos">
-      @for (tratamiento of tratamientos; track tratamiento.id) {
-        <div class="tratamiento-carta" (click)="verTratamiento(tratamiento.id)">
+      @for (tratamiento of tratamientosService.tratamientos(); track tratamiento._id) {
+        <div class="tratamiento-carta" (click)="verTratamiento(tratamiento._id!)">
           <img [src]="'Imagenes/' + tratamiento.imagen" [alt]="tratamiento.nombre">
           <div>{{ tratamiento.nombre }}</div>
         </div>

@@ -69,6 +69,14 @@
 
     #IniciaSesion { color: #007bff; font-size: 14px; cursor: pointer; }
     #IniciaSesion:hover { text-decoration: underline; }
+
+    .MensajeError {
+        color: red;
+        margin-top: 10px;
+        text-align: center;
+        font-family: Arial;
+        font-size: 14px;
+    }
 }
 
 /* Tablet */
@@ -140,6 +148,14 @@
     #Pregunta { margin-top: 15px; color: #777; font-size: 14px; }
     #IniciaSesion { color: #007bff; font-size: 14px; cursor: pointer; }
     #IniciaSesion:hover { text-decoration: underline; }
+
+    .MensajeError {
+        color: red;
+        margin-top: 10px;
+        text-align: center;
+        font-family: Arial;
+        font-size: 14px;
+    }
 }
 
 /* Mobile */
@@ -211,4 +227,12 @@
     #Pregunta { margin-top: 15px; color: #777; font-size: 14px; }
     #IniciaSesion { color: #007bff; font-size: 14px; cursor: pointer; }
     #IniciaSesion:hover { text-decoration: underline; }
+
+    .MensajeError {
+        color: red;
+        margin-top: 10px;
+        text-align: center;
+        font-family: Arial;
+        font-size: 14px;
+    }
 }

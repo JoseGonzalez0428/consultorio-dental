@@ -1,52 +1,43 @@
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { RouterModule, Router } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { AuthService } from '../../services/auth';
 
 @Component({
   selector: 'app-registro',
   standalone: true,
-  imports: [FormsModule, RouterModule],
+  imports: [ReactiveFormsModule, RouterModule],
   templateUrl: './registro.html',
-  styleUrl: './registro.css',
+  styleUrl: './registro.css'
 })
 export class Registro {
-  nombres: string = '';
-  apellidoPaterno: string = '';
-  apellidoMaterno: string = '';
-  correo: string = '';
-  telefono: string = '';
-  contrasena: string = '';
-  fechaNacimiento: string = '';
-  sexo: string = '';
 
-  mensaje: string = '';
-  esError: boolean = false;
-  constructor(private router: Router){}
+  private fb = inject(FormBuilder);
+  public authService = inject(AuthService);
 
-  registrarse(): void {
-    if(!this.nombres || !this.apellidoPaterno || !this.apellidoMaterno || !this.correo || !this.telefono || !this.contrasena || !this.fechaNacimiento || !this.sexo){
-      this.mensaje = 'Por favor completa todos los campos.';
-      this.esError = true;
-      return;
+  registroForm = this.fb.group({
+    nombres: ['', [Validators.required]],
+    apellido_paterno: ['', [Validators.required]],
+    apellido_materno: [''],
+    correo: ['', [Validators.required, Validators.email]],
+    telefono: ['', [Validators.required]],
+    contrasena: ['', [Validators.required, Validators.minLength(6)]],
+    fecha_nacimiento: ['', [Validators.required]],
+    sexo: ['', [Validators.required]]
+  });
+
+  onSubmit(): void {
+    if (this.registroForm.valid) {
+      this.authService.register({
+        nombres: this.registroForm.value.nombres!,
+        apellido_paterno: this.registroForm.value.apellido_paterno!,
+        apellido_materno: this.registroForm.value.apellido_materno ?? '',
+        correo: this.registroForm.value.correo!,
+        telefono: this.registroForm.value.telefono!,
+        contrasena: this.registroForm.value.contrasena!,
+        fecha_nacimiento: this.registroForm.value.fecha_nacimiento!,
+        sexo: this.registroForm.value.sexo!
+      });
     }
-
-    // Simulación de registro exitoso
-    console.log('Datos de registro:', {
-      nombres: this.nombres,
-      apellidoPaterno: this.apellidoPaterno,
-      apellidoMaterno: this.apellidoMaterno,
-      correo: this.correo,
-      telefono: this.telefono,
-      contrasena: this.contrasena,
-      fechaNacimiento: this.fechaNacimiento,
-      sexo: this.sexo
-    });
-
-    this.mensaje = 'Registro exitoso. Ahora puedes iniciar sesión.';
-    this.esError = false;
-
-    setTimeout(() => {
-      this.router.navigate(['/login']);
-    }, 2000);
   }
 }

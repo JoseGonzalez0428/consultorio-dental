@@ -12,9 +12,9 @@
 
     <div id="ContenidoHorarios">
       @if (!fechaSeleccionada) {
-        <p style="padding:20px;">Por favor selecciona una fecha para ver las citas.</p>
-      } @else if (citas.length === 0) {
-        <p style="padding:20px;">No hay citas para la fecha <strong>{{ fechaSeleccionada }}</strong>.</p>
+        <p class="MensajeInfo">Selecciona una fecha para ver las citas.</p>
+      } @else if (citasService.citasPorFecha().length === 0) {
+        <p class="MensajeInfo">No hay citas para la fecha seleccionada.</p>
       } @else {
         <div class="TablaCitas2">
           <div class="CeldaCitas" id="CeldaTit">Hora</div>
@@ -22,7 +22,7 @@
           <div class="CeldaCitas" id="CeldaTit">Paciente</div>
           <div class="CeldaCitas" id="CeldaTit">Acciones</div>
 
-          @for (cita of citas; track cita.id_cita) {
+          @for (cita of citasService.citasPorFecha(); track cita._id) {
             <div class="CeldaCitas">
               {{ cita.hora }} - {{ sumarUnaHora(cita.hora) }}
             </div>
@@ -31,29 +31,12 @@
               <div>{{ cita.nombre_paciente }}</div>
               <div>{{ cita.telefono }}</div>
             </div>
-            <div class="CeldaCitas" style="display:flex; gap:4px;">
-              <button class="BotonCita" (click)="cancelarCita(cita.id_cita)">Cancelar</button>
-              <button class="BotonCita" (click)="completarCita(cita.id_cita)">Completar</button>
+            <div class="CeldaCitas AccionesCita">
+              <button class="BotonCita" (click)="cancelarCita(cita._id!)">Cancelar</button>
+              <button class="BotonCita" (click)="completarCita(cita._id!)">Completar</button>
             </div>
           }
         </div>
-
-        <!-- Paginación -->
-        @if (totalPaginas > 1) {
-          <div class="DesplazarReporte" style="margin-top:20px; justify-content:center; align-items:center; gap:10px;">
-            <img src="Imagenes/FlechaIzq.png" alt="Anterior"
-              [style.opacity]="paginaActual === 1 ? '0.3' : '1'"
-              [style.cursor]="paginaActual === 1 ? 'default' : 'pointer'"
-              (click)="cambiarPagina(paginaActual - 1)">
-            <div id="NoReporte">
-              {{ paginaActual | number:'2.0-0' }}/{{ totalPaginas | number:'2.0-0' }}
-            </div>
-            <img src="Imagenes/FlechaDer.png" alt="Siguiente"
-              [style.opacity]="paginaActual === totalPaginas ? '0.3' : '1'"
-              [style.cursor]="paginaActual === totalPaginas ? 'default' : 'pointer'"
-              (click)="cambiarPagina(paginaActual + 1)">
-          </div>
-        }
       }
     </div>
   </div>

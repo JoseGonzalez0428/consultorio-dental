@@ -3,53 +3,64 @@
     <div class="AgendarIzq">
       <div class="TitContenido">Crear nuevo reporte</div>
       <div id="ImgAgendar">
-        <img src="Imagenes/reportes-medicos.jpg" alt="Reportes Médicos">
+        <img src="Imagenes/reportes-medicos.jpg" alt="Reportes">
       </div>
     </div>
 
     <div class="AgendarDer">
-      @if (mensaje) {
-        <p style="margin-bottom: 20px; color: green; font-family: Verdana; font-weight: bold;">
-          {{ mensaje }}
-        </p>
-      }
-      @if (error) {
-        <p style="margin-bottom: 20px; color: red; font-family: Verdana; font-weight: bold;">
-          {{ error }}
-        </p>
-      }
-
-      <div class="TitOpcion">Selecciona la fecha (solo citas pasadas):</div>
-      <div class="Opciones">
-        <div class="TipoOpcion">
-          <input type="date" [(ngModel)]="fechaSeleccionada"
-            [max]="ayer"
-            (ngModelChange)="cargarCitas($event)"
-            required>
+      <form (ngSubmit)="onSubmit()">
+        <div class="TitOpcion">Selecciona la fecha (solo citas pasadas):</div>
+        <div class="Opciones">
+          <div class="TipoOpcion">Fecha</div>
+          <div class="BotonOpcion">
+            <input type="date" [formControl]="reporteForm.controls.fecha"
+              [max]="ayer"
+              (change)="cargarCitas()">
+          </div>
         </div>
-      </div>
 
-      <div class="TitOpcion">Citas disponibles:</div>
-      <div class="Opciones">
-        <select [(ngModel)]="idCitaSeleccionada" required>
-          <option value="">Selecciona una cita</option>
-          @for (cita of citas; track cita.id_cita) {
-            <option [value]="cita.id_cita">
-              {{ cita.hora }} - {{ cita.nombre_paciente }} - {{ cita.nombre_tratamiento }}
-            </option>
+        <div class="TitOpcion">Citas disponibles:</div>
+        <div class="Opciones">
+          <div class="TipoOpcion">Cita</div>
+          <div class="BotonOpcion">
+            <select [formControl]="reporteForm.controls.id_cita">
+              <option value="">Selecciona una cita</option>
+              @for (cita of reportesService.citasPasadas(); track cita._id) {
+                <option [value]="cita._id">
+                  {{ cita.hora }} - {{ cita.nombre_paciente }} - {{ cita.nombre_tratamiento }}
+                </option>
+              }
+            </select>
+          </div>
+        </div>
+
+        <div class="TitOpcion">Notas:</div>
+        <div class="Opciones">
+          <textarea [formControl]="reporteForm.controls.notas" rows="6"></textarea>
+        </div>
+
+        <br>
+        <button type="submit" class="BotonCita"
+          [disabled]="reporteForm.invalid || reportesService.isLoading()">
+          @if (reportesService.isLoading()) {
+            Guardando...
+          } @else {
+            Crear reporte
           }
-        </select>
-      </div>
+        </button>
+      </form>
 
-      <div class="TitOpcion">Notas:</div>
-      <div class="Opciones">
-        <textarea [(ngModel)]="notas" rows="6"
-          style="width:100%; font-family: Arial, sans-serif;"
-          required></textarea>
-      </div>
+      @if (reportesService.successMessage()) {
+        <div class="MensajeExito">
+          {{ reportesService.successMessage() }}
+        </div>
+      }
 
-      <br>
-      <button class="BotonCita" (click)="crearReporte()">Crear reporte</button>
+      @if (reportesService.errorMessage()) {
+        <div class="MensajeError">
+          {{ reportesService.errorMessage() }}
+        </div>
+      }
     </div>
   </div>
 </div>

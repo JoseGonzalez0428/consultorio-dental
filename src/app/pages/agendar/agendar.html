@@ -8,55 +8,67 @@
     </div>
 
     <div class="AgendarDer">
-      <!-- Tratamiento -->
-      <div class="TitOpcion">Tratamiento:</div>
-      <div class="Opciones">
-        <div class="TipoOpcion">Tipo de tratamiento</div>
-        <div class="BotonOpcion">
-          <select [(ngModel)]="idTratamientoSeleccionado" required>
-            <option value="">Seleccione...</option>
-            @for (t of tratamientos; track t.id) {
-              <option [value]="t.id">{{ t.nombre }}</option>
-            }
-          </select>
+      <form (ngSubmit)="onSubmit()">
+        <div class="TitOpcion">Tratamiento:</div>
+        <div class="Opciones">
+          <div class="TipoOpcion">Tipo de tratamiento</div>
+          <div class="BotonOpcion">
+            <select [formControl]="agendarForm.controls.id_tratamiento">
+              <option value="">Seleccione...</option>
+              @for (t of tratamientosService.tratamientos(); track t._id) {
+                <option [value]="t._id">{{ t.nombre }}</option>
+              }
+            </select>
+          </div>
         </div>
-      </div>
 
-      <!-- Fecha -->
-      <div class="TitOpcion">Fecha:</div>
-      <div class="Opciones">
-        <div class="TipoOpcion">Seleccione una fecha</div>
-        <div class="BotonOpcion">
-          <select [(ngModel)]="fechaSeleccionada" (ngModelChange)="cargarHoras($event)" required>
-            <option value="">Seleccione...</option>
-            @for (f of fechasDisponibles; track f) {
-              <option [value]="f">{{ formatearFecha(f) }}</option>
-            }
-          </select>
+        <div class="TitOpcion">Fecha:</div>
+        <div class="Opciones">
+          <div class="TipoOpcion">Seleccione una fecha</div>
+          <div class="BotonOpcion">
+            <select [formControl]="agendarForm.controls.fecha" (ngModelChange)="cargarHoras($event)">
+              <option value="">Seleccione...</option>
+              @for (f of fechasDisponibles; track f) {
+                <option [value]="f">{{ formatearFecha(f) }}</option>
+              }
+            </select>
+          </div>
         </div>
-      </div>
 
-      <!-- Hora -->
-      <div class="TitOpcion">Hora:</div>
-      <div class="Opciones">
-        <div class="TipoOpcion">Seleccione una hora</div>
-        <div class="BotonOpcion">
-          <select [(ngModel)]="horaSeleccionada" [disabled]="!fechaSeleccionada" required>
-            <option value="">Seleccione una fecha primero</option>
-            @for (h of horasDisponibles; track h.inicio) {
-              <option [value]="h.inicio">{{ h.inicio }} - {{ h.fin }}</option>
-            }
-          </select>
+        <div class="TitOpcion">Hora:</div>
+        <div class="Opciones">
+          <div class="TipoOpcion">Seleccione una hora</div>
+          <div class="BotonOpcion">
+            <select [formControl]="agendarForm.controls.hora">
+              <option value="">Seleccione una fecha primero</option>
+              @for (h of horasDisponibles; track h.inicio) {
+                <option [value]="h.inicio">{{ h.inicio }} - {{ h.fin }}</option>
+              }
+            </select>
+          </div>
         </div>
-      </div>
 
-      <br>
-      <button class="BotonCita" (click)="confirmarCita()">Confirmar cita</button>
+        <br>
+        <button type="submit" class="BotonCita"
+          [disabled]="agendarForm.invalid || citasService.isLoading()">
+          @if (citasService.isLoading()) {
+            Procesando...
+          } @else {
+            Confirmar cita
+          }
+        </button>
+      </form>
 
-      @if (mensaje) {
-        <p style="margin-top: 20px; font-family: Verdana; font-weight: bold;">
-          {{ mensaje }}
-        </p>
+      @if (citasService.successMessage()) {
+        <div class="MensajeExito">
+          {{ citasService.successMessage() }}
+        </div>
+      }
+
+      @if (citasService.errorMessage()) {
+        <div class="MensajeError">
+          {{ citasService.errorMessage() }}
+        </div>
       }
     </div>
   </div>

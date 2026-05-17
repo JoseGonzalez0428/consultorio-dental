@@ -8,37 +8,51 @@
     </div>
 
     <div class="AgendarDer">
-      <div class="TitOpcion">Fecha:</div>
-      <div class="Opciones">
-        <div class="TipoOpcion">Selecciona una fecha</div>
-        <div class="BotonOpcion">
-          <input type="date" [(ngModel)]="fecha" required>
+      <form (ngSubmit)="onSubmit()">
+        <div class="TitOpcion">Fecha:</div>
+        <div class="Opciones">
+          <div class="TipoOpcion">Selecciona una fecha</div>
+          <div class="BotonOpcion">
+            <input type="date" [formControl]="horarioForm.controls.fecha">
+          </div>
         </div>
-      </div>
 
-      <div class="TitOpcion">Hora de Inicio:</div>
-      <div class="Opciones">
-        <div class="TipoOpcion">Hora inicial</div>
-        <div class="BotonOpcion">
-          <input type="time" [(ngModel)]="horaInicio" step="3600" required>
+        <div class="TitOpcion">Hora de Inicio:</div>
+        <div class="Opciones">
+          <div class="TipoOpcion">Hora inicial</div>
+          <div class="BotonOpcion">
+            <input type="time" [formControl]="horarioForm.controls.hora_inicio" step="3600">
+          </div>
         </div>
-      </div>
 
-      <div class="TitOpcion">Hora de Fin:</div>
-      <div class="Opciones">
-        <div class="TipoOpcion">Hora final</div>
-        <div class="BotonOpcion">
-          <input type="time" [(ngModel)]="horaFin" step="3600" required>
+        <div class="TitOpcion">Hora de Fin:</div>
+        <div class="Opciones">
+          <div class="TipoOpcion">Hora final</div>
+          <div class="BotonOpcion">
+            <input type="time" [formControl]="horarioForm.controls.hora_fin" step="3600">
+          </div>
         </div>
-      </div>
 
-      <br>
-      <button class="BotonCita" (click)="agregarHorario()">Agregar Horario</button>
+        <br>
+        <button type="submit" class="BotonCita" [disabled]="horarioForm.invalid || horariosService.isLoading()">
+          @if (horariosService.isLoading()) {
+            Guardando...
+          } @else {
+            Agregar Horario
+          }
+        </button>
+      </form>
 
-      @if (mensaje) {
-        <p style="margin-top: 20px; color: #333; font-family: Verdana; font-weight: bold;">
-          {{ mensaje }}
-        </p>
+      @if (horariosService.successMessage()) {
+        <div class="MensajeExito">
+          {{ horariosService.successMessage() }}
+        </div>
+      }
+
+      @if (horariosService.errorMessage()) {
+        <div class="MensajeError">
+          {{ horariosService.errorMessage() }}
+        </div>
       }
     </div>
   </div>

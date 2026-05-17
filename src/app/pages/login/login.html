@@ -6,24 +6,33 @@
     </div>
 
     <div class="CuadroLogin">
-      <div class="TitLogin">Email</div>
-      <div class="Campo">
-        <input type="email" [(ngModel)]="correo" required>
-      </div>
+      <form (ngSubmit)="onSubmit()">
+        <div class="TitLogin">Email</div>
+        <div class="Campo">
+          <input type="email" formControlName="correo" [formControl]="loginForm.controls.correo">
+        </div>
 
-      <div class="TitLogin">Contraseña</div>
-      <div class="Campo">
-        <input type="password" [(ngModel)]="contrasena" required>
-      </div>
+        <div class="TitLogin">Contraseña</div>
+        <div class="Campo">
+          <input type="password" formControlName="contrasena" [formControl]="loginForm.controls.contrasena">
+        </div>
 
-      <div id="BotonRegistrar">
-        <input type="submit" value="Iniciar Sesión" (click)="iniciarSesion()">
-        @if (mensajeError) {
-          <div style="color: red; margin-top: 10px; text-align: center;">
-            {{ mensajeError }}
+        <div id="BotonRegistrar">
+          <button type="submit" [disabled]="loginForm.invalid || authService.isLoading()">
+            @if (authService.isLoading()) {
+              Cargando...
+            } @else {
+              Iniciar Sesión
+            }
+          </button>
+        </div>
+
+        @if (authService.errorMessage()) {
+          <div class="MensajeError">
+            {{ authService.errorMessage() }}
           </div>
         }
-      </div>
+      </form>
 
       <div id="Pregunta">¿No tienes cuenta?</div>
       <div id="IniciaSesion">

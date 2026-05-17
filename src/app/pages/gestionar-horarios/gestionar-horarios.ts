@@ -1,41 +1,41 @@
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, inject } from '@angular/core';
+import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
+import { HorariosService } from '../../services/horarios';
 
 @Component({
   selector: 'app-gestionar-horarios',
   standalone: true,
-  imports: [FormsModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './gestionar-horarios.html',
-  styleUrls: ['./gestionar-horarios.css']
+  styleUrl: './gestionar-horarios.css'
 })
 export class GestionarHorarios {
 
-  fecha: string = '';
-  horaInicio: string = '';
-  horaFin: string = '';
-  mensaje: string = '';
+  private fb = inject(FormBuilder);
+  public horariosService = inject(HorariosService);
 
-  agregarHorario(): void {
-    if (!this.fecha || !this.horaInicio || !this.horaFin) {
-      this.mensaje = '⚠️ Todos los campos son obligatorios.';
+  horarioForm = this.fb.group({
+    fecha: ['', [Validators.required]],
+    hora_inicio: ['', [Validators.required]],
+    hora_fin: ['', [Validators.required]]
+  });
+
+  onSubmit(): void {
+    if (this.horarioForm.invalid) return;
+
+    const { fecha, hora_inicio, hora_fin } = this.horarioForm.value;
+
+    if (hora_inicio! >= hora_fin!) {
+      this.horariosService.errorMessage.set('La hora de inicio debe ser menor que la hora de fin.');
       return;
     }
 
-    if (this.horaInicio >= this.horaFin) {
-      this.mensaje = '⚠️ La hora de inicio debe ser menor que la hora de fin.';
-      return;
-    }
-
-    // Esto se reemplazará con llamada al backend
-    console.log('Horario agregado:', {
-      fecha: this.fecha,
-      hora_inicio: this.horaInicio,
-      hora_fin: this.horaFin
+    this.horariosService.agregarHorario({
+      fecha: fecha!,
+      hora_inicio: hora_inicio!,
+      hora_fin: hora_fin!
     });
 
-    this.mensaje = '✅ Horario agregado exitosamente.';
-    this.fecha = '';
-    this.horaInicio = '';
-    this.horaFin = '';
+    this.horarioForm.reset();
   }
 }

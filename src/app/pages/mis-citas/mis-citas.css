@@ -63,6 +63,36 @@
         padding-left: 5px;
         padding-right: 5px;
     }
+
+    .MensajeExito {
+        color: green;
+        margin-bottom: 15px;
+        font-family: Verdana;
+    }
+
+    .MensajeError {
+        color: red;
+        margin-bottom: 15px;
+        font-family: Verdana;
+    }
+
+    .SinCitas {
+        grid-column: span 3;
+        text-align: center;
+        padding: 20px;
+        font-family: sans-serif;
+    }
+
+    .BotonesCita {
+        display: flex;
+        gap: 5px;
+        margin-top: 5px;
+    }
+
+    .flechaDesactivada {
+        opacity: 0.3;
+        cursor: default;
+    }
 }
 
 /* Tablet */
@@ -127,6 +157,36 @@
         padding-left: 5px;
         padding-right: 5px;
     }
+
+    .MensajeExito {
+        color: green;
+        margin-bottom: 15px;
+        font-family: Verdana;
+    }
+
+    .MensajeError {
+        color: red;
+        margin-bottom: 15px;
+        font-family: Verdana;
+    }
+
+    .SinCitas {
+        grid-column: span 3;
+        text-align: center;
+        padding: 20px;
+        font-family: sans-serif;
+    }
+
+    .BotonesCita {
+        display: flex;
+        gap: 5px;
+        margin-top: 5px;
+    }
+
+    .flechaDesactivada {
+        opacity: 0.3;
+        cursor: default;
+    }
 }
 
 /* Mobile */
@@ -190,5 +250,35 @@
         text-align: center;
         padding-left: 5px;
         padding-right: 5px;
+    }
+
+    .MensajeExito {
+        color: green;
+        margin-bottom: 15px;
+        font-family: Verdana;
+    }
+
+    .MensajeError {
+        color: red;
+        margin-bottom: 15px;
+        font-family: Verdana;
+    }
+
+    .SinCitas {
+        grid-column: span 3;
+        text-align: center;
+        padding: 20px;
+        font-family: sans-serif;
+    }
+
+    .BotonesCita {
+        display: flex;
+        gap: 5px;
+        margin-top: 5px;
+    }
+
+    .flechaDesactivada {
+        opacity: 0.3;
+        cursor: default;
     }
 }

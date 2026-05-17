@@ -4,31 +4,31 @@
     <div id="ContenidoHorarios">
       <div class="TablaHorarios">
 
-        <!-- Navegación del mes -->
         <div class="CeldaMes">
-          <img src="Imagenes/FlechaIzq.png" style="cursor:pointer;" (click)="mesAnterior()">
-          <div class="Mes">{{ nombreMes }} {{ anioActual }}</div>
-          <img src="Imagenes/FlechaDer.png" style="cursor:pointer;" (click)="mesSiguiente()">
+          <img src="Imagenes/FlechaIzq.png" (click)="horariosService.mesAnterior()">
+          <div class="Mes">{{ horariosService.nombreMes() }} {{ horariosService.anioActual() }}</div>
+          <img src="Imagenes/FlechaDer.png" (click)="horariosService.mesSiguiente()">
         </div>
 
-        <!-- Días de la semana -->
         @for (dia of diasSemana; track dia) {
           <div class="CeldaDia">{{ dia }}</div>
         }
 
-        <!-- Espacios vacíos antes del primer día -->
-        @for (vacio of vacios; track vacio) {
+        @for (vacio of horariosService.vacios(); track vacio) {
           <div class="CeldaHorario sinHorario"></div>
         }
 
-        <!-- Días del mes -->
-        @for (dia of diasDelMes; track dia.fecha) {
-          <div class="CeldaHorario" [class.sinHorario]="!dia.disponible" [class.disponible]="dia.disponible">
+        @for (dia of horariosService.diasCalendario(); track dia.fecha) {
+          <div class="CeldaHorario"
+            [class.sinHorario]="!dia.disponible"
+            [class.disponible]="dia.disponible">
+
             @if (!dia.disponible) {
               <div class="DiaHorario">{{ dia.numero }}</div>
             }
-            @if (dia.disponible && !isAdmin) {
-              <div style="cursor:pointer;" (click)="irAgendar(dia.fecha)">
+
+            @if (dia.disponible && !authService.isAdmin()) {
+              <div (click)="irAgendar(dia.fecha)">
                 <div class="DiaHorario">{{ dia.numero }}</div>
                 @for (bloque of dia.bloques; track bloque) {
                   <div [class]="bloque.turno === 'Mat' ? 'CeldaHorarioMat' : 'CeldaHorarioVes'">
@@ -37,21 +37,18 @@
                 }
               </div>
             }
-            @if (dia.disponible && isAdmin) {
+
+            @if (dia.disponible && authService.isAdmin()) {
               <div class="DiaHorario">{{ dia.numero }}</div>
               @for (bloque of dia.bloques; track bloque) {
                 <div [class]="bloque.turno === 'Mat' ? 'CeldaHorarioMat' : 'CeldaHorarioVes'">
                   {{ bloque.horaIni }}-{{ bloque.horaFin }}
                 </div>
               }
-              <span style="color:red; font-weight:bold; cursor:pointer; font-size:12px;"
-                (click)="eliminarFecha(dia.fecha)">
-                Eliminar
-              </span>
+              <span class="EliminarFecha" (click)="eliminarFecha(dia.fecha)">Eliminar</span>
             }
           </div>
         }
-
       </div>
     </div>
   </div>

@@ -30,6 +30,23 @@
     .TituloCuadro { font-family: sans-serif; font-size: 24px; }
 
     .TextoCuadro { font-family: sans-serif; font-size: 20px; }
+
+        .MensajeCargando {
+        font-family: sans-serif;
+        padding: 40px;
+        text-align: center;
+        color: #555;
+    }
+
+    .MensajeNoEncontrado {
+        font-family: Verdana;
+        padding: 40px;
+        text-align: center;
+    }
+
+    .BotonAgendarCita {
+        margin-top: 20px;
+    }
 }
 
 /* Tablet */
@@ -69,6 +86,23 @@
     .TituloCuadro { font-family: sans-serif; font-size: 24px; }
 
     .TextoCuadro { font-family: sans-serif; font-size: 20px; }
+
+        .MensajeCargando {
+        font-family: sans-serif;
+        padding: 40px;
+        text-align: center;
+        color: #555;
+    }
+
+    .MensajeNoEncontrado {
+        font-family: Verdana;
+        padding: 40px;
+        text-align: center;
+    }
+
+    .BotonAgendarCita {
+        margin-top: 20px;
+    }
 }
 
 /* Mobile */
@@ -108,4 +142,21 @@
     .TituloCuadro { font-family: sans-serif; font-size: 20px; }
 
     .TextoCuadro { font-family: sans-serif; font-size: 16px; }
+
+    .MensajeCargando {
+        font-family: sans-serif;
+        padding: 40px;
+        text-align: center;
+        color: #555;
+    }
+
+    .MensajeNoEncontrado {
+        font-family: Verdana;
+        padding: 40px;
+        text-align: center;
+    }
+
+    .BotonAgendarCita {
+        margin-top: 20px;
+    }
 }

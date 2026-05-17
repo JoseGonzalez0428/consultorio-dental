@@ -40,6 +40,11 @@
     #MiCuenta { background-color: white; color: #7160E6; border: 2px solid #7160E6; border-radius: 20px; padding: 10px 20px; cursor: pointer; }
     #InicioS:hover, #Registrar:hover, #MiCuenta:hover { background-color: #7160E6; color: black; }
     .PerfilContainer { display: flex !important; }
+    .SaludoUsuario {
+        font-family: Verdana;
+        font-size: 14px;
+        color: white;
+    }
 }
 
 /* Tablet */
@@ -82,6 +87,12 @@
     .BotonSesion { background-color: gray; color: white; }
     #MiCuenta { background-color: white; color: #7160E6; border: 2px solid #7160E6; border-radius: 20px; padding: 10px 20px; cursor: pointer; }
     #InicioS:hover, #Registrar:hover, #MiCuenta:hover { background-color: #7160E6; color: black; }
+
+    .SaludoUsuario {
+        font-family: Verdana;
+        font-size: 14px;
+        color: white;
+    }
 }
 
 /* Mobile */
@@ -146,4 +157,10 @@
     }
 
     .MenuAbierto .MenuItems { display: flex; }
+
+    .SaludoUsuario {
+        font-family: Verdana;
+        font-size: 14px;
+        color: white;
+    }
 }

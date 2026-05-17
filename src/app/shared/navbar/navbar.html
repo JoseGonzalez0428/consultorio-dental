@@ -3,7 +3,7 @@
     <img src="Imagenes/logo.png" alt="Logo Consultorio">
   </div>
 
-  @if (!isAuthenticated) {
+  @if (!authService.isLoggedIn()) {
     <div class="Hamburguesa" (click)="toggleMenu()">☰</div>
     <div class="MenuItems">
       <div class="Boton" routerLink="/inicio">Inicio</div>
@@ -16,9 +16,9 @@
     </div>
   }
 
-  @if (isAuthenticated && tipoUsuario === 'cliente') {
-    <span style="font-family: Verdana; font-size: 14px;">
-      {{ saludo }} {{ nombreUsuario }}
+  @if (authService.isLoggedIn() && authService.tipoUsuario() === 'cliente') {
+    <span class="SaludoUsuario">
+      {{ authService.saludo() }} {{ authService.nombreUsuario() }}
     </span>
     <div class="Hamburguesa" (click)="toggleMenu()">☰</div>
     <div class="MenuItems">
@@ -32,17 +32,17 @@
     </div>
   }
 
-  @if (isAuthenticated && tipoUsuario === 'admin') {
-    <span style="font-family: Verdana; font-size: 14px;">
-      {{ saludo }} {{ nombreUsuario }}
+  @if (authService.isLoggedIn() && authService.tipoUsuario() === 'admin') {
+    <span class="SaludoUsuario">
+      {{ authService.saludo() }} {{ authService.nombreUsuario() }}
     </span>
     <div class="Hamburguesa" (click)="toggleMenu()">☰</div>
     <div class="MenuItems">
       <div class="Boton" routerLink="/reportes">Reportes</div>
       <div class="Boton" routerLink="/crear-reporte">Crear reporte</div>
       <div class="Boton" routerLink="/gestionar-citas">Gestionar Citas</div>
-      <div class="Boton" routerLink="/gestionar-tratamientos">Gestionar Tratamientos</div>
       <div class="Boton" routerLink="/gestionar-horarios">Gestionar Horarios</div>
+      <div class="Boton" routerLink="/gestionar-tratamientos">Gestionar Tratamientos</div>
       <div class="Boton" routerLink="/horarios">Horarios</div>
       <div class="BotonSesion" (click)="cerrarSesion()">Cerrar sesión</div>
     </div>

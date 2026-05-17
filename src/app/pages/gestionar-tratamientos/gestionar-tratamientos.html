@@ -1,1 +1,85 @@
-<p>gestionar-tratamientos works!</p>
+<div class="Pagina">
+  <div class="Contenido">
+    <div class="TitContenido">Gestionar Tratamientos</div>
+
+    @if (tratamientosService.successMessage()) {
+      <div class="MensajeExito">
+        {{ tratamientosService.successMessage() }}
+      </div>
+    }
+
+    @if (tratamientosService.errorMessage()) {
+      <div class="MensajeError">
+        {{ tratamientosService.errorMessage() }}
+      </div>
+    }
+
+    <div class="SeccionFormulario">
+      <h3 class="TituloFormulario">
+        {{ tratamientoEditando ? 'Editar tratamiento' : 'Nuevo tratamiento' }}
+      </h3>
+
+      <form (ngSubmit)="onSubmit()">
+        <div class="TitOpcion">Nombre:</div>
+        <div class="CampoFormulario">
+          <input type="text" [formControl]="tratamientoForm.controls.nombre">
+        </div>
+
+        <div class="TitOpcion">Descripción:</div>
+        <div class="CampoFormulario">
+          <textarea [formControl]="tratamientoForm.controls.descripcion" rows="3"></textarea>
+        </div>
+
+        <div class="TitOpcion">Precio:</div>
+        <div class="CampoFormulario">
+          <input type="text" [formControl]="tratamientoForm.controls.precio">
+        </div>
+
+        <div class="TitOpcion">Imagen (nombre del archivo):</div>
+        <div class="CampoFormulario">
+          <input type="text" [formControl]="tratamientoForm.controls.imagen" placeholder="consulta.jpg">
+        </div>
+
+        <div class="TitOpcion">Recomendaciones (una por línea):</div>
+        <div class="CampoFormulario">
+          <textarea [formControl]="tratamientoForm.controls.recomendaciones" rows="5"></textarea>
+        </div>
+
+        <div class="BotonesFormulario">
+          <button type="submit" class="BotonCita"
+            [disabled]="tratamientoForm.invalid || tratamientosService.isLoading()">
+            @if (tratamientosService.isLoading()) {
+              Guardando...
+            } @else {
+              {{ tratamientoEditando ? 'Actualizar' : 'Crear' }}
+            }
+          </button>
+          @if (tratamientoEditando) {
+            <button type="button" class="BotonCancelar" (click)="cancelarEdicion()">
+              Cancelar
+            </button>
+          }
+        </div>
+      </form>
+    </div>
+
+    <div class="TablaTratamientos">
+      <div class="CeldaTratamiento" id="CeldaTit">Nombre</div>
+      <div class="CeldaTratamiento" id="CeldaTit">Precio</div>
+      <div class="CeldaTratamiento" id="CeldaTit">Acciones</div>
+
+      @if (tratamientosService.tratamientos().length === 0) {
+        <div class="SinTratamientos">No hay tratamientos registrados.</div>
+      }
+
+      @for (t of tratamientosService.tratamientos(); track t._id) {
+        <div class="CeldaTratamiento">{{ t.nombre }}</div>
+        <div class="CeldaTratamiento">{{ t.precio }}</div>
+        <div class="CeldaTratamiento AccionesTratamiento">
+          <button class="BotonCita" (click)="editarTratamiento(t)">Editar</button>
+          <button class="BotonEliminar" (click)="eliminarTratamiento(t._id!)">Eliminar</button>
+        </div>
+      }
+    </div>
+  </div>
+</div>

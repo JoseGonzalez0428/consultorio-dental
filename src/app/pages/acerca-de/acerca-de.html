@@ -4,13 +4,13 @@
       <div class="InfoDescripcion">
         <div class="TitContenido">Acerca de nosotros</div>
         <div class="TextoDescripcion">
-          La Dra. Ana Luisa cuenta con más de 25 años de experiencia en el 
-          cuidado de la salud bucal, brindando atención profesional y 
-          personalizada a cada paciente. Se tituló en la Facultad de 
-          Estomatología de la UASLP, donde adquirió los conocimientos y 
-          habilidades que la han distinguido a lo largo de su trayectoria. 
-          Su compromiso es ofrecer tratamientos de alta calidad en un ambiente 
-          cómodo y confiable, priorizando siempre el bienestar y la 
+          La Dra. Ana Luisa cuenta con más de 25 años de experiencia en el
+          cuidado de la salud bucal, brindando atención profesional y
+          personalizada a cada paciente. Se tituló en la Facultad de
+          Estomatología de la UASLP, donde adquirió los conocimientos y
+          habilidades que la han distinguido a lo largo de su trayectoria.
+          Su compromiso es ofrecer tratamientos de alta calidad en un ambiente
+          cómodo y confiable, priorizando siempre el bienestar y la
           satisfacción de sus pacientes.
         </div>
       </div>
@@ -19,8 +19,8 @@
       </div>
     </div>
 
-    <div class="Contenido">
-      <h2 style="font-family: Verdana; margin-bottom: 20px;">Solicita informes</h2>
+    <div class="SeccionInformes">
+      <h2 class="TituloInformes">Solicita informes</h2>
 
       <div class="campo-formulario">
         <label>Nombre</label>
@@ -34,7 +34,7 @@
 
       <div class="campo-formulario">
         <label>Correo electrónico</label>
-        <input type="email" [(ngModel)]="correo" placeholder="email@fakerdomain.net">
+        <input type="email" [(ngModel)]="correo" placeholder="email@dominio.com">
       </div>
 
       <div class="campo-formulario">
@@ -43,12 +43,12 @@
       </div>
 
       @if (enviado) {
-        <div style="color: green; font-family: Verdana; margin-top: 10px;">
-          ✅ Tu mensaje ha sido enviado, nos pondremos en contacto contigo pronto.
+        <div class="MensajeExito">
+          Tu mensaje ha sido enviado, nos pondremos en contacto contigo pronto.
         </div>
       }
 
-      <button class="Boton" style="margin-top: 20px;" (click)="enviarMensaje()">Aceptar</button>
+      <button class="boton-enviar" (click)="enviarMensaje()">Aceptar</button>
     </div>
   </div>
 </div>
