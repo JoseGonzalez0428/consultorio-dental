@@ -1,162 +1,205 @@
-/* Desktop */
-@media screen and (min-width:1025px) {
-    .Tratamiento { display: flex; }
-
-    .ImagenTrat { min-width: 50%; }
-
-    .ImagenTrat img {
-        width: 100%;
-        height: 280px;
-        object-fit: cover;
-        object-position: center;
-        border-radius: 8px;
-    }
-
-    .InfoTrat { padding: 15px; }
-
-    .TituloTrat { font-family: Verdana; font-size: 24px; font-weight: bold; }
-
-    .PrecioTrat { font-family: Arial; font-size: 50px; font-weight: bold; }
-
-    .TextoTrat { font-family: Arial; font-size: 20px; padding-bottom: 15px; text-align: justify; }
-
-    .CuadroRecomen {
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        padding: 15px;
-        margin-top: 10px;
-    }
-
-    .TituloCuadro { font-family: sans-serif; font-size: 24px; }
-
-    .TextoCuadro { font-family: sans-serif; font-size: 20px; }
-
-        .MensajeCargando {
-        font-family: sans-serif;
-        padding: 40px;
-        text-align: center;
-        color: #555;
-    }
-
-    .MensajeNoEncontrado {
-        font-family: Verdana;
-        padding: 40px;
-        text-align: center;
-    }
-
-    .BotonAgendarCita {
-        margin-top: 20px;
-    }
+/* ==========================================================================
+   Conexión Arquitectónica con tu styles.css General
+   ========================================================================== */
+.Pagina {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  background-color: #faf9fe; /* El mismo fondo lila ultra suave de tu app */
 }
 
-/* Tablet */
-@media screen and (min-width:681px) and (max-width:1024px) {
-    .Tratamiento {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .ImagenTrat { min-width: 50%; }
-
-    .ImagenTrat img {
-        width: 100%;
-        height: 280px;
-        object-fit: cover;
-        object-position: center;
-        border-radius: 8px;
-    }
-
-    .InfoTrat { padding: 15px; }
-
-    .TituloTrat { font-family: Verdana; font-size: 24px; font-weight: bold; }
-
-    .PrecioTrat { font-family: Arial; font-size: 50px; font-weight: bold; }
-
-    .TextoTrat { font-family: Arial; font-size: 20px; padding-bottom: 15px; text-align: justify; }
-
-    .CuadroRecomen {
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        padding: 15px;
-        margin-top: 10px;
-    }
-
-    .TituloCuadro { font-family: sans-serif; font-size: 24px; }
-
-    .TextoCuadro { font-family: sans-serif; font-size: 20px; }
-
-        .MensajeCargando {
-        font-family: sans-serif;
-        padding: 40px;
-        text-align: center;
-        color: #555;
-    }
-
-    .MensajeNoEncontrado {
-        font-family: Verdana;
-        padding: 40px;
-        text-align: center;
-    }
-
-    .BotonAgendarCita {
-        margin-top: 20px;
-    }
+/* Dejamos que los paddings por breakpoint los administre tu styles.css */
+.Contenido {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-/* Mobile */
-@media screen and (min-width:0px) and (max-width:680px) {
-    .Tratamiento {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
+/* ==========================================================================
+   Estructura de la Tarjeta de Detalle (.Tratamiento)
+   ========================================================================== */
+.Tratamiento {
+  background-color: #ffffff;
+  border-radius: 24px;
+  border: 1px solid #f3e8ff;
+  box-shadow: 0 10px 25px -5px rgba(113, 96, 230, 0.04);
+  padding: 24px;
+  width: 100%;
+  max-width: 900px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column; /* Apilado vertical por defecto para móvil */
+  gap: 24px;
+}
 
-    .ImagenTrat { min-width: 50%; }
+/* Bloque Izquierdo: Imagen */
+.ImagenTrat {
+  width: 100%;
+}
 
-    .ImagenTrat img {
-        width: 100%;
-        height: 300px;
-        object-fit: cover;
-        object-position: center;
-        border-radius: 8px;
-    }
+.ImagenTrat img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(113, 96, 230, 0.06);
+}
 
-    .InfoTrat { padding: 15px; }
+/* Bloque Derecho: Textos e Información */
+.InfoTrat {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
 
-    .TituloTrat { font-family: Verdana; font-size: 20px; font-weight: bold; }
+.TituloTrat {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #1e1b4b; /* Morado muy oscuro de alta legibilidad */
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
 
-    .PrecioTrat { font-family: Arial; font-size: 40px; font-weight: bold; }
+/* Estilizamos el precio de forma integrada en lugar de una tipografía gigante suelta */
+.PrecioTrat {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #7160e6; /* Morado insignia */
+  margin-bottom: 16px;
+  display: inline-block;
+}
 
-    .TextoTrat { font-family: Arial; font-size: 16px; padding-bottom: 15px; text-align: justify; }
+/* Añadimos el signo de pesos y la moneda de forma elegante vía CSS */
+.PrecioTrat::before {
+  content: "$";
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-right: 2px;
+}
 
-    .CuadroRecomen {
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        padding: 10px;
-        margin-top: 10px;
-    }
+.PrecioTrat::after {
+  content: " MXN";
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #94a3b8;
+}
 
-    .TituloCuadro { font-family: sans-serif; font-size: 20px; }
+.TextoTrat {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #475569; /* Gris slate para descanso visual */
+  text-align: justify;
+  padding-bottom: 16px;
+}
 
-    .TextoCuadro { font-family: sans-serif; font-size: 16px; }
+/* ==========================================================================
+   El Cuadro de Recomendaciones (.CuadroRecomen)
+   ========================================================================== */
+.CuadroRecomen {
+  background-color: #fcfbfe; /* Fondo lila claro que resalta del fondo blanco */
+  border: 1px dashed #e2d9f3;
+  border-radius: 16px;
+  padding: 20px;
+  margin-top: 8px;
+}
 
-    .MensajeCargando {
-        font-family: sans-serif;
-        padding: 40px;
-        text-align: center;
-        color: #555;
-    }
+.TituloCuadro {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1e1b4b;
+  margin-bottom: 12px;
+}
 
-    .MensajeNoEncontrado {
-        font-family: Verdana;
-        padding: 40px;
-        text-align: center;
-    }
+.TextoCuadro {
+  font-size: 0.9rem;
+  color: #475569;
+}
 
-    .BotonAgendarCita {
-        margin-top: 20px;
-    }
+.TextoCuadro ul {
+  margin: 0;
+  padding-left: 20px; /* Sangría idónea para las viñetas */
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.TextoCuadro li {
+  line-height: 1.4;
+}
+
+/* ==========================================================================
+   Botón de Acción Principal (.BotonCita)
+   ========================================================================== */
+.BotonAgendarCita {
+  margin-top: 24px;
+  width: 100%;
+}
+
+/* Estilizamos directamente el botón real dentro de tu contenedor */
+.BotonAgendarCita .BotonCita {
+  width: 100%;
+  height: 46px;
+  background-color: #c860e6; /* Tu rosa corporativo de acción */
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px -1px rgba(200, 96, 230, 0.2);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.BotonAgendarCita .BotonCita:hover {
+  background-color: #b34fd1;
+  box-shadow: 0 10px 15px -3px rgba(200, 96, 230, 0.25);
+}
+
+/* States de Feedback de carga o errores */
+.MensajeCargando, .MensajeNoEncontrado {
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #94a3b8;
+  padding: 40px;
+}
+
+/* ==========================================================================
+   Media Query de Escritorio (Layout en dos columnas horizontales)
+   ========================================================================== */
+@media screen and (min-width: 1025px) {
+  .Tratamiento {
+    flex-direction: row; /* Imagen y Texto se alinean lado a lado */
+    padding: 32px;
+    gap: 32px;
+    align-items: flex-start;
+  }
+
+  /* La imagen toma exactamente el 45% del espacio */
+  .ImagenTrat {
+    width: 45%;
+    position: sticky;
+    top: 20px; /* Efecto flotante si el texto de la derecha es muy largo */
+  }
+
+  .ImagenTrat img {
+    height: 380px; /* Un poco más de altura vertical en monitores */
+  }
+
+  /* El bloque informativo toma el 55% restante */
+  .InfoTrat {
+    width: 55%;
+  }
+
+  .TituloTrat {
+    font-size: 1.85rem;
+  }
 }

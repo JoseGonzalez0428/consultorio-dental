@@ -1,131 +1,132 @@
-/* Desktop */
-@media screen and (min-width:1025px) {
-    .lista-tratamientos {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 3%;
-        margin: 5vh auto;
-        width: 90%;
-    }
-
-    .tratamiento-carta {
-        width: 22%;
-        min-width: 140px;
-        text-align: center;
-        cursor: pointer;
-    }
-
-    .tratamiento-carta img {
-        width: 100%;
-        aspect-ratio: 1/1;
-        object-fit: cover;
-        border-radius: 10px;
-    }
-
-    .tratamiento-carta div {
-        margin-top: 0.5em;
-        font-family: sans-serif;
-        font-size: 1em;
-    }
-
-    .MensajeCargando {
-        text-align: center;
-        font-family: sans-serif;
-        font-size: 18px;
-        margin-top: 20px;
-        color: #555;
-    }
-
-    .TituloTratamientos {
-        text-align: center;
-    }
+/* ==========================================================================
+   Contenedor y Estructura Global
+   ========================================================================== */
+.Pagina {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
-/* Tablet */
-@media screen and (min-width:681px) and (max-width:1024px) {
-    .lista-tratamientos {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 3%;
-        margin: 5vh auto;
-        width: 90%;
-    }
-
-    .tratamiento-carta {
-        width: 40%;
-        min-width: 140px;
-        text-align: center;
-        cursor: pointer;
-    }
-
-    .tratamiento-carta img {
-        width: 100%;
-        aspect-ratio: 1/1;
-        object-fit: cover;
-        border-radius: 10px;
-    }
-
-    .tratamiento-carta div {
-        margin-top: 0.5em;
-        font-family: sans-serif;
-        font-size: 1em;
-    }
-
-    .MensajeCargando {
-        text-align: center;
-        font-family: sans-serif;
-        font-size: 18px;
-        margin-top: 20px;
-        color: #555;
-    }
-
-    .TituloTratamientos {
-        text-align: center;
-    }
+.TituloTratamientos {
+  text-align: center;
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #1e1b4b; /* Tono morado muy oscuro */
+  letter-spacing: -0.02em;
+  margin-bottom: 32px;
 }
 
-/* Mobile */
-@media screen and (min-width:0px) and (max-width:680px) {
-    .lista-tratamientos {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 5%;
-        margin: 3vh auto;
-        width: 95%;
-    }
+.Contenido {
+  flex-grow: 1;
+}
 
-    .tratamiento-carta {
-        width: 45%;
-        min-width: 120px;
-        text-align: center;
-        cursor: pointer;
-    }
+/* ==========================================================================
+   Cuadrícula de Tratamientos (CSS Grid Inteligente)
+   ========================================================================== */
+.lista-tratamientos {
+  display: grid;
+  /* En móvil acomoda 2 columnas automáticas que ocupan el espacio disponible */
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 20px;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-    .tratamiento-carta img {
-        width: 100%;
-        aspect-ratio: 1/1;
-        object-fit: cover;
-        border-radius: 10px;
-    }
+/* ==========================================================================
+   La Tarjeta de Tratamiento (.tratamiento-carta)
+   ========================================================================== */
+.tratamiento-carta {
+  background-color: #ffffff;
+  border-radius: 20px;
+  border: 1px solid #f3e8ff;
+  padding: 16px;
+  box-shadow: 0 4px 10px -4px rgba(113, 96, 230, 0.04);
+  text-align: center;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Animación de UX fluida */
+}
 
-    .tratamiento-carta div {
-        margin-top: 0.5em;
-        font-family: sans-serif;
-        font-size: 0.9em;
-    }
+/* Ajuste de la imagen cuadrada */
+.tratamiento-carta img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 14px;
+  transition: transform 0.3s ease;
+}
 
-    .MensajeCargando {
-        text-align: center;
-        font-family: sans-serif;
-        font-size: 18px;
-        margin-top: 20px;
-        color: #555;
-    }
+/* El texto abajo de la imagen */
+.tratamiento-carta div {
+  margin-top: 12px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #334155; /* Gris slate para máxima elegancia */
+  transition: color 0.2s ease;
+}
 
-    .TituloTratamientos {
-        text-align: center;
-    }
+/* Microinteracción premium al pasar el mouse por encima */
+.tratamiento-carta:hover {
+  transform: translateY(-6px); /* La tarjeta flota sutilmente */
+  border-color: #eecffd;
+  box-shadow: 0 12px 20px -8px rgba(113, 96, 230, 0.15);
+}
+
+.tratamiento-carta:hover img {
+  transform: scale(1.02); /* Ligero zoom interno a la foto */
+}
+
+.tratamiento-carta:hover div {
+  color: #7160e6; /* El texto se ilumina en el morado de la clínica */
+}
+
+/* ==========================================================================
+   Feedback de Carga
+   ========================================================================== */
+.MensajeCargando {
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #94a3b8;
+  margin-top: 32px;
+  animation: pulseCarga 1.5s infinite;
+}
+
+@keyframes pulseCarga {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* ==========================================================================
+   Media Queries Escalables (Tablet y Escritorio)
+   ========================================================================== */
+
+/* Tablet (Aumenta a 3 columnas simétricas) */
+@media screen and (min-width: 681px) and (max-width: 1024px) {
+  .lista-tratamientos {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    width: 90%;
+  }
+}
+
+/* Desktop (Se transforma en una rejilla perfecta de 4 columnas) */
+@media screen and (min-width: 1025px) {
+  .lista-tratamientos {
+    grid-template-columns: repeat(4, 1fr); /* 4 elementos alineados por fila */
+    gap: 28px;
+    width: 90%;
+  }
+  
+  .tratamiento-carta {
+    padding: 20px; /* Un poco más de aire interno en pantallas grandes */
+  }
+  
+  .tratamiento-carta div {
+    font-size: 1.05rem;
+  }
 }
