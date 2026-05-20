@@ -51,18 +51,19 @@ export class TratamientosService {
     });
   }
 
-  crearTratamiento(tratamiento: Tratamiento): void {
+  crearTratamiento(formData: FormData): void {
     this.isLoading.set(true);
     this.successMessage.set(null);
     this.errorMessage.set(null);
 
-    this.http.post<any>(`${this.BASE_URL}/tratamientos`, tratamiento).subscribe({
+    this.http.post<any>(`${this.BASE_URL}/tratamientos`, formData).subscribe({
       next: () => {
         this.successMessage.set('Tratamiento creado correctamente.');
         this.fetchTratamientos();
       },
       error: (error: any) => {
         this.errorMessage.set(error.error.msg ?? 'Error al crear tratamiento.');
+        this.isLoading.set(false);
       },
       complete: () => {
         this.isLoading.set(false);
@@ -70,18 +71,19 @@ export class TratamientosService {
     });
   }
 
-  actualizarTratamiento(id: string, tratamiento: Tratamiento): void {
+  actualizarTratamiento(id: string, formData: FormData): void {
     this.isLoading.set(true);
     this.successMessage.set(null);
     this.errorMessage.set(null);
 
-    this.http.put<any>(`${this.BASE_URL}/tratamientos/${id}`, tratamiento).subscribe({
+    this.http.put<any>(`${this.BASE_URL}/tratamientos/${id}`, formData).subscribe({
       next: () => {
         this.successMessage.set('Tratamiento actualizado correctamente.');
         this.fetchTratamientos();
       },
       error: (error: any) => {
         this.errorMessage.set(error.error.msg ?? 'Error al actualizar tratamiento.');
+        this.isLoading.set(false);
       },
       complete: () => {
         this.isLoading.set(false);

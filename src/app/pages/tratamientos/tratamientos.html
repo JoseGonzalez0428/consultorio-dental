@@ -11,7 +11,7 @@
         <div class="tratamiento-carta" (click)="verTratamiento(tratamiento._id!)">
           
           <div class="tratamiento-imagen-container">
-            <img [src]="'Imagenes/' + tratamiento.imagen" [alt]="tratamiento.nombre">
+            <img [src]="'http://localhost:3000/imagenes/' + tratamiento.imagen">
           </div>
           
           <div class="tratamiento-info-wrapper">
