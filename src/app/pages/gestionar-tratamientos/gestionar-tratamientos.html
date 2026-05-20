@@ -124,8 +124,12 @@
                 <div class="TratamientoPrecio">{{ t.precio }}</div>
               </div>
               <div class="TratamientoAcciones">
-                <button class="BtnEditar" (click)="editarTratamiento(t)">Editar</button>
-                <button class="BtnEliminar" (click)="eliminarTratamiento(t._id!)">Eliminar</button>
+                @if (t.activo) {
+                  <button class="BtnEditar" (click)="editarTratamiento(t)">Editar</button>
+                  <button class="BtnEliminar" (click)="eliminarTratamiento(t._id!)">Desactivar</button>
+                } @else {
+                  <button class="BtnEditar" (click)="reactivarTratamiento(t._id!)">Reactivar</button>
+                }
               </div>
             </div>
           }

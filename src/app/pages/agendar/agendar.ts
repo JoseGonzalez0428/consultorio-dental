@@ -21,12 +21,35 @@ export class Agendar implements OnInit {
   public horariosService = inject(HorariosService);
   public tratamientosService = inject(TratamientosService);
 
-  fechasDisponibles = computed(() =>
-    this.horariosService.horarios()
-      .map(h => h.fecha)
-      .filter(f => f >= new Date().toISOString().split('T')[0])
-      .filter((f, i, arr) => arr.indexOf(f) === i)
-  );
+  fechasDisponibles = computed(() => {
+    const ocupadas = this.citasService.horasOcupadas();
+    
+    return this.horariosService.horarios()
+      .filter(h => h.fecha >= new Date().toISOString().split('T')[0])
+      .reduce((fechas: string[], h) => {
+        if (!fechas.includes(h.fecha)) {
+          fechas.push(h.fecha);
+        }
+        return fechas;
+      }, [])
+      .filter(fecha => {
+        const horariosDeFecha = this.horariosService.horarios().filter(h => h.fecha === fecha);
+        const ocupadasDeFecha = ocupadas[fecha] ?? [];
+        
+        const bloques: string[] = [];
+        horariosDeFecha.forEach(disp => {
+          const inicio = new Date(`2000-01-01T${disp.hora_inicio}`);
+          const fin = new Date(`2000-01-01T${disp.hora_fin}`);
+          while (inicio < fin) {
+            const horaInicio = inicio.toTimeString().slice(0, 5);
+            inicio.setHours(inicio.getHours() + 1);
+            if (inicio <= fin) bloques.push(horaInicio);
+          }
+        });
+
+        return bloques.some(b => !ocupadasDeFecha.includes(b));
+      });
+  });
   horasDisponibles: BloqueHorario[] = [];
 
   agendarForm = this.fb.group({
@@ -41,11 +64,16 @@ export class Agendar implements OnInit {
     this.citasService.fetchHorasOcupadas();
 
     const fechaGet = this.route.snapshot.queryParamMap.get('fecha');
+    const tratamientoGet = this.route.snapshot.queryParamMap.get('tratamiento');
+
     if (fechaGet) {
       this.agendarForm.controls.fecha.setValue(fechaGet);
       this.cargarHoras(fechaGet);
     }
 
+    if (tratamientoGet) {
+      this.agendarForm.controls.id_tratamiento.setValue(tratamientoGet);
+    }
   }
 
   cargarHoras(fecha: string): void {

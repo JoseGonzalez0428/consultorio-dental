@@ -5,4 +5,5 @@ export interface Tratamiento {
     precio: string;
     imagen: string;
     recomendaciones: string[];
+    activo?: boolean;
 }

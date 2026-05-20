@@ -27,7 +27,7 @@ export class GestionarTratamientos implements OnInit {
   });
 
   ngOnInit(): void {
-    this.tratamientosService.fetchTratamientos();
+    this.tratamientosService.fetchTodosLosTratamientos();
   }
 
   imagenPreview: string | null = null;
@@ -100,5 +100,9 @@ export class GestionarTratamientos implements OnInit {
   eliminarTratamiento(id: string): void {
     if (!confirm('¿Seguro que quieres eliminar este tratamiento?')) return;
     this.tratamientosService.eliminarTratamiento(id);
+  }
+
+  reactivarTratamiento(id: string): void {
+    this.tratamientosService.reactivarTratamiento(id);
   }
 }

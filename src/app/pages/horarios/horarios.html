@@ -27,18 +27,16 @@
             <span class="day-number">{{ dia.numero }}</span>
 
             @if (dia.disponible && !authService.isAdmin()) {
-              <div class="slots-indicator" (click)="irAgendar(dia.fecha)">
-                <span class="indicator-dot"></span>
-                <span class="slots-text">{{ dia.bloques.length }} horarios</span>
-              </div>
-            }
-
-            @if (dia.disponible && authService.isAdmin()) {
-              <div class="slots-indicator">
-                <span class="indicator-dot"></span>
-                <span class="slots-text">{{ dia.bloques.length }} h</span>
-                <button type="button" class="btn-delete-date" (click)="eliminarFecha(dia.fecha)">✕</button>
-              </div>
+              @if (tieneHorasDisponibles(dia.fecha)) {
+                <div class="slots-indicator" (click)="irAgendar(dia.fecha)">
+                  <span class="indicator-dot"></span>
+                  <span class="slots-text">{{ bloquesDisponibles(dia.fecha) }} disponibles</span>
+                </div>
+              } @else {
+                <div class="slots-indicator slots-lleno">
+                  <span class="slots-text">Sin espacio</span>
+                </div>
+              }
             }
 
           </div>

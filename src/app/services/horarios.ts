@@ -98,10 +98,12 @@ export class HorariosService {
         });
       }
 
+      const hoy = new Date().toISOString().split('T')[0];
+
       dias.push({
         numero: d,
         fecha,
-        disponible: !!disponibilidad,
+        disponible: !!disponibilidad && fecha >= hoy,
         bloques
       });
     }

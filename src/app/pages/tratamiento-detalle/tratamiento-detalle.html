@@ -41,7 +41,9 @@
           </div>
           
           <div class="BotonAgendarCita">
-            <button class="BotonCita" routerLink="/agendar">Agendar cita</button>
+            <button class="BotonCita" [routerLink]="['/agendar']" [queryParams]="{tratamiento: tratamientosService.tratamientoSeleccionado()!._id}">
+              Agendar cita
+            </button>
           </div>
         </div>
 

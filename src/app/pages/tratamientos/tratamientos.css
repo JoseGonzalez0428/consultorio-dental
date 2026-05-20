@@ -14,13 +14,24 @@
 
 .Contenido {
   flex-grow: 1;
+  padding: 0 20px; /* Margen de seguridad para pantallas pequeñas */
+  box-sizing: border-box;
+}
+
+/* El nuevo candado de alineación para toda la vista */
+.tratamientos-wrapper {
+  width: 100%;
+  max-width: 1100px;
+  margin: 40px auto; /* Centrado horizontal e introduce espacio respirable arriba/abajo */
+  box-sizing: border-box;
 }
 
 .TituloTratamientos {
-  text-align: center;
+  text-align: left; /* Cambiado a la izquierda para un look moderno alineado con la rejilla */
   color: #0f172a;
+  font-size: 2rem;
   font-weight: 800;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.04em;
   margin-top: 0;
   margin-bottom: 32px;
 }
@@ -30,12 +41,9 @@
    ========================================================================== */
 .lista-tratamientos {
   display: grid;
-  /* 2 columnas nativas perfectas en móvil */
   grid-template-columns: repeat(2, 1fr); 
   gap: 16px;
   width: 100%;
-  max-width: 1100px;
-  margin: 0 auto;
   box-sizing: border-box;
 }
 
@@ -56,7 +64,6 @@
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Contenedor de la foto para aislar efectos */
 .tratamiento-imagen-container {
   width: 100%;
   overflow: hidden;
@@ -76,9 +83,9 @@
   width: 100%;
   padding-top: 12px;
   padding-bottom: 4px;
-  min-height: 44px; /* Ocupa exactamente el espacio de dos renglones de texto */
+  min-height: 44px;
   display: flex;
-  align-items: center; /* Centra el texto verticalmente si es de un solo renglón */
+  align-items: center; 
   justify-content: center;
   box-sizing: border-box;
 }
@@ -102,14 +109,13 @@
 }
 
 .tratamiento-carta:hover img {
-  transform: scale(1.03); /* Efecto zoom controlado */
+  transform: scale(1.03);
 }
 
 .tratamiento-carta:hover .tratamiento-name-text {
-  color: #7160e6; /* Iluminación al morado insignia */
+  color: #7160e6;
 }
 
-/* Feedback de Carga */
 .MensajeCargando {
   text-align: center;
   font-size: 0.95rem;
@@ -121,28 +127,29 @@
 /* ==========================================================================
    Breakpoints Responsivos Sincronizados
    ========================================================================== */
-
-/* Tablet (Sube a 3 columnas perfectamente cuadradas) */
 @media screen and (min-width: 681px) and (max-width: 1024px) {
+  .tratamientos-wrapper {
+    width: 95%;
+  }
   .lista-tratamientos {
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
-    width: 95%;
   }
   .tratamiento-carta { padding: 16px; }
   .tratamiento-info-wrapper { min-height: 48px; }
   .tratamiento-name-text { font-size: 0.95rem; }
 }
 
-/* Desktop (Rejilla maestra de 4 columnas en monitores grandes) */
 @media screen and (min-width: 1025px) {
+  .tratamientos-wrapper {
+    width: 100%;
+  }
   .lista-tratamientos {
     grid-template-columns: repeat(4, 1fr);
     gap: 24px;
-    width: 100%;
   }
   .tratamiento-carta { padding: 18px; }
-  /* En PC los textos pueden ser un pelín más holgados */
   .tratamiento-info-wrapper { min-height: 52px; } 
   .tratamiento-name-text { font-size: 1rem; }
+  .TituloTratamientos { font-size: 2.25rem; }
 }

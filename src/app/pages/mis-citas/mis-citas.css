@@ -1,18 +1,40 @@
 /* ==========================================================================
-   Contenedor y Listado General
+   Contenedor y Listado General (Garantía de Altura Invariable)
    ========================================================================== */
 .Pagina {
-  background-color: #faf9fe; /* El lila claro de fondo global */
-  font-family: system-ui, -apple-system, sans-serif;
+  background-color: #faf9fe;
+  font-family: "Inter", "Geist Sans", -apple-system, sans-serif;
   box-sizing: border-box;
+  letter-spacing: -0.01em;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
+.Contenido {
+  flex-grow: 1;
+  max-width: 1050px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.TitContenido {
+  color: #0f172a;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 24px;
+}
+
+/* El candado de accesibilidad: Obliga al contenedor a medir lo mismo en PC */
 .ContenedorCitas {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  margin-top: 32px;
+  margin-top: 16px;
   width: 100%;
+  box-sizing: border-box;
+  min-height: 680px; /* Consistencia base para pantallas móviles */
 }
 
 /* ==========================================================================
@@ -21,24 +43,31 @@
 .TarjetaCita {
   background-color: #ffffff;
   border-radius: 20px;
-  border: 1px solid #f3e8ff;
+  border: 1px solid #f1f5f9;
   padding: 24px;
-  box-shadow: 0 4px 10px -4px rgba(113, 96, 230, 0.05);
+  box-shadow: 0 4px 12px -2px rgba(113, 96, 230, 0.02);
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   gap: 20px;
+  transition: opacity 0.2s ease, border-color 0.2s ease;
 }
 
-/* Distintivo lateral para citas pendientes */
-.TarjetaPendiente {
+.TarjetaCita[data-status="Pendiente"] {
   border-left: 4px solid #7160e6;
 }
 
-/* Distribución interna de los datos de lectura */
+.TarjetaCita[data-status="Terminada"],
+.TarjetaCita[data-status="Cancelada"] {
+  background-color: #f8fafc;
+  border-color: #e2e8f0;
+  opacity: 0.75;
+}
+
+/* Distribución interna de los datos */
 .CitaBloqueInfo {
   display: grid;
-  grid-template-columns: 1fr; /* Una columna en móvil */
+  grid-template-columns: 1fr;
   gap: 16px;
 }
 
@@ -57,18 +86,18 @@
 }
 
 .InfoValorDestacado {
-  font-size: 1.05rem;
+  font-size: 1rem;
   font-weight: 700;
-  color: #1e293b;
+  color: #0f172a;
 }
 
 .InfoValorSecundario {
-  font-size: 0.875rem;
+  font-size: 0.85rem;
   color: #64748b;
 }
 
 /* ==========================================================================
-   Estilizado de los Badges de Estado
+   Badges de Estado Estilizados (Selectores de Atributo)
    ========================================================================== */
 .EstadoCita {
   display: inline-flex;
@@ -76,21 +105,22 @@
   justify-content: center;
   padding: 4px 12px;
   border-radius: 20px;
-  font-size: 0.8rem;
-  font-weight: 600;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
   width: fit-content;
 }
 
-/* Variaciones basadas en tus IDs originales de estado */
-#CitaPendiente { background-color: #f5f3ff; color: #7160e6; }
-#CitaCompletada { background-color: #f0fdf4; color: #16a34a; }
-#CitaCancelada { background-color: #fef2f2; color: #ef4444; }
+.EstadoCita[data-status="Pendiente"] { background-color: #f5f3ff; color: #7160e6; }
+.EstadoCita[data-status="Terminada"] { background-color: #f0fdf4; color: #16a34a; }
+.EstadoCita[data-status="Cancelada"] { background-color: #fef2f2; color: #ef4444; }
 
 /* ==========================================================================
-   Panel de Modificación (Inputs y Botones)
+   Panel de Modificación (Controles de Cita Activa)
    ========================================================================== */
 .OpcionesCita {
-  background-color: #fcfbfe;
+  background-color: #fbfaff;
   border-radius: 14px;
   padding: 16px;
   border: 1px dashed #e2d9f3;
@@ -105,15 +135,15 @@
   gap: 10px;
 }
 
-/* Envoltura para las flechas de los selectores */
 .SelectorWrapper {
   position: relative;
   width: 100%;
 }
 
 .SelectorWrapper::after {
-  content: "▼";
-  font-size: 8px;
+  content: "↓";
+  font-size: 11px;
+  font-weight: 700;
   color: #94a3b8;
   position: absolute;
   right: 12px;
@@ -124,12 +154,13 @@
 
 .OpcionesCita select {
   width: 100%;
-  height: 38px;
-  padding: 0 12px;
+  height: 40px;
+  padding: 0 24px 0 12px;
   background-color: #ffffff;
   border: 1.5px solid #e2e8f0;
   border-radius: 10px;
   font-size: 0.85rem;
+  font-weight: 600;
   color: #334155;
   outline: none;
   cursor: pointer;
@@ -139,12 +170,14 @@
 
 .OpcionesCita select:focus {
   border-color: #7160e6;
+  box-shadow: 0 0 0 3px #f5f3ff;
 }
 
 .OpcionesCita select:disabled {
   background-color: #f1f5f9;
-  color: #cbd5e1;
+  color: #94a3b8;
   cursor: not-allowed;
+  border-color: #e2e8f0;
 }
 
 /* Botones de acción */
@@ -155,7 +188,7 @@
 
 .BotonCita {
   flex: 1;
-  height: 38px;
+  height: 40px;
   font-size: 0.85rem;
   font-weight: 600;
   border: none;
@@ -165,26 +198,27 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  font-family: inherit;
 }
 
-/* Modificamos tus IDs de color originales para integrarlos armónicamente */
-#Mod { background-color: #7160e6; color: #ffffff; }
-#Mod:hover { background-color: #5b4cc4; }
+.btn-modificar { background-color: #7160e6; color: #ffffff; box-shadow: 0 2px 4px rgba(113, 96, 230, 0.1); }
+.btn-modificar:hover { background-color: #5b4cc4; }
 
-#Canc { background-color: #fef2f2; color: #ef4444; }
-#Canc:hover { background-color: #fee2e2; }
+.btn-cancelar { background-color: #fef2f2; color: #ef4444; border: 1px solid #fee2e2; }
+.btn-cancelar:hover { background-color: #ef4444; color: #ffffff; }
 
 /* ==========================================================================
-   Alertas y Paginación
+   Alertas y Paginación Fija
    ========================================================================== */
 .SinCitas {
   text-align: center;
   background-color: #ffffff;
-  padding: 32px;
+  padding: 40px;
   border-radius: 20px;
-  border: 1px solid #e2e8f0;
+  border: 1px dashed #cbd5e1;
   color: #64748b;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
+  font-weight: 500;
 }
 
 .DesplazarReporte {
@@ -192,7 +226,8 @@
   justify-content: center;
   align-items: center;
   gap: 16px;
-  margin-top: 32px;
+  margin-top: 24px;
+  padding: 12px 0;
 }
 
 .DesplazarReporte img {
@@ -203,13 +238,13 @@
 }
 
 .flechaDesactivada {
-  opacity: 0.2;
+  opacity: 0.15;
   cursor: default;
 }
 
 #NoReporte {
-  font-size: 0.9rem;
-  font-weight: 600;
+  font-size: 0.85rem;
+  font-weight: 700;
   color: #475569;
 }
 
@@ -217,34 +252,46 @@
   padding: 12px;
   border-radius: 12px;
   font-size: 0.85rem;
-  font-weight: 500;
+  font-weight: 600;
   text-align: center;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
 }
-.MensajeExito { background-color: #f0fdf4; border: 1px solid #dcfce7; color: #16a34a; }
-.MensajeError { background-color: #fef2f2; border: 1px solid #fee2e2; color: #dc2626; }
+.MensajeExito { background-color: #f0fdf4; color: #16a34a; }
+.MensajeError { background-color: #fef2f2; color: #dc2626; }
 
 /* ==========================================================================
-   Modo Escritorio (Distribución Horizontal Limpia)
+   Fijación Estricta de Altura en Escritorio (UX Accesible)
    ========================================================================== */
 @media screen and (min-width: 681px) {
+  
+  /* 👈 Fijamos la altura matemática exacta para 3 tarjetas pendientes con sus respectivos gaps */
+  .ContenedorCitas {
+    height: 590px; 
+    min-height: 590px;
+    justify-content: flex-start; /* Alinea los elementos arriba si hay menos de 3 */
+  }
+
   .CitaBloqueInfo {
-    grid-template-columns: 30% 45% 25%; /* Divide la fila de información horizontalmente */
+    grid-template-columns: 30% 45% 25%;
     align-items: center;
   }
 
   .OpcionesCita {
-    flex-direction: row; /* Los controles y los botones se ponen lado a lado */
+    flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    height: 72px; /* Forzamos altura simétrica para la barra de herramientas */
+    box-sizing: border-box;
   }
 
   .ControlesSeleccion {
     grid-template-columns: 1fr 1fr;
     width: 60%;
+    gap: 16px;
   }
 
   .BotonesCita {
     width: 35%;
+    max-width: 240px;
   }
 }

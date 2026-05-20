@@ -1,7 +1,8 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, computed } from '@angular/core';
 import { Router } from '@angular/router';
 import { HorariosService } from '../../services/horarios';
 import { AuthService } from '../../services/auth';
+import { CitasService } from '../../services/citas';
 
 @Component({
   selector: 'app-horarios',
@@ -14,21 +15,53 @@ export class Horarios implements OnInit {
 
   public horariosService = inject(HorariosService);
   public authService = inject(AuthService);
+  public citasService = inject(CitasService);
   private router = inject(Router);
 
   diasSemana = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
 
   ngOnInit(): void {
     this.horariosService.fetchHorarios();
+    this.citasService.fetchHorasOcupadas();
+  }
+
+  tieneHorasDisponibles(fecha: string): boolean {
+    const horariosDeFecha = this.horariosService.horarios().filter(h => h.fecha === fecha);
+    const ocupadas = this.citasService.horasOcupadas()[fecha] ?? [];
+
+    const bloques: string[] = [];
+    horariosDeFecha.forEach(disp => {
+      const inicio = new Date(`2000-01-01T${disp.hora_inicio}`);
+      const fin = new Date(`2000-01-01T${disp.hora_fin}`);
+      while (inicio < fin) {
+        const horaInicio = inicio.toTimeString().slice(0, 5);
+        inicio.setHours(inicio.getHours() + 1);
+        if (inicio <= fin) bloques.push(horaInicio);
+      }
+    });
+
+    return bloques.some(b => !ocupadas.includes(b));
+  }
+
+  bloquesDisponibles(fecha: string): number {
+    const horariosDeFecha = this.horariosService.horarios().filter(h => h.fecha === fecha);
+    const ocupadas = this.citasService.horasOcupadas()[fecha] ?? [];
+
+    const bloques: string[] = [];
+    horariosDeFecha.forEach(disp => {
+      const inicio = new Date(`2000-01-01T${disp.hora_inicio}`);
+      const fin = new Date(`2000-01-01T${disp.hora_fin}`);
+      while (inicio < fin) {
+        const horaInicio = inicio.toTimeString().slice(0, 5);
+        inicio.setHours(inicio.getHours() + 1);
+        if (inicio <= fin) bloques.push(horaInicio);
+      }
+    });
+
+    return bloques.filter(b => !ocupadas.includes(b)).length;
   }
 
   irAgendar(fecha: string): void {
     this.router.navigate(['/agendar'], { queryParams: { fecha } });
-  }
-
-  eliminarFecha(fecha: string): void {
-    if (confirm(`¿Eliminar todos los horarios del ${fecha}?`)) {
-      this.horariosService.eliminarHorario(fecha);
-    }
   }
 }

@@ -195,3 +195,9 @@
     height: 8px;
   }
 }
+
+.slots-lleno {
+    opacity: 0.5;
+    cursor: default;
+    pointer-events: none;
+}

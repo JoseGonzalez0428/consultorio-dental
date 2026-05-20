@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, computed } from '@angular/core';
+import { Component, OnInit, inject, computed, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CitasService } from '../../services/citas';
 import { HorariosService } from '../../services/horarios';
@@ -25,7 +25,7 @@ export class MisCitas implements OnInit {
 
   citas: CitaExtendida[] = [];
   fechasDisponibles: string[] = [];
-  paginaActual: number = 1;
+  paginaActual = signal<number>(1);
   citasPorPagina: number = 3;
 
   totalPaginas = computed(() =>
@@ -34,7 +34,7 @@ export class MisCitas implements OnInit {
 
   citasPaginadas = computed(() => {
     const todas = this.citasService.citas() as CitaExtendida[];
-    const offset = (this.paginaActual - 1) * this.citasPorPagina;
+    const offset = (this.paginaActual() - 1) * this.citasPorPagina;
     return todas.slice(offset, offset + this.citasPorPagina);
   });
 
@@ -48,7 +48,7 @@ export class MisCitas implements OnInit {
 
   cambiarPagina(pagina: number): void {
     if (pagina < 1 || pagina > this.totalPaginas()) return;
-    this.paginaActual = pagina;
+    this.paginaActual.set(pagina);
   }
 
   cargarHorasModificacion(cita: CitaExtendida): void {

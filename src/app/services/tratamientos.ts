@@ -101,7 +101,9 @@ export class TratamientosService {
     this.http.delete<any>(`${this.BASE_URL}/tratamientos/${id}`).subscribe({
       next: () => {
         this.successMessage.set('Tratamiento eliminado correctamente.');
-        this.fetchTratamientos();
+        this._tratamientos.update(lista =>
+          lista.map(t => t._id === id ? { ...t, activo: false } : t)
+        );
       },
       error: (error: any) => {
         this.errorMessage.set(error.error.msg ?? 'Error al eliminar tratamiento.');
@@ -119,5 +121,40 @@ export class TratamientosService {
 
   limpiarSeleccion(): void {
     this._tratamientoSeleccionado.set(null);
+  }
+
+  fetchTodosLosTratamientos(): void {
+    this.isLoading.set(true);
+    this.http.get<Tratamiento[]>(`${this.BASE_URL}/tratamientos/admin/todos`).subscribe({
+      next: (response) => {
+        this._tratamientos.set(response);
+      },
+      error: (error: any) => {
+        this.errorMessage.set(error.error.msg ?? 'Error al cargar tratamientos.');
+        this.isLoading.set(false);
+      },
+      complete: () => {
+        this.isLoading.set(false);
+      }
+    });
+  }
+
+  reactivarTratamiento(id: string): void {
+    this.isLoading.set(true);
+    this.http.put<any>(`${this.BASE_URL}/tratamientos/${id}/reactivar`, {}).subscribe({
+      next: () => {
+        this.successMessage.set('Tratamiento reactivado correctamente.');
+        this._tratamientos.update(lista =>
+          lista.map(t => t._id === id ? { ...t, activo: true } : t)
+        );
+      },
+      error: (error: any) => {
+        this.errorMessage.set(error.error.msg ?? 'Error al reactivar tratamiento.');
+        this.isLoading.set(false);
+      },
+      complete: () => {
+        this.isLoading.set(false);
+      }
+    });
   }
 }

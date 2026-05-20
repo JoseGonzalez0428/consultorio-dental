@@ -15,7 +15,7 @@
       }
 
       @for (cita of citasPaginadas(); track cita._id) {
-        <div class="TarjetaCita" [class.TarjetaPendiente]="cita.estado === 'Pendiente'">
+        <div class="TarjetaCita" [attr.data-status]="cita.estado">
           
           <div class="CitaBloqueInfo">
             <div class="InfoGrupo">
@@ -31,7 +31,7 @@
 
             <div class="InfoGrupo">
               <span class="InfoLabel">Estado</span>
-              <div class="EstadoCita" [id]="'Cita' + cita.estado">
+              <div class="EstadoCita" [attr.data-status]="cita.estado">
                 <span class="EstatusCita">{{ cita.estado }}</span>
               </div>
             </div>
@@ -60,8 +60,8 @@
               </div>
 
               <div class="BotonesCita">
-                <button type="button" class="BotonCita" id="Mod" (click)="modificarCita(cita)">Modificar</button>
-                <button type="button" class="BotonCita" id="Canc" (click)="cancelarCita(cita._id)">Cancelar</button>
+                <button type="button" class="BotonCita btn-modificar" (click)="modificarCita(cita)">Modificar</button>
+                <button type="button" class="BotonCita btn-cancelar" (click)="cancelarCita(cita._id)">Cancelar</button>
               </div>
             </div>
           }
@@ -73,12 +73,12 @@
     @if (totalPaginas() > 1) {
       <div class="DesplazarReporte">
         <img src="Imagenes/FlechaIzq.png" alt="Anterior"
-          [class.flechaDesactivada]="paginaActual === 1"
-          (click)="cambiarPagina(paginaActual - 1)">
-        <div id="NoReporte">{{ paginaActual }}/{{ totalPaginas() }}</div>
+          [class.flechaDesactivada]="paginaActual() === 1"
+          (click)="cambiarPagina(paginaActual() - 1)">
+        <div id="NoReporte">{{ paginaActual() }}/{{ totalPaginas() }}</div>
         <img src="Imagenes/FlechaDer.png" alt="Siguiente"
-          [class.flechaDesactivada]="paginaActual === totalPaginas()"
-          (click)="cambiarPagina(paginaActual + 1)">
+          [class.flechaDesactivada]="paginaActual() === totalPaginas()"
+          (click)="cambiarPagina(paginaActual() + 1)">
       </div>
     }
   </div>
