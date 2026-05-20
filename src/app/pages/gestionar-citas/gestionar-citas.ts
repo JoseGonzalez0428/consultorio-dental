@@ -12,7 +12,6 @@ import { CitasService } from '../../services/citas';
 export class GestionarCitas {
 
   public citasService = inject(CitasService);
-
   fechaSeleccionada: string = '';
 
   cargarCitas(fecha: string): void {
@@ -22,11 +21,12 @@ export class GestionarCitas {
   }
 
   cancelarCita(id: string): void {
-    this.citasService.cancelarCita(id);
+    if (!confirm('¿Seguro que quieres cancelar esta cita?')) return;
+    this.citasService.cancelarCitaAdmin(id, this.fechaSeleccionada);
   }
 
   completarCita(id: string): void {
-    this.citasService.completarCita(id);
+    this.citasService.completarCitaAdmin(id, this.fechaSeleccionada);
   }
 
   sumarUnaHora(hora: string): string {

@@ -2,7 +2,6 @@
    Contenedor y Listado General
    ========================================================================== */
 .Pagina {
-  min-height: 100vh;
   background-color: #faf9fe; /* El lila claro de fondo global */
   font-family: system-ui, -apple-system, sans-serif;
   box-sizing: border-box;

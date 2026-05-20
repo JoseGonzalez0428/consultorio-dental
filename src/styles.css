@@ -1,14 +1,33 @@
-body {
+/* ==========================================================================
+   Tu styles.css General (Corregido para fijar el Footer al piso)
+   ========================================================================== */
+html, body {
     margin: 0;
     padding: 0;
+    height: 100%;
 }
 
 app-root {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    min-height: 100vh; /* Ocupa el alto de la ventana */
 }
 
+/* El truco maestro: Forzamos a que el enrutador de Angular y la clase .Pagina 
+   hereden el comportamiento elástico para empujar estructuralmente al footer */
+router-outlet + *, .Pagina {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; 
+}
+
+.Contenido {
+    flex-grow: 1;
+}
+
+/* ==========================================================================
+   Tus Media Queries de Paddings y Fuentes Existientes (Intactas)
+   ========================================================================== */
 @media screen and (min-width:1025px) {
     .Contenido { padding: 50px; }
     .TitContenido { font-family: Verdana; font-size: 44px; font-weight: bold; width: 260px; }

@@ -1,320 +1,302 @@
-/* Desktop */
-@media screen and (min-width:1025px) {
-    .GestionarArriba {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-        margin-bottom: 20px;
-    }
-
-    .OpcionesGestionar {
-        display: flex;
-        height: 80px;
-        font-family: sans-serif;
-        font-size: 20px;
-        padding: 10px;
-        width: 60%;
-    }
-
-    .TablaCitas2 {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 0px;
-        border: 1px solid black;
-        margin-top: 20px;
-    }
-
-    .CeldaCitas {
-        text-align: center;
-        align-content: center;
-        border: 1px solid black;
-        padding: 10px 20px;
-        font-family: sans-serif;
-        font-size: 18px;
-        min-height: 80px;
-    }
-
-    #CeldaTit {
-        background-color: #00A8E8;
-        min-height: 60px;
-        font-size: 24px;
-    }
-
-    .BotonCita {
-        background-color: #dbd1f2;
-        padding: 10px 20px;
-        border-radius: 10px;
-        text-align: center;
-        cursor: pointer;
-        font-family: Arial, Helvetica, sans-serif;
-        border: none;
-        margin: 2px;
-    }
-
-    .BotonCita:hover { background-color: #0056b3; color: white; }
-
-    .BotonOpcion {
-        width: 50%;
-        align-content: center;
-        justify-content: space-between;
-        align-items: center;
-        padding: 10px;
-        background-color: #D9D9D9;
-        border-radius: 0px 10px 10px 0px;
-        height: 60px;
-        display: flex;
-        border: 1px solid black;
-        position: relative;
-    }
-
-    .BotonOpcion input[type="date"] {
-        width: 100%;
-        background: transparent;
-        border: none;
-        font-size: 16px;
-        font-family: Arial;
-        outline: none;
-        cursor: pointer;
-    }
-
-    .TipoOpcion {
-        width: 50%;
-        text-align: center;
-        align-content: center;
-        padding: 10px;
-        border-radius: 10px 0px 0px 10px;
-        height: 60px;
-        border: 1px solid black;
-    }
-
-    .DesplazarReporte {
-        display: flex;
-        justify-content: center;
-        margin-top: 20px;
-        align-items: center;
-    }
-
-    .DesplazarReporte img { height: 15px; width: auto; }
-
-    #NoReporte {
-        font-family: Arial;
-        font-size: 16px;
-        text-align: center;
-        padding-left: 5px;
-        padding-right: 5px;
-    }
+/* ==========================================================================
+   Conexión Arquitectónica y Layout Elástico
+   ========================================================================== */
+.Pagina {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  background-color: #faf9fe;
 }
 
-/* Tablet */
-@media screen and (min-width:681px) and (max-width:1024px) {
-    .GestionarArriba {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-        margin-bottom: 20px;
-    }
-
-    .OpcionesGestionar {
-        display: flex;
-        height: 80px;
-        font-family: sans-serif;
-        font-size: 20px;
-        padding: 10px;
-        width: 60%;
-    }
-
-    .TablaCitas2 {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 0px;
-        border: 1px solid black;
-        margin-top: 20px;
-    }
-
-    .CeldaCitas {
-        text-align: center;
-        align-content: center;
-        border: 1px solid black;
-        padding: 10px;
-        font-family: sans-serif;
-        font-size: 14px;
-        min-height: 80px;
-    }
-
-    #CeldaTit {
-        background-color: #00A8E8;
-        min-height: 60px;
-        font-size: 20px;
-    }
-
-    .BotonCita {
-        background-color: #dbd1f2;
-        padding: 8px 12px;
-        border-radius: 10px;
-        text-align: center;
-        cursor: pointer;
-        font-family: Arial, Helvetica, sans-serif;
-        border: none;
-        margin: 2px;
-    }
-
-    .BotonCita:hover { background-color: #0056b3; color: white; }
-
-    .BotonOpcion {
-        width: 50%;
-        align-content: center;
-        padding: 10px;
-        background-color: #D9D9D9;
-        border-radius: 0px 10px 10px 0px;
-        height: 60px;
-        display: flex;
-        border: 1px solid black;
-    }
-
-    .BotonOpcion input[type="date"] {
-        width: 100%;
-        background: transparent;
-        border: none;
-        font-size: 16px;
-        font-family: Arial;
-        outline: none;
-        cursor: pointer;
-    }
-
-    .TipoOpcion {
-        width: 50%;
-        text-align: center;
-        align-content: center;
-        padding: 10px;
-        border-radius: 10px 0px 0px 10px;
-        height: 60px;
-        border: 1px solid black;
-    }
-
-    .DesplazarReporte {
-        display: flex;
-        justify-content: center;
-        margin-top: 20px;
-        align-items: center;
-    }
-
-    .DesplazarReporte img { height: 15px; width: auto; }
-
-    #NoReporte {
-        font-family: Arial;
-        font-size: 16px;
-        text-align: center;
-        padding-left: 5px;
-        padding-right: 5px;
-    }
+.Contenido {
+  flex-grow: 1;
 }
 
-/* Mobile */
-@media screen and (min-width:0px) and (max-width:680px) {
-    .GestionarArriba {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-        margin-bottom: 20px;
-        gap: 10px;
-    }
+#ContenidoHorarios {
+  width: 100%;
+  margin-top: 24px;
+}
 
-    .OpcionesGestionar {
-        display: flex;
-        height: 60px;
-        font-family: sans-serif;
-        font-size: 18px;
-        padding: 10px;
-        width: 100%;
-    }
+/* ==========================================================================
+   Filtro Superior de Fecha (Estilo Minimalista)
+   ========================================================================== */
+.GestionarArriba {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  border-bottom: 1px solid #f3e8ff;
+  padding-bottom: 24px;
+}
 
-    .TablaCitas2 {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 0px;
-        border: 1px solid black;
-        margin-top: 20px;
-    }
+.OpcionesGestionar {
+  display: flex;
+  width: 100%;
+  max-width: 400px;
+  height: 46px;
+  box-sizing: border-box;
+}
 
-    .CeldaCitas {
-        text-align: center;
-        align-content: center;
-        border: 1px solid black;
-        padding: 5px;
-        font-family: sans-serif;
-        font-size: 12px;
-        min-height: 60px;
-    }
+/* El bloque estático izquierdo de la etiqueta */
+.TipoOpcion {
+  width: 30%;
+  background-color: #f5f3ff;
+  color: #7160e6;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid #e2d9f3;
+  border-right: none;
+  border-radius: 12px 0 0 12px;
+}
 
-    #CeldaTit {
-        background-color: #00A8E8;
-        min-height: 40px;
-        font-size: 14px;
-    }
+/* El contenedor derecho con el input de tipo date real */
+.BotonOpcion {
+  width: 70%;
+  background-color: #ffffff;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 0 12px 12px 0;
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
 
-    .BotonCita {
-        background-color: #dbd1f2;
-        padding: 6px 8px;
-        border-radius: 10px;
-        text-align: center;
-        cursor: pointer;
-        font-family: Arial, Helvetica, sans-serif;
-        border: none;
-        margin: 2px;
-        font-size: 11px;
-    }
+.BotonOpcion input[type="date"] {
+  width: 100%;
+  background: transparent;
+  border: none;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #1f2937;
+  outline: none;
+  cursor: pointer;
+}
 
-    .BotonCita:hover { background-color: #0056b3; color: white; }
+/* Resaltado interactivo cuando el admin interactúa con el calendario */
+.BotonOpcion:focus-within {
+  border-color: #7160e6;
+  box-shadow: 0 0 0 4px #fdf4ff;
+}
 
-    .BotonOpcion {
-        width: 50%;
-        align-content: center;
-        padding: 5px;
-        background-color: #D9D9D9;
-        border-radius: 0px 10px 10px 0px;
-        height: 40px;
-        display: flex;
-        border: 1px solid black;
-    }
+/* ==========================================================================
+   Listado de Citas en Formato Tarjeta (UX Profesional)
+   ========================================================================== */
+.TablaCitas2 {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+}
 
-    .BotonOpcion input[type="date"] {
-        width: 100%;
-        background: transparent;
-        border: none;
-        font-size: 14px;
-        font-family: Arial;
-        outline: none;
-        cursor: pointer;
-    }
+.TarjetaGestionCita {
+  background-color: #ffffff;
+  border-radius: 18px;
+  border: 1px solid #f3e8ff;
+  padding: 20px;
+  box-shadow: 0 4px 10px -4px rgba(113, 96, 230, 0.04);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column; /* Apilado en móvil */
+  gap: 16px;
+}
 
-    .TipoOpcion {
-        width: 50%;
-        text-align: center;
-        align-content: center;
-        padding: 5px;
-        border-radius: 10px 0px 0px 10px;
-        height: 40px;
-        border: 1px solid black;
-        font-size: 14px;
-    }
+/* Bloque Informativo de la cita */
+.GestionInfoBloque {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
 
-    .DesplazarReporte {
-        display: flex;
-        justify-content: center;
-        margin-top: 20px;
-        align-items: center;
-    }
+.GestionMeta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
 
-    .DesplazarReporte img { height: 15px; width: auto; }
+/* Distintivo de Horario Destacado */
+.GestionHoraBadge {
+  background-color: #f5f3ff;
+  color: #7160e6;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 8px;
+}
 
-    #NoReporte {
-        font-family: Arial;
-        font-size: 14px;
-        text-align: center;
-        padding-left: 5px;
-        padding-right: 5px;
-    }
+.GestionTratamientoText {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+/* Datos del Paciente */
+.GestionPacienteData {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.PacienteNombre {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #334155;
+}
+
+.PacienteTelefono {
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+/* ==========================================================================
+   Botones de Acción Administrativa (.BotonCita)
+   ========================================================================== */
+.AccionesCita {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+
+.BotonCita {
+  flex: 1;
+  height: 38px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+/* Botón Completar (Acento Verde Médico de Éxito) */
+.btn-completar {
+  background-color: #f0fdf4;
+  color: #16a34a;
+  border: 1px solid #bbf7d0;
+}
+.btn-completar:hover {
+  background-color: #16a34a;
+  color: #ffffff;
+}
+
+/* Botón Cancelar (Acento Rojo de Advertencia) */
+.btn-cancelar {
+  background-color: #fef2f2;
+  color: #ef4444;
+  border: 1px solid #fee2e2;
+}
+.btn-cancelar:hover {
+  background-color: #ef4444;
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   Estados de Información y Feedbacks
+   ========================================================================== */
+.MensajeInfo {
+  text-align: center;
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 32px;
+  border-radius: 16px;
+  margin: 20px 0;
+}
+.info-vacio { background-color: #f8fafc; border: 1px dashed #cbd5e1; color: #64748b; }
+.info-alerta { background-color: #fffbeb; border: 1px solid #fef3c7; color: #b45309; }
+
+/* ==========================================================================
+   Media Queries Responsivas Sincronizadas
+   ========================================================================== */
+
+/* Tablet (Ajustes de ancho intermedio) */
+@media screen and (min-width: 681px) and (max-width: 1024px) {
+  .TarjetaGestionCita {
+    padding: 22px;
+  }
+}
+
+/* Desktop (Distribución en Fila Única Horizontal de Alto Nivel) */
+@media screen and (min-width: 1025px) {
+  .GestionarArriba {
+    flex-direction: row; /* El título y el filtro de fecha van alineados a los extremos */
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 16px;
+  }
+
+  .OpcionesGestionar {
+    margin: 0;
+  }
+
+  /* La tarjeta se estira de forma horizontal unificada en PC */
+  .TarjetaGestionCita {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 28px;
+  }
+
+  .GestionInfoBloque {
+    flex-direction: row; /* El horario y los datos del paciente van alineados lado a lado */
+    align-items: center;
+    gap: 40px;
+    flex: 1;
+  }
+
+  .GestionMeta {
+    flex-direction: row;
+    width: 40%;
+  }
+
+  .GestionPacienteData {
+    width: 50%;
+  }
+
+  /* Los botones toman un ancho fijo y elegante en la esquina derecha */
+  .AccionesCita {
+    width: 240px;
+  }
+}
+
+.CitaTerminada {
+    opacity: 0.7;
+    border-left: 4px solid #22c55e;
+}
+
+.CitaCancelada {
+    opacity: 0.5;
+    border-left: 4px solid #ef4444;
+}
+
+.EstadoBadge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+}
+
+.EstadoPendiente {
+    background-color: #fef9c3;
+    color: #854d0e;
+}
+
+.EstadoTerminado {
+    background-color: #dcfce7;
+    color: #166534;
+}
+
+.EstadoCancelado {
+    background-color: #fee2e2;
+    color: #991b1b;
 }

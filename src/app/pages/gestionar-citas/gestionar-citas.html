@@ -1,5 +1,6 @@
 <div class="Pagina">
   <div class="Contenido">
+    
     <div class="GestionarArriba">
       <div class="TitContenido">Gestionar citas</div>
       <div class="OpcionesGestionar">
@@ -12,28 +13,36 @@
 
     <div id="ContenidoHorarios">
       @if (!fechaSeleccionada) {
-        <p class="MensajeInfo">Selecciona una fecha para ver las citas.</p>
+        <p class="MensajeInfo info-vacio">Selecciona una fecha para ver las citas de la agenda.</p>
       } @else if (citasService.citasPorFecha().length === 0) {
-        <p class="MensajeInfo">No hay citas para la fecha seleccionada.</p>
+        <p class="MensajeInfo info-alerta">No hay citas programadas para la fecha seleccionada.</p>
       } @else {
         <div class="TablaCitas2">
-          <div class="CeldaCitas" id="CeldaTit">Hora</div>
-          <div class="CeldaCitas" id="CeldaTit">Tratamiento</div>
-          <div class="CeldaCitas" id="CeldaTit">Paciente</div>
-          <div class="CeldaCitas" id="CeldaTit">Acciones</div>
-
           @for (cita of citasService.citasPorFecha(); track cita._id) {
-            <div class="CeldaCitas">
-              {{ cita.hora }} - {{ sumarUnaHora(cita.hora) }}
-            </div>
-            <div class="CeldaCitas">{{ cita.nombre_tratamiento }}</div>
-            <div class="CeldaCitas">
-              <div>{{ cita.nombre_paciente }}</div>
-              <div>{{ cita.telefono }}</div>
-            </div>
-            <div class="CeldaCitas AccionesCita">
-              <button class="BotonCita" (click)="cancelarCita(cita._id!)">Cancelar</button>
-              <button class="BotonCita" (click)="completarCita(cita._id!)">Completar</button>
+            <div class="TarjetaGestionCita" [class.CitaTerminada]="cita.estado === 'Terminada'" [class.CitaCancelada]="cita.estado === 'Cancelada'">
+              
+              <div class="GestionInfoBloque">
+                <div class="GestionMeta">
+                  <span class="GestionHoraBadge">{{ cita.hora }} - {{ sumarUnaHora(cita.hora) }}</span>
+                  <span class="GestionTratamientoText">{{ cita.nombre_tratamiento }}</span>
+                  <span class="EstadoBadge" [class.EstadoPendiente]="cita.estado === 'Pendiente'" [class.EstadoTerminado]="cita.estado === 'Terminada'" [class.EstadoCancelado]="cita.estado === 'Cancelada'">
+                    {{ cita.estado }}
+                  </span>
+                </div>
+                
+                <div class="GestionPacienteData">
+                  <div class="PacienteNombre">{{ cita.nombre_paciente }}</div>
+                  <div class="PacienteTelefono">{{ cita.telefono }}</div>
+                </div>
+              </div>
+
+              @if (cita.estado === 'Pendiente') {
+                <div class="AccionesCita">
+                  <button type="button" class="BotonCita btn-completar" (click)="completarCita(cita._id!)">Completar</button>
+                  <button type="button" class="BotonCita btn-cancelar" (click)="cancelarCita(cita._id!)">Cancelar</button>
+                </div>
+              }
+
             </div>
           }
         </div>

@@ -40,6 +40,7 @@ export class CitasService {
   }
 
   fetchCitasPorFecha(fecha: string): void {
+    if (!fecha) return;
     this.isLoading.set(true);
     this.http.get<Cita[]>(`${this.BASE_URL}/citas?fecha=${fecha}`).subscribe({
       next: (response) => {
@@ -126,7 +127,37 @@ export class CitasService {
     this.isLoading.set(true);
     this.http.put<any>(`${this.BASE_URL}/citas/${id}/completar`, {}).subscribe({
       next: () => {
-        this.fetchCitasPorFecha('');
+        this.successMessage.set('Cita completada correctamente.');
+      },
+      error: (error: any) => {
+        this.errorMessage.set(error.error.msg ?? 'Error al completar la cita.');
+      },
+      complete: () => {
+        this.isLoading.set(false);
+      }
+    });
+  }
+
+  cancelarCitaAdmin(id: string, fecha: string): void {
+    this.isLoading.set(true);
+    this.http.put<any>(`${this.BASE_URL}/citas/${id}/cancelar`, {}).subscribe({
+      next: () => {
+        this.fetchCitasPorFecha(fecha);
+      },
+      error: (error: any) => {
+        this.errorMessage.set(error.error.msg ?? 'Error al cancelar la cita.');
+      },
+      complete: () => {
+        this.isLoading.set(false);
+      }
+    });
+  }
+
+  completarCitaAdmin(id: string, fecha: string): void {
+    this.isLoading.set(true);
+    this.http.put<any>(`${this.BASE_URL}/citas/${id}/completar`, {}).subscribe({
+      next: () => {
+        this.fetchCitasPorFecha(fecha);
       },
       error: (error: any) => {
         this.errorMessage.set(error.error.msg ?? 'Error al completar la cita.');

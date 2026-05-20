@@ -1,72 +1,157 @@
+/* ==========================================================================
+   Estructura Base y Conexión Global
+   ========================================================================== */
+.Pagina {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  background-color: #faf9fe;
+}
+
+.Contenido {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Encabezado Principal */
+.TextoIndex {
+  text-align: center;
+  margin-bottom: 24px; /* 👈 Un poco más cerrado para ahorrar espacio */
+}
+
+.TextoIndex h2 {
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: #1e1b4b;
+  letter-spacing: -0.02em;
+  margin: 0 0 8px 0;
+}
+
+.TextoIndex p {
+  font-size: 1rem;
+  color: #64748b;
+  margin: 0;
+}
+
+/* ==========================================================================
+   El Carrusel Cinemático Chaparrito (.carousel)
+   ========================================================================== */
 .carousel {
-    display: flex;
-    overflow: hidden;
-    width: 90%;
-    max-width: 1000px;
-    margin: 0 auto 40px auto;
-    position: relative;
-    aspect-ratio: 16/6;
-    border-radius: 12px;
+  width: 100%;
+  max-width: 1050px;
+  margin: 0 auto;
+  position: relative;
+  /* 👈 Cambiamos a 16/5 en PC para hacerlo significativamente más chato y panorámico */
+  aspect-ratio: 16 / 5; 
+  max-height: 280px; /* 👈 Candado estricto: la foto nunca medirá más de 280px de alto en escritorio */
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px -10px rgba(113, 96, 230, 0.1);
+  border: 1px solid #f3e8ff;
+}
+
+/* Contenedor interno flexible de transiciones */
+.carousel-inner {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .slide {
-    flex: 0 0 100%;
-    position: relative;
-    cursor: pointer;
-    height: 100%;
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  box-sizing: border-box;
 }
 
 .slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 12px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* 👈 Mueve sutilmente el enfoque de las fotos un poco más arriba para que al recortarse sigan luciendo perfectas */
+  object-position: center 35%; 
 }
 
+/* Gradiente protector de lectura inferior */
+.slide::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 55%; /* Un poquito más alto para compensar que el carrusel es más chato */
+  background: linear-gradient(to top, rgba(15, 23, 42, 0.7) 0%, rgba(15, 23, 42, 0) 100%);
+  pointer-events: none;
+}
+
+/* Texto de la diapositiva */
 .titulo-slide {
-    position: absolute;
-    bottom: 5%;
-    left: 5%;
-    font-size: 2.2vw;
-    font-family: Arial, sans-serif;
-    background-color: rgba(0,0,0,0.6);
-    color: white;
-    padding: 0.5em 1em;
-    border-radius: 8px;
-    max-width: 90%;
-    text-wrap: balance;
+  position: absolute;
+  bottom: 12%; /* Subió un poquito para no pegarse al borde inferior */
+  left: 5%;
+  font-size: 1.25rem; /* Ajustado para que quepa perfecto en el nuevo formato esbelto */
+  font-weight: 700;
+  color: #ffffff;
+  z-index: 2;
+  max-width: 85%;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  letter-spacing: -0.01em;
 }
 
-/* Desktop */
-@media screen and (min-width:1025px) {
-    .TextoIndex {
-        text-align: center;
-        margin-bottom: 40px;
-        font-family: Verdana;
-        font-size: 18px;
-    }
+/* ==========================================================================
+   Botón Inferior de Acción (.Boton)
+   ========================================================================== */
+.ContenedorBotonHome {
+  text-align: center;
+  margin-top: 24px; /* 👈 Reducido de 32px a 24px */
 }
 
-/* Tablet */
-@media screen and (min-width:681px) and (max-width:1024px) {
-    .TextoIndex {
-        text-align: center;
-        margin-bottom: 30px;
-        font-family: Verdana;
-        font-size: 16px;
-    }
+.Boton {
+  height: 46px;
+  padding: 0 28px;
+  background-color: #c860e6;
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(200, 96, 230, 0.15);
+  transition: all 0.2s ease;
 }
 
-/* Mobile */
-@media screen and (min-width:0px) and (max-width:680px) {
-    .TextoIndex {
-        text-align: center;
-        margin-bottom: 20px;
-        font-family: Verdana;
-        font-size: 14px;
-    }
+.Boton:hover {
+  background-color: #b34fd1;
+  box-shadow: 0 8px 16px -4px rgba(200, 96, 230, 0.25);
+  transform: translateY(-2px);
+}
 
-    .titulo-slide {
-        font-size: 3.5vw;
-    }
+/* ==========================================================================
+   Media Queries Responsivas Sincronizadas
+   ========================================================================== */
+@media screen and (max-width: 1024px) {
+  .TextoIndex h2 { font-size: 1.6rem; }
+  .carousel { 
+    border-radius: 16px; 
+    aspect-ratio: 16 / 6; /* En tabletas se abre un pelín más de alto para mantener la armonía */
+    max-height: 240px;
+  }
+  .titulo-slide { font-size: 1.1rem; bottom: 12%; left: 6%; }
+}
+
+@media screen and (max-width: 680px) {
+  .TextoIndex h2 { font-size: 1.4rem; }
+  .TextoIndex p { font-size: 0.9rem; }
+  .carousel { 
+    border-radius: 14px; 
+    aspect-ratio: 4 / 3; /* En móvil regresa a proporción vertical porque las pantallas son alargadas */
+    max-height: unset; /* Quitamos el tope en móvil para que no se achate de más */
+  }
+  .titulo-slide { font-size: 1rem; bottom: 12%; left: 8%; max-width: 84%; }
+  .Boton { width: 100%; max-width: 320px; }
 }

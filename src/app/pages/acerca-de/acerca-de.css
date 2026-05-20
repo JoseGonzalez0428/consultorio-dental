@@ -2,7 +2,6 @@
    Contenedor Base y Tipografías Uniformes
    ========================================================================== */
 .Pagina {
-  min-height: 100vh;
   background-color: #faf9fe; /* El mismo fondo lila ultra suave de todo el sitio */
   font-family: system-ui, -apple-system, sans-serif;
   color: #334155;
