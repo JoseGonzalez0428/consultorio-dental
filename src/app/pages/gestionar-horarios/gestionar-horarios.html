@@ -1,59 +1,103 @@
 <div class="Pagina">
   <div class="Contenido" id="ContAgendar">
+    
     <div class="AgendarIzq">
-      <div class="TitContenido">Gestionar Horarios</div>
-      <div id="ImgAgendar">
-        <img src="Imagenes/Consultorio.jpg" alt="Consultorio">
+      <div class="TitContenido">Calendario de Horarios</div>
+      
+      <div class="calendar-card">
+        <header class="calendar-header">
+          <button type="button" class="nav-arrow" (click)="horariosService.mesAnterior()">←</button>
+          <h2 class="current-date">{{ horariosService.nombreMes() }} {{ horariosService.anioActual() }}</h2>
+          <button type="button" class="nav-arrow" (click)="horariosService.mesSiguiente()">→</button>
+        </header>
+
+        <div class="calendar-grid">
+          @for (dia of diasSemana; track dia) {
+            <div class="weekday-label">{{ dia }}</div>
+          }
+
+          @for (vacio of horariosService.vacios(); track vacio) {
+            <div class="calendar-day day-empty"></div>
+          }
+
+          @for (dia of horariosService.diasCalendario(); track dia.fecha) {
+            <div class="calendar-day" 
+                 [class.day-disabled]="!dia.disponible" 
+                 [class.day-active]="dia.disponible"
+                 [class.day-focused]="diaSeleccionadoObjeto()?.fecha === dia.fecha"
+                 (click)="seleccionarDia(dia)">
+              
+              <span class="day-number">{{ dia.numero }}</span>
+
+              @if (dia.disponible) {
+                <div class="slots-indicator">
+                  <span class="indicator-dot"></span>
+                  <span class="slots-text">{{ dia.bloques.length }} bloq</span>
+                </div>
+              }
+            </div>
+          }
+        </div>
       </div>
     </div>
 
     <div class="AgendarDer">
-      <form (ngSubmit)="onSubmit()">
-        <div class="TitOpcion">Fecha:</div>
-        <div class="Opciones">
-          <div class="TipoOpcion">Selecciona una fecha</div>
-          <div class="BotonOpcion">
-            <input type="date" [formControl]="horarioForm.controls.fecha">
+      
+      <div class="PanelSeccionFormulario">
+        <div class="SubTitFormulario">Configurar nuevo bloque</div>
+        <form [formGroup]="horarioForm" (ngSubmit)="onSubmit()">
+          
+          <div class="TitOpcion">Fecha:</div>
+          <div class="Opciones">
+            <div class="BotonOpcion InputCompleto">
+              <input type="date" formControlName="fecha">
+            </div>
           </div>
-        </div>
 
-        <div class="TitOpcion">Hora de Inicio:</div>
-        <div class="Opciones">
-          <div class="TipoOpcion">Hora inicial</div>
-          <div class="BotonOpcion">
-            <input type="time" [formControl]="horarioForm.controls.hora_inicio" step="3600">
+          <div class="ContenedorHorasInline">
+            <div class="HoraInputGrupo">
+              <div class="TitOpcion">Inicio:</div>
+              <div class="BotonOpcion InputCompleto">
+                <input type="time" formControlName="hora_inicio" step="3600">
+              </div>
+            </div>
+            <div class="HoraInputGrupo">
+              <div class="TitOpcion">Fin:</div>
+              <div class="BotonOpcion InputCompleto">
+                <input type="time" formControlName="hora_fin" step="3600">
+              </div>
+            </div>
           </div>
-        </div>
 
-        <div class="TitOpcion">Hora de Fin:</div>
-        <div class="Opciones">
-          <div class="TipoOpcion">Hora final</div>
-          <div class="BotonOpcion">
-            <input type="time" [formControl]="horarioForm.controls.hora_fin" step="3600">
+          <button type="submit" class="BotonCita" [disabled]="horarioForm.invalid || horariosService.isLoading()">
+            {{ horariosService.isLoading() ? 'Guardando...' : 'Agregar Horario' }}
+          </button>
+        </form>
+      </div>
+
+      <div class="PanelSeccionDetalleHoras">
+        <div class="SubTitFormulario">Horas del día seleccionado</div>
+        
+        @if (!diaSeleccionadoObjeto()) {
+          <p class="MensajeDetalleInfo">Haz clic en un día del calendario para auditar sus horas.</p>
+        } @else if (!diaSeleccionadoObjeto()!.disponible) {
+          <p class="MensajeDetalleInfo">Este día no tiene ningún horario asignado.</p>
+        } @else {
+          <div class="ListaBloquesAuditoria">
+            @for (bloque of diaSeleccionadoObjeto()!.bloques; track bloque.id) {
+              <div class="ItemBloqueHora">
+                <span class="BadgeTurno" [attr.data-turno]="bloque.turno">{{ bloque.turno }}</span>
+                <span class="TextoHorasRango">{{ bloque.horaIni }} - {{ bloque.horaFin }}</span>
+                <button type="button" class="BtnBorrarBloqueSingle" (click)="eliminarBloque(bloque.id, $event)" title="Eliminar este bloque">✕</button>
+              </div>
+            }
           </div>
-        </div>
+        }
+      </div>
 
-        <br>
-        <button type="submit" class="BotonCita" [disabled]="horarioForm.invalid || horariosService.isLoading()">
-          @if (horariosService.isLoading()) {
-            Guardando...
-          } @else {
-            Agregar Horario
-          }
-        </button>
-      </form>
-
-      @if (horariosService.successMessage()) {
-        <div class="MensajeExito">
-          {{ horariosService.successMessage() }}
-        </div>
-      }
-
-      @if (horariosService.errorMessage()) {
-        <div class="MensajeError">
-          {{ horariosService.errorMessage() }}
-        </div>
-      }
+      @if (horariosService.successMessage()) { <div class="MensajeExito">{{ horariosService.successMessage() }}</div> }
+      @if (horariosService.errorMessage()) { <div class="MensajeError">{{ horariosService.errorMessage() }}</div> }
     </div>
+
   </div>
 </div>

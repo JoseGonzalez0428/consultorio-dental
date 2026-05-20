@@ -1,294 +1,335 @@
-/* Desktop */
-@media screen and (min-width:1025px) {
-    #ContAgendar { display: flex; }
-
-    .AgendarIzq { width: 35%; }
-
-    .AgendarDer {
-        width: 60%;
-        border-radius: 10px;
-        padding: 20px;
-        margin-left: 20px;
-    }
-
-    #ImgAgendar { display: flex; height: 50%; }
-    #ImgAgendar img { width: 100%; margin-top: 10px; }
-
-    .TitOpcion {
-        font-family: Verdana;
-        font-size: 28px;
-        margin-bottom: 10px;
-        margin-top: 10px;
-    }
-
-    .Opciones {
-        border-radius: 10px;
-        display: flex;
-        height: 80px;
-        font-family: sans-serif;
-        font-size: 20px;
-        padding: 10px;
-    }
-
-    .TipoOpcion {
-        width: 50%;
-        text-align: center;
-        align-content: center;
-        padding: 10px;
-        border-radius: 10px 0px 0px 10px;
-        height: 60px;
-        border: 1px solid black;
-    }
-
-    .BotonOpcion {
-        width: 50%;
-        align-content: center;
-        justify-content: space-between;
-        align-items: center;
-        padding: 10px;
-        background-color: #D9D9D9;
-        border-radius: 0px 10px 10px 0px;
-        height: 60px;
-        display: flex;
-        border: 1px solid black;
-        position: relative;
-    }
-
-    .BotonOpcion input[type="date"],
-    .BotonOpcion input[type="time"] {
-        width: 100%;
-        background: transparent;
-        border: none;
-        font-size: 16px;
-        font-family: Arial;
-        outline: none;
-        cursor: pointer;
-    }
-
-    .BotonCita {
-        background-color: #dbd1f2;
-        padding: 10px 20px;
-        border-radius: 10px;
-        text-align: center;
-        cursor: pointer;
-        font-family: Arial, Helvetica, sans-serif;
-        border: none;
-        margin-top: 10px;
-    }
-
-    .BotonCita:hover { background-color: #0056b3; color: white; }
-
-    .MensajeExito {
-        color: green;
-        margin-top: 20px;
-        font-family: Verdana;
-        font-weight: bold;
-    }
-
-    .MensajeError {
-        color: red;
-        margin-top: 20px;
-        font-family: Verdana;
-        font-weight: bold;
-    }
+/* ==========================================================================
+   Estructura Base y Tipografía Avanzada (Geist/Inter Stack)
+   ========================================================================== */
+.Pagina {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  background-color: #faf9fe;
+  /* 👈 Cambio radical de Tipografía: Stack sans-serif ultra moderno y nítido */
+  font-family: "Inter", "Geist Sans", "-apple-system", BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  box-sizing: border-box;
+  letter-spacing: -0.01em;
 }
 
-/* Tablet */
-@media screen and (min-width:681px) and (max-width:1024px) {
-    #ContAgendar {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .AgendarIzq {
-        width: 80%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .AgendarDer {
-        width: 100%;
-        border-radius: 10px;
-        padding: 20px;
-    }
-
-    #ImgAgendar { display: flex; align-items: center; width: 80%; }
-    #ImgAgendar img { width: 100%; margin-top: 10px; }
-
-    .TitOpcion {
-        font-family: Verdana;
-        font-size: 28px;
-        margin-bottom: 10px;
-        margin-top: 10px;
-    }
-
-    .Opciones {
-        border-radius: 10px;
-        display: flex;
-        height: 80px;
-        font-family: sans-serif;
-        font-size: 20px;
-        padding: 10px;
-    }
-
-    .TipoOpcion {
-        width: 50%;
-        text-align: center;
-        align-content: center;
-        padding: 10px;
-        border-radius: 10px 0px 0px 10px;
-        height: 60px;
-        border: 1px solid black;
-    }
-
-    .BotonOpcion {
-        width: 50%;
-        align-content: center;
-        padding: 10px;
-        background-color: #D9D9D9;
-        border-radius: 0px 10px 10px 0px;
-        height: 60px;
-        display: flex;
-        border: 1px solid black;
-    }
-
-    .BotonOpcion input[type="date"],
-    .BotonOpcion input[type="time"] {
-        width: 100%;
-        background: transparent;
-        border: none;
-        font-size: 16px;
-        font-family: Arial;
-        outline: none;
-        cursor: pointer;
-    }
-
-    .BotonCita {
-        background-color: #dbd1f2;
-        padding: 10px 20px;
-        border-radius: 10px;
-        text-align: center;
-        cursor: pointer;
-        font-family: Arial, Helvetica, sans-serif;
-        border: none;
-        margin-top: 10px;
-    }
-
-    .BotonCita:hover { background-color: #0056b3; color: white; }
-
-    .MensajeExito {
-        color: green;
-        margin-top: 20px;
-        font-family: Verdana;
-        font-weight: bold;
-    }
-
-    .MensajeError {
-        color: red;
-        margin-top: 20px;
-        font-family: Verdana;
-        font-weight: bold;
-    }
+#ContAgendar {
+  max-width: 1140px;
+  margin: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  box-sizing: border-box;
 }
 
-/* Mobile */
-@media screen and (min-width:0px) and (max-width:680px) {
-    #ContAgendar {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
+.AgendarIzq, .AgendarDer {
+  width: 100%;
+  box-sizing: border-box;
+}
 
-    .AgendarIzq {
-        width: 80%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
+.TitContenido {
+  font-size: 1.6rem;
+  font-weight: 800; /* Tipografía más pesada y contundente */
+  color: #0f172a;
+  letter-spacing: -0.03em;
+  margin-bottom: 20px;
+}
 
-    .AgendarDer {
-        width: 100%;
-        border-radius: 10px;
-        padding: 20px;
-    }
+.SubTitFormulario {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  color: #64748b;
+}
 
-    #ImgAgendar { display: flex; align-items: center; width: 80%; }
-    #ImgAgendar img { width: 100%; margin-top: 10px; }
+/* ==========================================================================
+   El Módulo del Calendario Moderno
+   ========================================================================== */
+.calendar-card {
+  background-color: #ffffff;
+  border-radius: 24px;
+  border: 1px solid #f1f5f9;
+  box-shadow: 0 4px 20px -2px rgba(113, 96, 230, 0.02);
+  overflow: hidden;
+}
 
-    .TitOpcion {
-        font-family: Verdana;
-        font-size: 20px;
-        margin-bottom: 10px;
-        margin-top: 10px;
-    }
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 24px;
+  border-bottom: 1px solid #f1f5f9;
+}
 
-    .Opciones {
-        border-radius: 10px;
-        display: flex;
-        height: 60px;
-        font-family: sans-serif;
-        font-size: 16px;
-        padding: 5px;
-    }
+.current-date {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+  text-transform: capitalize;
+  letter-spacing: -0.02em;
+}
 
-    .TipoOpcion {
-        width: 50%;
-        text-align: center;
-        align-content: center;
-        padding: 5px;
-        border-radius: 10px 0px 0px 10px;
-        height: 40px;
-        border: 1px solid black;
-    }
+.nav-arrow {
+  background-color: #f8fafc;
+  color: #64748b;
+  border: 1px solid #ebdfff;
+  font-size: 0.9rem;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+.nav-arrow:hover { background-color: #f5f3ff; color: #7160e6; }
 
-    .BotonOpcion {
-        width: 50%;
-        align-content: center;
-        padding: 5px;
-        background-color: #D9D9D9;
-        border-radius: 0px 10px 10px 0px;
-        height: 40px;
-        display: flex;
-        border: 1px solid black;
-    }
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  padding: 12px;
+}
 
-    .BotonOpcion input[type="date"],
-    .BotonOpcion input[type="time"] {
-        width: 100%;
-        background: transparent;
-        border: none;
-        font-size: 14px;
-        font-family: Arial;
-        outline: none;
-        cursor: pointer;
-    }
+.weekday-label {
+  text-align: center;
+  font-weight: 700;
+  font-size: 0.7rem;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 12px 0;
+}
 
-    .BotonCita {
-        background-color: #dbd1f2;
-        padding: 8px 16px;
-        border-radius: 10px;
-        text-align: center;
-        cursor: pointer;
-        font-family: Arial, Helvetica, sans-serif;
-        border: none;
-        margin-top: 10px;
-    }
+.calendar-day, .day-empty {
+  aspect-ratio: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+  border-radius: 16px;
+  margin: 2px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
-    .BotonCita:hover { background-color: #0056b3; color: white; }
+.day-number {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
 
-    .MensajeExito {
-        color: green;
-        margin-top: 20px;
-        font-family: Verdana;
-        font-weight: bold;
-    }
+.day-disabled .day-number { color: #cbd5e1; }
+.day-disabled:hover { background-color: #f8fafc; }
 
-    .MensajeError {
-        color: red;
-        margin-top: 20px;
-        font-family: Verdana;
-        font-weight: bold;
-    }
+/* Día seleccionado con un sutil aro de enfoque */
+.day-focused {
+  box-shadow: 0 0 0 2px #7160e6 !important;
+}
+
+.day-active {
+  background-color: #faf8ff;
+}
+.day-active .day-number {
+  color: #7160e6;
+}
+
+.slots-indicator {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 4px;
+  background-color: #ffffff;
+  padding: 2px 8px;
+  border-radius: 20px;
+  border: 1px solid #e2d9f3;
+}
+
+.indicator-dot {
+  width: 5px;
+  height: 5px;
+  background-color: #c860e6;
+  border-radius: 50%;
+}
+
+.slots-text {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #7160e6;
+}
+
+/* ==========================================================================
+   Panel de Control Derecho (Formulario + Auditoría)
+   ========================================================================== */
+.AgendarDer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.PanelSeccionFormulario, .PanelSeccionDetalleHoras {
+  background-color: #ffffff;
+  border-radius: 24px;
+  border: 1px solid #f1f5f9;
+  padding: 28px;
+  box-sizing: border-box;
+}
+
+.TitOpcion {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 14px;
+  margin-bottom: 6px;
+}
+
+.Opciones { display: flex; width: 100%; }
+.InputCompleto { width: 100% !important; border-radius: 12px !important; }
+
+.ContenedorHorasInline {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+.HoraInputGrupo { flex: 1; }
+
+.BotonOpcion {
+  height: 44px;
+  background-color: #f8fafc;
+  border: 1.5px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+.BotonOpcion input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #0f172a;
+  font-family: inherit;
+  height: 100%;
+}
+
+.BotonOpcion:focus-within {
+  background-color: #ffffff;
+  border-color: #7160e6;
+  box-shadow: 0 0 0 4px #f5f3ff;
+}
+
+.BotonCita {
+  width: 100%;
+  height: 44px;
+  background-color: #7160e6; 
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(113, 96, 230, 0.15);
+  transition: all 0.2s ease;
+  margin-top: 16px;
+}
+.BotonCita:hover { background-color: #5b4cc4; }
+.BotonCita:disabled { background-color: #e2e8f0; color: #94a3b8; cursor: not-allowed; box-shadow: none; }
+
+/* ==========================================================================
+   Listado de Auditoría Interna de Bloques
+   ========================================================================== */
+.MensajeDetalleInfo {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #94a3b8;
+  padding: 20px 0;
+  margin: 0;
+}
+
+.ListaBloquesAuditoria {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 200px;
+  overflow-y: auto; /* Scroll interno elegante si hay muchísimos bloques */
+  padding-right: 4px;
+}
+
+.ItemBloqueHora {
+  display: flex;
+  align-items: center;
+  background-color: #f8fafc;
+  border: 1px solid #f1f5f9;
+  padding: 10px 14px;
+  border-radius: 12px;
+  justify-content: space-between;
+}
+
+.BadgeTurno {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+.BadgeTurno[data-turno="Mat"] { background-color: #e0f2fe; color: #0369a1; }
+.BadgeTurno[data-turno="Ves"] { background-color: #fef3c7; color: #b45309; }
+
+.TextoHorasRango {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #334155;
+  flex-grow: 1;
+  margin-left: 12px;
+}
+
+.BtnBorrarBloqueSingle {
+  background-color: transparent;
+  border: none;
+  color: #94a3b8;
+  font-size: 0.8rem;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+.BtnBorrarBloqueSingle:hover {
+  background-color: #fef2f2;
+  color: #ef4444;
+}
+
+/* Alertas */
+.MensajeExito, .MensajeError {
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: center;
+}
+.MensajeExito { background-color: #f0fdf4; color: #16a34a; }
+.MensajeError { background-color: #fef2f2; color: #dc2626; }
+
+/* ==========================================================================
+   Responsivo
+   ========================================================================== */
+@media screen and (min-width: 1025px) {
+  #ContAgendar { flex-direction: row; align-items: flex-start; gap: 32px; }
+  .AgendarIzq { width: 55%; }
+  .AgendarDer { width: 45%; position: sticky; top: 24px; }
 }

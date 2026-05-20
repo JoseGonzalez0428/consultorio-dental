@@ -18,6 +18,7 @@ export interface DiaCalendario {
 }
 
 export interface BloqueHorarioCalendario {
+    id: string;
     horaIni: string;
     horaFin: string;
     turno: string;

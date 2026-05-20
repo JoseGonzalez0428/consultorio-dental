@@ -89,6 +89,7 @@ export class HorariosService {
         disponibilidad.forEach(disp => {
           const turno = parseInt(disp.hora_inicio) < 13 ? 'Mat' : 'Ves';
           bloques.push({
+            id: disp._id ?? '',
             horaIni: disp.hora_inicio,
             horaFin: disp.hora_fin,
             turno
@@ -139,6 +140,7 @@ export class HorariosService {
       },
       error: (error: any) => {
         this.errorMessage.set(error.error.msg ?? 'Error al agregar horario.');
+        this.isLoading.set(false);
       },
       complete: () => {
         this.isLoading.set(false);
@@ -154,6 +156,22 @@ export class HorariosService {
       },
       error: (error: any) => {
         this.errorMessage.set(error.error.msg ?? 'Error al eliminar horario.');
+      },
+      complete: () => {
+        this.isLoading.set(false);
+      }
+    });
+  }
+
+  eliminarHorarioPorId(id: string): void {
+    this.isLoading.set(true);
+    this.http.delete<any>(`${this.BASE_URL}/horarios/bloque/${id}`).subscribe({
+      next: () => {
+        this.fetchHorarios();
+      },
+      error: (error: any) => {
+        this.errorMessage.set(error.error.msg ?? 'Error al eliminar el horario.');
+        this.isLoading.set(false);
       },
       complete: () => {
         this.isLoading.set(false);
