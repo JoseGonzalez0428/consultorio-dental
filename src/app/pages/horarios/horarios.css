@@ -1,270 +1,197 @@
-/* Desktop */
-@media screen and (min-width:1025px) {
-    #TitHor { text-align: center; }
-
-    #ContenidoHorarios {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .TablaHorarios {
-        width: 90%;
-        display: grid;
-        margin-top: 40px;
-        border: 1px solid black;
-        grid-template-columns: repeat(7, 1fr);
-    }
-
-    .CeldaMes {
-        align-content: center;
-        justify-content: center;
-        align-items: center;
-        padding: 10px 0;
-        height: 20px;
-        display: flex;
-        grid-column: span 7;
-    }
-
-    .Mes {
-        text-align: center;
-        font-size: 24px;
-        font-family: Arial;
-        width: 100%;
-    }
-
-    .CeldaMes img { height: 20px; margin-left: 20px; cursor: pointer; }
-
-    .CeldaDia {
-        width: 100%;
-        text-align: center;
-        font-weight: bold;
-        padding: 10px 0;
-        border-top: 1px solid black;
-    }
-
-    .CeldaHorario {
-        text-align: center;
-        border: 1px solid black;
-        min-height: 80px;
-    }
-
-    .DiaHorario {
-        font-weight: bold;
-        text-align: right;
-        padding: 0 10px;
-        font-size: 16px;
-        font-family: Verdana;
-        color: skyblue;
-    }
-
-    .CeldaHorarioMat, .CeldaHorarioVes { padding: 5px; }
-
-    .sinHorario {
-        background-color: #e0e0e0;
-        opacity: 0.6;
-        min-height: 80px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-    }
-
-    .sinHorario::after {
-        content: "No disponible";
-        font-size: 10px;
-        color: #777;
-    }
-
-    .disponible { cursor: pointer; }
-
-    .EliminarFecha {
-        color: red;
-        font-weight: bold;
-        cursor: pointer;
-        font-size: 12px;
-        display: block;
-        margin-top: 4px;
-    }
+/* ==========================================================================
+   Contenedor Principal y Tarjeta
+   ========================================================================== */
+.schedule-page {
+  min-height: 100vh;
+  background-color: #f8fafc; /* Fondo gris neutro ultra limpio */
+  font-family: system-ui, -apple-system, sans-serif;
+  padding: 40px 16px;
+  box-sizing: border-box;
 }
 
-/* Tablet */
-@media screen and (min-width:681px) and (max-width:1024px) {
-    #TitHor { text-align: center; }
-
-    #ContenidoHorarios {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .TablaHorarios {
-        width: 90%;
-        display: grid;
-        margin-top: 40px;
-        border: 1px solid black;
-        grid-template-columns: repeat(7, 1fr);
-    }
-
-    .CeldaMes {
-        align-content: center;
-        justify-content: center;
-        align-items: center;
-        padding: 10px 0;
-        height: 20px;
-        display: flex;
-        grid-column: span 7;
-    }
-
-    .Mes {
-        text-align: center;
-        font-size: 24px;
-        font-family: Arial;
-        width: 100%;
-    }
-
-    .CeldaMes img { height: 20px; margin-left: 20px; cursor: pointer; }
-
-    .CeldaDia {
-        width: 100%;
-        text-align: center;
-        font-weight: bold;
-        padding: 10px 0;
-        border-top: 1px solid black;
-    }
-
-    .CeldaHorario {
-        text-align: center;
-        border: 1px solid black;
-        min-height: 80px;
-    }
-
-    .DiaHorario {
-        font-weight: bold;
-        text-align: right;
-        padding: 0 10px;
-        font-size: 16px;
-        font-family: Verdana;
-        color: skyblue;
-    }
-
-    .CeldaHorarioMat, .CeldaHorarioVes { padding: 5px; font-size: 12px; }
-
-    .sinHorario {
-        background-color: #e0e0e0;
-        opacity: 0.6;
-        min-height: 80px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-    }
-
-    .sinHorario::after {
-        content: "No disponible";
-        font-size: 10px;
-        color: #777;
-    }
-
-    .disponible { cursor: pointer; }
-
-    .EliminarFecha {
-        color: red;
-        font-weight: bold;
-        cursor: pointer;
-        font-size: 12px;
-        display: block;
-        margin-top: 4px;
-    }
+.schedule-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
-/* Mobile */
-@media screen and (min-width:0px) and (max-width:680px) {
-    #TitHor { text-align: center; }
+.schedule-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0f172a;
+  text-align: center;
+  margin-bottom: 24px;
+}
 
-    #ContenidoHorarios {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+.calendar-card {
+  background-color: #ffffff;
+  border-radius: 20px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
 
-    .TablaHorarios {
-        width: 95%;
-        display: grid;
-        margin-top: 40px;
-        border: 1px solid black;
-        grid-template-columns: repeat(7, 1fr);
-    }
+/* ==========================================================================
+   Cabecera de Navegación
+   ========================================================================== */
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid #f1f5f9;
+}
 
-    .CeldaMes {
-        align-content: center;
-        justify-content: center;
-        align-items: center;
-        padding: 10px 0;
-        height: 20px;
-        display: flex;
-        grid-column: span 7;
-    }
+.current-date {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+  text-transform: capitalize;
+}
 
-    .Mes {
-        text-align: center;
-        font-size: 20px;
-        font-family: Arial;
-        width: 100%;
-    }
+.nav-arrow {
+  background-color: #f1f5f9;
+  color: #475569;
+  border: none;
+  font-size: 1rem;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
 
-    .CeldaMes img { height: 20px; margin-left: 20px; cursor: pointer; }
+.nav-arrow:hover {
+  background-color: #e2e8f0;
+}
 
-    .CeldaDia {
-        width: 100%;
-        text-align: center;
-        font-weight: bold;
-        padding: 10px 0;
-        border-top: 1px solid black;
-        font-size: 14px;
-    }
+/* ==========================================================================
+   Diseño de la Rejilla del Calendario (Fijo en 7 columnas)
+   ========================================================================== */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  padding: 12px;
+  background-color: #ffffff;
+}
 
-    .CeldaHorario {
-        text-align: center;
-        border: 1px solid black;
-        min-height: 60px;
-    }
+.weekday-label {
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.75rem;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 12px 0;
+}
 
-    .DiaHorario {
-        font-weight: bold;
-        text-align: right;
-        padding: 0 10px;
-        font-size: 14px;
-        font-family: Verdana;
-        color: skyblue;
-    }
+/* Celdas Base */
+.calendar-day, .day-empty {
+  aspect-ratio: 1 / 1; /* Celdas perfectamente cuadradas */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-sizing: border-box;
+}
 
-    .CeldaHorarioMat, .CeldaHorarioVes { padding: 5px; font-size: 10px; }
+.day-number {
+  font-size: 1rem;
+  font-weight: 500;
+}
 
-    .sinHorario {
-        background-color: #e0e0e0;
-        opacity: 0.6;
-        min-height: 60px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-    }
+/* Días No Disponibles (Totalmente limpios y discretos) */
+.day-disabled {
+  background-color: transparent;
+}
 
-    .sinHorario::after {
-        content: "No disponible";
-        font-size: 9px;
-        color: #777;
-    }
+.day-disabled .day-number {
+  color: #cbd5e1; /* Gris claro que denota inactividad */
+}
 
-    .disponible { cursor: pointer; }
+/* Días Activos con Horarios (Efecto de tarjeta flotante sutil) */
+.day-active {
+  cursor: pointer;
+}
 
-    .EliminarFecha {
-        color: red;
-        font-weight: bold;
-        cursor: pointer;
-        font-size: 12px;
-        display: block;
-        margin-top: 4px;
-    }
+.day-active .day-number {
+  color: #7160e6; /* Resalta el número en el morado de tu marca */
+  font-weight: 700;
+}
+
+/* Indicador inferior de citas */
+.slots-indicator {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 4px;
+  background-color: #f5f3ff; /* Fondo morado lila muy suave */
+  padding: 2px 8px;
+  border-radius: 20px;
+  transition: background-color 0.2s;
+}
+
+.day-active:hover .slots-indicator {
+  background-color: #eecffd;
+}
+
+.indicator-dot {
+  width: 6px;
+  height: 6px;
+  background-color: #c860e6; /* El rosa original actúa como el punto de alerta activa */
+  border-radius: 50%;
+}
+
+.slots-text {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #7160e6;
+}
+
+/* Botón de eliminar para Administradores */
+.btn-delete-date {
+  background: none;
+  border: none;
+  color: #ef4444;
+  font-size: 0.7rem;
+  cursor: pointer;
+  padding: 0 0 0 4px;
+  margin-left: 4px;
+  border-left: 1px solid #ddd;
+}
+
+/* ==========================================================================
+   Ajustes para Pantallas Móviles
+   ========================================================================== */
+@media screen and (max-width: 600px) {
+  .calendar-grid {
+    padding: 4px;
+  }
+  
+  .weekday-label {
+    font-size: 0.65rem;
+  }
+
+  .day-number {
+    font-size: 0.9rem;
+  }
+
+  .slots-text {
+    display: none; /* Ocultamos la palabra en pantallas pequeñas para que no sature */
+  }
+
+  .slots-indicator {
+    padding: 4px;
+    margin-top: 2px;
+  }
+  
+  .indicator-dot {
+    width: 8px; /* El punto se hace un poquito más grande para suplir la falta de texto */
+    height: 8px;
+  }
 }

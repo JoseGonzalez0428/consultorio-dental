@@ -100,7 +100,7 @@ form {
   color: #1f2937;
   font-family: inherit;
   height: 100%;
-  cursor: pointer; /* 👈 La manita se queda solo donde sí hay una acción de elegir */
+  cursor: pointer;
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
