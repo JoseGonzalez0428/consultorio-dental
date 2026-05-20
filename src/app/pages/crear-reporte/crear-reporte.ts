@@ -15,6 +15,8 @@ export class CrearReporte implements OnInit {
   public reportesService = inject(ReportesService);
 
   ayer: string = '';
+  mesActual: string = new Date().toLocaleString('es-MX', { month: 'long' });
+  mesActualCapitalizado: string = '';
 
   reporteForm = this.fb.group({
     fecha: ['', [Validators.required]],
@@ -26,6 +28,10 @@ export class CrearReporte implements OnInit {
     const hoy = new Date();
     hoy.setDate(hoy.getDate() - 1);
     this.ayer = `${hoy.getFullYear()}-${String(hoy.getMonth() + 1).padStart(2, '0')}-${String(hoy.getDate()).padStart(2, '0')}`;
+    
+    this.mesActualCapitalizado = this.mesActual.charAt(0).toUpperCase() + this.mesActual.slice(1);
+    
+    this.reportesService.fetchReportes(1);
   }
 
   cargarCitas(): void {
