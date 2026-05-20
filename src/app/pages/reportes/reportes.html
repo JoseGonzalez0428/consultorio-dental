@@ -1,46 +1,70 @@
 <div class="Pagina">
   <div class="Contenido">
-    <div class="TitContenido">Reportes</div>
+
+    <div class="ReportesHeader">
+      <div class="TitContenido">Reportes clínicos</div>
+      <div class="ReportesContador">
+        Total: <strong>{{ reportesService.totalReportes() }}</strong> reportes
+      </div>
+    </div>
 
     @if (reportesService.isLoading()) {
       <div class="MensajeCargando">Cargando reportes...</div>
     }
 
-    <div class="TablaReportes">
-      <div id="TituloCelda" class="CeldaReportes">Fecha</div>
-      <div id="TituloCelda" class="CeldaReportes">Tratamiento</div>
-      <div id="TituloCelda" class="CeldaReportes">Notas</div>
-      <div id="TituloCelda" class="CeldaReportes">Paciente</div>
+    @if (reportesService.reportes().length === 0 && !reportesService.isLoading()) {
+      <div class="SinReportes">No hay reportes disponibles.</div>
+    }
 
-      @if (reportesService.reportes().length === 0) {
-        <div class="SinReportes">No hay reportes disponibles.</div>
-      }
-
+    <div class="ListaReportes">
       @for (reporte of reportesService.reportes(); track reporte._id) {
-        <div class="CeldaReportes">
-          {{ reporte.fecha_cita }} {{ reporte.hora_cita }}
-        </div>
-        <div class="CeldaReportes">{{ reporte.nombre_tratamiento }}</div>
-        <div class="CeldaReportes">{{ reporte.notas }}</div>
-        <div class="CeldaReportes">
-          <div>{{ reporte.nombre_paciente }}</div>
-          <div>{{ reporte.telefono }}</div>
+        <div class="TarjetaReporte">
+
+          <div class="TarjetaReporteHeader">
+            <div class="ReporteFechaHora">
+              <span class="ReporteIcono">📅</span>
+              <div>
+                <div class="ReporteFecha">{{ reporte.fecha_cita }}</div>
+                <div class="ReporteHora">{{ reporte.hora_cita }}</div>
+              </div>
+            </div>
+            <div class="ReporteTratamientoBadge">{{ reporte.nombre_tratamiento }}</div>
+          </div>
+
+          <div class="TarjetaReporteBody">
+            <div class="ReporteNotas">
+              <span class="ReporteNotasLabel">Notas clínicas</span>
+              <p class="ReporteNotasTexto">{{ reporte.notas }}</p>
+            </div>
+          </div>
+
+          <div class="TarjetaReporteFooter">
+            <span class="ReporteIcono">👤</span>
+            <div class="ReportePacienteInfo">
+              <span class="ReportePacienteNombre">{{ reporte.nombre_paciente }}</span>
+              <span class="ReportePacienteTelefono">{{ reporte.telefono }}</span>
+            </div>
+          </div>
+
         </div>
       }
     </div>
 
     @if (totalPaginas() > 1) {
       <div class="DesplazarReporte">
-        <img src="Imagenes/FlechaIzq.png" alt="Anterior"
-          [class.flechaDesactivada]="paginaActual === 1"
+        <button type="button" class="BtnPagina"
+          [disabled]="paginaActual === 1"
           (click)="cambiarPagina(paginaActual - 1)">
-        <div id="NoReporte">
-          {{ paginaActual }}/{{ totalPaginas() }}
-        </div>
-        <img src="Imagenes/FlechaDer.png" alt="Siguiente"
-          [class.flechaDesactivada]="paginaActual === totalPaginas()"
+          ← Anterior
+        </button>
+        <span class="PaginaInfo">{{ paginaActual }} / {{ totalPaginas() }}</span>
+        <button type="button" class="BtnPagina"
+          [disabled]="paginaActual === totalPaginas()"
           (click)="cambiarPagina(paginaActual + 1)">
+          Siguiente →
+        </button>
       </div>
     }
+
   </div>
 </div>

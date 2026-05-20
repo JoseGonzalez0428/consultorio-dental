@@ -1,194 +1,260 @@
-/* Desktop */
-@media screen and (min-width:1025px) {
-    .TablaReportes {
-        display: grid;
-        grid-template-columns: 20% 20% 40% 20%;
-        margin-top: 40px;
-        border: 1px solid black;
-    }
-
-    .CeldaReportes {
-        padding: 10px;
-        font-family: sans-serif;
-        font-size: 18px;
-        text-align: center;
-        align-content: center;
-        min-height: 60px;
-        border: 1px solid black;
-    }
-
-    #TituloCelda {
-        background-color: #D9D9D9;
-        font-weight: bold;
-        font-size: 24px;
-        height: 30px;
-        min-height: 30px;
-    }
-
-    .DesplazarReporte {
-        display: flex;
-        justify-content: center;
-        margin-top: 20px;
-        align-items: center;
-    }
-
-    .DesplazarReporte img { height: 15px; width: auto; cursor: pointer; }
-
-    #NoReporte {
-        font-family: Arial;
-        font-size: 16px;
-        text-align: center;
-        padding-left: 5px;
-        padding-right: 5px;
-    }
-
-        .MensajeCargando {
-        text-align: center;
-        font-family: sans-serif;
-        font-size: 18px;
-        margin-top: 20px;
-        color: #555;
-    }
-
-    .SinReportes {
-        grid-column: span 4;
-        text-align: center;
-        padding: 20px;
-        font-family: sans-serif;
-    }
-
-    .flechaDesactivada {
-        opacity: 0.3;
-        cursor: default;
-    }
+/* ==========================================================================
+   Contenedor Principal y Conexión Elástica
+   ========================================================================== */
+.Pagina {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  background-color: #faf9fe;
+  font-family: "Inter", "Geist Sans", -apple-system, sans-serif;
+  box-sizing: border-box;
+  letter-spacing: -0.01em;
 }
 
-/* Tablet */
-@media screen and (min-width:681px) and (max-width:1024px) {
-    .TablaReportes {
-        display: grid;
-        grid-template-columns: 20% 20% 40% 20%;
-        margin-top: 40px;
-        border: 1px solid black;
-    }
-
-    .CeldaReportes {
-        padding: 10px;
-        font-family: sans-serif;
-        font-size: 14px;
-        text-align: center;
-        align-content: center;
-        min-height: 60px;
-        border: 1px solid black;
-    }
-
-    #TituloCelda {
-        background-color: #D9D9D9;
-        font-weight: bold;
-        font-size: 20px;
-        height: 30px;
-        min-height: 30px;
-    }
-
-    .DesplazarReporte {
-        display: flex;
-        justify-content: center;
-        margin-top: 20px;
-        align-items: center;
-    }
-
-    .DesplazarReporte img { height: 15px; width: auto; cursor: pointer; }
-
-    #NoReporte {
-        font-family: Arial;
-        font-size: 16px;
-        text-align: center;
-        padding-left: 5px;
-        padding-right: 5px;
-    }
-
-        .MensajeCargando {
-        text-align: center;
-        font-family: sans-serif;
-        font-size: 18px;
-        margin-top: 20px;
-        color: #555;
-    }
-
-    .SinReportes {
-        grid-column: span 4;
-        text-align: center;
-        padding: 20px;
-        font-family: sans-serif;
-    }
-
-    .flechaDesactivada {
-        opacity: 0.3;
-        cursor: default;
-    }
+.Contenido {
+  flex-grow: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
 }
 
-/* Mobile */
-@media screen and (min-width:0px) and (max-width:680px) {
-    .TablaReportes {
-        display: grid;
-        grid-template-columns: 20% 20% 40% 20%;
-        margin-top: 40px;
-        border: 1px solid black;
-    }
+/* ==========================================================================
+   Encabezado de Reportes (ReportesHeader)
+   ========================================================================== */
+.ReportesHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-bottom: 1px solid #f1f5f9;
+  padding-bottom: 24px;
+  margin-bottom: 24px;
+  width: 100%;
+}
 
-    .CeldaReportes {
-        padding: 10px 5px;
-        font-family: sans-serif;
-        font-size: 14px;
-        text-align: center;
-        align-content: center;
-        min-height: 60px;
-        border: 1px solid black;
-    }
+.TitContenido {
+  color: #0f172a;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin: 0;
+}
 
-    #TituloCelda {
-        background-color: #D9D9D9;
-        font-weight: bold;
-        font-size: 18px;
-        height: 30px;
-        min-height: 30px;
-    }
+.ReportesContador {
+  font-size: 0.9rem;
+  color: #64748b;
+}
 
-    .DesplazarReporte {
-        display: flex;
-        justify-content: center;
-        margin-top: 20px;
-        align-items: center;
-    }
+.ReportesContador strong {
+  color: #7160e6;
+  font-weight: 700;
+}
 
-    .DesplazarReporte img { height: 15px; width: auto; cursor: pointer; }
+/* ==========================================================================
+   Listado y Estructura de Tarjetas (ListaReportes)
+   ========================================================================== */
+.ListaReportes {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
 
-    #NoReporte {
-        font-family: Arial;
-        font-size: 14px;
-        text-align: center;
-        padding-left: 5px;
-        padding-right: 5px;
-    }
+.TarjetaReporte {
+  background-color: #ffffff;
+  border-radius: 20px;
+  border: 1px solid #f1f5f9;
+  padding: 24px;
+  box-shadow: 0 4px 12px -2px rgba(113, 96, 230, 0.02);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
 
-    .MensajeCargando {
-        text-align: center;
-        font-family: sans-serif;
-        font-size: 18px;
-        margin-top: 20px;
-        color: #555;
-    }
+/* Cabecera de la Tarjeta */
+.TarjetaReporteHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-bottom: 1px solid #f8fafc;
+  padding-bottom: 14px;
+}
 
-    .SinReportes {
-        grid-column: span 4;
-        text-align: center;
-        padding: 20px;
-        font-family: sans-serif;
-    }
+.ReporteFechaHora {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
 
-    .flechaDesactivada {
-        opacity: 0.3;
-        cursor: default;
-    }
+/* Ocultamos los emojis nativos visualmente para limpiar el entorno */
+.ReporteIcono {
+  display: none;
+}
+
+.ReporteFecha {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.ReporteHora {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #64748b;
+  margin-top: 2px;
+}
+
+.ReporteTratamientoBadge {
+  background-color: #f5f3ff;
+  color: #7160e6;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 10px;
+  width: fit-content;
+}
+
+/* Cuerpo de la Tarjeta (Notas Clínicas) */
+.TarjetaReporteBody {
+  width: 100%;
+}
+
+.ReporteNotas {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ReporteNotasLabel {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.ReporteNotasTexto {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #334155;
+  text-align: justify;
+  margin: 0;
+  background-color: #f8fafc;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid #f1f5f9;
+}
+
+/* Footer de la Tarjeta (Información del Paciente) */
+.TarjetaReporteFooter {
+  display: flex;
+  align-items: center;
+  background-color: #fdf6ff; /* Sutil fondo rosa/morado lavado institucional */
+  padding: 10px 16px;
+  border-radius: 12px;
+  border: 1px solid #fdf0ff;
+}
+
+.ReportePacienteInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ReportePacienteNombre {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #4c1d95; /* Morado oscuro de alta legibilidad */
+}
+
+.ReportePacienteTelefono {
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+/* ==========================================================================
+   Controles de Paginación (DesplazarReporte)
+   ========================================================================== */
+.DesplazarReporte {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 32px;
+  padding: 16px 0;
+  width: 100%;
+}
+
+.BtnPagina {
+  height: 38px;
+  padding: 0 16px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #7160e6;
+  background-color: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 10px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.BtnPagina:hover:not(:disabled) {
+  border-color: #7160e6;
+  background-color: #f5f3ff;
+}
+
+.BtnPagina:disabled {
+  color: #cbd5e1;
+  background-color: #f8fafc;
+  border-color: #e2e8f0;
+  cursor: not-allowed;
+}
+
+.PaginaInfo {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #475569;
+}
+
+/* Mensajes de Estado */
+.MensajeCargando, .SinReportes {
+  text-align: center;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #94a3b8;
+  padding: 48px;
+}
+
+/* ==========================================================================
+   Ajustes de Escritorio (Layout de Fila Horizontal Unificado)
+   ========================================================================== */
+@media screen and (min-width: 1025px) {
+  .ReportesHeader {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 16px;
+  }
+
+  /* La cabecera del reporte se alinea lado a lado en PC */
+  .TarjetaReporteHeader {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+  }
+
+  .ReporteTratamientoBadge {
+    margin-left: auto;
+  }
+
+  /* El footer se vuelve una discreta barra integrada a la derecha de la cabecera */
+  .TarjetaReporte {
+    position: relative;
+    padding-bottom: 20px;
+  }
 }
