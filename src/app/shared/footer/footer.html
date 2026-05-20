@@ -1,38 +1,63 @@
-<div class="PieDePag">
-  <div id="LogoPie">
-    <img src="Imagenes/logo.png" alt="Logo">
+<footer class="footer">
+  <div class="footer-brand-line"></div>
+
+  <div class="footer-container">
+    
+    <div class="footer-brand">
+      <img src="Imagenes/logo.png" alt="Logo Consultorio" class="footer-logo">
+      <p class="footer-tagline">Cuidando tu sonrisa con la calidez y el profesionalismo que mereces.</p>
+    </div>
+
+    <div class="footer-links">
+      <span class="footer-title">Navegación</span>
+      
+      @if (!authService.isLoggedIn()) {
+        <a routerLink="/inicio" class="foot-link">Inicio</a>
+        <a routerLink="/tratamientos" class="foot-link">Tratamientos</a>
+        <a routerLink="/agendar" class="foot-link">Agendar</a>
+        <a routerLink="/horarios" class="foot-link">Horarios</a>
+        <a routerLink="/acerca" class="foot-link">Acerca de nosotros</a>
+      }
+
+      @if (authService.isLoggedIn() && authService.tipoUsuario() === 'cliente') {
+        <a routerLink="/inicio" class="foot-link">Inicio</a>
+        <a routerLink="/tratamientos" class="foot-link">Tratamientos</a>
+        <a routerLink="/agendar" class="foot-link">Agendar</a>
+        <a routerLink="/horarios" class="foot-link">Horarios</a>
+        <a routerLink="/acerca" class="foot-link">Acerca de nosotros</a>
+        <a routerLink="/mis-citas" class="foot-link">Mis citas</a>
+      }
+
+      @if (authService.isLoggedIn() && authService.tipoUsuario() === 'admin') {
+        <a routerLink="/reportes" class="foot-link">Reportes</a>
+        <a routerLink="/crear-reporte" class="foot-link">Crear reporte</a>
+        <a routerLink="/gestionar-citas" class="foot-link">Gestionar Citas</a>
+        <a routerLink="/gestionar-horarios" class="foot-link">Gestionar Horarios</a>
+        <a routerLink="/gestionar-tratamientos" class="foot-link">Gestionar Tratamientos</a>
+      }
+    </div>
+
+    <div class="footer-contact">
+      <span class="footer-title">Contacto</span>
+      <address class="contact-info">
+        <p class="contact-item">
+          <span class="icon">📍</span>
+          <span>Juan Bustamante 39, Abasolo, 79500 Villa de Reyes, S.L.P.</span>
+        </p>
+        <p class="contact-item">
+          <span class="icon">✉️</span>
+          <a href="mailto:analuisaflo@hotmail.com">analuisaflo@hotmail.com</a>
+        </p>
+        <p class="contact-item">
+          <span class="icon">📞</span>
+          <a href="tel:+524851060414">+52 485 106 0414</a>
+        </p>
+      </address>
+    </div>
+
   </div>
 
-  <div class="ConjPie">
-    @if (!authService.isLoggedIn()) {
-      <div class="TextoPie" routerLink="/inicio">Inicio</div>
-      <div class="TextoPie" routerLink="/tratamientos">Tratamientos</div>
-      <div class="TextoPie" routerLink="/agendar">Agendar</div>
-      <div class="TextoPie" routerLink="/horarios">Horarios</div>
-      <div class="TextoPie" routerLink="/acerca">Acerca de nosotros</div>
-    }
-
-    @if (authService.isLoggedIn() && authService.tipoUsuario() === 'cliente') {
-      <div class="TextoPie" routerLink="/inicio">Inicio</div>
-      <div class="TextoPie" routerLink="/tratamientos">Tratamientos</div>
-      <div class="TextoPie" routerLink="/agendar">Agendar</div>
-      <div class="TextoPie" routerLink="/horarios">Horarios</div>
-      <div class="TextoPie" routerLink="/acerca">Acerca de nosotros</div>
-      <div class="TextoPie" routerLink="/mis-citas">Mis citas</div>
-    }
-
-    @if (authService.isLoggedIn() && authService.tipoUsuario() === 'admin') {
-      <div class="TextoPie" routerLink="/reportes">Reportes</div>
-      <div class="TextoPie" routerLink="/crear-reporte">Crear reporte</div>
-      <div class="TextoPie" routerLink="/gestionar-citas">Gestionar Citas</div>
-      <div class="TextoPie" routerLink="/gestionar-horarios">Gestionar Horarios</div>
-      <div class="TextoPie" routerLink="/gestionar-tratamientos">Gestionar Tratamientos</div>
-    }
+  <div class="footer-bottom">
+    <p>&copy; 2026 Odontología Integral Flores. Todos los derechos reservados.</p>
   </div>
-
-  <div class="ConjPie">
-    <div class="TextoPie" id="nopointer">Juan Bustamante 39, Abasolo, 79500 Villa de Reyes, S.L.P.</div>
-    <div class="TextoPie" id="nopointer">analuisaflo@hotmail.com</div>
-    <div class="TextoPie" id="nopointer">+52 485 106 0414</div>
-  </div>
-</div>
+</footer>

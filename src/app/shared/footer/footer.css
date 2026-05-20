@@ -1,64 +1,163 @@
-/* Desktop */
-@media screen and (min-width:1025px) {
-    .PieDePag {
-        height: 210px;
-        background-color: #C860E6;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        padding: 20px;
-        flex-wrap: wrap;
-    }
-
-    #LogoPie img { height: 120px; width: auto; padding-left: 20px; }
-
-    .ConjPie { display: flex; flex-direction: column; gap: 10px; }
-
-    .TextoPie { font-family: sans-serif; font-size: 20px; color: white; cursor: pointer; }
-
-    #nopointer { cursor: default; }
+/* ==========================================================================
+   Contenedor Principal (Fondo Rosa Suave/Lavado)
+   ========================================================================== */
+.footer {
+  background-color: #fdf6ff; /* Un tono rosa/violeta pastel sumamente sutil y limpio */
+  border-top: 1px solid #f3e8ff;
+  position: relative;
+  padding: 48px 24px 0 24px;
+  font-family: system-ui, -apple-system, sans-serif;
+  color: #4b5563;
 }
 
-/* Tablet */
-@media screen and (min-width:681px) and (max-width:1024px) {
-    .PieDePag {
-        height: fit-content;
-        background-color: #C860E6;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        padding: 20px;
-        flex-wrap: wrap;
-    }
-
-    #LogoPie img { height: 100px; width: auto; margin-right: 10px; }
-
-    .ConjPie { display: flex; flex-direction: column; gap: 10px; }
-
-    .TextoPie { font-family: sans-serif; font-size: 14px; color: white; cursor: pointer; }
-
-    #nopointer { cursor: default; }
+/* Línea decorativa con el color rosa original de la marca */
+.footer-brand-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #7160E6 0%, #C860E6 100%); /* Fusión perfecta de tus dos colores originales */
 }
 
-/* Mobile */
-@media screen and (min-width:0px) and (max-width:680px) {
-    .PieDePag {
-        height: fit-content;
-        background-color: #C860E6;
-        display: flex;
-        flex-direction: column;
-        justify-content: left;
-        padding: 20px;
-        flex-wrap: wrap;
-    }
+.footer-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
 
-    #LogoPie img { height: 120px; width: auto; }
+/* Encabezados internos del Footer */
+.footer-title {
+  display: block;
+  color: #4c1d95; /* Morado oscuro para títulos con alta legibilidad */
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 16px;
+}
 
-    .ConjPie { display: flex; flex-direction: column; text-align: left; gap: 10px; margin-top: 10px; }
+/* ==========================================================================
+   Bloques de Contenido
+   ========================================================================== */
 
-    .TextoPie { font-family: sans-serif; font-size: 16px; color: white; cursor: pointer; }
+/* Branding */
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
 
-    #nopointer { cursor: default; }
+.footer-logo {
+  height: 54px;
+  width: auto;
+  object-fit: contain;
+  align-self: flex-start;
+}
+
+.footer-tagline {
+  font-size: 0.9rem;
+  margin: 0;
+  color: #6b7280;
+  line-height: 1.5;
+}
+
+/* Lista de enlaces */
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.foot-link {
+  color: #4b5563;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  align-self: flex-start;
+}
+
+/* Al pasar el cursor, aplicamos el rosa característico de tu logo */
+.foot-link:hover {
+  color: #C860E6; 
+  text-decoration: underline;
+  transform: translateX(2px); /* Pequeña animación fluida de UX */
+}
+
+/* Datos de contacto */
+.footer-contact {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-info {
+  font-style: normal;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.contact-item a {
+  color: #4b5563;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.contact-item a:hover {
+  color: #C860E6; /* Resaltado rosa en los enlaces de correo/teléfono */
+}
+
+.contact-item .icon {
+  flex-shrink: 0;
+  font-size: 1rem;
+}
+
+/* ==========================================================================
+   Barra Inferior de Copyright
+   ========================================================================== */
+.footer-bottom {
+  max-width: 1240px;
+  margin: 40px auto 0 auto;
+  padding: 20px 0;
+  border-top: 1px solid #f3e8ff;
+  text-align: center;
+  font-size: 0.8rem;
+  color: #a78bfa; /* Texto sutil en tono lila */
+}
+
+.footer-bottom p {
+  margin: 0;
+}
+
+/* ==========================================================================
+   Vista de Escritorio (Pantallas Medianas y Grandes)
+   ========================================================================== */
+@media screen and (min-width: 768px) {
+  .footer {
+    padding-top: 56px;
+  }
+
+  .footer-container {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+  }
+
+  .footer-brand, .footer-links, .footer-contact {
+    flex: 1;
+    max-width: 320px;
+  }
 }

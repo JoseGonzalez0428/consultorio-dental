@@ -10,5 +10,5 @@ import { AuthService } from '../../services/auth';
   styleUrl: './footer.css',
 })
 export class Footer {
-  authService = inject(AuthService);
+  public readonly authService = inject(AuthService);
 }
