@@ -54,6 +54,7 @@ export class ReportesService {
       },
       error: (error: any) => {
         this.errorMessage.set(error.error.msg ?? 'Error al cargar citas.');
+        this.isLoading.set(false);
       },
       complete: () => {
         this.isLoading.set(false);
@@ -73,6 +74,7 @@ export class ReportesService {
       },
       error: (error: any) => {
         this.errorMessage.set(error.error.msg ?? 'Error al crear reporte.');
+        this.isLoading.set(false);
       },
       complete: () => {
         this.isLoading.set(false);

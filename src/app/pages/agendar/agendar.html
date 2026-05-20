@@ -35,7 +35,7 @@
               <div class="BotonOpcion InputCompleto">
                 <select formControlName="fecha" (change)="cargarHoras(agendarForm.controls.fecha.value ?? '')">
                   <option value="">Seleccione...</option>
-                  @for (f of fechasDisponibles; track f) {
+                  @for (f of fechasDisponibles(); track f) {
                     <option [value]="f">{{ formatearFecha(f) }}</option>
                   }
                 </select>

@@ -49,6 +49,7 @@ export class HorariosService {
       },
       error: (error: any) => {
         this.errorMessage.set(error.error.msg ?? 'Error al cargar horarios.');
+        this.isLoading.set(false);
       },
       complete: () => {
         this.isLoading.set(false);
@@ -156,6 +157,7 @@ export class HorariosService {
       },
       error: (error: any) => {
         this.errorMessage.set(error.error.msg ?? 'Error al eliminar horario.');
+        this.isLoading.set(false);
       },
       complete: () => {
         this.isLoading.set(false);

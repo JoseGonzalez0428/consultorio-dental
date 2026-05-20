@@ -78,6 +78,7 @@ export class CitasService {
       },
       error: (error: any) => {
         this.errorMessage.set(error.error.msg ?? 'Error al agendar la cita.');
+        this.isLoading.set(false);
       },
       complete: () => {
         this.isLoading.set(false);
@@ -97,6 +98,7 @@ export class CitasService {
       },
       error: (error: any) => {
         this.errorMessage.set(error.error.msg ?? 'Error al modificar la cita.');
+        this.isLoading.set(false);
       },
       complete: () => {
         this.isLoading.set(false);
@@ -116,6 +118,7 @@ export class CitasService {
       },
       error: (error: any) => {
         this.errorMessage.set(error.error.msg ?? 'Error al cancelar la cita.');
+        this.isLoading.set(false);
       },
       complete: () => {
         this.isLoading.set(false);
@@ -131,6 +134,7 @@ export class CitasService {
       },
       error: (error: any) => {
         this.errorMessage.set(error.error.msg ?? 'Error al completar la cita.');
+        this.isLoading.set(false);
       },
       complete: () => {
         this.isLoading.set(false);
@@ -146,6 +150,7 @@ export class CitasService {
       },
       error: (error: any) => {
         this.errorMessage.set(error.error.msg ?? 'Error al cancelar la cita.');
+        this.isLoading.set(false);
       },
       complete: () => {
         this.isLoading.set(false);
@@ -161,6 +166,7 @@ export class CitasService {
       },
       error: (error: any) => {
         this.errorMessage.set(error.error.msg ?? 'Error al completar la cita.');
+        this.isLoading.set(false);
       },
       complete: () => {
         this.isLoading.set(false);

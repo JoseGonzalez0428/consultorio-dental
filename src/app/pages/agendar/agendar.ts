@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, computed } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { CitasService } from '../../services/citas';
@@ -21,7 +21,12 @@ export class Agendar implements OnInit {
   public horariosService = inject(HorariosService);
   public tratamientosService = inject(TratamientosService);
 
-  fechasDisponibles: string[] = [];
+  fechasDisponibles = computed(() =>
+    this.horariosService.horarios()
+      .map(h => h.fecha)
+      .filter(f => f >= new Date().toISOString().split('T')[0])
+      .filter((f, i, arr) => arr.indexOf(f) === i)
+  );
   horasDisponibles: BloqueHorario[] = [];
 
   agendarForm = this.fb.group({
@@ -33,6 +38,7 @@ export class Agendar implements OnInit {
   ngOnInit(): void {
     this.tratamientosService.fetchTratamientos();
     this.horariosService.fetchHorarios();
+    this.citasService.fetchHorasOcupadas();
 
     const fechaGet = this.route.snapshot.queryParamMap.get('fecha');
     if (fechaGet) {
@@ -40,10 +46,6 @@ export class Agendar implements OnInit {
       this.cargarHoras(fechaGet);
     }
 
-    this.fechasDisponibles = this.horariosService.horarios()
-      .map(h => h.fecha)
-      .filter(f => f >= new Date().toISOString().split('T')[0])
-      .filter((f, i, arr) => arr.indexOf(f) === i);
   }
 
   cargarHoras(fecha: string): void {

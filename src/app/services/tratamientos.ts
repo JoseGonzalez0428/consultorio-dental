@@ -29,6 +29,7 @@ export class TratamientosService {
       },
       error: (error: any) => {
         this.errorMessage.set(error.error.msg ?? 'Error al cargar tratamientos.');
+        this.isLoading.set(false);
       },
       complete: () => {
         this.isLoading.set(false);
@@ -44,6 +45,7 @@ export class TratamientosService {
       },
       error: (error: any) => {
         this.errorMessage.set(error.error.msg ?? 'Error al cargar tratamiento.');
+        this.isLoading.set(false);
       },
       complete: () => {
         this.isLoading.set(false);
@@ -103,6 +105,7 @@ export class TratamientosService {
       },
       error: (error: any) => {
         this.errorMessage.set(error.error.msg ?? 'Error al eliminar tratamiento.');
+        this.isLoading.set(false);
       },
       complete: () => {
         this.isLoading.set(false);

@@ -13,7 +13,8 @@
       <div class="Tratamiento">
         
         <div class="ImagenTrat">
-          <img [src]="'Imagenes/' + tratamientosService.tratamientoSeleccionado()!.imagen" [alt]="tratamientosService.tratamientoSeleccionado()!.nombre">
+          <img [src]="'http://localhost:3000/imagenes/' + tratamientosService.tratamientoSeleccionado()!.imagen" 
+              [alt]="tratamientosService.tratamientoSeleccionado()!.nombre">
         </div>
         
         <div class="InfoTrat">

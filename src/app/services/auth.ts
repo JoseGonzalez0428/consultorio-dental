@@ -55,6 +55,7 @@ export class AuthService {
       },
       error: (error: any) => {
         this.errorMessage.set(error.error.msg ?? 'Error al iniciar sesión.');
+        this.isLoading.set(false);
       },
       complete: () => {
         this.isLoading.set(false);
@@ -72,6 +73,7 @@ export class AuthService {
       },
       error: (error: any) => {
         this.errorMessage.set(error.error.msg ?? 'Error al registrarse.');
+        this.isLoading.set(false);
       },
       complete: () => {
         this.isLoading.set(false);
