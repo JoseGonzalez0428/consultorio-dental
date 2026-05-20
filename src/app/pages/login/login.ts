@@ -11,21 +11,25 @@ import { AuthService } from '../../services/auth';
   styleUrl: './login.css'
 })
 export class Login {
+  private readonly fb = inject(FormBuilder);
+  public readonly authService = inject(AuthService);
 
-  private fb = inject(FormBuilder);
-  public authService = inject(AuthService);
-
-  loginForm = this.fb.group({
+  // Formulario reactivo con validaciones nativas básicas
+  readonly loginForm = this.fb.group({
     correo: ['', [Validators.required, Validators.email]],
     contrasena: ['', [Validators.required]]
   });
 
   onSubmit(): void {
-    if (this.loginForm.valid) {
-      this.authService.login({
-        correo: this.loginForm.value.correo!,
-        contrasena: this.loginForm.value.contrasena!
-      });
+    if (this.loginForm.invalid || this.authService.isLoading()) {
+      return;
+    }
+
+    // Extraemos los valores de manera segura limpiando posibles nulos o undefined
+    const { correo, contrasena } = this.loginForm.getRawValue();
+    
+    if (correo && contrasena) {
+      this.authService.login({ correo, contrasena });
     }
   }
 }

@@ -27,6 +27,12 @@ export class Registro {
   });
 
   onSubmit(): void {
+    console.log('form value:', this.registroForm.value);
+    console.log('form valid:', this.registroForm.valid);
+    console.log('form errors:', this.registroForm.errors);
+    Object.keys(this.registroForm.controls).forEach(key => {
+        console.log(key, this.registroForm.get(key)?.errors);
+    });
     if (this.registroForm.valid) {
       this.authService.register({
         nombres: this.registroForm.value.nombres!,

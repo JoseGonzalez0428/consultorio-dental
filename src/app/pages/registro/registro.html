@@ -6,45 +6,45 @@
     </div>
 
     <div class="CuadroLogin">
-      <form (ngSubmit)="onSubmit()">
+      <form [formGroup]="registroForm"  (ngSubmit)="onSubmit()">
         <div class="TitLogin">Nombres</div>
         <div class="Campo">
-          <input type="text" [formControl]="registroForm.controls.nombres">
+          <input type="text" formControlName="nombres">
         </div>
 
         <div class="TitLogin">Apellido Paterno</div>
         <div class="Campo">
-          <input type="text" [formControl]="registroForm.controls.apellido_paterno">
+          <input type="text" formControlName="apellido_paterno">
         </div>
 
         <div class="TitLogin">Apellido Materno</div>
         <div class="Campo">
-          <input type="text" [formControl]="registroForm.controls.apellido_materno">
+          <input type="text" formControlName="apellido_materno">
         </div>
 
         <div class="TitLogin">Email</div>
         <div class="Campo">
-          <input type="email" [formControl]="registroForm.controls.correo">
+          <input type="email" formControlName="correo">
         </div>
 
         <div class="TitLogin">Teléfono</div>
         <div class="Campo">
-          <input type="text" [formControl]="registroForm.controls.telefono">
+          <input type="text" formControlName="telefono">
         </div>
 
         <div class="TitLogin">Contraseña</div>
         <div class="Campo">
-          <input type="password" [formControl]="registroForm.controls.contrasena">
+          <input type="password" formControlName="contrasena">
         </div>
 
         <div class="TitLogin">Fecha de Nacimiento</div>
         <div class="Campo">
-          <input type="date" [formControl]="registroForm.controls.fecha_nacimiento">
+          <input type="date" formControlName="fecha_nacimiento">
         </div>
 
         <div class="TitLogin">Sexo</div>
         <div class="Campo" id="CampoSexo">
-          <select [formControl]="registroForm.controls.sexo">
+          <select formControlName="sexo">
             <option value="">Selecciona</option>
             <option value="Masculino">Masculino</option>
             <option value="Femenino">Femenino</option>
@@ -52,12 +52,8 @@
         </div>
 
         <div id="BotonRegistrar">
-          <button type="submit" [disabled]="registroForm.invalid || authService.isLoading()">
-            @if (authService.isLoading()) {
-              Cargando...
-            } @else {
-              Registrarse
-            }
+          <button type="submit">
+            Registrarse
           </button>
         </div>
 
