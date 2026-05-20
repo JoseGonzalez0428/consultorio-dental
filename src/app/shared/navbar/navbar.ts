@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth';
 
@@ -10,15 +10,21 @@ import { AuthService } from '../../services/auth';
   styleUrl: './navbar.css',
 })
 export class Navbar {
-
-  authService = inject(AuthService);
+  public readonly authService = inject(AuthService);
+  
+  // Control reactivo del menú móvil
+  public isMenuOpen = signal<boolean>(false);
 
   toggleMenu(): void {
-    const menu = document.getElementById('Menu');
-    menu?.classList.toggle('MenuAbierto');
+    this.isMenuOpen.update(state => !state);
+  }
+
+  closeMenu(): void {
+    this.isMenuOpen.set(false);
   }
 
   cerrarSesion(): void {
+    this.closeMenu();
     this.authService.logout();
   }
 }
