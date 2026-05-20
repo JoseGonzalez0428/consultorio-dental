@@ -3,71 +3,81 @@
     <div class="TitContenido">Mis citas</div>
 
     @if (citasService.successMessage()) {
-      <div class="MensajeExito">
-        {{ citasService.successMessage() }}
-      </div>
+      <div class="MensajeExito">{{ citasService.successMessage() }}</div>
     }
     @if (citasService.errorMessage()) {
-      <div class="MensajeError">
-        {{ citasService.errorMessage() }}
-      </div>
+      <div class="MensajeError">{{ citasService.errorMessage() }}</div>
     }
 
-    <div class="TablaCitas">
-      <div class="CeldaCitas" id="CeldaTit">Fecha</div>
-      <div class="CeldaCitas" id="CeldaTit">Tratamiento</div>
-      <div class="CeldaCitas" id="CeldaTit">Estado</div>
-
-      @if (citas.length === 0) {
-        <div class="SinCitas">
-          No tienes citas registradas.
-        </div>
+    <div class="ContenedorCitas">
+      @if (citasService.citas().length === 0) {
+        <div class="SinCitas">No tienes citas registradas.</div>
       }
 
-      @for (cita of citas; track cita._id) {
-        <div class="CeldaCitas">
-          <div>{{ formatearFecha(cita.fecha) }}</div>
-          <div>{{ cita.hora }} - {{ sumarUnaHora(cita.hora) }}</div>
-        </div>
-        <div class="CeldaCitas">{{ cita.nombre_tratamiento }}</div>
-        <div class="CeldaCitas">
-          <div class="EstadoCita" [id]="'Cita' + cita.estado">
-            <div class="EstatusCita">{{ cita.estado }}</div>
-            @if (cita.estado === 'Pendiente') {
-              <div class="OpcionesCita">
-                <select [(ngModel)]="cita.nueva_fecha" (ngModelChange)="cargarHorasModificacion(cita)">
-                  <option value="">Seleccione fecha</option>
-                  @for (f of fechasDisponibles; track f) {
-                    <option [value]="f">{{ formatearFecha(f) }}</option>
-                  }
-                </select>
-                <select [(ngModel)]="cita.nueva_hora" [disabled]="!cita.nueva_fecha">
-                  <option value="">Seleccione hora</option>
-                  @for (h of cita.horasDisponibles; track h.inicio) {
-                    <option [value]="h.inicio">{{ h.inicio }} - {{ h.fin }}</option>
-                  }
-                </select>
-                <div class="BotonesCita">
-                  <button class="BotonCita" (click)="modificarCita(cita)">Modificar</button>
-                  <button class="BotonCita" (click)="cancelarCita(cita._id)">Cancelar</button>
+      @for (cita of citasPaginadas(); track cita._id) {
+        <div class="TarjetaCita" [class.TarjetaPendiente]="cita.estado === 'Pendiente'">
+          
+          <div class="CitaBloqueInfo">
+            <div class="InfoGrupo">
+              <span class="InfoLabel">Fecha y Hora</span>
+              <div class="InfoValorDestacado">{{ formatearFecha(cita.fecha) }}</div>
+              <div class="InfoValorSecundario">{{ cita.hora }} - {{ sumarUnaHora(cita.hora) }}</div>
+            </div>
+
+            <div class="InfoGrupo">
+              <span class="InfoLabel">Tratamiento</span>
+              <div class="InfoValorDestacado">{{ cita.nombre_tratamiento }}</div>
+            </div>
+
+            <div class="InfoGrupo">
+              <span class="InfoLabel">Estado</span>
+              <div class="EstadoCita" [id]="'Cita' + cita.estado">
+                <span class="EstatusCita">{{ cita.estado }}</span>
+              </div>
+            </div>
+          </div>
+
+          @if (cita.estado === 'Pendiente') {
+            <div class="OpcionesCita">
+              <div class="ControlesSeleccion">
+                <div class="SelectorWrapper">
+                  <select [(ngModel)]="cita.nueva_fecha" (ngModelChange)="cargarHorasModificacion(cita)">
+                    <option value="">Seleccione fecha</option>
+                    @for (f of fechasDisponibles; track f) {
+                      <option [value]="f">{{ formatearFecha(f) }}</option>
+                    }
+                  </select>
+                </div>
+
+                <div class="SelectorWrapper">
+                  <select [(ngModel)]="cita.nueva_hora" [disabled]="!cita.nueva_fecha">
+                    <option value="">Seleccione hora</option>
+                    @for (h of cita.horasDisponibles; track h.inicio) {
+                      <option [value]="h.inicio">{{ h.inicio }} - {{ h.fin }}</option>
+                    }
+                  </select>
                 </div>
               </div>
-            }
-          </div>
+
+              <div class="BotonesCita">
+                <button type="button" class="BotonCita" id="Mod" (click)="modificarCita(cita)">Modificar</button>
+                <button type="button" class="BotonCita" id="Canc" (click)="cancelarCita(cita._id)">Cancelar</button>
+              </div>
+            </div>
+          }
+
         </div>
       }
     </div>
 
-    @if (totalPaginas > 1) {
+    @if (totalPaginas() > 1) {
       <div class="DesplazarReporte">
         <img src="Imagenes/FlechaIzq.png" alt="Anterior"
           [class.flechaDesactivada]="paginaActual === 1"
           (click)="cambiarPagina(paginaActual - 1)">
-        <div id="NoReporte">
-          {{ paginaActual }}/{{ totalPaginas }}
-        </div>
+        <div id="NoReporte">{{ paginaActual }}/{{ totalPaginas() }}</div>
         <img src="Imagenes/FlechaDer.png" alt="Siguiente"
-          [class.flechaDesactivada]="paginaActual === totalPaginas"
+          [class.flechaDesactivada]="paginaActual === totalPaginas()"
           (click)="cambiarPagina(paginaActual + 1)">
       </div>
     }

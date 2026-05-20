@@ -29,10 +29,12 @@
           {{ authService.saludo() }} <strong class="user-name">{{ authService.nombreUsuario() }}</strong>
         </span>
         
-        <a routerLink="/inicio" routerLinkActive="active" class="nav-link" (click)="closeMenu()">Inicio</a>
-        <a routerLink="/tratamientos" routerLinkActive="active" class="nav-link" (click)="closeMenu()">Tratamientos</a>
-        <a routerLink="/agendar" routerLinkActive="active" class="nav-link" (click)="closeMenu()">Agendar</a>
-        <a routerLink="/mis-citas" routerLinkActive="active" class="nav-link" (click)="closeMenu()">Mis citas</a>
+        <a routerLink="/inicio" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link" (click)="closeMenu()">Inicio</a>
+        <a routerLink="/tratamientos" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link" (click)="closeMenu()">Tratamientos</a>
+        <a routerLink="/agendar" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link" (click)="closeMenu()">Agendar</a>
+        <a routerLink="/horarios" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link" (click)="closeMenu()">Horarios</a>
+        <a routerLink="/acerca" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link" (click)="closeMenu()">Acerca de nosotros</a>
+        <a routerLink="/mis-citas" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link" (click)="closeMenu()">Mis citas</a>
         
         <div class="auth-buttons">
           <button (click)="cerrarSesion()" class="btn btn-logout">Cerrar sesión</button>

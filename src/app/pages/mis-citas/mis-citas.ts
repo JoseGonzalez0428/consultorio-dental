@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, computed } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CitasService } from '../../services/citas';
 import { HorariosService } from '../../services/horarios';
@@ -27,29 +27,28 @@ export class MisCitas implements OnInit {
   fechasDisponibles: string[] = [];
   paginaActual: number = 1;
   citasPorPagina: number = 3;
-  totalPaginas: number = 1;
+
+  totalPaginas = computed(() =>
+    Math.ceil(this.citasService.citas().length / this.citasPorPagina)
+  );
+
+  citasPaginadas = computed(() => {
+    const todas = this.citasService.citas() as CitaExtendida[];
+    const offset = (this.paginaActual - 1) * this.citasPorPagina;
+    return todas.slice(offset, offset + this.citasPorPagina);
+  });
 
   ngOnInit(): void {
     this.citasService.fetchMisCitas();
     this.horariosService.fetchHorarios();
-    this.cargarCitas();
-  }
 
-  cargarCitas(): void {
-    const todasLasCitas = this.citasService.citas() as CitaExtendida[];
-    this.totalPaginas = Math.ceil(todasLasCitas.length / this.citasPorPagina);
-    const offset = (this.paginaActual - 1) * this.citasPorPagina;
-    this.citas = todasLasCitas.slice(offset, offset + this.citasPorPagina);
-
-    const horarios = this.horariosService.horarios();
-    this.fechasDisponibles = [...new Set(horarios.map(h => h.fecha))]
+    this.fechasDisponibles = [...new Set(this.horariosService.horarios().map(h => h.fecha))]
       .filter(f => f >= new Date().toISOString().split('T')[0]);
   }
 
   cambiarPagina(pagina: number): void {
-    if (pagina < 1 || pagina > this.totalPaginas) return;
+    if (pagina < 1 || pagina > this.totalPaginas()) return;
     this.paginaActual = pagina;
-    this.cargarCitas();
   }
 
   cargarHorasModificacion(cita: CitaExtendida): void {
