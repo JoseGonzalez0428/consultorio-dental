@@ -1,310 +1,203 @@
-/* Desktop */
-@media screen and (min-width:1025px) {
-    .Descripcion {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .InfoDescripcion {
-        width: 50%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: justify;
-    }
-
-    #Doctora {
-        width: 50%;
-        display: flex;
-        justify-content: center;
-    }
-
-    .Descripcion img { width: 60%; height: auto; }
-
-    .TextoDescripcion {
-        margin-top: 40px;
-        font-family: sans-serif;
-        font-size: 24px;
-        padding: 10px;
-        width: 80%;
-        line-height: 1.5;
-    }
-
-    .formulario-contenedor {
-        max-width: 400px;
-        margin: 40px auto;
-        padding: 20px;
-        font-family: Arial, sans-serif;
-        font-size: 14px;
-        box-sizing: border-box;
-    }
-
-    .campo-formulario {
-        margin-bottom: 18px;
-        display: flex;
-        flex-direction: column;
-    }
-
-    .campo-formulario label {
-        margin-bottom: 6px;
-        font-weight: bold;
-    }
-
-    .campo-formulario input[type="text"],
-    .campo-formulario textarea,
-    .campo-formulario select {
-        padding: 8px 10px;
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        font-family: Arial, sans-serif;
-        font-size: 14px;
-        outline: none;
-        transition: border-color 0.3s;
-    }
-
-    .campo-formulario input[type="text"]:focus,
-    .campo-formulario textarea:focus,
-    .campo-formulario select:focus {
-        border-color: #007bff;
-    }
-
-    .boton-enviar {
-        display: block;
-        width: 100%;
-        padding: 10px 0;
-        background-color: #007bff;
-        color: white;
-        border: none;
-        border-radius: 8px;
-        font-family: Arial, sans-serif;
-        font-size: 14px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-        text-align: center;
-    }
-
-    .boton-enviar:hover { background-color: #0056b3; }
-
-    .SeccionInformes {
-        padding: 40px;
-    }
-
-    .TituloInformes {
-        font-family: Verdana;
-        font-size: 24px;
-        margin-bottom: 20px;
-    }
-
-    .MensajeExito {
-        color: green;
-        font-family: Verdana;
-        margin-top: 10px;
-        margin-bottom: 10px;
-    }
+/* ==========================================================================
+   Contenedor Base y Tipografías Uniformes
+   ========================================================================== */
+.Pagina {
+  min-height: 100vh;
+  background-color: #faf9fe; /* El mismo fondo lila ultra suave de todo el sitio */
+  font-family: system-ui, -apple-system, sans-serif;
+  color: #334155;
+  padding: 40px 16px;
+  box-sizing: border-box;
 }
 
-/* Tablet */
-@media screen and (min-width:681px) and (max-width:1024px) {
-    .Descripcion {
-        display: flex;
-        flex-direction: column-reverse;
-        align-items: center;
-    }
-
-    .InfoDescripcion {
-        width: 90%;
-        display: flex;
-        flex-direction: column;
-        text-align: justify;
-        justify-content: center;
-        align-items: center;
-    }
-
-    #Doctora {
-        width: 90%;
-        margin-bottom: 20px;
-        display: flex;
-        justify-content: center;
-    }
-
-    .Descripcion img { width: 60%; height: auto; }
-
-    .TextoDescripcion {
-        margin-top: 20px;
-        font-family: sans-serif;
-        font-size: 24px;
-        padding: 10px;
-        width: 80%;
-        line-height: 1.5;
-    }
-
-    .formulario-contenedor {
-        max-width: 400px;
-        margin: 40px auto;
-        padding: 20px;
-        font-family: Arial, sans-serif;
-        font-size: 14px;
-        box-sizing: border-box;
-    }
-
-    .campo-formulario {
-        margin-bottom: 18px;
-        display: flex;
-        flex-direction: column;
-    }
-
-    .campo-formulario label {
-        margin-bottom: 6px;
-        font-weight: bold;
-    }
-
-    .campo-formulario input[type="text"],
-    .campo-formulario textarea,
-    .campo-formulario select {
-        padding: 8px 10px;
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        font-family: Arial, sans-serif;
-        font-size: 14px;
-        outline: none;
-        transition: border-color 0.3s;
-    }
-
-    .boton-enviar {
-        display: block;
-        width: 100%;
-        padding: 10px 0;
-        background-color: #007bff;
-        color: white;
-        border: none;
-        border-radius: 8px;
-        font-family: Arial, sans-serif;
-        font-size: 14px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-        text-align: center;
-    }
-
-    .boton-enviar:hover { background-color: #0056b3; }
-
-    .SeccionInformes {
-        padding: 40px;
-    }
-
-    .TituloInformes {
-        font-family: Verdana;
-        font-size: 24px;
-        margin-bottom: 20px;
-    }
-
-    .MensajeExito {
-        color: green;
-        font-family: Verdana;
-        margin-top: 10px;
-        margin-bottom: 10px;
-    }
+.Contenido {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column; /* Apilado vertical por defecto en móviles y tabletas */
+  gap: 48px;
 }
 
-/* Mobile */
-@media screen and (min-width:0px) and (max-width:680px) {
-    .Descripcion {
-        display: flex;
-        flex-direction: column-reverse;
-        align-items: center;
-    }
+/* ==========================================================================
+   Sección 1: Tarjeta Informativa de la Doctora
+   ========================================================================== */
+.Descripcion {
+  display: flex;
+  flex-direction: column-reverse; /* En móvil la foto va arriba del texto por orden visual */
+  background-color: #ffffff;
+  border-radius: 24px;
+  padding: 32px;
+  border: 1px solid #f3e8ff;
+  box-shadow: 0 10px 25px -5px rgba(113, 96, 230, 0.04);
+  gap: 24px;
+  align-items: center;
+}
 
-    .InfoDescripcion {
-        width: 90%;
-        display: flex;
-        flex-direction: column;
-        text-align: justify;
-        justify-content: center;
-        align-items: center;
-    }
+.InfoDescripcion {
+  width: 100%;
+}
 
-    #Doctora {
-        width: 90%;
-        margin-bottom: 20px;
-        display: flex;
-        justify-content: center;
-    }
+.TitContenido {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #1e1b4b; /* Tono morado muy oscuro de alta legibilidad */
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
 
-    .Descripcion img { width: 60%; height: auto; }
+.TextoDescripcion {
+  font-size: 1rem; /* Reducido de 24px a 1rem (16px) para una lectura fluida y descansada */
+  line-height: 1.6;
+  color: #475569;
+  text-align: left;
+}
 
-    .TextoDescripcion {
-        margin-top: 20px;
-        font-family: sans-serif;
-        font-size: 20px;
-        padding: 10px;
-        width: 80%;
-        line-height: 1.5;
-    }
+#Doctora {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 
-    .formulario-contenedor {
-        max-width: 100%;
-        margin: 20px auto;
-        padding: 15px;
-        font-family: Arial, sans-serif;
-        font-size: 14px;
-        box-sizing: border-box;
-    }
+.Descripcion img {
+  width: 100%;
+  max-width: 280px; /* Tamaño controlado y elegante para la foto */
+  height: auto;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(113, 96, 230, 0.1);
+  object-fit: cover;
+}
 
-    .campo-formulario {
-        margin-bottom: 18px;
-        display: flex;
-        flex-direction: column;
-    }
+/* ==========================================================================
+   Sección 2: Tarjeta del Formulario de Informes
+   ========================================================================== */
+.SeccionInformes {
+  background-color: #ffffff;
+  border-radius: 24px;
+  border: 1px solid #f3e8ff;
+  box-shadow: 0 10px 25px -5px rgba(113, 96, 230, 0.04);
+  padding: 40px 32px;
+  width: 100%;
+  max-width: 550px; /* Evita que el formulario se estire infinitamente */
+  margin: 0 auto;
+  box-sizing: border-box;
+}
 
-    .campo-formulario label {
-        margin-bottom: 6px;
-        font-weight: bold;
-    }
+.TituloInformes {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #1e1b4b;
+  margin-top: 0;
+  margin-bottom: 24px;
+  letter-spacing: -0.01em;
+}
 
-    .campo-formulario input[type="text"],
-    .campo-formulario textarea,
-    .campo-formulario select {
-        padding: 8px 10px;
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        font-family: Arial, sans-serif;
-        font-size: 14px;
-        outline: none;
-        transition: border-color 0.3s;
-    }
+.campo-formulario {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
 
-    .boton-enviar {
-        display: block;
-        width: 100%;
-        padding: 10px 0;
-        background-color: #007bff;
-        color: white;
-        border: none;
-        border-radius: 8px;
-        font-family: Arial, sans-serif;
-        font-size: 14px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-        text-align: center;
-    }
+.campo-formulario label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #4b5563;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
 
-    .boton-enviar:hover { background-color: #0056b3; }
+/* Inputs y Textarea unificados con el diseño del sitio */
+.campo-formulario input[type="text"],
+.campo-formulario input[type="email"],
+.campo-formulario textarea {
+  width: 100%;
+  padding: 12px 14px;
+  background-color: #f9fafb;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  color: #1f2937;
+  outline: none;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
 
-    .SeccionInformes {
-        padding: 40px;
-    }
+.campo-formulario input:focus,
+.campo-formulario textarea:focus {
+  background-color: #ffffff;
+  border-color: #c860e6; /* Nuestro rosa de acento característico */
+  box-shadow: 0 0 0 4px #fdf4ff;
+}
 
-    .TituloInformes {
-        font-family: Verdana;
-        font-size: 24px;
-        margin-bottom: 20px;
-    }
+/* El botón de enviar ahora hace juego con el Navbar y el Footer */
+.boton-enviar {
+  width: 100%;
+  height: 46px;
+  background-color: #c860e6;
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px -1px rgba(200, 96, 230, 0.2);
+  transition: all 0.2s ease;
+  margin-top: 8px;
+}
 
-    .MensajeExito {
-        color: green;
-        font-family: Verdana;
-        margin-top: 10px;
-        margin-bottom: 10px;
-    }
+.boton-enviar:hover {
+  background-color: #b34fd1;
+  box-shadow: 0 10px 15px -3px rgba(200, 96, 230, 0.25);
+}
+
+/* Notificación de Éxito Limpia */
+.MensajeExito {
+  padding: 12px;
+  background-color: #f0fdf4;
+  border: 1px solid #dcfce7;
+  border-radius: 12px;
+  color: #15803d;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+/* ==========================================================================
+   Media Query Inteligente para Pantallas Grandes (Escritorio)
+   ========================================================================== */
+@media screen and (min-width: 1025px) {
+  .Contenido {
+    flex-direction: row; /* Se distribuyen lado a lado de forma majestuosa */
+    align-items: flex-start;
+    gap: 32px;
+  }
+
+  /* La tarjeta de la descripción toma el 60% del espacio */
+  .Descripcion {
+    flex: 6;
+    flex-direction: row; /* En escritorio la imagen va al lado del texto */
+    padding: 40px;
+    gap: 32px;
+  }
+
+  .InfoDescripcion {
+    flex: 1;
+  }
+
+  #Doctora {
+    flex: unset;
+    width: auto;
+  }
+
+  .Descripcion img {
+    max-width: 240px;
+  }
+
+  /* La tarjeta de informes toma el 40% del espacio restante */
+  .SeccionInformes {
+    flex: 4;
+    margin: 0;
+  }
 }
