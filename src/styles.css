@@ -1,22 +1,25 @@
-body { margin: 0px; padding: 0px; }
+body {
+    margin: 0;
+    padding: 0;
+}
 
-/* Desktop */
+app-root {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
 @media screen and (min-width:1025px) {
-    .Pagina { width: 100%; margin: 0 auto; }
-    .Contenido { padding: 50px; min-height: 705px; }
+    .Contenido { padding: 50px; }
     .TitContenido { font-family: Verdana; font-size: 44px; font-weight: bold; width: 260px; }
 }
 
-/* Tablet */
 @media screen and (min-width:681px) and (max-width:1024px) {
-    .Pagina { width: 100%; margin: 0 auto; }
-    .Contenido { padding: 50px; min-height: 705px; }
-    .TitContenido { font-family: Verdana; font-size: 40px; font-weight: bold; display: flex; justify-content: center; align-items: center; }
+    .Contenido { padding: 50px; }
+    .TitContenido { font-family: Verdana; font-size: 40px; font-weight: bold; }
 }
 
-/* Mobile */
 @media screen and (min-width:0px) and (max-width:680px) {
-    .Pagina { width: 100%; margin: 0 auto; }
-    .Contenido { padding: 50px; min-height: 705px; }
-    .TitContenido { font-family: Verdana; font-size: 32px; font-weight: bold; display: flex; justify-content: center; align-items: center; }
+    .Contenido { padding: 20px; }
+    .TitContenido { font-family: Verdana; font-size: 32px; font-weight: bold; }
 }
