@@ -1,46 +1,30 @@
 <div class="Pagina">
   <div id="MenuDeLogin"></div>
   <div class="Contenido">
-    <div id="LogoLogin">
-      <img src="Imagenes/logo.png" alt="Logo">
-    </div>
+    <div id="LogoLogin"><img src="Imagenes/logo.png" alt="Logo"></div>
 
     <div class="CuadroLogin">
-      <form [formGroup]="registroForm"  (ngSubmit)="onSubmit()">
+      <form [formGroup]="registroForm" (ngSubmit)="onSubmit()">
         <div class="TitLogin">Nombres</div>
-        <div class="Campo">
-          <input type="text" formControlName="nombres">
-        </div>
+        <div class="Campo"><input type="text" formControlName="nombres" placeholder="Tu nombre"></div>
 
         <div class="TitLogin">Apellido Paterno</div>
-        <div class="Campo">
-          <input type="text" formControlName="apellido_paterno">
-        </div>
+        <div class="Campo"><input type="text" formControlName="apellido_paterno" placeholder="Primer apellido"></div>
 
         <div class="TitLogin">Apellido Materno</div>
-        <div class="Campo">
-          <input type="text" formControlName="apellido_materno">
-        </div>
+        <div class="Campo"><input type="text" formControlName="apellido_materno" placeholder="Segundo apellido"></div>
 
         <div class="TitLogin">Email</div>
-        <div class="Campo">
-          <input type="email" formControlName="correo">
-        </div>
+        <div class="Campo"><input type="email" formControlName="correo" placeholder="ejemplo@correo.com"></div>
 
         <div class="TitLogin">Teléfono</div>
-        <div class="Campo">
-          <input type="text" formControlName="telefono">
-        </div>
+        <div class="Campo"><input type="text" formControlName="telefono" placeholder="10 dígitos"></div>
 
         <div class="TitLogin">Contraseña</div>
-        <div class="Campo">
-          <input type="password" formControlName="contrasena">
-        </div>
+        <div class="Campo"><input type="password" formControlName="contrasena" placeholder="Mínimo 6 caracteres"></div>
 
         <div class="TitLogin">Fecha de Nacimiento</div>
-        <div class="Campo">
-          <input type="date" formControlName="fecha_nacimiento">
-        </div>
+        <div class="Campo"><input type="date" formControlName="fecha_nacimiento"></div>
 
         <div class="TitLogin">Sexo</div>
         <div class="Campo" id="CampoSexo">
@@ -52,22 +36,18 @@
         </div>
 
         <div id="BotonRegistrar">
-          <button type="submit">
-            Registrarse
+          <button type="submit" [disabled]="registroForm.invalid || authService.isLoading()">
+            @if (authService.isLoading()) { Registrando... } @else { Registrarse }
           </button>
         </div>
 
         @if (authService.errorMessage()) {
-          <div class="MensajeError">
-            {{ authService.errorMessage() }}
-          </div>
+          <div class="MensajeError">{{ authService.errorMessage() }}</div>
         }
       </form>
 
       <div id="Pregunta">¿Ya tienes una cuenta?</div>
-      <div id="IniciaSesion">
-        <a routerLink="/login">Inicia Sesión</a>
-      </div>
+      <div id="IniciaSesion"><a routerLink="/login">Inicia Sesión</a></div>
     </div>
   </div>
   <div id="PieDeLogin"></div>
