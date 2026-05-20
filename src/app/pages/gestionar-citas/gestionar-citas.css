@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Conexión Arquitectónica y Layout Elástico
+   Estructura Global y Conexión Elástica
    ========================================================================== */
 .Pagina {
   width: 100%;
@@ -7,165 +7,206 @@
   flex-direction: column;
   flex-grow: 1;
   background-color: #faf9fe;
+  font-family: "Inter", "Geist Sans", -apple-system, sans-serif;
+  box-sizing: border-box;
+  letter-spacing: -0.01em;
 }
 
 .Contenido {
   flex-grow: 1;
-}
-
-#ContenidoHorarios {
+  max-width: 1100px;
+  margin: 0 auto;
   width: 100%;
-  margin-top: 24px;
 }
 
 /* ==========================================================================
-   Filtro Superior de Fecha (Estilo Minimalista)
+   Header de la Agenda (Layout Superior Limpio)
    ========================================================================== */
-.GestionarArriba {
+.agenda-header {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  width: 100%;
-  border-bottom: 1px solid #f3e8ff;
+  border-bottom: 1px solid #f1f5f9;
   padding-bottom: 24px;
-}
-
-.OpcionesGestionar {
-  display: flex;
   width: 100%;
-  max-width: 400px;
-  height: 46px;
-  box-sizing: border-box;
 }
 
-/* El bloque estático izquierdo de la etiqueta */
-.TipoOpcion {
-  width: 30%;
-  background-color: #f5f3ff;
-  color: #7160e6;
-  font-size: 0.85rem;
+.TitContenido {
+  color: #0f172a;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+
+/* Selector de Fecha Estilizado */
+.date-selector-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  max-width: 280px;
+}
+
+.date-selector-label {
+  font-size: 0.7rem;
   font-weight: 700;
+  color: #64748b;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1.5px solid #e2d9f3;
-  border-right: none;
-  border-radius: 12px 0 0 12px;
 }
 
-/* El contenedor derecho con el input de tipo date real */
-.BotonOpcion {
-  width: 70%;
+.date-input-field {
+  height: 42px;
   background-color: #ffffff;
-  border: 1.5px solid #e5e7eb;
-  border-radius: 0 12px 12px 0;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
   display: flex;
   align-items: center;
-  padding: 0 14px;
+  padding: 0 12px;
   box-sizing: border-box;
   transition: all 0.2s ease;
 }
 
-.BotonOpcion input[type="date"] {
+.date-input-field input[type="date"] {
   width: 100%;
   background: transparent;
   border: none;
+  outline: none;
   font-family: inherit;
   font-size: 0.9rem;
   font-weight: 600;
-  color: #1f2937;
-  outline: none;
+  color: #0f172a;
   cursor: pointer;
 }
 
-/* Resaltado interactivo cuando el admin interactúa con el calendario */
-.BotonOpcion:focus-within {
+.date-input-field:focus-within {
   border-color: #7160e6;
-  box-shadow: 0 0 0 4px #fdf4ff;
+  box-shadow: 0 0 0 4px #f5f3ff;
 }
 
 /* ==========================================================================
-   Listado de Citas en Formato Tarjeta (UX Profesional)
+   Listado de Tarjetas Dinámicas (.appointments-grid)
    ========================================================================== */
-.TablaCitas2 {
+.agenda-content {
+  width: 100%;
+  margin-top: 24px;
+}
+
+.appointments-grid {
   display: flex;
   flex-direction: column;
   gap: 14px;
   width: 100%;
 }
 
-.TarjetaGestionCita {
+/* La Tarjeta Maestra Administrativa */
+.appointment-admin-card {
   background-color: #ffffff;
-  border-radius: 18px;
-  border: 1px solid #f3e8ff;
+  border-radius: 20px;
+  border: 1px solid #f1f5f9;
   padding: 20px;
-  box-shadow: 0 4px 10px -4px rgba(113, 96, 230, 0.04);
+  box-shadow: 0 4px 12px -2px rgba(113, 96, 230, 0.02);
   box-sizing: border-box;
   display: flex;
-  flex-direction: column; /* Apilado en móvil */
-  gap: 16px;
-}
-
-/* Bloque Informativo de la cita */
-.GestionInfoBloque {
-  display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
+  transition: all 0.3s ease;
 }
 
-.GestionMeta {
+/* Comportamientos Visuales por Estado de Cita */
+.appointment-admin-card[data-status="Pendiente"] {
+  border-left: 4px solid #7160e6;
+}
+
+.appointment-admin-card[data-status="Terminada"],
+.appointment-admin-card[data-status="Cancelada"] {
+  background-color: #f8fafc;
+  border-color: #e2e8f0;
+  opacity: 0.7; /* Sutil opacidad para que resalten las pendientes */
+}
+
+/* Elementos Internos de la Tarjeta */
+.appointment-meta-row {
   display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 10px;
+  flex-direction: column; 
+  gap: 8px;
+  margin-bottom: 12px;
+  width: 100%;
 }
 
-/* Distintivo de Horario Destacado */
-.GestionHoraBadge {
+.time-badge {
   background-color: #f5f3ff;
   color: #7160e6;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 700;
   padding: 4px 10px;
   border-radius: 8px;
 }
 
-.GestionTratamientoText {
-  font-size: 1rem;
+.treatment-name-wrapper {
+    width: 100%;
+    min-width: 0;
+    text-align: left;
+    display: block;
+  }
+
+.treatment-tag {
+  font-size: 0.95rem;
   font-weight: 700;
-  color: #1e293b;
+  color: #0f172a;
+  word-break: break-word;
+  display: inline-block;
 }
 
-/* Datos del Paciente */
-.GestionPacienteData {
+/* Las Cápsulas de Estatus (Pills) */
+.status-pill {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 20px;
+  letter-spacing: 0.02em;
+  margin-left: auto; /* Empuja el badge al extremo derecho */
+}
+.status-pill[data-status="Pendiente"] { background-color: #f3e8ff; color: #6b21a8; }
+.status-pill[data-status="Terminada"] { background-color: #dcfce7; color: #166534; }
+.status-pill[data-status="Cancelada"] { background-color: #fee2e2; color: #991b1b; }
+
+/* Detalles del Paciente */
+.patient-details-row {
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
 
-.PacienteNombre {
-  font-size: 0.95rem;
+.patient-name {
+  font-size: 1rem;
   font-weight: 600;
   color: #334155;
+  margin: 0;
 }
 
-.PacienteTelefono {
+.patient-phone {
   font-size: 0.85rem;
   color: #64748b;
+  text-decoration: none;
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
 }
+.patient-phone:hover { color: #7160e6; text-decoration: underline; }
 
 /* ==========================================================================
-   Botones de Acción Administrativa (.BotonCita)
+   Botones Administrativos (.btn-action-admin)
    ========================================================================== */
-.AccionesCita {
+.card-actions-area {
   display: flex;
   gap: 8px;
   width: 100%;
 }
 
-.BotonCita {
+.btn-action-admin {
   flex: 1;
   height: 38px;
   font-size: 0.85rem;
@@ -177,126 +218,101 @@
   align-items: center;
   justify-content: center;
   transition: all 0.2s ease;
+  font-family: inherit;
 }
 
-/* Botón Completar (Acento Verde Médico de Éxito) */
-.btn-completar {
+/* Completar (Verde Clínico) */
+.btn-complete {
   background-color: #f0fdf4;
   color: #16a34a;
   border: 1px solid #bbf7d0;
 }
-.btn-completar:hover {
-  background-color: #16a34a;
-  color: #ffffff;
-}
+.btn-complete:hover { background-color: #16a34a; color: #ffffff; }
 
-/* Botón Cancelar (Acento Rojo de Advertencia) */
-.btn-cancelar {
+/* Cancelar (Rojo de Advertencia) */
+.btn-cancel {
   background-color: #fef2f2;
   color: #ef4444;
   border: 1px solid #fee2e2;
 }
-.btn-cancelar:hover {
-  background-color: #ef4444;
-  color: #ffffff;
-}
+.btn-cancel:hover { background-color: #ef4444; color: #ffffff; }
 
-/* ==========================================================================
-   Estados de Información y Feedbacks
-   ========================================================================== */
-.MensajeInfo {
+/* Notices de Feedback de Selección vacía/alerta */
+.status-notice {
   text-align: center;
-  font-size: 0.95rem;
-  font-weight: 500;
   padding: 32px;
   border-radius: 16px;
-  margin: 20px 0;
+  font-size: 0.9rem;
+  font-weight: 500;
 }
-.info-vacio { background-color: #f8fafc; border: 1px dashed #cbd5e1; color: #64748b; }
-.info-alerta { background-color: #fffbeb; border: 1px solid #fef3c7; color: #b45309; }
+.notice-icon { font-size: 1.5rem; display: block; margin-bottom: 8px; }
+.notice-empty { background-color: #f8fafc; border: 1px dashed #cbd5e1; color: #64748b; }
+.notice-alert { background-color: #fffbeb; border: 1px solid #fef3c7; color: #b45309; }
 
 /* ==========================================================================
-   Media Queries Responsivas Sincronizadas
+   Media Queries para Pantallas Grandes (Escritorio)
    ========================================================================== */
-
-/* Tablet (Ajustes de ancho intermedio) */
-@media screen and (min-width: 681px) and (max-width: 1024px) {
-  .TarjetaGestionCita {
-    padding: 22px;
-  }
-}
-
-/* Desktop (Distribución en Fila Única Horizontal de Alto Nivel) */
 @media screen and (min-width: 1025px) {
-  .GestionarArriba {
-    flex-direction: row; /* El título y el filtro de fecha van alineados a los extremos */
+  .agenda-header {
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
     padding-bottom: 16px;
   }
 
-  .OpcionesGestionar {
-    margin: 0;
-  }
-
-  /* La tarjeta se estira de forma horizontal unificada en PC */
-  .TarjetaGestionCita {
+  /* La tarjeta se estira majestuosamente horizontal en PC */
+  .appointment-admin-card {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 28px;
+    padding: 18px 28px;
   }
 
-  .GestionInfoBloque {
-    flex-direction: row; /* El horario y los datos del paciente van alineados lado a lado */
+  .card-main-body {
+    display: flex;
     align-items: center;
     gap: 40px;
     flex: 1;
   }
 
-  .GestionMeta {
-    flex-direction: row;
-    width: 40%;
+  /* 👈 Transformamos la sub-fila en un Grid de 3 columnas fijas */
+  .appointment-meta-row {
+    margin-bottom: 0;
+    width: 55%; /* Le damos un poco más de holgura en PC */
+    display: grid;
+    grid-template-columns: 110px 1fr 110px; 
+    align-items: center;
+    gap: 16px;
   }
 
-  .GestionPacienteData {
-    width: 50%;
+  .treatment-name-wrapper {
+    width: 100%;
+    min-width: 0; /* Previene que el texto desborde el Grid */
+    text-align: left;
+    display: block;
   }
 
-  /* Los botones toman un ancho fijo y elegante en la esquina derecha */
-  .AccionesCita {
+  .meta-time-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .meta-status-container {
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .status-pill {
+    margin-left: 0; /* Reseteamos el margin-left antiguo para que obedezca al Grid */
+    width: 100%;
+    text-align: center;
+  }
+
+  .patient-details-row {
+    width: 35%;
+  }
+
+  .card-actions-area {
     width: 240px;
   }
-}
-
-.CitaTerminada {
-    opacity: 0.7;
-    border-left: 4px solid #22c55e;
-}
-
-.CitaCancelada {
-    opacity: 0.5;
-    border-left: 4px solid #ef4444;
-}
-
-.EstadoBadge {
-    font-size: 0.75rem;
-    font-weight: 600;
-    padding: 3px 10px;
-    border-radius: 20px;
-}
-
-.EstadoPendiente {
-    background-color: #fef9c3;
-    color: #854d0e;
-}
-
-.EstadoTerminado {
-    background-color: #dcfce7;
-    color: #166534;
-}
-
-.EstadoCancelado {
-    background-color: #fee2e2;
-    color: #991b1b;
 }

@@ -9,8 +9,15 @@
     <div class="lista-tratamientos">
       @for (tratamiento of tratamientosService.tratamientos(); track tratamiento._id) {
         <div class="tratamiento-carta" (click)="verTratamiento(tratamiento._id!)">
-          <img [src]="'Imagenes/' + tratamiento.imagen" [alt]="tratamiento.nombre">
-          <div>{{ tratamiento.nombre }}</div>
+          
+          <div class="tratamiento-imagen-container">
+            <img [src]="'Imagenes/' + tratamiento.imagen" [alt]="tratamiento.nombre">
+          </div>
+          
+          <div class="tratamiento-info-wrapper">
+            <span class="tratamiento-name-text">{{ tratamiento.nombre }}</span>
+          </div>
+
         </div>
       }
     </div>

@@ -1,36 +1,53 @@
 <div class="Pagina">
   <div class="Contenido">
+    
     @if (tratamientosService.isLoading()) {
       <div class="MensajeCargando">Cargando...</div>
     }
 
     @if (tratamientosService.tratamientoSeleccionado()) {
+      <div class="BotonVolverContenedor">
+        <a routerLink="/tratamientos" class="BotonVolver">← Volver a tratamientos</a>
+      </div>
+
       <div class="Tratamiento">
+        
         <div class="ImagenTrat">
-          <img [src]="'Imagenes/' + tratamientosService.tratamientoSeleccionado()!.imagen"
-            [alt]="tratamientosService.tratamientoSeleccionado()!.nombre">
+          <img [src]="'Imagenes/' + tratamientosService.tratamientoSeleccionado()!.imagen" [alt]="tratamientosService.tratamientoSeleccionado()!.nombre">
         </div>
+        
         <div class="InfoTrat">
-          <div class="TituloTrat">{{ tratamientosService.tratamientoSeleccionado()!.nombre }}</div>
-          <div class="PrecioTrat">{{ tratamientosService.tratamientoSeleccionado()!.precio }}</div>
-          <div class="TextoTrat">{{ tratamientosService.tratamientoSeleccionado()!.descripcion }}</div>
-          <div class="CuadroRecomen">
-            <div class="TituloCuadro">¿Cuándo se recomienda?</div>
-            <div class="TextoCuadro">
-              <ul>
-                @for (recomendacion of tratamientosService.tratamientoSeleccionado()!.recomendaciones; track recomendacion) {
-                  <li>{{ recomendacion }}</li>
-                }
-              </ul>
+          <div class="TratamientoHeaderRow">
+            <h1 class="TituloTrat">{{ tratamientosService.tratamientoSeleccionado()!.nombre }}</h1>
+            <div class="PrecioTratContainer">
+              <span class="PrecioTrat">{{ tratamientosService.tratamientoSeleccionado()!.precio }}</span>
             </div>
           </div>
+          
+          <div class="TratamientoCuerpoRow">
+            <p class="TextoTrat">{{ tratamientosService.tratamientoSeleccionado()!.descripcion }}</p>
+            
+            <div class="CuadroRecomen">
+              <h2 class="TituloCuadro">¿Cuándo se recomienda?</h2>
+              <div class="TextoCuadro">
+                <ul>
+                  @for (recomendacion of tratamientosService.tratamientoSeleccionado()!.recomendaciones; track recomendacion) {
+                    <li>{{ recomendacion }}</li>
+                  }
+                </ul>
+              </div>
+            </div>
+          </div>
+          
           <div class="BotonAgendarCita">
             <button class="BotonCita" routerLink="/agendar">Agendar cita</button>
           </div>
         </div>
+
       </div>
     } @else {
       <div class="MensajeNoEncontrado">Tratamiento no encontrado.</div>
     }
+    
   </div>
 </div>

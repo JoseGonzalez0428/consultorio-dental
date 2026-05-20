@@ -1,5 +1,6 @@
 <div class="Pagina">
   <div id="ContAgendar">
+    
     <div class="AgendarIzq">
       <div class="TitContenido">Agendar una cita</div>
       <div id="ImgAgendar">
@@ -9,48 +10,57 @@
 
     <div class="AgendarDer">
       <form [formGroup]="agendarForm" (ngSubmit)="onSubmit()">
-        <div class="TitOpcion">Tratamiento:</div>
-        <div class="Opciones">
-          <div class="TipoOpcion">Tipo de tratamiento</div>
-          <div class="BotonOpcion">
-            <select formControlName="id_tratamiento">
-              <option value="">Seleccione...</option>
-              @for (t of tratamientosService.tratamientos(); track t._id) {
-                <option [value]="t._id">{{ t.nombre }}</option>
-              }
-            </select>
+        
+        <div class="form-group-booking">
+          <label class="TitOpcion">Tratamiento:</label>
+          <div class="Opciones">
+            <div class="TipoOpcion">Tipo de tratamiento</div>
+            <div class="BotonOpcion InputCompleto">
+              <select formControlName="id_tratamiento">
+                <option value="">Seleccione...</option>
+                @for (t of tratamientosService.tratamientos(); track t._id) {
+                  <option [value]="t._id">{{ t.nombre }}</option>
+                }
+              </select>
+            </div>
           </div>
         </div>
 
-        <div class="TitOpcion">Fecha:</div>
-        <div class="Opciones">
-          <div class="TipoOpcion">Seleccione una fecha</div>
-          <div class="BotonOpcion">
-            <select formControlName="fecha"
-              (change)="cargarHoras(agendarForm.controls.fecha.value ?? '')">
-              <option value="">Seleccione...</option>
-              @for (f of fechasDisponibles; track f) {
-                <option [value]="f">{{ formatearFecha(f) }}</option>
-              }
-            </select>
+        <div class="booking-datetime-row">
+          
+          <div class="datetime-field-wrapper">
+            <label class="TitOpcion">Fecha:</label>
+            <div class="Opciones">
+              <div class="TipoOpcion">Seleccione una fecha</div>
+              <div class="BotonOpcion InputCompleto">
+                <select formControlName="fecha" (change)="cargarHoras(agendarForm.controls.fecha.value ?? '')">
+                  <option value="">Seleccione...</option>
+                  @for (f of fechasDisponibles; track f) {
+                    <option [value]="f">{{ formatearFecha(f) }}</option>
+                  }
+                </select>
+              </div>
+            </div>
           </div>
+
+          <div class="datetime-field-wrapper">
+            <label class="TitOpcion">Hora:</label>
+            <div class="Opciones">
+              <div class="TipoOpcion">Seleccione una hora</div>
+              <div class="BotonOpcion InputCompleto">
+                <select formControlName="hora">
+                  <option value="">Seleccione una fecha primero</option>
+                  @for (h of horasDisponibles; track h.inicio) {
+                    <option [value]="h.inicio">{{ h.inicio }} - {{ h.fin }}</option>
+                  }
+                </select>
+              </div>
+            </div>
+          </div>
+
         </div>
 
-        <div class="TitOpcion">Hora:</div>
-        <div class="Opciones">
-          <div class="TipoOpcion">Seleccione una hora</div>
-          <div class="BotonOpcion">
-            <select formControlName="hora">
-              <option value="">Seleccione una fecha primero</option>
-              @for (h of horasDisponibles; track h.inicio) {
-                <option [value]="h.inicio">{{ h.inicio }} - {{ h.fin }}</option>
-              }
-            </select>
-          </div>
-        </div>
-
-        <button type="submit" class="BotonCita"
-          [disabled]="agendarForm.invalid || citasService.isLoading()">
+        <button type="submit" class="BotonCita" [disabled]="agendarForm.invalid || citasService.isLoading()">
           @if (citasService.isLoading()) {
             Procesando...
           } @else {
@@ -67,5 +77,6 @@
         <div class="MensajeError">{{ citasService.errorMessage() }}</div>
       }
     </div>
+
   </div>
 </div>
