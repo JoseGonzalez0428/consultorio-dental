@@ -87,8 +87,9 @@ export class CitasService {
 
     this.http.post<any>(`${this.BASE_URL}/citas`, cita).subscribe({
       next: () => {
-        this.successMessage.set('Cita agendada correctamente. Se enviara un correo de confirmacion.');
+        this.successMessage.set('Cita agendada correctamente. Se enviará un correo de confirmación.');
         this.fetchMisCitas();
+        this.fetchHorasOcupadas();
       },
       error: (error: any) => {
         this.errorMessage.set(error.error.msg ?? 'Error al agendar la cita.');
