@@ -4,6 +4,8 @@ import { CitasService } from '../../services/citas';
 import { HorariosService } from '../../services/horarios';
 import { Cita } from '../../interfaces/cita.interface';
 import { BloqueHorario } from '../../interfaces/horario.interface';
+import { ViewChild } from '@angular/core';
+import { ModalConfirmacion } from '../../shared/modal-confirmacion/modal-confirmacion';
 
 interface CitaExtendida extends Cita {
   nueva_fecha?: string;
@@ -14,11 +16,13 @@ interface CitaExtendida extends Cita {
 @Component({
   selector: 'app-mis-citas',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, ModalConfirmacion],
   templateUrl: './mis-citas.html',
   styleUrl: './mis-citas.css'
 })
 export class MisCitas implements OnInit {
+
+  @ViewChild('modal') modal!: ModalConfirmacion;
 
   public citasService = inject(CitasService);
   private horariosService = inject(HorariosService);
@@ -48,7 +52,7 @@ export class MisCitas implements OnInit {
         return bloques.some(b => !ocupadasDeFecha.includes(b));
       });
   });
-  
+
   paginaActual = signal<number>(1);
   citasPorPagina: number = 3;
 
@@ -99,13 +103,24 @@ export class MisCitas implements OnInit {
 
   modificarCita(cita: CitaExtendida): void {
     if (!cita._id || !cita.nueva_fecha || !cita.nueva_hora) return;
-    this.citasService.modificarCita(cita._id, cita.nueva_fecha, cita.nueva_hora);
+    this.modal.abrir({
+      titulo: 'Modificar cita',
+      mensaje: `¿Confirmas reagendar tu cita para el ${this.formatearFecha(cita.nueva_fecha)} a las ${cita.nueva_hora}?`,
+      textoConfirmar: 'Confirmar',
+      tipo: 'warning',
+      accion: () => this.citasService.modificarCita(cita._id!, cita.nueva_fecha!, cita.nueva_hora!)
+    });
   }
 
   cancelarCita(id: string | undefined): void {
     if (!id) return;
-    if (!confirm('¿Seguro que quieres cancelar esta cita?')) return;
-    this.citasService.cancelarCita(id);
+    this.modal.abrir({
+      titulo: 'Cancelar cita',
+      mensaje: '¿Estás seguro de que deseas cancelar esta cita? Esta acción no se puede deshacer.',
+      textoConfirmar: 'Cancelar cita',
+      tipo: 'danger',
+      accion: () => this.citasService.cancelarCita(id)
+    });
   }
 
   formatearFecha(fecha: string): string {

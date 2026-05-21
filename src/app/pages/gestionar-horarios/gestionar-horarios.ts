@@ -1,12 +1,14 @@
-import { Component, OnInit, inject, signal, computed } from '@angular/core';
+import { Component, OnInit, inject, signal, computed} from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { HorariosService } from '../../services/horarios';
 import { DiaCalendario } from '../../interfaces/horario.interface';
+import { ViewChild } from '@angular/core';
+import { ModalConfirmacion } from '../../shared/modal-confirmacion/modal-confirmacion';
 
 @Component({
   selector: 'app-gestionar-horarios',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, ModalConfirmacion],
   templateUrl: './gestionar-horarios.html',
   styleUrl: './gestionar-horarios.css'
 })
@@ -14,6 +16,36 @@ export class GestionarHorarios implements OnInit {
 
   private fb = inject(FormBuilder);
   public horariosService = inject(HorariosService);
+  modalVisible = signal(false);
+  modalTitulo = signal('');
+  modalMensaje = signal('');
+  modalTextoConfirmar = signal('');
+  modalTipo = signal<'danger' | 'warning' | 'success'>('danger');
+  private modalAccion: (() => void) | null = null;
+
+  abrirModal(opciones: {
+    titulo: string;
+    mensaje: string;
+    textoConfirmar?: string;
+    tipo?: 'danger' | 'warning' | 'success';
+    accion: () => void;
+  }): void {
+    this.modalTitulo.set(opciones.titulo);
+    this.modalMensaje.set(opciones.mensaje);
+    this.modalTextoConfirmar.set(opciones.textoConfirmar ?? 'Confirmar');
+    this.modalTipo.set(opciones.tipo ?? 'danger');
+    this.modalAccion = opciones.accion;
+    this.modalVisible.set(true);
+  }
+
+  confirmarModal(): void {
+    if (this.modalAccion) this.modalAccion();
+    this.modalVisible.set(false);
+  }
+
+  cancelarModal(): void {
+    this.modalVisible.set(false);
+  }
 
   diasSemana: string[] = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
 
@@ -41,16 +73,29 @@ export class GestionarHorarios implements OnInit {
 
   eliminarBloque(id: string, event: Event): void {
     event.stopPropagation();
-    if (confirm('¿Desea eliminar este bloque de horario?')) {
-      this.horariosService.eliminarHorarioPorId(id);
-    }
+    this.abrirModal({
+      titulo: 'Eliminar bloque',
+      mensaje: '¿Deseas eliminar este bloque de horario?',
+      textoConfirmar: 'Eliminar',
+      tipo: 'danger',
+      accion: () => this.horariosService.eliminarHorarioPorId(id)
+    });
   }
 
   eliminarFecha(fecha: string, event: Event): void {
     event.stopPropagation();
-    if (confirm(`¿Desea eliminar todos los horarios del día ${fecha}?`)) {
-      this.horariosService.eliminarHorario(fecha);
-    }
+    this.abrirModal({
+      titulo: 'Eliminar horarios',
+      mensaje: `¿Deseas eliminar todos los horarios del día ${this.formatearFecha(fecha)}?`,
+      textoConfirmar: 'Eliminar',
+      tipo: 'danger',
+      accion: () => this.horariosService.eliminarHorario(fecha)
+    });
+  }
+
+  formatearFecha(fecha: string): string {
+    const [anio, mes, dia] = fecha.split('-');
+    return `${dia}/${mes}/${anio}`;
   }
 
   onSubmit(): void {
@@ -68,6 +113,7 @@ export class GestionarHorarios implements OnInit {
       hora_inicio: hora_inicio!,
       hora_fin: hora_fin!
     });
+    
 
     this.horarioForm.reset();
   }

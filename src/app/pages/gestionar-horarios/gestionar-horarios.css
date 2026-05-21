@@ -333,3 +333,125 @@
   .AgendarIzq { width: 55%; }
   .AgendarDer { width: 45%; position: sticky; top: 24px; }
 }
+
+/* ==========================================================================
+   Estructura del Modal de Confirmación (ModalOverlay)
+   ========================================================================== */
+.ModalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(15, 23, 42, 0.3); /* Fondo oscuro translúcido */
+  backdrop-filter: blur(4px); /* Sutil desenfoque de fondo de alta fidelidad */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999; /* Asegura que se dibuje por encima de cualquier menú o tabla */
+  animation: fadeInOverlay 0.2s ease-out;
+}
+
+.ModalContenido {
+  background-color: #ffffff;
+  width: 90%;
+  max-width: 400px; /* Tamaño ideal y compacto para cuadros de diálogo */
+  border-radius: 24px;
+  border: 1px solid #f1f5f9;
+  padding: 28px;
+  box-sizing: border-box;
+  text-align: center;
+  box-shadow: 0 20px 25px -5px rgba(15, 23, 42, 0.08), 0 10px 10px -5px rgba(15, 23, 42, 0.04);
+  animation: scaleUpModal 0.25s cubic-bezier(0.34, 1.56, 0.64, 1); /* Efecto elástico sutil */
+}
+
+/* Elementos Internos del Diálogo */
+.ModalIcono {
+  font-size: 2rem;
+  margin-bottom: 14px;
+  display: inline-block;
+  line-height: 1;
+}
+
+.ModalTitulo {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+
+.ModalMensaje {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #64748b;
+  margin-bottom: 24px;
+  padding: 0 4px;
+}
+
+/* ==========================================================================
+   Botonera del Diálogo (.ModalBotones)
+   ========================================================================== */
+.ModalBotones {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+.BtnModalCancelar, 
+.BtnModalEliminar {
+  flex: 1;
+  height: 42px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+/* Botón Cancelar (Look Neutral Discreto) */
+.BtnModalCancelar {
+  background-color: #f1f5f9;
+  color: #475569;
+}
+
+.BtnModalCancelar:hover {
+  background-color: #e2e8f0;
+  color: #334155;
+}
+
+/* Botón Eliminar / Confirmar (Acento de Advertencia) */
+.BtnModalEliminar {
+  background-color: #ef4444; /* Rojo semántico de destrucción */
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.15);
+}
+
+.BtnModalEliminar:hover {
+  background-color: #dc2626;
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   Animaciones de Fluidez Visual
+   ========================================================================== */
+@keyframes fadeInOverlay {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleUpModal {
+  from {
+    transform: scale(0.92);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

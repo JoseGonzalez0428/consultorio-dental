@@ -2,16 +2,18 @@ import { Component, OnInit, inject, ChangeDetectorRef } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { TratamientosService } from '../../services/tratamientos';
 import { Tratamiento } from '../../interfaces/tratamiento.interface';
-
+import { ViewChild } from '@angular/core';
+import { ModalConfirmacion } from '../../shared/modal-confirmacion/modal-confirmacion';
 @Component({
   selector: 'app-gestionar-tratamientos',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, ModalConfirmacion],
   templateUrl: './gestionar-tratamientos.html',
   styleUrl: './gestionar-tratamientos.css'
 })
 export class GestionarTratamientos implements OnInit {
 
+  @ViewChild('modal') modal!: ModalConfirmacion;
   private fb = inject(FormBuilder);
   private cdr = inject(ChangeDetectorRef);
   public tratamientosService = inject(TratamientosService);
@@ -98,11 +100,22 @@ export class GestionarTratamientos implements OnInit {
   }
 
   eliminarTratamiento(id: string): void {
-    if (!confirm('¿Seguro que quieres eliminar este tratamiento?')) return;
-    this.tratamientosService.eliminarTratamiento(id);
+    this.modal.abrir({
+      titulo: 'Desactivar tratamiento',
+      mensaje: '¿Estás seguro de que deseas desactivar este tratamiento? Las citas pendientes asociadas serán canceladas.',
+      textoConfirmar: 'Desactivar',
+      tipo: 'danger',
+      accion: () => this.tratamientosService.eliminarTratamiento(id)
+    });
   }
 
   reactivarTratamiento(id: string): void {
-    this.tratamientosService.reactivarTratamiento(id);
+    this.modal.abrir({
+      titulo: 'Reactivar tratamiento',
+      mensaje: '¿Deseas reactivar este tratamiento para que vuelva a estar disponible?',
+      textoConfirmar: 'Reactivar',
+      tipo: 'success',
+      accion: () => this.tratamientosService.reactivarTratamiento(id)
+    });
   }
 }

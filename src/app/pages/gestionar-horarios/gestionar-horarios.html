@@ -101,3 +101,17 @@
 
   </div>
 </div>
+
+@if (modalVisible()) {
+  <div class="ModalOverlay" (click)="cancelarModal()">
+    <div class="ModalContenido" (click)="$event.stopPropagation()">
+      <div class="ModalIcono">⚠️</div>
+      <div class="ModalTitulo">{{ modalTitulo() }}</div>
+      <div class="ModalMensaje">{{ modalMensaje() }}</div>
+      <div class="ModalBotones">
+        <button class="BtnModalCancelar" (click)="cancelarModal()">Cancelar</button>
+        <button class="BtnModalEliminar" (click)="confirmarModal()">{{ modalTextoConfirmar() }}</button>
+      </div>
+    </div>
+  </div>
+}
