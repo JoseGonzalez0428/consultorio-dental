@@ -14,6 +14,10 @@ export class GestionarCitas {
   public citasService = inject(CitasService);
   fechaSeleccionada: string = '';
 
+  ngOnInit(): void {
+    this.citasService.fetchFechasConCitas();
+  }
+
   cargarCitas(fecha: string): void {
     if (fecha) {
       this.citasService.fetchCitasPorFecha(fecha);
@@ -34,5 +38,10 @@ export class GestionarCitas {
     const nueva = new Date();
     nueva.setHours(h + 1, m);
     return nueva.toTimeString().slice(0, 5);
+  }
+
+  formatearFecha(fecha: string): string {
+    const [anio, mes, dia] = fecha.split('-');
+    return `${dia}/${mes}/${anio}`;
   }
 }

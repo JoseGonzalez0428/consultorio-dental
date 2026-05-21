@@ -14,6 +14,9 @@ export class CitasService {
   private _citas = signal<Cita[]>([]);
   public citas = this._citas.asReadonly();
 
+  private _fechasConCitas = signal<string[]>([]);
+  public fechasConCitas = this._fechasConCitas.asReadonly();
+
   private _citasPorFecha = signal<Cita[]>([]);
   public citasPorFecha = this._citasPorFecha.asReadonly();
 
@@ -35,6 +38,17 @@ export class CitasService {
       },
       complete: () => {
         this.isLoading.set(false);
+      }
+    });
+  }
+
+  fetchFechasConCitas(): void {
+    this.http.get<string[]>(`${this.BASE_URL}/citas/fechas`).subscribe({
+      next: (response) => {
+        this._fechasConCitas.set(response);
+      },
+      error: (error: any) => {
+        this.errorMessage.set(error.error.msg ?? 'Error al obtener fechas.');
       }
     });
   }
@@ -144,7 +158,7 @@ export class CitasService {
 
   cancelarCitaAdmin(id: string, fecha: string): void {
     this.isLoading.set(true);
-    this.http.put<any>(`${this.BASE_URL}/citas/${id}/cancelar`, {}).subscribe({
+    this.http.put<any>(`${this.BASE_URL}/citas/${id}/cancelar-admin`, {}).subscribe({
       next: () => {
         this.fetchCitasPorFecha(fecha);
       },

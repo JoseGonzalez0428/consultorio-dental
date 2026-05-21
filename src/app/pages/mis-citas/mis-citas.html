@@ -43,7 +43,7 @@
                 <div class="SelectorWrapper">
                   <select [(ngModel)]="cita.nueva_fecha" (ngModelChange)="cargarHorasModificacion(cita)">
                     <option value="">Seleccione fecha</option>
-                    @for (f of fechasDisponibles; track f) {
+                    @for (f of fechasDisponibles(); track f) {
                       <option [value]="f">{{ formatearFecha(f) }}</option>
                     }
                   </select>

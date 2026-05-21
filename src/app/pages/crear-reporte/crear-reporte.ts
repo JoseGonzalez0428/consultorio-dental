@@ -32,6 +32,8 @@ export class CrearReporte implements OnInit {
     this.mesActualCapitalizado = this.mesActual.charAt(0).toUpperCase() + this.mesActual.slice(1);
     
     this.reportesService.fetchReportes(1);
+
+    this.reportesService.fetchFechasSinReporte();
   }
 
   cargarCitas(): void {
@@ -51,5 +53,10 @@ export class CrearReporte implements OnInit {
     });
 
     this.reporteForm.reset();
+  }
+
+  formatearFecha(fecha: string): string {
+    const [anio, mes, dia] = fecha.split('-');
+    return `${dia}/${mes}/${anio}`;
   }
 }

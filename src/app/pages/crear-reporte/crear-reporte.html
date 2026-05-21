@@ -5,7 +5,6 @@
       <div class="TitContenido">Crear nuevo reporte</div>
       
       <div class="kpi-dashboard">
-        
         <div class="kpi-card text-card">
           <h3>Gestión Documental</h3>
           <p>Monitoreo de historiales clínicos y evolución de tratamientos de los pacientes del consultorio.</p>
@@ -13,7 +12,7 @@
 
         <div class="kpi-card-metric highlight-metric">
           <span class="kpi-label">Pendientes de redactar</span>
-          <span class="kpi-value">-</span>
+          <span class="kpi-value">{{ reportesService.fechasSinReporte().length }}</span>
         </div>
 
         <div class="kpi-grid-sub">
@@ -21,33 +20,36 @@
             <span class="kpi-label">Reportes creados</span>
             <span class="kpi-value">{{ reportesService.totalReportes() }}</span>
           </div>
-          
           <div class="kpi-card-metric">
             <span class="kpi-label">Mes actual</span>
             <span class="kpi-value">{{ mesActualCapitalizado }}</span>
           </div>
         </div>
-
       </div>
     </div>
 
     <div class="AgendarDer">
-      <form (ngSubmit)="onSubmit()">
+      <form [formGroup]="reporteForm" (ngSubmit)="onSubmit()">
         
         <div class="form-group-booking">
-          <label class="TitOpcion">Selecciona la fecha (solo citas pasadas):</label>
+          <label class="TitOpcion">Fecha:</label>
           <div class="Opciones">
             <div class="BotonOpcion InputCompleto">
-              <input type="date" [formControl]="reporteForm.controls.fecha" [max]="ayer" (change)="cargarCitas()">
+              <select formControlName="fecha" (change)="cargarCitas()">
+                <option value="">Selecciona una fecha</option>
+                @for (fecha of reportesService.fechasSinReporte(); track fecha) {
+                  <option [value]="fecha">{{ formatearFecha(fecha) }}</option>
+                }
+              </select>
             </div>
           </div>
         </div>
 
         <div class="form-group-booking">
-          <label class="TitOpcion">Citas disponibles:</label>
+          <label class="TitOpcion">Cita:</label>
           <div class="Opciones">
             <div class="BotonOpcion InputCompleto">
-              <select [formControl]="reporteForm.controls.id_cita">
+              <select formControlName="id_cita">
                 <option value="">Selecciona una cita</option>
                 @for (cita of reportesService.citasPasadas(); track cita._id) {
                   <option [value]="cita._id">
@@ -62,11 +64,13 @@
         <div class="form-group-booking">
           <label class="TitOpcion">Notas:</label>
           <div class="Opciones ContainerTextarea">
-            <textarea [formControl]="reporteForm.controls.notas" rows="6" placeholder="Escriba las observaciones clínicas del tratamiento aquí..."></textarea>
+            <textarea formControlName="notas" rows="6" 
+              placeholder="Escriba las observaciones clínicas del tratamiento aquí..."></textarea>
           </div>
         </div>
 
-        <button type="submit" class="BotonCita" [disabled]="reporteForm.invalid || reportesService.isLoading()">
+        <button type="submit" class="BotonCita" 
+          [disabled]="reporteForm.invalid || reportesService.isLoading()">
           {{ reportesService.isLoading() ? 'Guardando...' : 'Crear reporte' }}
         </button>
       </form>

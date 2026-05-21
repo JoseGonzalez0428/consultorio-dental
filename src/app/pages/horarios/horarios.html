@@ -17,7 +17,7 @@
           <div class="weekday-label">{{ dia }}</div>
         }
 
-        @for (vacio of horariosService.vacios(); track vacio) {
+        @for (vacio of horariosService.vacios(); track $index) {
           <div class="calendar-day day-empty"></div>
         }
 

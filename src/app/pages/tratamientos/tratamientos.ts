@@ -21,6 +21,4 @@ export class Tratamientos implements OnInit {
   verTratamiento(id: string): void {
     this.router.navigate(['/tratamiento', id]);
   }
-
-  
 }

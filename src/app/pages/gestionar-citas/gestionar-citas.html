@@ -5,13 +5,14 @@
       <h1 class="TitContenido">Gestionar citas</h1>
       
       <div class="date-selector-wrapper">
-        <label class="date-selector-label" for="agenda-date">Fecha de agenda</label>
-        <div class="date-input-field">
-          <input 
-            id="agenda-date"
-            type="date" 
-            [(ngModel)]="fechaSeleccionada" 
-            (ngModelChange)="cargarCitas($event)">
+        <label class="date-selector-label" for="agenda-date">Filtrar por fecha activa</label>
+        <div class="date-select-field">
+          <select id="agenda-date" [(ngModel)]="fechaSeleccionada" (ngModelChange)="cargarCitas($event)">
+            <option value="">Selecciona una fecha...</option>
+            @for (fecha of citasService.fechasConCitas(); track fecha) {
+              <option [value]="fecha">{{ formatearFecha(fecha) }}</option>
+            }
+          </select>
         </div>
       </div>
     </header>
@@ -21,7 +22,7 @@
       @if (!fechaSeleccionada) {
         <div class="status-notice notice-empty">
           <span class="notice-icon">💡</span>
-          <p>Selecciona una fecha para desplegar las citas de la agenda médica.</p>
+          <p>Selecciona una fecha activa para desplegar las citas de la agenda médica.</p>
         </div>
       } 
       
@@ -48,7 +49,7 @@
                   </div>
 
                   <div class="treatment-name-wrapper">
-                    <span class="treatment-tag">{{ cita.nombre_tratamiento || cita.nombre_tratamiento }}</span>
+                    <span class="treatment-tag">{{ cita.nombre_tratamiento }}</span>
                   </div>
 
                   <div class="meta-status-container">

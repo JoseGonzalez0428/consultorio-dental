@@ -20,7 +20,7 @@
 }
 
 /* ==========================================================================
-   Header de la Agenda (Layout Superior Limpio)
+   Header de la Agenda e Integración de Filtros
    ========================================================================== */
 .agenda-header {
   display: flex;
@@ -38,36 +38,39 @@
   margin: 0;
 }
 
-/* Selector de Fecha Estilizado */
+/* ==========================================================================
+   El nuevo Selector de Fecha Premium (date-select-field)
+   ========================================================================== */
 .date-selector-wrapper {
   display: flex;
   flex-direction: column;
   gap: 6px;
   width: 100%;
-  max-width: 280px;
+  max-width: 290px; /* Un pelín más holgado para albergar fechas largas formateadas */
 }
 
 .date-selector-label {
   font-size: 0.7rem;
   font-weight: 700;
-  color: #64748b;
+  color: #7160e6; /* Morado corporativo para denotar que es un filtro inteligente */
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 
-.date-input-field {
+.date-select-field {
   height: 42px;
-  background-color: #ffffff;
+  background-color: #f8fafc;
   border: 1.5px solid #e2e8f0;
   border-radius: 12px;
   display: flex;
   align-items: center;
-  padding: 0 12px;
+  padding: 0 14px;
   box-sizing: border-box;
+  position: relative; /* Clave para anclar la nueva flecha */
   transition: all 0.2s ease;
 }
 
-.date-input-field input[type="date"] {
+.date-select-field select {
   width: 100%;
   background: transparent;
   border: none;
@@ -77,11 +80,49 @@
   font-weight: 600;
   color: #0f172a;
   cursor: pointer;
+  height: 100%;
+  appearance: none; /* Oculta la flecha tosca nativa de Windows/Mac */
+  -webkit-appearance: none;
+  padding-right: 24px; /* Evita que el texto colisione con la flecha */
 }
 
-.date-input-field:focus-within {
+/* Flecha minimalista estilizada integrada al contenedor */
+.date-select-field::after {
+  content: "↓";
+  font-size: 11px;
+  font-weight: 700;
+  color: #94a3b8;
+  position: absolute;
+  right: 14px;
+  pointer-events: none; /* Permite que el clic pase a través e interactúe con el select */
+}
+
+/* Estados Interactivos */
+.date-select-field:hover {
+  border-color: #cbd5e1;
+  background-color: #f1f5f9;
+}
+
+.date-select-field:focus-within {
+  background-color: #ffffff;
   border-color: #7160e6;
   box-shadow: 0 0 0 4px #f5f3ff;
+}
+
+.date-select-field:focus-within::after {
+  color: #7160e6;
+}
+
+/* ==========================================================================
+   Ajustes en Escritorio (Alineación a los extremos)
+   ========================================================================== */
+@media screen and (min-width: 1025px) {
+  .agenda-header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 16px;
+  }
 }
 
 /* ==========================================================================

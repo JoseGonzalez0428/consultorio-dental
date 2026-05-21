@@ -24,7 +24,31 @@ export class MisCitas implements OnInit {
   private horariosService = inject(HorariosService);
 
   citas: CitaExtendida[] = [];
-  fechasDisponibles: string[] = [];
+
+  fechasDisponibles = computed(() => {
+    const ocupadas = this.citasService.horasOcupadas();
+
+    return [...new Set(this.horariosService.horarios().map(h => h.fecha))]
+      .filter(f => f >= new Date().toISOString().split('T')[0])
+      .filter(fecha => {
+        const horariosDeFecha = this.horariosService.horarios().filter(h => h.fecha === fecha);
+        const ocupadasDeFecha = ocupadas[fecha] ?? [];
+
+        const bloques: string[] = [];
+        horariosDeFecha.forEach(disp => {
+          const inicio = new Date(`2000-01-01T${disp.hora_inicio}`);
+          const fin = new Date(`2000-01-01T${disp.hora_fin}`);
+          while (inicio < fin) {
+            const horaInicio = inicio.toTimeString().slice(0, 5);
+            inicio.setHours(inicio.getHours() + 1);
+            if (inicio <= fin) bloques.push(horaInicio);
+          }
+        });
+
+        return bloques.some(b => !ocupadasDeFecha.includes(b));
+      });
+  });
+  
   paginaActual = signal<number>(1);
   citasPorPagina: number = 3;
 
@@ -41,9 +65,7 @@ export class MisCitas implements OnInit {
   ngOnInit(): void {
     this.citasService.fetchMisCitas();
     this.horariosService.fetchHorarios();
-
-    this.fechasDisponibles = [...new Set(this.horariosService.horarios().map(h => h.fecha))]
-      .filter(f => f >= new Date().toISOString().split('T')[0]);
+    this.citasService.fetchHorasOcupadas();
   }
 
   cambiarPagina(pagina: number): void {
@@ -59,6 +81,8 @@ export class MisCitas implements OnInit {
     const disponibilidad = horarios.filter(h => h.fecha === cita.nueva_fecha);
     if (!disponibilidad.length) return;
 
+    const ocupadas = this.citasService.horasOcupadas()[cita.nueva_fecha ?? ''] ?? [];
+
     disponibilidad.forEach(disp => {
       const inicio = new Date(`2000-01-01T${disp.hora_inicio}`);
       const fin = new Date(`2000-01-01T${disp.hora_fin}`);
@@ -66,7 +90,7 @@ export class MisCitas implements OnInit {
         const horaInicio = inicio.toTimeString().slice(0, 5);
         inicio.setHours(inicio.getHours() + 1);
         const horaFin = inicio.toTimeString().slice(0, 5);
-        if (inicio <= fin) {
+        if (inicio <= fin && !ocupadas.includes(horaInicio)) {
           cita.horasDisponibles!.push({ inicio: horaInicio, fin: horaFin });
         }
       }

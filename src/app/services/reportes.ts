@@ -14,6 +14,9 @@ export class ReportesService {
   private _reportes = signal<Reporte[]>([]);
   public reportes = this._reportes.asReadonly();
 
+  private _fechasSinReporte = signal<string[]>([]);
+  public fechasSinReporte = this._fechasSinReporte.asReadonly();
+
   private _totalReportes = signal<number>(0);
   public totalReportes = this._totalReportes.asReadonly();
 
@@ -46,6 +49,17 @@ export class ReportesService {
     });
   }
 
+  fetchFechasSinReporte(): void {
+    this.http.get<string[]>(`${this.BASE_URL}/reportes/fechas-sin-reporte`).subscribe({
+      next: (response) => {
+        this._fechasSinReporte.set(response);
+      },
+      error: (error: any) => {
+        this.errorMessage.set(error.error.msg ?? 'Error al obtener fechas.');
+      }
+    });
+  }
+
   fetchCitasPasadasPorFecha(fecha: string): void {
     this.isLoading.set(true);
     this.http.get<any[]>(`${this.BASE_URL}/reportes/citas-pasadas?fecha=${fecha}`).subscribe({
@@ -71,6 +85,8 @@ export class ReportesService {
       next: () => {
         this.successMessage.set('Reporte creado correctamente.');
         this.fetchReportes();
+        this.fetchFechasSinReporte();
+        this._citasPasadas.set([])
       },
       error: (error: any) => {
         this.errorMessage.set(error.error.msg ?? 'Error al crear reporte.');
