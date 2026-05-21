@@ -4,45 +4,19 @@
     <div class="AgendarIzq">
       <div class="TitContenido">Calendario de Horarios</div>
       
-      <div class="calendar-card">
-        <header class="calendar-header">
-          <button type="button" class="nav-arrow" (click)="horariosService.mesAnterior()">←</button>
-          <h2 class="current-date">{{ horariosService.nombreMes() }} {{ horariosService.anioActual() }}</h2>
-          <button type="button" class="nav-arrow" (click)="horariosService.mesSiguiente()">→</button>
-        </header>
-
-        <div class="calendar-grid">
-          @for (dia of diasSemana; track dia) {
-            <div class="weekday-label">{{ dia }}</div>
-          }
-
-          @for (vacio of horariosService.vacios(); track $index) {
-            <div class="calendar-day day-empty"></div>
-          }
-
-          @for (dia of horariosService.diasCalendario(); track dia.fecha) {
-            <div class="calendar-day" 
-                 [class.day-disabled]="!dia.disponible" 
-                 [class.day-active]="dia.disponible"
-                 [class.day-focused]="diaSeleccionadoObjeto()?.fecha === dia.fecha"
-                 (click)="seleccionarDia(dia)">
-              
-              <span class="day-number">{{ dia.numero }}</span>
-
-              @if (dia.disponible) {
-                <div class="slots-indicator">
-                  <span class="indicator-dot"></span>
-                  <span class="slots-text">{{ dia.bloques.length }} bloq</span>
-                </div>
-              }
-            </div>
-          }
-        </div>
-      </div>
+      <app-calendario
+        [dias]="horariosService.diasCalendario()"
+        [vacios]="horariosService.vacios()"
+        [nombreMes]="horariosService.nombreMes()"
+        [anioActual]="horariosService.anioActual()"
+        [diaSeleccionado]="diaSeleccionadoObjeto()?.fecha ?? null"
+        (anteriorClic)="horariosService.mesAnterior()"
+        (siguienteClic)="horariosService.mesSiguiente()"
+        (diaClic)="seleccionarDia($event)">
+      </app-calendario>
     </div>
 
     <div class="AgendarDer">
-      
       <div class="PanelSeccionFormulario">
         <div class="SubTitFormulario">Configurar nuevo bloque</div>
         <form [formGroup]="horarioForm" (ngSubmit)="onSubmit()">
@@ -88,7 +62,7 @@
               <div class="ItemBloqueHora">
                 <span class="BadgeTurno" [attr.data-turno]="bloque.turno">{{ bloque.turno }}</span>
                 <span class="TextoHorasRango">{{ bloque.horaIni }} - {{ bloque.horaFin }}</span>
-                <button type="button" class="BtnBorrarBloqueSingle" (click)="eliminarBloque(bloque.id, $event)" title="Eliminar este bloque">✕</button>
+                <button type="button" class="BtnBorrarBloqueSingle" (click)="eliminarBloque(bloque.id, $event)">✕</button>
               </div>
             }
           </div>

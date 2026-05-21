@@ -1,69 +1,50 @@
 <div class="Pagina">
-  <div class="Contenido">
-    
-    <header class="agenda-header">
-      <h1 class="TitContenido">Gestionar citas</h1>
-      
-      <div class="date-selector-wrapper">
-        <label class="date-selector-label" for="agenda-date">Filtrar por fecha activa</label>
-        <div class="date-select-field">
-          <select id="agenda-date" [(ngModel)]="fechaSeleccionada" (ngModelChange)="cargarCitas($event)">
-            <option value="">Selecciona una fecha...</option>
-            @for (fecha of citasService.fechasConCitas(); track fecha) {
-              <option [value]="fecha">{{ formatearFecha(fecha) }}</option>
-            }
-          </select>
-        </div>
-      </div>
-    </header>
+  <div class="Contenido" id="ContAgendar">
 
-    <main class="agenda-content">
-      
-      @if (!fechaSeleccionada) {
-        <div class="status-notice notice-empty">
-          <span class="notice-icon">💡</span>
-          <p>Selecciona una fecha activa para desplegar las citas de la agenda médica.</p>
+    <div class="AgendarIzq">
+      <div class="TitContenido">Gestionar citas</div>
+
+      <app-calendario
+        [dias]="diasConCitas()"
+        [vacios]="horariosService.vacios()"
+        [nombreMes]="horariosService.nombreMes()"
+        [anioActual]="horariosService.anioActual()"
+        [diaSeleccionado]="fechaSeleccionada()"
+        (anteriorClic)="horariosService.mesAnterior()"
+        (siguienteClic)="horariosService.mesSiguiente()"
+        (diaClic)="seleccionarDia($event)">
+      </app-calendario>
+    </div>
+
+    <div class="AgendarDer">
+      @if (!fechaSeleccionada()) {
+        <div class="MensajeInfo">
+          Selecciona una fecha del calendario para ver las citas.
         </div>
-      } 
-      
-      @else if (citasService.citasPorFecha().length === 0) {
-        <div class="status-notice notice-alert">
-          <span class="notice-icon">📅</span>
-          <p>No se encontraron citas programadas para la fecha seleccionada.</p>
+      } @else if (citasService.citasPorFecha().length === 0) {
+        <div class="MensajeInfo">
+          No hay citas para el {{ formatearFecha(fechaSeleccionada()) }}.
         </div>
-      } 
-      
-      @else {
+      } @else {
+        <div class="SubTitFormulario">
+          Citas del {{ formatearFecha(fechaSeleccionada()) }}
+        </div>
+
         <div class="appointments-grid">
-          
           @for (cita of citasService.citasPorFecha(); track cita._id) {
             <div class="appointment-admin-card" [attr.data-status]="cita.estado">
               
               <div class="card-main-body">
                 <div class="appointment-meta-row">
-                  
-                  <div class="meta-time-container">
-                    <span class="time-badge">
-                      {{ cita.hora }} - {{ sumarUnaHora(cita.hora) }}
-                    </span>
-                  </div>
-
-                  <div class="treatment-name-wrapper">
-                    <span class="treatment-tag">{{ cita.nombre_tratamiento }}</span>
-                  </div>
-
-                  <div class="meta-status-container">
-                    <span class="status-pill" [attr.data-status]="cita.estado">
-                      {{ cita.estado }}
-                    </span>
-                  </div>
-
+                  <span class="time-badge">{{ cita.hora }} - {{ sumarUnaHora(cita.hora) }}</span>
+                  <span class="treatment-tag">{{ cita.nombre_tratamiento }}</span>
+                  <span class="status-pill" [attr.data-status]="cita.estado">{{ cita.estado }}</span>
                 </div>
                 
                 <section class="patient-details-row">
                   <h3 class="patient-name">{{ cita.nombre_paciente }}</h3>
                   <a [href]="'tel:' + cita.telefono" class="patient-phone">
-                    <span class="phone-icon">📞</span>{{ cita.telefono }}
+                    📞 {{ cita.telefono }}
                   </a>
                 </section>
               </div>
@@ -78,14 +59,11 @@
                   </button>
                 </footer>
               }
-
             </div>
           }
-
         </div>
       }
-      
-    </main>
+    </div>
 
   </div>
 </div>

@@ -4,11 +4,12 @@ import { HorariosService } from '../../services/horarios';
 import { DiaCalendario } from '../../interfaces/horario.interface';
 import { ViewChild } from '@angular/core';
 import { ModalConfirmacion } from '../../shared/modal-confirmacion/modal-confirmacion';
+import { Calendario } from '../../shared/calendario/calendario';
 
 @Component({
   selector: 'app-gestionar-horarios',
   standalone: true,
-  imports: [ReactiveFormsModule, ModalConfirmacion],
+  imports: [ReactiveFormsModule, ModalConfirmacion, Calendario],
   templateUrl: './gestionar-horarios.html',
   styleUrl: './gestionar-horarios.css'
 })

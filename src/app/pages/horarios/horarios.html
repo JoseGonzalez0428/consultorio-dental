@@ -1,48 +1,15 @@
 <div class="schedule-page">
   <main class="schedule-container">
-    
     <h1 class="schedule-title">Horarios Disponibles</h1>
     
-    <div class="calendar-card">
-      
-      <header class="calendar-header">
-        <button type="button" class="nav-arrow" (click)="horariosService.mesAnterior()">←</button>
-        <h2 class="current-date">{{ horariosService.nombreMes() }} {{ horariosService.anioActual() }}</h2>
-        <button type="button" class="nav-arrow" (click)="horariosService.mesSiguiente()">→</button>
-      </header>
-
-      <div class="calendar-grid">
-        
-        @for (dia of diasSemana; track dia) {
-          <div class="weekday-label">{{ dia }}</div>
-        }
-
-        @for (vacio of horariosService.vacios(); track $index) {
-          <div class="calendar-day day-empty"></div>
-        }
-
-        @for (dia of horariosService.diasCalendario(); track dia.fecha) {
-          <div class="calendar-day" [class.day-disabled]="!dia.disponible" [class.day-active]="dia.disponible">
-            
-            <span class="day-number">{{ dia.numero }}</span>
-
-            @if (dia.disponible && !authService.isAdmin()) {
-              @if (tieneHorasDisponibles(dia.fecha)) {
-                <div class="slots-indicator" (click)="irAgendar(dia.fecha)">
-                  <span class="indicator-dot"></span>
-                  <span class="slots-text">{{ bloquesDisponibles(dia.fecha) }} disponibles</span>
-                </div>
-              } @else {
-                <div class="slots-indicator slots-lleno">
-                  <span class="slots-text">Sin espacio</span>
-                </div>
-              }
-            }
-
-          </div>
-        }
-      </div>
-
-    </div>
-  </main>
+    <app-calendario
+        [dias]="diasConBadge()"
+        [vacios]="horariosService.vacios()"
+        [nombreMes]="horariosService.nombreMes()"
+        [anioActual]="horariosService.anioActual()"
+        (anteriorClic)="horariosService.mesAnterior()"
+        (siguienteClic)="horariosService.mesSiguiente()"
+        (diaClic)="irAgendar($event.fecha)">
+      </app-calendario>
+    </main>
 </div>

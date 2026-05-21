@@ -3,11 +3,12 @@ import { Router } from '@angular/router';
 import { HorariosService } from '../../services/horarios';
 import { AuthService } from '../../services/auth';
 import { CitasService } from '../../services/citas';
+import { Calendario } from '../../shared/calendario/calendario';
 
 @Component({
   selector: 'app-horarios',
   standalone: true,
-  imports: [],
+  imports: [Calendario],
   templateUrl: './horarios.html',
   styleUrl: './horarios.css'
 })
@@ -64,4 +65,25 @@ export class Horarios implements OnInit {
   irAgendar(fecha: string): void {
     this.router.navigate(['/agendar'], { queryParams: { fecha } });
   }
+
+  diasConBadge = computed(() => {
+    const ocupadas = this.citasService.horasOcupadas();
+    
+    return this.horariosService.diasCalendario().map(dia => {
+      if (!dia.disponible) return { ...dia, badge: undefined, clicable: false };
+
+      const ocupadasDeFecha = ocupadas[dia.fecha] ?? [];
+      const disponibles = dia.bloques.filter(b => !ocupadasDeFecha.includes(b.horaIni));
+
+      if (disponibles.length === 0) {
+        return { ...dia, badge: 'Sin espacio', clicable: false };
+      }
+
+      return { 
+        ...dia, 
+        badge: `${disponibles.length} disponibles`,
+        clicable: true
+      };
+    });
+  });
 }

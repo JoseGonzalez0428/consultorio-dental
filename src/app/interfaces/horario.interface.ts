@@ -11,10 +11,12 @@ export interface BloqueHorario {
 }
 
 export interface DiaCalendario {
-    numero: number;
-    fecha: string;
-    disponible: boolean;
-    bloques: BloqueHorarioCalendario[];
+  numero: number;
+  fecha: string;
+  disponible: boolean;
+  bloques: BloqueHorarioCalendario[];
+  badge?: string;
+  clicable?: boolean;
 }
 
 export interface BloqueHorarioCalendario {

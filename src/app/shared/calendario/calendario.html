@@ -1,0 +1,38 @@
+<div class="calendar-card">
+  <header class="calendar-header">
+    <button type="button" class="nav-arrow" (click)="anteriorClic.emit()">←</button>
+    <h2 class="current-date">{{ nombreMes() }} {{ anioActual() }}</h2>
+    <button type="button" class="nav-arrow" (click)="siguienteClic.emit()">→</button>
+  </header>
+
+  <div class="calendar-grid">
+    @for (dia of diasSemana; track dia) {
+      <div class="weekday-label">{{ dia }}</div>
+    }
+
+    @for (vacio of vacios(); track $index) {
+      <div class="calendar-day day-empty"></div>
+    }
+
+    @for (dia of dias(); track dia.fecha) {
+      <div class="calendar-day"
+        [class.day-disabled]="!dia.disponible"
+        [class.day-active]="dia.disponible"
+        [class.day-focused]="diaSeleccionado() === dia.fecha"
+        [class.day-clicable]="dia.clicable"
+        (click)="dia.clicable ? diaClic.emit(dia) : null">
+
+        <span class="day-number">{{ dia.numero }}</span>
+
+        @if (dia.disponible && dia.badge) {
+          <div class="slots-indicator" [class.slots-lleno]="dia.badge === 'Sin espacio'">
+            @if (dia.badge !== 'Sin espacio') {
+              <span class="indicator-dot"></span>
+            }
+            <span class="slots-text">{{ dia.badge }}</span>
+          </div>
+        }
+      </div>
+    }
+  </div>
+</div>

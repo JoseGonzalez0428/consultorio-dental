@@ -80,6 +80,7 @@ export class HorariosService {
     });
 
     const dias: DiaCalendario[] = [];
+    const hoy = new Date().toISOString().split('T')[0];
 
     for (let d = 1; d <= ultimoDia.getDate(); d++) {
       const fecha = `${anio}-${String(mes + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
@@ -98,13 +99,13 @@ export class HorariosService {
         });
       }
 
-      const hoy = new Date().toISOString().split('T')[0];
-
       dias.push({
         numero: d,
         fecha,
         disponible: !!disponibilidad && fecha >= hoy,
-        bloques
+        bloques,
+        badge: disponibilidad ? `${bloques.length} bloq` : undefined,
+        clicable: !!disponibilidad && fecha >= hoy
       });
     }
 
