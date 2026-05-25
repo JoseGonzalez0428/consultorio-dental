@@ -455,3 +455,47 @@
     opacity: 1;
   }
 }
+
+.BotonOpcion select {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 0.9rem;
+  color: #1f2937;
+  font-family: inherit;
+  height: 100%;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 24px;
+}
+
+.BotonOpcion {
+  position: relative;
+}
+
+.BotonOpcion::after {
+  content: "▼";
+  font-size: 10px;
+  color: #9ca3af;
+  position: absolute;
+  right: 14px;
+  pointer-events: none;
+}
+
+.BotonOpcion:focus-within {
+  background-color: #ffffff;
+  border-color: #c860e6;
+  box-shadow: 0 0 0 4px #fdf4ff;
+}
+
+.ContenedorHorasInline {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+}
+
+.HoraInputGrupo {
+  flex: 1;
+}

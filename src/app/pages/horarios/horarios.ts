@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { HorariosService } from '../../services/horarios';
 import { AuthService } from '../../services/auth';
 import { CitasService } from '../../services/citas';
-import { Calendario } from '../../shared/calendario/calendario';
+import { Calendario } from '../../components/calendario/calendario';
 
 @Component({
   selector: 'app-horarios',

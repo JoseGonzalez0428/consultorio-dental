@@ -3,13 +3,13 @@ import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { HorariosService } from '../../services/horarios';
 import { DiaCalendario } from '../../interfaces/horario.interface';
 import { ViewChild } from '@angular/core';
-import { ModalConfirmacion } from '../../shared/modal-confirmacion/modal-confirmacion';
-import { Calendario } from '../../shared/calendario/calendario';
+import { ModalConfirmacion } from '../../components/modal-confirmacion/modal-confirmacion';
+import { Calendario } from '../../components/calendario/calendario';
 
 @Component({
   selector: 'app-gestionar-horarios',
   standalone: true,
-  imports: [ReactiveFormsModule, ModalConfirmacion, Calendario],
+  imports: [ReactiveFormsModule,  Calendario],
   templateUrl: './gestionar-horarios.html',
   styleUrl: './gestionar-horarios.css'
 })
@@ -23,6 +23,12 @@ export class GestionarHorarios implements OnInit {
   modalTextoConfirmar = signal('');
   modalTipo = signal<'danger' | 'warning' | 'success'>('danger');
   private modalAccion: (() => void) | null = null;
+
+    horasDisponibles: string[] = [
+    '07:00', '08:00', '09:00', '10:00', '11:00', '12:00',
+    '13:00', '14:00', '15:00', '16:00', '17:00', '18:00',
+    '19:00', '20:00', '21:00'
+  ];
 
   abrirModal(opciones: {
     titulo: string;

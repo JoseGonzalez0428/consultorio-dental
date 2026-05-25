@@ -1,11 +1,12 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { TratamientosService } from '../../services/tratamientos';
+import { Resenas } from '../../components/resenas/resenas';
 
 @Component({
   selector: 'app-tratamiento-detalle',
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterModule, Resenas],
   templateUrl: './tratamiento-detalle.html',
   styleUrl: './tratamiento-detalle.css'
 })
@@ -19,5 +20,9 @@ export class TratamientoDetalle implements OnInit {
     if (id) {
       this.tratamientosService.fetchTratamientoById(id);
     }
+  }
+
+  ngOnDestroy(): void {
+    this.tratamientosService.limpiarSeleccion();
   }
 }

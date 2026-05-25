@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Estructura Global y Conexión Elástica
+   Base Global
    ========================================================================== */
 .Pagina {
   width: 100%;
@@ -12,127 +12,53 @@
   letter-spacing: -0.01em;
 }
 
-.Contenido {
-  flex-grow: 1;
-  max-width: 1100px;
-  margin: 0 auto;
-  width: 100%;
-}
-
 /* ==========================================================================
-   Header de la Agenda e Integración de Filtros
+   Layout Principal
    ========================================================================== */
-.agenda-header {
+#ContAgendar {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  border-bottom: 1px solid #f1f5f9;
-  padding-bottom: 24px;
+  gap: 24px;
+  padding: 24px 16px;
+  max-width: 1200px;
+  margin: 0 auto;
   width: 100%;
+  box-sizing: border-box;
 }
+
+.AgendarIzq { width: 100%; }
+.AgendarDer { width: 100%; }
 
 .TitContenido {
   color: #0f172a;
   font-weight: 800;
   letter-spacing: -0.03em;
-  margin: 0;
+  margin: 0 0 16px 0;
 }
 
-/* ==========================================================================
-   El nuevo Selector de Fecha Premium (date-select-field)
-   ========================================================================== */
-.date-selector-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  width: 100%;
-  max-width: 290px; /* Un pelín más holgado para albergar fechas largas formateadas */
-}
-
-.date-selector-label {
-  font-size: 0.7rem;
+.SubTitFormulario {
+  font-size: 1rem;
   font-weight: 700;
-  color: #7160e6; /* Morado corporativo para denotar que es un filtro inteligente */
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.date-select-field {
-  height: 42px;
-  background-color: #f8fafc;
-  border: 1.5px solid #e2e8f0;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  padding: 0 14px;
-  box-sizing: border-box;
-  position: relative; /* Clave para anclar la nueva flecha */
-  transition: all 0.2s ease;
-}
-
-.date-select-field select {
-  width: 100%;
-  background: transparent;
-  border: none;
-  outline: none;
-  font-family: inherit;
-  font-size: 0.9rem;
-  font-weight: 600;
   color: #0f172a;
-  cursor: pointer;
-  height: 100%;
-  appearance: none; /* Oculta la flecha tosca nativa de Windows/Mac */
-  -webkit-appearance: none;
-  padding-right: 24px; /* Evita que el texto colisione con la flecha */
+  margin-bottom: 16px;
+  margin-top: 8px;
 }
 
-/* Flecha minimalista estilizada integrada al contenedor */
-.date-select-field::after {
-  content: "↓";
-  font-size: 11px;
-  font-weight: 700;
-  color: #94a3b8;
-  position: absolute;
-  right: 14px;
-  pointer-events: none; /* Permite que el clic pase a través e interactúe con el select */
-}
-
-/* Estados Interactivos */
-.date-select-field:hover {
-  border-color: #cbd5e1;
-  background-color: #f1f5f9;
-}
-
-.date-select-field:focus-within {
-  background-color: #ffffff;
-  border-color: #7160e6;
-  box-shadow: 0 0 0 4px #f5f3ff;
-}
-
-.date-select-field:focus-within::after {
-  color: #7160e6;
+.MensajeInfo {
+  text-align: center;
+  padding: 32px;
+  border-radius: 16px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  background-color: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  color: #64748b;
+  margin-top: 16px;
 }
 
 /* ==========================================================================
-   Ajustes en Escritorio (Alineación a los extremos)
+   Tarjetas de Citas
    ========================================================================== */
-@media screen and (min-width: 1025px) {
-  .agenda-header {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding-bottom: 16px;
-  }
-}
-
-/* ==========================================================================
-   Listado de Tarjetas Dinámicas (.appointments-grid)
-   ========================================================================== */
-.agenda-content {
-  width: 100%;
-  margin-top: 24px;
-}
-
 .appointments-grid {
   display: flex;
   flex-direction: column;
@@ -140,7 +66,6 @@
   width: 100%;
 }
 
-/* La Tarjeta Maestra Administrativa */
 .appointment-admin-card {
   background-color: #ffffff;
   border-radius: 20px;
@@ -154,25 +79,30 @@
   transition: all 0.3s ease;
 }
 
-/* Comportamientos Visuales por Estado de Cita */
 .appointment-admin-card[data-status="Pendiente"] {
   border-left: 4px solid #7160e6;
 }
 
-.appointment-admin-card[data-status="Terminada"],
-.appointment-admin-card[data-status="Cancelada"] {
+.appointment-admin-card[data-status="Terminado"],
+.appointment-admin-card[data-status="Cancelado"] {
   background-color: #f8fafc;
   border-color: #e2e8f0;
-  opacity: 0.7; /* Sutil opacidad para que resalten las pendientes */
+  opacity: 0.7;
 }
 
-/* Elementos Internos de la Tarjeta */
 .appointment-meta-row {
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   gap: 8px;
   margin-bottom: 12px;
   width: 100%;
+}
+
+.meta-time-container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: flex-start;
 }
 
 .time-badge {
@@ -182,24 +112,9 @@
   font-weight: 700;
   padding: 4px 10px;
   border-radius: 8px;
+  white-space: nowrap;
 }
 
-.treatment-name-wrapper {
-    width: 100%;
-    min-width: 0;
-    text-align: left;
-    display: block;
-  }
-
-.treatment-tag {
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: #0f172a;
-  word-break: break-word;
-  display: inline-block;
-}
-
-/* Las Cápsulas de Estatus (Pills) */
 .status-pill {
   font-size: 0.7rem;
   font-weight: 700;
@@ -207,13 +122,28 @@
   padding: 3px 8px;
   border-radius: 20px;
   letter-spacing: 0.02em;
-  margin-left: auto; /* Empuja el badge al extremo derecho */
+  width: fit-content;
 }
-.status-pill[data-status="Pendiente"] { background-color: #f3e8ff; color: #6b21a8; }
-.status-pill[data-status="Terminada"] { background-color: #dcfce7; color: #166534; }
-.status-pill[data-status="Cancelada"] { background-color: #fee2e2; color: #991b1b; }
 
-/* Detalles del Paciente */
+.status-pill[data-status="Pendiente"] { background-color: #f3e8ff; color: #6b21a8; }
+.status-pill[data-status="Terminado"] { background-color: #dcfce7; color: #166534; }
+.status-pill[data-status="Cancelado"] { background-color: #fee2e2; color: #991b1b; }
+
+.treatment-name-wrapper {
+  width: 100%;
+  min-width: 0;
+}
+
+.treatment-tag {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0f172a;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .patient-details-row {
   display: flex;
   flex-direction: column;
@@ -231,26 +161,27 @@
   font-size: 0.85rem;
   color: #64748b;
   text-decoration: none;
-  width: fit-content;
   display: inline-flex;
   align-items: center;
   gap: 4px;
 }
+
 .patient-phone:hover { color: #7160e6; text-decoration: underline; }
 
 /* ==========================================================================
-   Botones Administrativos (.btn-action-admin)
+   Botones de Acción
    ========================================================================== */
 .card-actions-area {
   display: flex;
+  flex-direction: row;
   gap: 8px;
   width: 100%;
 }
 
 .btn-action-admin {
   flex: 1;
-  height: 38px;
-  font-size: 0.85rem;
+  height: 36px;
+  font-size: 0.8rem;
   font-weight: 600;
   border: none;
   border-radius: 10px;
@@ -262,7 +193,6 @@
   font-family: inherit;
 }
 
-/* Completar (Verde Clínico) */
 .btn-complete {
   background-color: #f0fdf4;
   color: #16a34a;
@@ -270,7 +200,6 @@
 }
 .btn-complete:hover { background-color: #16a34a; color: #ffffff; }
 
-/* Cancelar (Rojo de Advertencia) */
 .btn-cancel {
   background-color: #fef2f2;
   color: #ef4444;
@@ -278,126 +207,16 @@
 }
 .btn-cancel:hover { background-color: #ef4444; color: #ffffff; }
 
-/* Notices de Feedback de Selección vacía/alerta */
-.status-notice {
-  text-align: center;
-  padding: 32px;
-  border-radius: 16px;
-  font-size: 0.9rem;
-  font-weight: 500;
-}
+/* ==========================================================================
+   Notices
+   ========================================================================== */
 .notice-icon { font-size: 1.5rem; display: block; margin-bottom: 8px; }
 .notice-empty { background-color: #f8fafc; border: 1px dashed #cbd5e1; color: #64748b; }
 .notice-alert { background-color: #fffbeb; border: 1px solid #fef3c7; color: #b45309; }
 
 /* ==========================================================================
-   Media Queries para Pantallas Grandes (Escritorio)
+   Desktop
    ========================================================================== */
-@media screen and (min-width: 1025px) {
-  .agenda-header {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding-bottom: 16px;
-  }
-
-  /* La tarjeta se estira majestuosamente horizontal en PC */
-  .appointment-admin-card {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    padding: 18px 28px;
-  }
-
-  .card-main-body {
-    display: flex;
-    align-items: center;
-    gap: 40px;
-    flex: 1;
-  }
-
-  /* 👈 Transformamos la sub-fila en un Grid de 3 columnas fijas */
-  .appointment-meta-row {
-    margin-bottom: 0;
-    width: 55%; /* Le damos un poco más de holgura en PC */
-    display: grid;
-    grid-template-columns: 110px 1fr 110px; 
-    align-items: center;
-    gap: 16px;
-  }
-
-  .treatment-name-wrapper {
-    width: 100%;
-    min-width: 0; /* Previene que el texto desborde el Grid */
-    text-align: left;
-    display: block;
-  }
-
-  .meta-time-container {
-    display: flex;
-    align-items: center;
-  }
-
-  .meta-status-container {
-    display: flex;
-    justify-content: flex-start;
-  }
-
-  .status-pill {
-    margin-left: 0; /* Reseteamos el margin-left antiguo para que obedezca al Grid */
-    width: 100%;
-    text-align: center;
-  }
-
-  .patient-details-row {
-    width: 35%;
-  }
-
-  .card-actions-area {
-    width: 240px;
-  }
-}
-
-/* Layout de dos columnas */
-#ContAgendar {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  padding: 24px 16px;
-  max-width: 1200px;
-  margin: 0 auto;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.AgendarIzq {
-  width: 100%;
-}
-
-.AgendarDer {
-  width: 100%;
-}
-
-.MensajeInfo {
-  text-align: center;
-  padding: 32px;
-  border-radius: 16px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  background-color: #f8fafc;
-  border: 1px dashed #cbd5e1;
-  color: #64748b;
-  margin-top: 16px;
-}
-
-.SubTitFormulario {
-  font-size: 1rem;
-  font-weight: 700;
-  color: #0f172a;
-  margin-bottom: 16px;
-  margin-top: 8px;
-}
-
 @media screen and (min-width: 1025px) {
   #ContAgendar {
     flex-direction: row;
@@ -414,5 +233,55 @@
   .AgendarDer {
     flex: 1;
     min-width: 0;
+  }
+
+  .appointment-admin-card {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 28px;
+  }
+
+  .card-main-body {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .appointment-meta-row {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 0;
+    width: 55%;
+  }
+
+  .meta-time-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .treatment-tag {
+    max-width: 200px;
+  }
+
+  .patient-details-row {
+    width: 35%;
+    flex-shrink: 0;
+  }
+
+  .card-actions-area {
+    flex-direction: column;
+    width: 90px;
+    flex-shrink: 0;
+  }
+
+  .btn-action-admin {
+    flex: none;
+    width: 100%;
   }
 }

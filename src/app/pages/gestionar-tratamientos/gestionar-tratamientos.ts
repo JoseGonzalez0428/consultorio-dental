@@ -3,7 +3,7 @@ import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { TratamientosService } from '../../services/tratamientos';
 import { Tratamiento } from '../../interfaces/tratamiento.interface';
 import { ViewChild } from '@angular/core';
-import { ModalConfirmacion } from '../../shared/modal-confirmacion/modal-confirmacion';
+import { ModalConfirmacion } from '../../components/modal-confirmacion/modal-confirmacion';
 @Component({
   selector: 'app-gestionar-tratamientos',
   standalone: true,

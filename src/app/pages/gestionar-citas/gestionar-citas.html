@@ -35,10 +35,15 @@
             <div class="appointment-admin-card" [attr.data-status]="cita.estado">
               
               <div class="card-main-body">
-                <div class="appointment-meta-row">
+                <div class="meta-time-container">
                   <span class="time-badge">{{ cita.hora }} - {{ sumarUnaHora(cita.hora) }}</span>
+                  <div class="meta-status-container">
+                    <span class="status-pill" [attr.data-status]="cita.estado">{{ cita.estado }}</span>
+                  </div>
+                </div>
+
+                <div class="treatment-name-wrapper">
                   <span class="treatment-tag">{{ cita.nombre_tratamiento }}</span>
-                  <span class="status-pill" [attr.data-status]="cita.estado">{{ cita.estado }}</span>
                 </div>
                 
                 <section class="patient-details-row">

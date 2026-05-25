@@ -48,6 +48,9 @@
         </div>
 
       </div>
+      @if (tratamientosService.tratamientoSeleccionado()?._id) {
+        <app-resenas [idTratamiento]="tratamientosService.tratamientoSeleccionado()!._id!"></app-resenas>
+      }
     } @else {
       <div class="MensajeNoEncontrado">Tratamiento no encontrado.</div>
     }

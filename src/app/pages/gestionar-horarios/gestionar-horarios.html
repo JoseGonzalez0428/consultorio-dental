@@ -32,13 +32,23 @@
             <div class="HoraInputGrupo">
               <div class="TitOpcion">Inicio:</div>
               <div class="BotonOpcion InputCompleto">
-                <input type="time" formControlName="hora_inicio" step="3600">
+                <select formControlName="hora_inicio">
+                  <option value="">Selecciona</option>
+                  @for (hora of horasDisponibles; track hora) {
+                    <option [value]="hora">{{ hora }}</option>
+                  }
+                </select>
               </div>
             </div>
             <div class="HoraInputGrupo">
               <div class="TitOpcion">Fin:</div>
               <div class="BotonOpcion InputCompleto">
-                <input type="time" formControlName="hora_fin" step="3600">
+                <select formControlName="hora_fin">
+                  <option value="">Selecciona</option>
+                  @for (hora of horasDisponibles; track hora) {
+                    <option [value]="hora">{{ hora }}</option>
+                  }
+                </select>
               </div>
             </div>
           </div>

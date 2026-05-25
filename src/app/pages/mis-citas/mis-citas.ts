@@ -5,7 +5,7 @@ import { HorariosService } from '../../services/horarios';
 import { Cita } from '../../interfaces/cita.interface';
 import { BloqueHorario } from '../../interfaces/horario.interface';
 import { ViewChild } from '@angular/core';
-import { ModalConfirmacion } from '../../shared/modal-confirmacion/modal-confirmacion';
+import { ModalConfirmacion } from '../../components/modal-confirmacion/modal-confirmacion';
 
 interface CitaExtendida extends Cita {
   nueva_fecha?: string;

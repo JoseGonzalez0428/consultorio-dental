@@ -3,8 +3,8 @@ import { FormsModule } from '@angular/forms';
 import { CitasService } from '../../services/citas';
 import { HorariosService } from '../../services/horarios';
 import { ViewChild } from '@angular/core';
-import { ModalConfirmacion } from '../../shared/modal-confirmacion/modal-confirmacion';
-import { Calendario } from '../../shared/calendario/calendario';
+import { ModalConfirmacion } from '../../components/modal-confirmacion/modal-confirmacion';
+import { Calendario } from '../../components/calendario/calendario';
 
 @Component({
   selector: 'app-gestionar-citas',
