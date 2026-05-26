@@ -1,6 +1,7 @@
 import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Resena, ResenaRequest, PuedeResenar } from '../interfaces/resena.interface';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ import { Resena, ResenaRequest, PuedeResenar } from '../interfaces/resena.interf
 export class ResenasService {
 
   private http = inject(HttpClient);
-  private readonly BASE_URL = 'http://localhost:3000/api';
+  private readonly BASE_URL = environment.apiUrl;
 
   private _resenas = signal<Resena[]>([]);
   public resenas = this._resenas.asReadonly();

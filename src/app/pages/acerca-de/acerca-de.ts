@@ -12,7 +12,7 @@ import { HttpClient } from '@angular/common/http';
 export class AcercaDe {
 
   private http = inject(HttpClient);
-  private readonly BASE_URL = 'http://localhost:3000/api';
+  private readonly BASE_URL = 'https://consultorio-dental-api.onrender.com/api';
 
   nombre: string = '';
   apellidos: string = '';

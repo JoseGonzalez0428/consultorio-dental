@@ -1,6 +1,7 @@
 import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Reporte, ReporteRequest } from '../interfaces/reporte.interface';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ export class ReportesService {
 
   private http = inject(HttpClient);
 
-  private readonly BASE_URL = 'http://localhost:3000/api';
+  private readonly BASE_URL = environment.apiUrl;
 
   private _reportes = signal<Reporte[]>([]);
   public reportes = this._reportes.asReadonly();

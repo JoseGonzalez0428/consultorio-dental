@@ -2,6 +2,7 @@ import { Injectable, inject, signal, computed } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { LoginRequest, LoginResponse, RegisterRequest } from '../interfaces/usuario.interface';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class AuthService {
   private http = inject(HttpClient);
   private router = inject(Router);
 
-  private readonly BASE_URL = 'http://localhost:3000/api';
+  private readonly BASE_URL = environment.apiUrl;
 
   private _token = signal<string | null>(localStorage.getItem('token'));
   private _tipoUsuario = signal<string | null>(localStorage.getItem('tipo_usuario'));
