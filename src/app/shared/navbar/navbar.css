@@ -3,7 +3,7 @@
    ========================================================================== */
 .navbar {
   background-color: #ffffff;
-  border-bottom: 1px solid #f3e8ff; /* Borde sutilmente lila que combina con el footer */
+  border-bottom: 1px solid #f3e8ff; 
   box-shadow: 0 4px 10px -4px rgba(113, 96, 230, 0.05);
   position: sticky;
   top: 0;

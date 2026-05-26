@@ -5,7 +5,7 @@
   background-color: #fdf6ff; 
   border-top: 1px solid #f3e8ff;
   position: relative;
-  padding: 24px 20px 0 20px; /* 👈 Reducido a la mitad para hacerlo más chaparro */
+  padding: 24px 20px 0 20px; 
   font-family: system-ui, -apple-system, sans-serif;
   color: #4b5563;
 }
@@ -25,18 +25,18 @@
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 20px; /* 👈 Reducido de 36px a 20px para juntar los bloques en móvil */
+  gap: 20px; 
 }
 
 /* Encabezados internos del Footer */
 .footer-title {
   display: block;
   color: #4c1d95; 
-  font-size: 0.75rem; /* 👈 Ligeramente más compacto */
+  font-size: 0.75rem; 
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  margin-bottom: 8px; /* 👈 Reducido de 16px a 8px */
+  margin-bottom: 8px; 
 }
 
 /* ==========================================================================
@@ -47,18 +47,18 @@
 .footer-brand {
   display: flex;
   flex-direction: column;
-  gap: 8px; /* 👈 Más compacto */
+  gap: 8px;
 }
 
 .footer-logo {
-  height: 42px; /* 👈 Reducido de 54px a 42px para ahorrar altura */
+  height: 42px;
   width: auto;
   object-fit: contain;
   align-self: flex-start;
 }
 
 .footer-tagline {
-  font-size: 0.85rem; /* 👈 Un poco más pequeño */
+  font-size: 0.85rem; 
   margin: 0;
   color: #6b7280;
   line-height: 1.4;
@@ -68,7 +68,7 @@
 .footer-links {
   display: flex;
   flex-direction: column;
-  gap: 8px; /* 👈 Espaciado entre enlaces más cerrado */
+  gap: 8px; 
 }
 
 .foot-link {
@@ -96,7 +96,7 @@
   font-style: normal;
   display: flex;
   flex-direction: column;
-  gap: 8px; /* 👈 Espacio interno más compacto */
+  gap: 8px; 
 }
 
 .contact-item {
@@ -128,8 +128,8 @@
    ========================================================================== */
 .footer-bottom {
   max-width: 1240px;
-  margin: 20px auto 0 auto; /* 👈 Reducido el margen superior de 40px a 20px */
-  padding: 14px 0; /* 👈 Padding más esbelto */
+  margin: 20px auto 0 auto; 
+  padding: 14px 0;
   border-top: 1px solid #f3e8ff;
   text-align: center;
   font-size: 0.75rem;
@@ -145,14 +145,14 @@
    ========================================================================== */
 @media screen and (min-width: 768px) {
   .footer {
-    padding-top: 32px; /* 👈 Ajuste de altura superior en escritorio */
+    padding-top: 32px; 
   }
 
   .footer-container {
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
-    gap: 40px; /* Mayor separación lateral pero manteniendo el flujo chato */
+    gap: 40px; 
   }
 
   .footer-brand, .footer-links, .footer-contact {

@@ -2,7 +2,7 @@
    Contenedor Base y Tipografías Uniformes
    ========================================================================== */
 .Pagina {
-  background-color: #faf9fe; /* El mismo fondo lila ultra suave de todo el sitio */
+  background-color: #faf9fe; 
   font-family: system-ui, -apple-system, sans-serif;
   color: #334155;
   padding: 40px 16px;
@@ -10,10 +10,8 @@
 }
 
 .Contenido {
-  max-width: 1000px;
-  margin: 0 auto;
   display: flex;
-  flex-direction: column; /* Apilado vertical por defecto en móviles y tabletas */
+  flex-direction: column;
   gap: 48px;
 }
 
@@ -22,7 +20,7 @@
    ========================================================================== */
 .Descripcion {
   display: flex;
-  flex-direction: column-reverse; /* En móvil la foto va arriba del texto por orden visual */
+  flex-direction: column-reverse;
   background-color: #ffffff;
   border-radius: 24px;
   padding: 32px;
@@ -39,13 +37,13 @@
 .TitContenido {
   font-size: 1.75rem;
   font-weight: 800;
-  color: #1e1b4b; /* Tono morado muy oscuro de alta legibilidad */
+  color: #1e1b4b;
   letter-spacing: -0.02em;
   margin-bottom: 16px;
 }
 
 .TextoDescripcion {
-  font-size: 1rem; /* Reducido de 24px a 1rem (16px) para una lectura fluida y descansada */
+  font-size: 1rem; 
   line-height: 1.6;
   color: #475569;
   text-align: left;
@@ -59,7 +57,7 @@
 
 .Descripcion img {
   width: 100%;
-  max-width: 280px; /* Tamaño controlado y elegante para la foto */
+  max-width: 280px;
   height: auto;
   border-radius: 20px;
   box-shadow: 0 8px 20px rgba(113, 96, 230, 0.1);
@@ -76,7 +74,7 @@
   box-shadow: 0 10px 25px -5px rgba(113, 96, 230, 0.04);
   padding: 40px 32px;
   width: 100%;
-  max-width: 550px; /* Evita que el formulario se estire infinitamente */
+  max-width: 550px;
   margin: 0 auto;
   box-sizing: border-box;
 }
@@ -125,7 +123,7 @@
 .campo-formulario input:focus,
 .campo-formulario textarea:focus {
   background-color: #ffffff;
-  border-color: #c860e6; /* Nuestro rosa de acento característico */
+  border-color: #c860e6;
   box-shadow: 0 0 0 4px #fdf4ff;
 }
 
@@ -168,7 +166,7 @@
    ========================================================================== */
 @media screen and (min-width: 1025px) {
   .Contenido {
-    flex-direction: row; /* Se distribuyen lado a lado de forma majestuosa */
+    flex-direction: row;
     align-items: flex-start;
     gap: 32px;
   }
@@ -176,7 +174,7 @@
   /* La tarjeta de la descripción toma el 60% del espacio */
   .Descripcion {
     flex: 6;
-    flex-direction: row; /* En escritorio la imagen va al lado del texto */
+    flex-direction: row;
     padding: 40px;
     gap: 32px;
   }

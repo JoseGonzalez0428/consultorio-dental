@@ -15,6 +15,12 @@ export class Registro {
   private fb = inject(FormBuilder);
   public authService = inject(AuthService);
 
+  mostrarContrasena: boolean = false;
+
+  toggleContrasena(): void {
+    this.mostrarContrasena = !this.mostrarContrasena;
+  }
+
   registroForm = this.fb.group({
     nombres: ['', [Validators.required]],
     apellido_paterno: ['', [Validators.required]],

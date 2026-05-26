@@ -10,7 +10,6 @@
 }
 
 .Contenido {
-  flex-grow: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -19,7 +18,7 @@
 /* Encabezado Principal */
 .TextoIndex {
   text-align: center;
-  margin-bottom: 24px; /* 👈 Un poco más cerrado para ahorrar espacio */
+  margin-bottom: 24px; 
 }
 
 .TextoIndex h2 {
@@ -44,9 +43,8 @@
   max-width: 1050px;
   margin: 0 auto;
   position: relative;
-  /* 👈 Cambiamos a 16/5 en PC para hacerlo significativamente más chato y panorámico */
   aspect-ratio: 16 / 5; 
-  max-height: 280px; /* 👈 Candado estricto: la foto nunca medirá más de 280px de alto en escritorio */
+  max-height: 280px; 
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 10px 25px -10px rgba(113, 96, 230, 0.1);
@@ -73,7 +71,6 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* 👈 Mueve sutilmente el enfoque de las fotos un poco más arriba para que al recortarse sigan luciendo perfectas */
   object-position: center 35%; 
 }
 
@@ -92,9 +89,9 @@
 /* Texto de la diapositiva */
 .titulo-slide {
   position: absolute;
-  bottom: 12%; /* Subió un poquito para no pegarse al borde inferior */
+  bottom: 12%; 
   left: 5%;
-  font-size: 1.25rem; /* Ajustado para que quepa perfecto en el nuevo formato esbelto */
+  font-size: 1.25rem;
   font-weight: 700;
   color: #ffffff;
   z-index: 2;
@@ -150,7 +147,7 @@
   .carousel { 
     border-radius: 14px; 
     aspect-ratio: 4 / 3; /* En móvil regresa a proporción vertical porque las pantallas son alargadas */
-    max-height: unset; /* Quitamos el tope en móvil para que no se achate de más */
+    max-height: unset; 
   }
   .titulo-slide { font-size: 1rem; bottom: 12%; left: 8%; max-width: 84%; }
   .Boton { width: 100%; max-width: 320px; }

@@ -20,6 +20,12 @@ export class Login {
     contrasena: ['', [Validators.required]]
   });
 
+  mostrarContrasena: boolean = false;
+
+  toggleContrasena(): void {
+    this.mostrarContrasena = !this.mostrarContrasena;
+  }
+
   onSubmit(): void {
     if (this.loginForm.invalid || this.authService.isLoading()) {
       return;

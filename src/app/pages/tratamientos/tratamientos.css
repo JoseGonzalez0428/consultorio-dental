@@ -13,21 +13,19 @@
 }
 
 .Contenido {
-  flex-grow: 1;
-  padding: 0 20px; /* Margen de seguridad para pantallas pequeñas */
-  box-sizing: border-box;
+  padding-top: 0;
 }
 
 /* El nuevo candado de alineación para toda la vista */
 .tratamientos-wrapper {
   width: 100%;
   max-width: 1100px;
-  margin: 40px auto; /* Centrado horizontal e introduce espacio respirable arriba/abajo */
+  margin: 40px auto; 
   box-sizing: border-box;
 }
 
 .TituloTratamientos {
-  text-align: left; /* Cambiado a la izquierda para un look moderno alineado con la rejilla */
+  text-align: left; 
   color: #0f172a;
   font-size: 2rem;
   font-weight: 800;

@@ -3,7 +3,7 @@
    ========================================================================== */
 .schedule-page {
   min-height: 100vh;
-  background-color: #f8fafc; /* Fondo gris neutro ultra limpio */
+  background-color: #f8fafc; 
   font-family: system-ui, -apple-system, sans-serif;
   padding: 40px 16px;
   box-sizing: border-box;
@@ -120,7 +120,7 @@
 }
 
 .day-active .day-number {
-  color: #7160e6; /* Resalta el número en el morado de tu marca */
+  color: #7160e6; 
   font-weight: 700;
 }
 
@@ -130,7 +130,7 @@
   align-items: center;
   gap: 4px;
   margin-top: 4px;
-  background-color: #f5f3ff; /* Fondo morado lila muy suave */
+  background-color: #f5f3ff; 
   padding: 2px 8px;
   border-radius: 20px;
   transition: background-color 0.2s;
@@ -143,7 +143,7 @@
 .indicator-dot {
   width: 6px;
   height: 6px;
-  background-color: #c860e6; /* El rosa original actúa como el punto de alerta activa */
+  background-color: #c860e6; 
   border-radius: 50%;
 }
 
@@ -182,7 +182,7 @@
   }
 
   .slots-text {
-    display: none; /* Ocultamos la palabra en pantallas pequeñas para que no sature */
+    display: none; 
   }
 
   .slots-indicator {
@@ -191,7 +191,7 @@
   }
   
   .indicator-dot {
-    width: 8px; /* El punto se hace un poquito más grande para suplir la falta de texto */
+    width: 8px; 
     height: 8px;
   }
 }

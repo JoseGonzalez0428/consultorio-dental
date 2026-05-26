@@ -12,13 +12,6 @@
   flex-grow: 1;
 }
 
-.Contenido {
-  flex-grow: 1;
-  max-width: 1050px;
-  margin: 0 auto;
-  width: 100%;
-}
-
 .TitContenido {
   color: #0f172a;
   font-weight: 800;
@@ -34,7 +27,7 @@
   margin-top: 16px;
   width: 100%;
   box-sizing: border-box;
-  min-height: 680px; /* Consistencia base para pantallas móviles */
+  min-height: 680px; 
 }
 
 /* ==========================================================================
@@ -268,7 +261,7 @@
   .ContenedorCitas {
     height: 590px; 
     min-height: 590px;
-    justify-content: flex-start; /* Alinea los elementos arriba si hay menos de 3 */
+    justify-content: flex-start;
   }
 
   .CitaBloqueInfo {
@@ -280,7 +273,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    height: 72px; /* Forzamos altura simétrica para la barra de herramientas */
+    height: 72px; 
     box-sizing: border-box;
   }
 
