@@ -77,7 +77,7 @@
               } @else if (tratamientoEditando && tratamientoEditando.imagen) {
                 <div class="ImagenActual">
                   <div class="ImagenActualMiniatura">
-                    <img [src]="'http://localhost:3000/imagenes/' + tratamientoEditando.imagen" alt="Imagen actual">
+                    <img [src]="tratamientoEditando.imagen" alt="Imagen actual">
                   </div>
                   <div class="ImagenActualMeta">
                     <span class="ImagenActualLabel">Imagen actual en servidor</span>

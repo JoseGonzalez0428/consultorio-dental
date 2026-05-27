@@ -51,7 +51,7 @@
       @for (t of tratamientosService.tratamientos().slice(0, 3); track t._id) {
         <div class="TratamientoCard" (click)="verTratamiento(t._id!)">
           <div class="TratamientoCardImagen">
-            <img [src]="'http://localhost:3000/imagenes/' + t.imagen" [alt]="t.nombre">
+            <img [src]="t.imagen" [alt]="t.nombre">
           </div>
           <div class="TratamientoCardInfo">
             <h3 class="TratamientoCardNombre">{{ t.nombre }}</h3>
