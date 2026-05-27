@@ -98,4 +98,44 @@ export class ReportesService {
       }
     });
   }
+
+  actualizarReporte(id: string, notas: string): void {
+    this.isLoading.set(true);
+    this.successMessage.set(null);
+    this.errorMessage.set(null);
+
+    this.http.put<any>(`${this.BASE_URL}/reportes/${id}`, { notas }).subscribe({
+      next: () => {
+        this.successMessage.set('Reporte actualizado correctamente.');
+        this.fetchReportes(1);
+      },
+      error: (error: any) => {
+        this.errorMessage.set(error.error.msg ?? 'Error al actualizar reporte.');
+        this.isLoading.set(false);
+      },
+      complete: () => {
+        this.isLoading.set(false);
+      }
+    });
+  }
+
+  eliminarReporte(id: string): void {
+    this.isLoading.set(true);
+    this.successMessage.set(null);
+    this.errorMessage.set(null);
+
+    this.http.delete<any>(`${this.BASE_URL}/reportes/${id}`).subscribe({
+      next: () => {
+        this.successMessage.set('Reporte eliminado correctamente.');
+        this.fetchReportes(1);
+      },
+      error: (error: any) => {
+        this.errorMessage.set(error.error.msg ?? 'Error al eliminar reporte.');
+        this.isLoading.set(false);
+      },
+      complete: () => {
+        this.isLoading.set(false);
+      }
+    });
+  }
 }

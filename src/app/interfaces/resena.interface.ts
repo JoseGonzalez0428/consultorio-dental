@@ -1,5 +1,6 @@
 export interface Resena {
     _id?: string;
+    id_paciente?: string;
     calificacion: number;
     comentario: string;
     fecha: Date;

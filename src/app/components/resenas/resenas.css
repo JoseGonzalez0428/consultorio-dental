@@ -191,3 +191,87 @@
   font-size: 0.85rem;
   margin-top: 8px;
 }
+
+.ResenaAcciones {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.BtnEditarResena {
+  padding: 4px 12px;
+  border-radius: 8px;
+  border: 1.5px solid #7160e6;
+  background-color: #f5f3ff;
+  color: #7160e6;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.BtnEditarResena:hover {
+  background-color: #7160e6;
+  color: #ffffff;
+}
+
+.BtnEliminarResena {
+  padding: 4px 12px;
+  border-radius: 8px;
+  border: 1.5px solid #ef4444;
+  background-color: #fef2f2;
+  color: #ef4444;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.BtnEliminarResena:hover {
+  background-color: #ef4444;
+  color: #ffffff;
+}
+
+.FormularioEdicionResena {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.BotonesEdicion {
+  display: flex;
+  gap: 8px;
+}
+
+.BtnGuardarResena {
+  padding: 6px 16px;
+  border-radius: 8px;
+  border: none;
+  background-color: #7160e6;
+  color: #ffffff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.BtnGuardarResena:hover {
+  background-color: #5d4ed4;
+}
+
+.BtnCancelarEdicion {
+  padding: 6px 16px;
+  border-radius: 8px;
+  border: 1.5px solid #e5e7eb;
+  background-color: #ffffff;
+  color: #64748b;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.BtnCancelarEdicion:hover {
+  background-color: #f1f5f9;
+}

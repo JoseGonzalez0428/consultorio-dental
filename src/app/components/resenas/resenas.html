@@ -26,9 +26,35 @@
               <span class="ResenaFecha">{{ formatearFecha(resena.fecha) }}</span>
             </div>
           </div>
-          @if (resena.comentario) {
-            <div class="ResenaComentario">{{ resena.comentario }}</div>
+
+          @if (resenaEditandoId === resena._id) {
+            <div class="FormularioEdicionResena">
+              <div class="SelectorEstrellas">
+                @for (estrella of estrellas; track estrella) {
+                  <span class="EstrellaSelectorItem"
+                    [class.estrella-activa]="estrella <= calificacionEditando"
+                    (click)="seleccionarEstrellaEdicion(estrella)">★</span>
+                }
+              </div>
+              <textarea class="ResenaTextarea" [(ngModel)]="comentarioEditando" rows="3"></textarea>
+              <div class="BotonesEdicion">
+                <button class="BtnGuardarResena" (click)="guardarResena(resena._id!)">Guardar</button>
+                <button class="BtnCancelarEdicion" (click)="cancelarEdicionResena()">Cancelar</button>
+              </div>
+            </div>
+          } @else {
+            @if (resena.comentario) {
+              <div class="ResenaComentario">{{ resena.comentario }}</div>
+            }
           }
+
+          @if (authService.isLoggedIn() && !authService.isAdmin() && esMiResena(resena) && resenaEditandoId !== resena._id) {
+            <div class="ResenaAcciones">
+              <button class="BtnEditarResena" (click)="editarResena(resena)">Editar</button>
+              <button class="BtnEliminarResena" (click)="eliminarResena(resena._id!)">Eliminar</button>
+            </div>
+          }
+
         </div>
       }
     </div>
@@ -74,3 +100,17 @@
 
   </div>
 </div>
+
+@if (modalVisible()) {
+  <div class="ModalOverlay" (click)="cancelarModal()">
+    <div class="ModalContenido" (click)="$event.stopPropagation()">
+      <div class="ModalIcono">⚠️</div>
+      <div class="ModalTitulo">{{ modalTitulo() }}</div>
+      <div class="ModalMensaje">{{ modalMensaje() }}</div>
+      <div class="ModalBotones">
+        <button class="BtnModalCancelar" (click)="cancelarModal()">Cancelar</button>
+        <button class="BtnModalEliminar" (click)="confirmarModal()">{{ modalTextoConfirmar() }}</button>
+      </div>
+    </div>
+  </div>
+}

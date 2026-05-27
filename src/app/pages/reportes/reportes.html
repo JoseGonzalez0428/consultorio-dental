@@ -8,6 +8,13 @@
       </div>
     </div>
 
+    @if (reportesService.successMessage()) {
+      <div class="MensajeExito">{{ reportesService.successMessage() }}</div>
+    }
+    @if (reportesService.errorMessage()) {
+      <div class="MensajeError">{{ reportesService.errorMessage() }}</div>
+    }
+
     @if (reportesService.isLoading()) {
       <div class="MensajeCargando">Cargando reportes...</div>
     }
@@ -34,7 +41,15 @@
           <div class="TarjetaReporteBody">
             <div class="ReporteNotas">
               <span class="ReporteNotasLabel">Notas clínicas</span>
-              <p class="ReporteNotasTexto">{{ reporte.notas }}</p>
+              @if (reporteEditandoId === reporte._id) {
+                <textarea class="ReporteTextarea" [(ngModel)]="notasEditando" rows="4"></textarea>
+                <div class="BotonesEdicion">
+                  <button class="BtnGuardar" (click)="guardarReporte(reporte._id!)">Guardar</button>
+                  <button class="BtnCancelarEdicion" (click)="cancelarEdicion()">Cancelar</button>
+                </div>
+              } @else {
+                <p class="ReporteNotasTexto">{{ reporte.notas }}</p>
+              }
             </div>
           </div>
 
@@ -43,6 +58,10 @@
             <div class="ReportePacienteInfo">
               <span class="ReportePacienteNombre">{{ reporte.nombre_paciente }}</span>
               <span class="ReportePacienteTelefono">{{ reporte.telefono }}</span>
+            </div>
+            <div class="ReporteAcciones">
+              <button class="BtnEditarReporte" (click)="editarReporte(reporte)">Editar</button>
+              <button class="BtnEliminarReporte" (click)="eliminarReporte(reporte._id!)">Eliminar</button>
             </div>
           </div>
 
@@ -68,3 +87,17 @@
 
   </div>
 </div>
+
+@if (modalVisible()) {
+  <div class="ModalOverlay" (click)="cancelarModal()">
+    <div class="ModalContenido" (click)="$event.stopPropagation()">
+      <div class="ModalIcono">⚠️</div>
+      <div class="ModalTitulo">{{ modalTitulo() }}</div>
+      <div class="ModalMensaje">{{ modalMensaje() }}</div>
+      <div class="ModalBotones">
+        <button class="BtnModalCancelar" (click)="cancelarModal()">Cancelar</button>
+        <button class="BtnModalEliminar" (click)="confirmarModal()">{{ modalTextoConfirmar() }}</button>
+      </div>
+    </div>
+  </div>
+}

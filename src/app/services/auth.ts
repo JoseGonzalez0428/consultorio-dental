@@ -19,6 +19,9 @@ export class AuthService {
   private _nombreUsuario = signal<string | null>(localStorage.getItem('nombre_usuario'));
   private _sexoUsuario = signal<string | null>(localStorage.getItem('sexo_usuario'));
 
+  private _userId = signal<string | null>(localStorage.getItem('user_id'));
+  public userId = this._userId.asReadonly();
+
   public isLoggedIn = computed(() => !!this._token());
   public tipoUsuario = computed(() => this._tipoUsuario());
   public nombreUsuario = computed(() => this._nombreUsuario());
@@ -42,8 +45,10 @@ export class AuthService {
         localStorage.setItem('tipo_usuario', response.tipo_usuario);
         localStorage.setItem('nombre_usuario', response.nombre);
         localStorage.setItem('sexo_usuario', response.sexo);
+        localStorage.setItem('user_id', response.id);
 
         this._token.set(response.token);
+        this._userId.set(response.id);
         this._tipoUsuario.set(response.tipo_usuario);
         this._nombreUsuario.set(response.nombre);
         this._sexoUsuario.set(response.sexo);
@@ -87,11 +92,13 @@ export class AuthService {
     localStorage.removeItem('tipo_usuario');
     localStorage.removeItem('nombre_usuario');
     localStorage.removeItem('sexo_usuario');
+    localStorage.removeItem('user_id');
 
     this._token.set(null);
     this._tipoUsuario.set(null);
     this._nombreUsuario.set(null);
     this._sexoUsuario.set(null);
+    this._userId.set(null);
 
     this.router.navigate(['/login']);
   }

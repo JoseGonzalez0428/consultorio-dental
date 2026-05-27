@@ -21,6 +21,7 @@ export interface LoginResponse {
     tipo_usuario: string;
     nombre: string;
     sexo: string;
+    id: string;
 }
 
 export interface RegisterRequest {

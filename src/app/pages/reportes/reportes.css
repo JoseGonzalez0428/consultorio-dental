@@ -252,3 +252,95 @@
     padding-bottom: 20px;
   }
 }
+
+.ReporteAcciones {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.BtnEditarReporte {
+  padding: 6px 14px;
+  border-radius: 8px;
+  border: 1.5px solid #7160e6;
+  background-color: #f5f3ff;
+  color: #7160e6;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.BtnEditarReporte:hover {
+  background-color: #7160e6;
+  color: #ffffff;
+}
+
+.BtnEliminarReporte {
+  padding: 6px 14px;
+  border-radius: 8px;
+  border: 1.5px solid #ef4444;
+  background-color: #fef2f2;
+  color: #ef4444;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.BtnEliminarReporte:hover {
+  background-color: #ef4444;
+  color: #ffffff;
+}
+
+.ReporteTextarea {
+  width: 100%;
+  padding: 12px;
+  border: 1.5px solid #7160e6;
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  color: #334155;
+  resize: vertical;
+  outline: none;
+  box-sizing: border-box;
+  margin-top: 8px;
+}
+
+.BotonesEdicion {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.BtnGuardar {
+  padding: 8px 20px;
+  border-radius: 8px;
+  border: none;
+  background-color: #7160e6;
+  color: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.BtnGuardar:hover {
+  background-color: #5d4ed4;
+}
+
+.BtnCancelarEdicion {
+  padding: 8px 20px;
+  border-radius: 8px;
+  border: 1.5px solid #e5e7eb;
+  background-color: #ffffff;
+  color: #64748b;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.BtnCancelarEdicion:hover {
+  background-color: #f1f5f9;
+}
