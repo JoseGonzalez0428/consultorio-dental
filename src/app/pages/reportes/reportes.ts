@@ -78,6 +78,7 @@ export class Reportes implements OnInit {
     textoConfirmar: string;
     accion: () => void;
   }): void {
+    console.log('abrirModal llamado', opciones.titulo);
     this.modalTitulo.set(opciones.titulo);
     this.modalMensaje.set(opciones.mensaje);
     this.modalTextoConfirmar.set(opciones.textoConfirmar);
@@ -86,6 +87,7 @@ export class Reportes implements OnInit {
   }
 
   confirmarModal(): void {
+    console.log('confirmarModal llamado', this.modalAccion);
     if (this.modalAccion) this.modalAccion();
     this.modalVisible.set(false);
   }

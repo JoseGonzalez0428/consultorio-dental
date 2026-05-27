@@ -344,3 +344,168 @@
 .BtnCancelarEdicion:hover {
   background-color: #f1f5f9;
 }
+
+/* ==========================================================================
+   Mensajes de Retroalimentación y Alertas de Estado
+   ========================================================================== */
+.MensajeExito, 
+.MensajeError {
+  padding: 14px 20px;
+  border-radius: 14px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: left;
+  margin-bottom: 20px;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: slideInMessage 0.25s ease-out;
+}
+
+.MensajeExito {
+  background-color: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  color: #16a34a;
+}
+
+.MensajeError {
+  background-color: #fef2f2;
+  border: 1px solid #fee2e2;
+  color: #dc2626;
+}
+
+/* ==========================================================================
+   Estructura Avanzada del Modal de Confirmación
+   ========================================================================== */
+.ModalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(15, 23, 42, 0.3); /* Fondo oscuro translúcido */
+  backdrop-filter: blur(5px); /* Desenfoque de fondo de alta fidelidad */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999; /* Máxima prioridad de capa sobre headers y scrollbars */
+  animation: fadeInOverlay 0.2s ease-out;
+}
+
+.ModalContenido {
+  background-color: #ffffff;
+  border-radius: 24px;
+  padding: 28px;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 20px 25px -5px rgba(15, 23, 42, 0.08), 0 10px 10px -5px rgba(15, 23, 42, 0.04);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  text-align: center;
+  position: relative;
+  z-index: 10001;
+  box-sizing: border-box;
+  animation: scaleUpModal 0.25s cubic-bezier(0.34, 1.56, 0.64, 1); /* Rebote elástico premium */
+}
+
+/* Contenido Interno del Diálogo */
+.ModalIcono {
+  font-size: 2rem;
+  line-height: 1;
+  margin-bottom: 2px;
+}
+
+.ModalTitulo {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+}
+
+.ModalMensaje {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #64748b;
+  margin-bottom: 10px;
+  padding: 0 8px;
+}
+
+/* Botonera de Acción del Modal */
+.ModalBotones {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+.BtnModalCancelar, 
+.BtnModalEliminar {
+  flex: 1;
+  height: 42px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+/* Cancelar (Estilo Neutral Discreto) */
+.BtnModalCancelar {
+  background-color: #f1f5f9;
+  color: #475569;
+}
+
+.BtnModalCancelar:hover {
+  background-color: #e2e8f0;
+  color: #334155;
+}
+
+/* Confirmar Eliminación (Estilo de Alerta Destructiva) */
+.BtnModalEliminar {
+  background-color: #ef4444;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.15);
+}
+
+.BtnModalEliminar:hover {
+  background-color: #dc2626;
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   Animaciones de Transición Fluida
+   ========================================================================== */
+@keyframes slideInMessage {
+  from {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInOverlay {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleUpModal {
+  from {
+    transform: scale(0.92);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
