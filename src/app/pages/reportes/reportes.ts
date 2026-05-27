@@ -15,8 +15,8 @@ export class Reportes implements OnInit {
   public reportesService = inject(ReportesService);
 
   paginaActual: number = 1;
-  reporteEditandoId: string | null = null;
-  notasEditando: string = '';
+  reporteEditandoId = signal<string | null>(null);
+  notasEditando = signal<string>('');
 
   modalVisible = signal(false);
   modalTitulo = signal('');
@@ -39,32 +39,34 @@ export class Reportes implements OnInit {
   }
 
   editarReporte(reporte: Reporte): void {
-    this.reporteEditandoId = reporte._id!;
-    this.notasEditando = reporte.notas;
+    console.log('editarReporte llamado', reporte);
+    this.reporteEditandoId.set(reporte._id!);
+    this.notasEditando.set(reporte.notas);
   }
 
   cancelarEdicion(): void {
-    this.reporteEditandoId = null;
-    this.notasEditando = '';
+    this.reporteEditandoId.set(null);
+    this.notasEditando.set('');
   }
 
   guardarReporte(id: string): void {
-    if (!this.notasEditando.trim()) return;
+    if (!this.notasEditando().trim()) return;
     this.abrirModal({
       titulo: 'Actualizar reporte',
       mensaje: '¿Confirmas que deseas guardar los cambios en este reporte?',
       textoConfirmar: 'Guardar',
       accion: () => {
-        this.reportesService.actualizarReporte(id, this.notasEditando);
+        this.reportesService.actualizarReporte(id, this.notasEditando());
         this.cancelarEdicion();
       }
     });
   }
 
   eliminarReporte(id: string): void {
+    console.log('eliminarReporte llamado', id);
     this.abrirModal({
       titulo: 'Eliminar reporte',
-      mensaje: '¿Estás seguro de que deseas eliminar este reporte? Esta acción no se puede deshacer.',
+      mensaje: '¿Estás seguro de que deseas eliminar este reporte?',
       textoConfirmar: 'Eliminar',
       accion: () => this.reportesService.eliminarReporte(id)
     });
