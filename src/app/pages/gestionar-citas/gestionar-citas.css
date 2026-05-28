@@ -1,0 +1,288 @@
+/* ==========================================================================
+   Base Global
+   ========================================================================== */
+.Pagina {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  background-color: #faf9fe;
+  font-family: "Inter", "Geist Sans", -apple-system, sans-serif;
+  box-sizing: border-box;
+  letter-spacing: -0.01em;
+}
+
+/* ==========================================================================
+   Layout Principal
+   ========================================================================== */
+#ContAgendar {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 24px 16px;
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.AgendarIzq { width: 100%; }
+.AgendarDer { width: 100%; }
+
+.TitContenido {
+  color: #0f172a;
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin: 0 0 16px 0;
+}
+
+.SubTitFormulario {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 16px;
+  margin-top: 8px;
+}
+
+.MensajeInfo {
+  text-align: center;
+  padding: 32px;
+  border-radius: 16px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  background-color: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  color: #64748b;
+  margin-top: 16px;
+}
+
+/* ==========================================================================
+   Tarjetas de Citas
+   ========================================================================== */
+.appointments-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+}
+
+.appointment-admin-card {
+  background-color: #ffffff;
+  border-radius: 20px;
+  border: 1px solid #f1f5f9;
+  padding: 20px;
+  box-shadow: 0 4px 12px -2px rgba(113, 96, 230, 0.02);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: all 0.3s ease;
+}
+
+.appointment-admin-card[data-status="Pendiente"] {
+  border-left: 4px solid #7160e6;
+}
+
+.appointment-admin-card[data-status="Terminado"],
+.appointment-admin-card[data-status="Cancelado"] {
+  background-color: #f8fafc;
+  border-color: #e2e8f0;
+  opacity: 0.7;
+}
+
+.appointment-meta-row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 12px;
+  width: 100%;
+}
+
+.meta-time-container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: flex-start;
+}
+
+.time-badge {
+  background-color: #f5f3ff;
+  color: #7160e6;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+
+.status-pill {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 20px;
+  letter-spacing: 0.02em;
+  width: fit-content;
+}
+
+.status-pill[data-status="Pendiente"] { background-color: #f3e8ff; color: #6b21a8; }
+.status-pill[data-status="Terminado"] { background-color: #dcfce7; color: #166534; }
+.status-pill[data-status="Cancelado"] { background-color: #fee2e2; color: #991b1b; }
+
+.treatment-name-wrapper {
+  width: 100%;
+  min-width: 0;
+}
+
+.treatment-tag {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0f172a;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.patient-details-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.patient-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #334155;
+  margin: 0;
+}
+
+.patient-phone {
+  font-size: 0.85rem;
+  color: #64748b;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.patient-phone:hover { color: #7160e6; text-decoration: underline; }
+
+/* ==========================================================================
+   Botones de Acción
+   ========================================================================== */
+.card-actions-area {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  width: 100%;
+}
+
+.btn-action-admin {
+  flex: 1;
+  height: 36px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.btn-complete {
+  background-color: #f0fdf4;
+  color: #16a34a;
+  border: 1px solid #bbf7d0;
+}
+.btn-complete:hover { background-color: #16a34a; color: #ffffff; }
+
+.btn-cancel {
+  background-color: #fef2f2;
+  color: #ef4444;
+  border: 1px solid #fee2e2;
+}
+.btn-cancel:hover { background-color: #ef4444; color: #ffffff; }
+
+/* ==========================================================================
+   Notices
+   ========================================================================== */
+.notice-icon { font-size: 1.5rem; display: block; margin-bottom: 8px; }
+.notice-empty { background-color: #f8fafc; border: 1px dashed #cbd5e1; color: #64748b; }
+.notice-alert { background-color: #fffbeb; border: 1px solid #fef3c7; color: #b45309; }
+
+/* ==========================================================================
+   Desktop
+   ========================================================================== */
+@media screen and (min-width: 1025px) {
+  #ContAgendar {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 32px;
+    padding: 32px 24px;
+  }
+
+  .AgendarIzq {
+    width: 420px;
+    flex-shrink: 0;
+  }
+
+  .AgendarDer {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .appointment-admin-card {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 28px;
+  }
+
+  .card-main-body {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .appointment-meta-row {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 0;
+    width: 55%;
+  }
+
+  .meta-time-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .treatment-tag {
+    max-width: 200px;
+  }
+
+  .patient-details-row {
+    width: 35%;
+    flex-shrink: 0;
+  }
+
+  .card-actions-area {
+    flex-direction: column;
+    width: 90px;
+    flex-shrink: 0;
+  }
+
+  .btn-action-admin {
+    flex: none;
+    width: 100%;
+  }
+}

@@ -1,0 +1,492 @@
+/* ==========================================================================
+   Contenedor Principal y Flujo Elástico
+   ========================================================================== */
+.Pagina {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  background-color: #faf9fe;
+  font-family: "Inter", "Geist Sans", -apple-system, sans-serif;
+  box-sizing: border-box;
+  letter-spacing: -0.01em;
+}
+
+/* ==========================================================================
+   Encabezado Administrativo (GestionHeader)
+   ========================================================================== */
+.GestionHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-bottom: 1px solid #f1f5f9;
+  padding-bottom: 24px;
+  margin-bottom: 24px;
+  width: 100%;
+}
+
+.TitContenido {
+  font-size: 2rem;
+  color: #0f172a;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+
+.GestionContador {
+  font-size: 0.9rem;
+  color: #64748b;
+}
+
+/* ==========================================================================
+   Distribución en Paneles (GestionLayout)
+   ========================================================================== */
+.GestionLayout {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+}
+
+.PanelFormulario, .PanelLista {
+  background-color: #ffffff;
+  border-radius: 24px;
+  border: 1px solid #f1f5f9;
+  padding: 28px;
+  box-shadow: 0 4px 12px -2px rgba(113, 96, 230, 0.02);
+  box-sizing: border-box;
+}
+
+.PanelTitulo {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #f8fafc;
+  padding-bottom: 12px;
+}
+
+/* ==========================================================================
+   Elementos del Formulario de Captura
+   ========================================================================== */
+.CampoGrupo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+.CampoGrupoInline {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+}
+
+.CampoLabel {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #334155;
+}
+
+.CampoHint {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #94a3b8;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.CampoInput {
+  height: 44px;
+  background-color: #f8fafc;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 0 14px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #0f172a;
+  outline: none;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+.CampoInput::placeholder {
+  color: #94a3b8;
+  font-weight: 400;
+}
+
+.CampoInput:focus {
+  background-color: #ffffff;
+  border-color: #7160e6;
+  box-shadow: 0 0 0 4px #f5f3ff;
+}
+
+.CampoTextarea {
+  height: auto;
+  padding: 12px 14px;
+  resize: vertical;
+}
+
+/* Botonera del Formulario */
+.BotonesFormulario {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.BtnPrimario, .BtnSecundario {
+  height: 44px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.BtnPrimario {
+  flex: 2;
+  background-color: #7160e6;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(113, 96, 230, 0.15);
+}
+.BtnPrimario:hover:not(:disabled) {
+  background-color: #5b4cc4;
+}
+.BtnPrimario:disabled {
+  background-color: #e2e8f0;
+  color: #94a3b8;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.BtnSecundario {
+  flex: 1;
+  background-color: #f1f5f9;
+  color: #475569;
+}
+.BtnSecundario:hover {
+  background-color: #e2e8f0;
+}
+
+/* ==========================================================================
+   Listado de Tratamientos Existentes (PanelLista)
+   ========================================================================== */
+.ListaTratamientos {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.TarjetaTratamiento {
+  background-color: #f8fafc;
+  border: 1px solid #f1f5f9;
+  border-radius: 16px;
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-sizing: border-box;
+  transition: all 0.25s ease;
+}
+
+/* Estado de edición activo */
+.TarjetaEditando {
+  background-color: #fdf4ff;
+  border-color: #eecffd;
+  box-shadow: 0 0 0 2px #c860e6;
+}
+
+.TratamientoInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.TratamientoNombre {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.TratamientoPrecio {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #7160e6;
+}
+
+/* Botonera de Fila */
+.TratamientoAcciones {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+
+.BtnEditar, .BtnEliminar {
+  flex: 1;
+  height: 34px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.BtnEditar {
+  background-color: #ffffff;
+  color: #475569;
+  border: 1px solid #e2e8f0;
+}
+.BtnEditar:hover {
+  background-color: #f1f5f9;
+  border-color: #cbd5e1;
+}
+
+.BtnEliminar {
+  background-color: #fef2f2;
+  color: #ef4444;
+  border: 1px solid #fee2e2;
+}
+.BtnEliminar:hover {
+  background-color: #ef4444;
+  color: #ffffff;
+}
+
+/* Feedbacks de Operación */
+.MensajeExito, .MensajeError, .SinTratamientos {
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 16px;
+}
+.MensajeExito { background-color: #f0fdf4; color: #16a34a; }
+.MensajeError { background-color: #fef2f2; color: #dc2626; }
+.SinTratamientos { background-color: #f8fafc; color: #94a3b8; border: 1px dashed #cbd5e1; margin-bottom: 0; }
+
+/* ==========================================================================
+   Ajustes Responsivos de Rejilla (Escritorio)
+   ========================================================================== */
+@media screen and (min-width: 1025px) {
+  .GestionHeader {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 16px;
+  }
+
+  .GestionLayout {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 32px;
+  }
+
+  .PanelFormulario {
+    width: 45%;
+    position: sticky;
+    top: 24px;
+  }
+
+  .PanelLista {
+    width: 55%;
+  }
+
+  /* Distribución en una sola línea simétrica para las tarjetas existentes */
+  .TarjetaTratamiento {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 24px;
+  }
+
+  .TratamientoInfo {
+    width: 65%;
+  }
+
+  .TratamientoAcciones {
+    width: 160px;
+  }
+}
+
+/* ==========================================================================
+   Input de Archivos Estilizado (File Upload UX)
+   ========================================================================== */
+
+/* Oculta el botón feo por defecto del navegador */
+.InputFileOculto {
+  display: none !important;
+}
+
+/* El nuevo contenedor interactivo estilizado */
+.ContenedorUploadFalso {
+  width: 100%;
+  height: 64px;
+  background-color: #f8fafc;
+  border: 1.5px dashed #cbd5e1; 
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  box-sizing: border-box;
+  cursor: pointer;
+  gap: 14px;
+  transition: all 0.2s ease;
+}
+
+.ContenedorUploadFalso:hover {
+  background-color: #f5f3ff;
+  border-color: #7160e6;
+}
+
+/* Icono de flecha hacia arriba */
+.UploadIcono {
+  width: 32px;
+  height: 32px;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #64748b;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.01);
+}
+
+.ContenedorUploadFalso:hover .UploadIcono {
+  color: #7160e6;
+  border-color: #e2d9f3;
+  transform: translateY(-2px);
+}
+
+/* Textos informativos internos */
+.UploadTextos {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.UploadTextoPrincipal {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #334155;
+}
+
+.ContenedorUploadFalso:hover .UploadTextoPrincipal {
+  color: #7160e6;
+}
+
+.UploadTextoSecundario {
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+/* ==========================================================================
+   Visualizador de Imagen Actual (ImagenAtuall Miniatura)
+   ========================================================================== */
+.ImagenActual {
+  display: flex;
+  align-items: center;
+  background-color: #faf8ff;
+  border: 1px solid #eecffd;
+  border-radius: 14px;
+  padding: 10px 14px;
+  margin-top: 12px;
+  gap: 12px;
+}
+
+.ImagenActualMiniatura {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #f1f5f9;
+  border: 1px solid #e2d9f3;
+  flex-shrink: 0;
+}
+
+.ImagenActualMiniatura img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ImagenActualMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.ImagenActualLabel {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #c860e6; 
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.ImagenActualNombre {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #475569;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Añade puntos suspensivos si el nombre del archivo es muy largo */
+}
+
+/* ==========================================================================
+   Contenedor de Fila Elástica para Carga de Medios
+   ========================================================================== */
+.fila-media-upload {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Modificación de márgenes internos de los hijos para acoplarse limpios */
+.fila-media-upload .ImagenActual {
+  margin-top: 0; /* Eliminamos el margen superior viejo para que se alineen parejos */
+}
+
+@media screen and (min-width: 681px) {
+  
+  /* Si el contenedor tiene la clase de imagen actual, se activa la rejilla de 2 columnas */
+  .fila-media-upload.tiene-imagen-actual {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Mitad y mitad exactos */
+    align-items: center;
+    gap: 16px;
+  }
+  
+  /* Ajustamos la altura de ambos bloques para que compartan la misma simetría */
+  .ContenedorUploadFalso, 
+  .fila-media-upload .ImagenActual {
+    height: 64px;
+    box-sizing: border-box;
+  }
+  
+  /* Optimizamos los paddings internos de la miniatura para el formato horizontal */
+  .fila-media-upload .ImagenActual {
+    padding: 8px 14px;
+  }
+}

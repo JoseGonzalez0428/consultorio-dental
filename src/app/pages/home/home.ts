@@ -1,36 +1,24 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Component, OnInit, inject } from '@angular/core';
+import { Router, RouterModule } from '@angular/router';
+import { TratamientosService } from '../../services/tratamientos';
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [RouterModule],
   templateUrl: './home.html',
-  styleUrl: './home.css',
+  styleUrl: './home.css'
 })
-export class Home implements OnInit, OnDestroy {
+export class Home implements OnInit {
 
-  private carruselInterval: any;
-  
+  private router = inject(Router);
+  public tratamientosService = inject(TratamientosService);
+
   ngOnInit(): void {
-    this.iniciarCarrusel();
+    this.tratamientosService.fetchTratamientos();
   }
 
-  ngOnDestroy(): void {
-    if(this.carruselInterval){
-      clearInterval(this.carruselInterval);
-    }
-  }
-
-  iniciarCarrusel(): void {
-    const carrusel = document.getElementById('CarruselTratamientos');
-    if(carrusel){
-      let currentIndex = 0;
-      const slides = carrusel.children;
-      this.carruselInterval = setInterval(() => {
-        slides[currentIndex].scrollIntoView({ behavior: 'smooth' });
-        currentIndex = (currentIndex + 1) % slides.length;
-      }, 3500);
-    }
+  verTratamiento(id: string): void {
+    this.router.navigate(['/tratamiento', id]);
   }
 }

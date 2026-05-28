@@ -1,0 +1,207 @@
+/* ==========================================================================
+   Estilos Base y Contenedor (Móvil Primero)
+   ========================================================================== */
+.navbar {
+  background-color: #ffffff;
+  border-bottom: 1px solid #f3e8ff; 
+  box-shadow: 0 4px 10px -4px rgba(113, 96, 230, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  font-family: system-ui, -apple-system, sans-serif;
+  padding: 0 16px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+/* Logo */
+.navbar-logo {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-logo img {
+  height: 46px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* Botón de Menú Hamburguesa en Móvil (Usa el morado de la marca) */
+.hamburger-btn {
+  display: block;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #7160e6;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+}
+
+.hamburger-btn:hover {
+  background-color: #fdf6ff; /* Destello rosa sutil */
+}
+
+/* ==========================================================================
+   Desplegable Móvil (Por defecto colapsado)
+   ========================================================================== */
+.navbar-menu {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  top: 54px;
+  left: -16px;
+  right: -16px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #f3e8ff;
+  padding: 24px;
+  box-shadow: 0 10px 15px -3px rgba(113, 96, 230, 0.05);
+  gap: 16px;
+  animation: slideIn 0.2s ease-out;
+}
+
+.menu-abierto .navbar-menu {
+  display: flex;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Saludo de usuario */
+.user-greeting {
+  font-size: 0.9rem;
+  color: #4b5563;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #fdf6ff;
+}
+
+.user-name {
+  color: #4c1d95;
+}
+
+/* Enlaces del Menú (Ajuste a tonos de marca) */
+.nav-link {
+  color: #4b5563;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+
+/* Al pasar el cursor o estar activo, resalta con el rosa/morado suave */
+.nav-link:hover, .nav-link.active {
+  color: #C860E6; /* El rosa de acento en texto */
+  background-color: #fdf6ff; /* Fondo rosa pastel super suave */
+}
+
+/* Contenedor de Botones de Acción */
+.auth-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+/* Botones UI Basados en Clases Reutilizables */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  padding: 0 18px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+/* ¡NUEVO! Botón Principal con el Rosa Fiusha original estilizado */
+.btn-accent {
+  background-color: #C860E6;
+  color: #ffffff;
+  box-shadow: 0 4px 6px -1px rgba(200, 96, 230, 0.2);
+}
+
+.btn-accent:hover {
+  background-color: #b34fd1;
+  box-shadow: 0 8px 12px -3px rgba(200, 96, 230, 0.3);
+}
+
+/* Botón Secundario con el color Morado */
+.btn-secondary {
+  background-color: #f5f3ff;
+  color: #7160e6;
+}
+
+.btn-secondary:hover {
+  background-color: #eecffd;
+  color: #5b4cc4;
+}
+
+.btn-logout {
+  background-color: #fef2f2;
+  color: #ef4444;
+}
+
+.btn-logout:hover {
+  background-color: #fee2e2;
+}
+
+/* ==========================================================================
+   Modo Escritorio (Pantallas Grandes)
+   ========================================================================== */
+@media screen and (min-width: 1024px) {
+  .hamburger-btn {
+    display: none;
+  }
+
+  .navbar-menu {
+    display: flex;
+    flex-direction: row;
+    position: static;
+    padding: 0;
+    box-shadow: none;
+    border: none;
+    background: transparent;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .user-greeting {
+    padding-bottom: 0;
+    border-bottom: none;
+    margin-right: 12px;
+    font-size: 0.875rem;
+  }
+
+  .nav-link {
+    font-size: 0.875rem;
+    padding: 8px 16px;
+  }
+
+  .auth-buttons {
+    flex-direction: row;
+    margin-top: 0;
+    margin-left: 12px;
+    gap: 8px;
+  }
+}

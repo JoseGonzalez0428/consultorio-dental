@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { AuthService } from '../../services/auth';
 
 @Component({
   selector: 'app-footer',
@@ -9,16 +10,5 @@ import { RouterModule } from '@angular/router';
   styleUrl: './footer.css',
 })
 export class Footer {
-  isAuthenticated: boolean = false;
-  tipoUsuario: string | null = null;
-
-  ngOnInit(): void {
-    const token = localStorage.getItem('token');
-    const tipo = localStorage.getItem('tipo_usuario');
-
-    if(token && tipo){
-      this.isAuthenticated = true;
-      this.tipoUsuario = tipo;
-    }
-  }
+  public readonly authService = inject(AuthService);
 }

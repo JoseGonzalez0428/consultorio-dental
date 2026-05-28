@@ -1,55 +1,87 @@
 <div class="Pagina">
-  <div class="Contenido" id="ContAgendar">
+  <div id="ContAgendar">
+    
     <div class="AgendarIzq">
       <div class="TitContenido">Crear nuevo reporte</div>
-      <div id="ImgAgendar">
-        <img src="Imagenes/reportes-medicos.jpg" alt="Reportes Médicos">
+      
+      <div class="kpi-dashboard">
+        <div class="kpi-card text-card">
+          <h3>Gestión Documental</h3>
+          <p>Monitoreo de historiales clínicos y evolución de tratamientos de los pacientes del consultorio.</p>
+        </div>
+
+        <div class="kpi-card-metric highlight-metric">
+          <span class="kpi-label">Pendientes de redactar</span>
+          <span class="kpi-value">{{ reportesService.fechasSinReporte().length }}</span>
+        </div>
+
+        <div class="kpi-grid-sub">
+          <div class="kpi-card-metric">
+            <span class="kpi-label">Reportes creados</span>
+            <span class="kpi-value">{{ reportesService.totalReportes() }}</span>
+          </div>
+          <div class="kpi-card-metric">
+            <span class="kpi-label">Mes actual</span>
+            <span class="kpi-value">{{ mesActualCapitalizado }}</span>
+          </div>
+        </div>
       </div>
     </div>
 
     <div class="AgendarDer">
-      @if (mensaje) {
-        <p style="margin-bottom: 20px; color: green; font-family: Verdana; font-weight: bold;">
-          {{ mensaje }}
-        </p>
-      }
-      @if (error) {
-        <p style="margin-bottom: 20px; color: red; font-family: Verdana; font-weight: bold;">
-          {{ error }}
-        </p>
-      }
-
-      <div class="TitOpcion">Selecciona la fecha (solo citas pasadas):</div>
-      <div class="Opciones">
-        <div class="TipoOpcion">
-          <input type="date" [(ngModel)]="fechaSeleccionada"
-            [max]="ayer"
-            (ngModelChange)="cargarCitas($event)"
-            required>
+      <form [formGroup]="reporteForm" (ngSubmit)="onSubmit()">
+        
+        <div class="form-group-booking">
+          <label class="TitOpcion">Fecha:</label>
+          <div class="Opciones">
+            <div class="BotonOpcion InputCompleto">
+              <select formControlName="fecha" (change)="cargarCitas()">
+                <option value="">Selecciona una fecha</option>
+                @for (fecha of reportesService.fechasSinReporte(); track fecha) {
+                  <option [value]="fecha">{{ formatearFecha(fecha) }}</option>
+                }
+              </select>
+            </div>
+          </div>
         </div>
-      </div>
 
-      <div class="TitOpcion">Citas disponibles:</div>
-      <div class="Opciones">
-        <select [(ngModel)]="idCitaSeleccionada" required>
-          <option value="">Selecciona una cita</option>
-          @for (cita of citas; track cita.id_cita) {
-            <option [value]="cita.id_cita">
-              {{ cita.hora }} - {{ cita.nombre_paciente }} - {{ cita.nombre_tratamiento }}
-            </option>
-          }
-        </select>
-      </div>
+        <div class="form-group-booking">
+          <label class="TitOpcion">Cita:</label>
+          <div class="Opciones">
+            <div class="BotonOpcion InputCompleto">
+              <select formControlName="id_cita">
+                <option value="">Selecciona una cita</option>
+                @for (cita of reportesService.citasPasadas(); track cita._id) {
+                  <option [value]="cita._id">
+                    {{ cita.hora }} - {{ cita.nombre_paciente }} - {{ cita.nombre_tratamiento }}
+                  </option>
+                }
+              </select>
+            </div>
+          </div>
+        </div>
 
-      <div class="TitOpcion">Notas:</div>
-      <div class="Opciones">
-        <textarea [(ngModel)]="notas" rows="6"
-          style="width:100%; font-family: Arial, sans-serif;"
-          required></textarea>
-      </div>
+        <div class="form-group-booking">
+          <label class="TitOpcion">Notas:</label>
+          <div class="Opciones ContainerTextarea">
+            <textarea formControlName="notas" rows="6" 
+              placeholder="Escriba las observaciones clínicas del tratamiento aquí..."></textarea>
+          </div>
+        </div>
 
-      <br>
-      <button class="BotonCita" (click)="crearReporte()">Crear reporte</button>
+        <button type="submit" class="BotonCita" 
+          [disabled]="reporteForm.invalid || reportesService.isLoading()">
+          {{ reportesService.isLoading() ? 'Guardando...' : 'Crear reporte' }}
+        </button>
+      </form>
+
+      @if (reportesService.successMessage()) {
+        <div class="MensajeExito">{{ reportesService.successMessage() }}</div>
+      }
+      @if (reportesService.errorMessage()) {
+        <div class="MensajeError">{{ reportesService.errorMessage() }}</div>
+      }
     </div>
+
   </div>
 </div>

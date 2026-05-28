@@ -1,7 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, RouterModule, NavigationEnd } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { Component, inject, signal } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { AuthService } from '../../services/auth';
 
 @Component({
   selector: 'app-navbar',
@@ -10,61 +9,22 @@ import { filter } from 'rxjs/operators';
   templateUrl: './navbar.html',
   styleUrl: './navbar.css',
 })
-export class Navbar implements OnInit, OnDestroy {
-
-  isAuthenticated: boolean = false;
-  tipoUsuario: string | null = null;
-  nombreUsuario: string = '';
-  saludo: string = '';
-
-  private routerSub: Subscription = new Subscription();
-
-  constructor(private router: Router) {}
-
-  ngOnInit(): void {
-    this.cargarDatosUsuario();
-
-    // Se vuelve a ejecutar cada vez que el usuario navega a una nueva página
-    this.routerSub = this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
-    ).subscribe(() => {
-      this.cargarDatosUsuario();
-    });
-  }
-
-  ngOnDestroy(): void {
-    this.routerSub.unsubscribe();
-  }
-
-  cargarDatosUsuario(): void {
-    const token = localStorage.getItem('token');
-    const tipo = localStorage.getItem('tipo_usuario');
-    const nombre = localStorage.getItem('nombre_usuario');
-    const sexo = localStorage.getItem('sexo_usuario');
-
-    if (token && tipo) {
-      this.isAuthenticated = true;
-      this.tipoUsuario = tipo;
-      this.nombreUsuario = nombre ?? '';
-      this.saludo = sexo === 'Femenino' ? 'Bienvenida' : 'Bienvenido';
-    } else {
-      this.isAuthenticated = false;
-      this.tipoUsuario = null;
-    }
-  }
+export class Navbar {
+  public readonly authService = inject(AuthService);
+  
+  // Control reactivo del menú móvil
+  public isMenuOpen = signal<boolean>(false);
 
   toggleMenu(): void {
-    const menu = document.getElementById('Menu');
-    menu?.classList.toggle('MenuAbierto');
+    this.isMenuOpen.update(state => !state);
+  }
+
+  closeMenu(): void {
+    this.isMenuOpen.set(false);
   }
 
   cerrarSesion(): void {
-    localStorage.removeItem('token');
-    localStorage.removeItem('tipo_usuario');
-    localStorage.removeItem('nombre_usuario');
-    localStorage.removeItem('sexo_usuario');
-    this.isAuthenticated = false;
-    this.tipoUsuario = null;
-    this.router.navigate(['/inicio']);
+    this.closeMenu();
+    this.authService.logout();
   }
 }

@@ -1,14 +1,31 @@
 <div class="Pagina">
   <div class="Contenido">
-    <h2 class="TitContenido" style="text-align: center;">Nuestros tratamientos</h2>
+    
+    <div class="tratamientos-wrapper">
+      
+      <h2 class="TitContenido TituloTratamientos">Nuestros tratamientos</h2>
 
-    <div class="lista-tratamientos">
-      @for (tratamiento of tratamientos; track tratamiento.id) {
-        <div class="tratamiento-carta" (click)="verTratamiento(tratamiento.id)">
-          <img [src]="'Imagenes/' + tratamiento.imagen" [alt]="tratamiento.nombre">
-          <div>{{ tratamiento.nombre }}</div>
-        </div>
+      @if (tratamientosService.isLoading()) {
+        <div class="MensajeCargando">Cargando tratamientos...</div>
       }
+
+      <div class="lista-tratamientos">
+        @for (tratamiento of tratamientosService.tratamientos(); track tratamiento._id) {
+          <div class="tratamiento-carta" (click)="verTratamiento(tratamiento._id!)">
+            
+            <div class="tratamiento-imagen-container">
+              <img [src]="tratamiento.imagen" alt="{{ tratamiento.nombre }}" class="tratamiento-imagen" />
+            </div>
+            
+            <div class="tratamiento-info-wrapper">
+              <span class="tratamiento-name-text">{{ tratamiento.nombre }}</span>
+            </div>
+
+          </div>
+        }
+      </div>
+
     </div>
+
   </div>
 </div>

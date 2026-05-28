@@ -1,0 +1,290 @@
+/* ==========================================================================
+   Contenedor y Listado General (Garantía de Altura Invariable)
+   ========================================================================== */
+.Pagina {
+  background-color: #faf9fe;
+  font-family: "Inter", "Geist Sans", -apple-system, sans-serif;
+  box-sizing: border-box;
+  letter-spacing: -0.01em;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.TitContenido {
+  color: #0f172a;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 24px;
+}
+
+/* El candado de accesibilidad: Obliga al contenedor a medir lo mismo en PC */
+.ContenedorCitas {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 16px;
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 680px; 
+}
+
+/* ==========================================================================
+   Estructura de la Tarjeta Individual (.TarjetaCita)
+   ========================================================================== */
+.TarjetaCita {
+  background-color: #ffffff;
+  border-radius: 20px;
+  border: 1px solid #f1f5f9;
+  padding: 24px;
+  box-shadow: 0 4px 12px -2px rgba(113, 96, 230, 0.02);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transition: opacity 0.2s ease, border-color 0.2s ease;
+}
+
+.TarjetaCita[data-status="Pendiente"] {
+  border-left: 4px solid #7160e6;
+}
+
+.TarjetaCita[data-status="Terminada"],
+.TarjetaCita[data-status="Cancelada"] {
+  background-color: #f8fafc;
+  border-color: #e2e8f0;
+  opacity: 0.75;
+}
+
+/* Distribución interna de los datos */
+.CitaBloqueInfo {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.InfoGrupo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.InfoLabel {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.InfoValorDestacado {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.InfoValorSecundario {
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+/* ==========================================================================
+   Badges de Estado Estilizados (Selectores de Atributo)
+   ========================================================================== */
+.EstadoCita {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  width: fit-content;
+}
+
+.EstadoCita[data-status="Pendiente"] { background-color: #f5f3ff; color: #7160e6; }
+.EstadoCita[data-status="Terminada"] { background-color: #f0fdf4; color: #16a34a; }
+.EstadoCita[data-status="Cancelada"] { background-color: #fef2f2; color: #ef4444; }
+
+/* ==========================================================================
+   Panel de Modificación (Controles de Cita Activa)
+   ========================================================================== */
+.OpcionesCita {
+  background-color: #fbfaff;
+  border-radius: 14px;
+  padding: 16px;
+  border: 1px dashed #e2d9f3;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ControlesSeleccion {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.SelectorWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.SelectorWrapper::after {
+  content: "↓";
+  font-size: 11px;
+  font-weight: 700;
+  color: #94a3b8;
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.OpcionesCita select {
+  width: 100%;
+  height: 40px;
+  padding: 0 24px 0 12px;
+  background-color: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #334155;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.OpcionesCita select:focus {
+  border-color: #7160e6;
+  box-shadow: 0 0 0 3px #f5f3ff;
+}
+
+.OpcionesCita select:disabled {
+  background-color: #f1f5f9;
+  color: #94a3b8;
+  cursor: not-allowed;
+  border-color: #e2e8f0;
+}
+
+/* Botones de acción */
+.BotonesCita {
+  display: flex;
+  gap: 8px;
+}
+
+.BotonCita {
+  flex: 1;
+  height: 40px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: inherit;
+}
+
+.btn-modificar { background-color: #7160e6; color: #ffffff; box-shadow: 0 2px 4px rgba(113, 96, 230, 0.1); }
+.btn-modificar:hover { background-color: #5b4cc4; }
+
+.btn-cancelar { background-color: #fef2f2; color: #ef4444; border: 1px solid #fee2e2; }
+.btn-cancelar:hover { background-color: #ef4444; color: #ffffff; }
+
+/* ==========================================================================
+   Alertas y Paginación Fija
+   ========================================================================== */
+.SinCitas {
+  text-align: center;
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 20px;
+  border: 1px dashed #cbd5e1;
+  color: #64748b;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.DesplazarReporte {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-top: 24px;
+  padding: 12px 0;
+}
+
+.DesplazarReporte img {
+  height: 14px;
+  width: auto;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.flechaDesactivada {
+  opacity: 0.15;
+  cursor: default;
+}
+
+#NoReporte {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #475569;
+}
+
+.MensajeExito, .MensajeError {
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 12px;
+}
+.MensajeExito { background-color: #f0fdf4; color: #16a34a; }
+.MensajeError { background-color: #fef2f2; color: #dc2626; }
+
+/* ==========================================================================
+   Fijación Estricta de Altura en Escritorio (UX Accesible)
+   ========================================================================== */
+@media screen and (min-width: 681px) {
+  
+  /* 👈 Fijamos la altura matemática exacta para 3 tarjetas pendientes con sus respectivos gaps */
+  .ContenedorCitas {
+    height: 590px; 
+    min-height: 590px;
+    justify-content: flex-start;
+  }
+
+  .CitaBloqueInfo {
+    grid-template-columns: 30% 45% 25%;
+    align-items: center;
+  }
+
+  .OpcionesCita {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px; 
+    box-sizing: border-box;
+  }
+
+  .ControlesSeleccion {
+    grid-template-columns: 1fr 1fr;
+    width: 60%;
+    gap: 16px;
+  }
+
+  .BotonesCita {
+    width: 35%;
+    max-width: 240px;
+  }
+}

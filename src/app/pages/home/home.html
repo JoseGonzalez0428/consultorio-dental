@@ -1,28 +1,120 @@
 <div class="Pagina">
-  <div class="Contenido">
-    <div class="TextoIndex" style="text-align: center; margin-bottom: 40px; font-family: Verdana; font-size: 18px;">
-      <h2>Bienvenido a nuestra clínica dental</h2>
-      <p>Tu sonrisa es nuestra prioridad. Descubre nuestros tratamientos y atención personalizada.</p>
+
+  <!-- HERO -->
+  <section class="HeroSection">
+    <div class="HeroContenido">
+      <div class="HeroTexto">
+        <span class="HeroBadge">Odontología Integral Flores</span>
+        <h1 class="HeroTitulo">Tu sonrisa merece el mejor cuidado</h1>
+        <p class="HeroSubtitulo">Atención dental profesional y personalizada en Villa de Reyes, S.L.P. Cuidamos tu salud bucal con tecnología moderna y calidez humana.</p>
+        <div class="HeroBotones">
+          <a routerLink="/agendar" class="BtnHeroPrimario">Agendar cita</a>
+          <a routerLink="/tratamientos" class="BtnHeroSecundario">Ver tratamientos</a>
+        </div>
+      </div>
+      <div class="HeroImagen">
+        <img src="Imagenes/Consultorio.jpg" alt="Consultorio dental">
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="StatsSection">
+    <div class="StatsGrid">
+      <div class="StatCard">
+        <span class="StatNumero">500+</span>
+        <span class="StatLabel">Pacientes atendidos</span>
+      </div>
+      <div class="StatCard">
+        <span class="StatNumero">10+</span>
+        <span class="StatLabel">Años de experiencia</span>
+      </div>
+      <div class="StatCard">
+        <span class="StatNumero">{{ tratamientosService.tratamientos().length }}</span>
+        <span class="StatLabel">Tratamientos disponibles</span>
+      </div>
+      <div class="StatCard">
+        <span class="StatNumero">100%</span>
+        <span class="StatLabel">Compromiso contigo</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRATAMIENTOS DESTACADOS -->
+  <section class="TratamientosSection">
+    <div class="SeccionHeader">
+      <h2 class="SeccionTitulo">Nuestros tratamientos</h2>
+      <p class="SeccionSubtitulo">Ofrecemos una amplia gama de servicios dentales para toda la familia</p>
     </div>
 
-    <!-- Carrusel -->
-    <div id="CarruselTratamientos" class="carousel">
-      <div class="slide">
-        <img src="Imagenes/dra_atendiendo.jpg" alt="Dra atendiendo">
-        <div class="titulo-slide">Atención personalizada y profesional</div>
-      </div>
-      <div class="slide">
-        <img src="Imagenes/Consultorio.jpg" alt="Consultorio interior">
-        <div class="titulo-slide">Comodidad y tecnología en un solo lugar</div>
-      </div>
-      <div class="slide">
-        <img src="Imagenes/fachada_consultorio.png" alt="Fachada del consultorio">
-        <div class="titulo-slide">Visítanos en Villa de Reyes</div>
-      </div>
+    <div class="TratamientosGrid">
+      @for (t of tratamientosService.tratamientos().slice(0, 3); track t._id) {
+        <div class="TratamientoCard" (click)="verTratamiento(t._id!)">
+          <div class="TratamientoCardImagen">
+            <img [src]="t.imagen" [alt]="t.nombre">
+          </div>
+          <div class="TratamientoCardInfo">
+            <h3 class="TratamientoCardNombre">{{ t.nombre }}</h3>
+            <p class="TratamientoCardDesc">{{ t.descripcion }}</p>
+            <span class="TratamientoCardPrecio">{{ t.precio }}</span>
+          </div>
+        </div>
+      }
     </div>
 
-    <div style="text-align: center; margin-top: 40px;">
-      <button class="Boton" routerLink="/tratamientos">Ver todos los tratamientos</button>
+    <div class="VerTodosWrapper">
+      <a routerLink="/tratamientos" class="BtnVerTodos">Ver todos los tratamientos</a>
     </div>
-  </div>
+  </section>
+
+  <!-- POR QUÉ ELEGIRNOS -->
+  <section class="PorQueSection">
+    <div class="SeccionHeader">
+      <h2 class="SeccionTitulo">¿Por qué elegirnos?</h2>
+      <p class="SeccionSubtitulo">Nos comprometemos a brindarte la mejor experiencia dental</p>
+    </div>
+
+    <div class="PorQueGrid">
+      <div class="PorQueCard">
+        <div class="PorQueIcono">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#7160e6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+          </svg>
+        </div>
+        <h3 class="PorQueTitulo">Atención personalizada</h3>
+        <p class="PorQueDesc">Cada paciente es único. Diseñamos un plan de tratamiento adaptado a tus necesidades específicas.</p>
+      </div>
+
+      <div class="PorQueCard">
+        <div class="PorQueIcono">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#7160e6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+        </div>
+        <h3 class="PorQueTitulo">Horarios flexibles</h3>
+        <p class="PorQueDesc">Agenda tu cita en el horario que mejor se adapte a tu rutina. Tu tiempo es valioso para nosotros.</p>
+      </div>
+
+      <div class="PorQueCard">
+        <div class="PorQueIcono">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#7160e6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+        </div>
+        <h3 class="PorQueTitulo">Experiencia y confianza</h3>
+        <p class="PorQueDesc">Más de 10 años cuidando la salud bucal de familias en Villa de Reyes con profesionalismo y calidez.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="CTASection">
+    <div class="CTAContenido">
+      <h2 class="CTATitulo">¿Listo para tu primera cita?</h2>
+      <p class="CTASubtitulo">Agenda hoy y da el primer paso hacia una sonrisa más saludable</p>
+      <a routerLink="/agendar" class="BtnCTA">Agendar mi cita ahora</a>
+    </div>
+  </section>
+
 </div>

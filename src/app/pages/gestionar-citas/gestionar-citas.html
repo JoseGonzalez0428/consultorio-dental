@@ -1,60 +1,76 @@
 <div class="Pagina">
-  <div class="Contenido">
-    <div class="GestionarArriba">
+  <div class="Contenido" id="ContAgendar">
+
+    <div class="AgendarIzq">
       <div class="TitContenido">Gestionar citas</div>
-      <div class="OpcionesGestionar">
-        <div class="TipoOpcion">Día</div>
-        <div class="BotonOpcion">
-          <input type="date" [(ngModel)]="fechaSeleccionada" (ngModelChange)="cargarCitas($event)">
-        </div>
-      </div>
+
+      <app-calendario
+        [dias]="diasConCitas()"
+        [vacios]="horariosService.vacios()"
+        [nombreMes]="horariosService.nombreMes()"
+        [anioActual]="horariosService.anioActual()"
+        [diaSeleccionado]="fechaSeleccionada()"
+        (anteriorClic)="horariosService.mesAnterior()"
+        (siguienteClic)="horariosService.mesSiguiente()"
+        (diaClic)="seleccionarDia($event)">
+      </app-calendario>
     </div>
 
-    <div id="ContenidoHorarios">
-      @if (!fechaSeleccionada) {
-        <p style="padding:20px;">Por favor selecciona una fecha para ver las citas.</p>
-      } @else if (citas.length === 0) {
-        <p style="padding:20px;">No hay citas para la fecha <strong>{{ fechaSeleccionada }}</strong>.</p>
+    <div class="AgendarDer">
+      @if (!fechaSeleccionada()) {
+        <div class="MensajeInfo">
+          Selecciona una fecha del calendario para ver las citas.
+        </div>
+      } @else if (citasService.citasPorFecha().length === 0) {
+        <div class="MensajeInfo">
+          No hay citas para el {{ formatearFecha(fechaSeleccionada()) }}.
+        </div>
       } @else {
-        <div class="TablaCitas2">
-          <div class="CeldaCitas" id="CeldaTit">Hora</div>
-          <div class="CeldaCitas" id="CeldaTit">Tratamiento</div>
-          <div class="CeldaCitas" id="CeldaTit">Paciente</div>
-          <div class="CeldaCitas" id="CeldaTit">Acciones</div>
+        <div class="SubTitFormulario">
+          Citas del {{ formatearFecha(fechaSeleccionada()) }}
+        </div>
 
-          @for (cita of citas; track cita.id_cita) {
-            <div class="CeldaCitas">
-              {{ cita.hora }} - {{ sumarUnaHora(cita.hora) }}
-            </div>
-            <div class="CeldaCitas">{{ cita.nombre_tratamiento }}</div>
-            <div class="CeldaCitas">
-              <div>{{ cita.nombre_paciente }}</div>
-              <div>{{ cita.telefono }}</div>
-            </div>
-            <div class="CeldaCitas" style="display:flex; gap:4px;">
-              <button class="BotonCita" (click)="cancelarCita(cita.id_cita)">Cancelar</button>
-              <button class="BotonCita" (click)="completarCita(cita.id_cita)">Completar</button>
+        <div class="appointments-grid">
+          @for (cita of citasService.citasPorFecha(); track cita._id) {
+            <div class="appointment-admin-card" [attr.data-status]="cita.estado">
+              
+              <div class="card-main-body">
+                <div class="meta-time-container">
+                  <span class="time-badge">{{ cita.hora }} - {{ sumarUnaHora(cita.hora) }}</span>
+                  <div class="meta-status-container">
+                    <span class="status-pill" [attr.data-status]="cita.estado">{{ cita.estado }}</span>
+                  </div>
+                </div>
+
+                <div class="treatment-name-wrapper">
+                  <span class="treatment-tag">{{ cita.nombre_tratamiento }}</span>
+                </div>
+                
+                <section class="patient-details-row">
+                  <h3 class="patient-name">{{ cita.nombre_paciente }}</h3>
+                  <a [href]="'tel:' + cita.telefono" class="patient-phone">
+                    📞 {{ cita.telefono }}
+                  </a>
+                </section>
+              </div>
+
+              @if (cita.estado === 'Pendiente') {
+                <footer class="card-actions-area">
+                  <button type="button" class="btn-action-admin btn-complete" (click)="completarCita(cita._id!)">
+                    Completar
+                  </button>
+                  <button type="button" class="btn-action-admin btn-cancel" (click)="cancelarCita(cita._id!)">
+                    Cancelar
+                  </button>
+                </footer>
+              }
             </div>
           }
         </div>
-
-        <!-- Paginación -->
-        @if (totalPaginas > 1) {
-          <div class="DesplazarReporte" style="margin-top:20px; justify-content:center; align-items:center; gap:10px;">
-            <img src="Imagenes/FlechaIzq.png" alt="Anterior"
-              [style.opacity]="paginaActual === 1 ? '0.3' : '1'"
-              [style.cursor]="paginaActual === 1 ? 'default' : 'pointer'"
-              (click)="cambiarPagina(paginaActual - 1)">
-            <div id="NoReporte">
-              {{ paginaActual | number:'2.0-0' }}/{{ totalPaginas | number:'2.0-0' }}
-            </div>
-            <img src="Imagenes/FlechaDer.png" alt="Siguiente"
-              [style.opacity]="paginaActual === totalPaginas ? '0.3' : '1'"
-              [style.cursor]="paginaActual === totalPaginas ? 'default' : 'pointer'"
-              (click)="cambiarPagina(paginaActual + 1)">
-          </div>
-        }
       }
     </div>
+
   </div>
 </div>
+
+<app-modal-confirmacion #modal></app-modal-confirmacion>

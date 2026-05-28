@@ -1,33 +1,59 @@
 <div class="Pagina">
   <div class="Contenido">
-    @if (tratamiento) {
+    
+    @if (tratamientosService.isLoading()) {
+      <div class="MensajeCargando">Cargando...</div>
+    }
+
+    @if (tratamientosService.tratamientoSeleccionado()) {
+      <div class="BotonVolverContenedor">
+        <a routerLink="/tratamientos" class="BotonVolver">← Volver a tratamientos</a>
+      </div>
+
       <div class="Tratamiento">
+        
         <div class="ImagenTrat">
-          <img [src]="'Imagenes/' + tratamiento.imagen" [alt]="tratamiento.nombre">
+          <img [src]="tratamientosService.tratamientoSeleccionado()!.imagen" 
+              [alt]="tratamientosService.tratamientoSeleccionado()!.nombre">
         </div>
+        
         <div class="InfoTrat">
-          <div class="TituloTrat">{{ tratamiento.nombre }}</div>
-          <div class="PrecioTrat">{{ tratamiento.precio }}</div>
-          <div class="TextoTrat">{{ tratamiento.descripcion }}</div>
-          <div class="CuadroRecomen">
-            <div class="TituloCuadro">¿Cuándo se recomienda?</div>
-            <div class="TextoCuadro">
-              <ul>
-                @for (recomendacion of tratamiento.recomendaciones; track recomendacion) {
-                  <li>{{ recomendacion }}</li>
-                }
-              </ul>
+          <div class="TratamientoHeaderRow">
+            <h1 class="TituloTrat">{{ tratamientosService.tratamientoSeleccionado()!.nombre }}</h1>
+            <div class="PrecioTratContainer">
+              <span class="PrecioTrat">{{ tratamientosService.tratamientoSeleccionado()!.precio }}</span>
             </div>
           </div>
-          <div style="margin-top: 20px;">
-            <button class="BotonCita" routerLink="/agendar">Agendar cita</button>
+          
+          <div class="TratamientoCuerpoRow">
+            <p class="TextoTrat">{{ tratamientosService.tratamientoSeleccionado()!.descripcion }}</p>
+            
+            <div class="CuadroRecomen">
+              <h2 class="TituloCuadro">¿Cuándo se recomienda?</h2>
+              <div class="TextoCuadro">
+                <ul>
+                  @for (recomendacion of tratamientosService.tratamientoSeleccionado()!.recomendaciones; track recomendacion) {
+                    <li>{{ recomendacion }}</li>
+                  }
+                </ul>
+              </div>
+            </div>
+          </div>
+          
+          <div class="BotonAgendarCita">
+            <button class="BotonCita" [routerLink]="['/agendar']" [queryParams]="{tratamiento: tratamientosService.tratamientoSeleccionado()!._id}">
+              Agendar cita
+            </button>
           </div>
         </div>
+
       </div>
+      @if (tratamientosService.tratamientoSeleccionado()?._id) {
+        <app-resenas [idTratamiento]="tratamientosService.tratamientoSeleccionado()!._id!"></app-resenas>
+      }
     } @else {
-      <div style="font-family: Verdana; padding: 40px; text-align: center;">
-        Tratamiento no encontrado.
-      </div>
+      <div class="MensajeNoEncontrado">Tratamiento no encontrado.</div>
     }
+    
   </div>
 </div>

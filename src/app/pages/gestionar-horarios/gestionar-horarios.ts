@@ -1,41 +1,127 @@
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, OnInit, inject, signal, computed} from '@angular/core';
+import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
+import { HorariosService } from '../../services/horarios';
+import { DiaCalendario } from '../../interfaces/horario.interface';
+import { ViewChild } from '@angular/core';
+import { ModalConfirmacion } from '../../components/modal-confirmacion/modal-confirmacion';
+import { Calendario } from '../../components/calendario/calendario';
 
 @Component({
   selector: 'app-gestionar-horarios',
   standalone: true,
-  imports: [FormsModule],
+  imports: [ReactiveFormsModule,  Calendario],
   templateUrl: './gestionar-horarios.html',
-  styleUrls: ['./gestionar-horarios.css']
+  styleUrl: './gestionar-horarios.css'
 })
-export class GestionarHorarios {
+export class GestionarHorarios implements OnInit {
 
-  fecha: string = '';
-  horaInicio: string = '';
-  horaFin: string = '';
-  mensaje: string = '';
+  private fb = inject(FormBuilder);
+  public horariosService = inject(HorariosService);
+  modalVisible = signal(false);
+  modalTitulo = signal('');
+  modalMensaje = signal('');
+  modalTextoConfirmar = signal('');
+  modalTipo = signal<'danger' | 'warning' | 'success'>('danger');
+  private modalAccion: (() => void) | null = null;
 
-  agregarHorario(): void {
-    if (!this.fecha || !this.horaInicio || !this.horaFin) {
-      this.mensaje = '⚠️ Todos los campos son obligatorios.';
-      return;
-    }
+    horasDisponibles: string[] = [
+    '07:00', '08:00', '09:00', '10:00', '11:00', '12:00',
+    '13:00', '14:00', '15:00', '16:00', '17:00', '18:00',
+    '19:00', '20:00', '21:00'
+  ];
 
-    if (this.horaInicio >= this.horaFin) {
-      this.mensaje = '⚠️ La hora de inicio debe ser menor que la hora de fin.';
-      return;
-    }
+  abrirModal(opciones: {
+    titulo: string;
+    mensaje: string;
+    textoConfirmar?: string;
+    tipo?: 'danger' | 'warning' | 'success';
+    accion: () => void;
+  }): void {
+    this.modalTitulo.set(opciones.titulo);
+    this.modalMensaje.set(opciones.mensaje);
+    this.modalTextoConfirmar.set(opciones.textoConfirmar ?? 'Confirmar');
+    this.modalTipo.set(opciones.tipo ?? 'danger');
+    this.modalAccion = opciones.accion;
+    this.modalVisible.set(true);
+  }
 
-    // Esto se reemplazará con llamada al backend
-    console.log('Horario agregado:', {
-      fecha: this.fecha,
-      hora_inicio: this.horaInicio,
-      hora_fin: this.horaFin
+  confirmarModal(): void {
+    if (this.modalAccion) this.modalAccion();
+    this.modalVisible.set(false);
+  }
+
+  cancelarModal(): void {
+    this.modalVisible.set(false);
+  }
+
+  diasSemana: string[] = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
+
+  private _diaSeleccionado = signal<DiaCalendario | null>(null);
+  public diaSeleccionadoObjeto = computed(() => {
+    const fecha = this._diaSeleccionado()?.fecha;
+    if (!fecha) return null;
+    return this.horariosService.diasCalendario().find(d => d.fecha === fecha) ?? null;
+  });
+
+  horarioForm = this.fb.group({
+    fecha: ['', [Validators.required]],
+    hora_inicio: ['', [Validators.required]],
+    hora_fin: ['', [Validators.required]]
+  });
+
+  ngOnInit(): void {
+    this.horariosService.fetchHorarios();
+  }
+
+  seleccionarDia(dia: DiaCalendario): void {
+    this._diaSeleccionado.set(dia);
+    this.horarioForm.controls.fecha.setValue(dia.fecha);
+  }
+
+  eliminarBloque(id: string, event: Event): void {
+    event.stopPropagation();
+    this.abrirModal({
+      titulo: 'Eliminar bloque',
+      mensaje: '¿Deseas eliminar este bloque de horario?',
+      textoConfirmar: 'Eliminar',
+      tipo: 'danger',
+      accion: () => this.horariosService.eliminarHorarioPorId(id)
     });
+  }
 
-    this.mensaje = '✅ Horario agregado exitosamente.';
-    this.fecha = '';
-    this.horaInicio = '';
-    this.horaFin = '';
+  eliminarFecha(fecha: string, event: Event): void {
+    event.stopPropagation();
+    this.abrirModal({
+      titulo: 'Eliminar horarios',
+      mensaje: `¿Deseas eliminar todos los horarios del día ${this.formatearFecha(fecha)}?`,
+      textoConfirmar: 'Eliminar',
+      tipo: 'danger',
+      accion: () => this.horariosService.eliminarHorario(fecha)
+    });
+  }
+
+  formatearFecha(fecha: string): string {
+    const [anio, mes, dia] = fecha.split('-');
+    return `${dia}/${mes}/${anio}`;
+  }
+
+  onSubmit(): void {
+    if (this.horarioForm.invalid) return;
+
+    const { fecha, hora_inicio, hora_fin } = this.horarioForm.value;
+
+    if (hora_inicio! >= hora_fin!) {
+      this.horariosService.errorMessage.set('La hora de inicio debe ser menor que la hora de fin.');
+      return;
+    }
+
+    this.horariosService.agregarHorario({
+      fecha: fecha!,
+      hora_inicio: hora_inicio!,
+      hora_fin: hora_fin!
+    });
+    
+
+    this.horarioForm.reset();
   }
 }

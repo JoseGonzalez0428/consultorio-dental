@@ -1,0 +1,501 @@
+/* ==========================================================================
+   Estructura Base y Tipografía Avanzada (Geist/Inter Stack)
+   ========================================================================== */
+.Pagina {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  background-color: #faf9fe;
+  /* 👈 Cambio radical de Tipografía: Stack sans-serif ultra moderno y nítido */
+  font-family: "Inter", "Geist Sans", "-apple-system", BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  box-sizing: border-box;
+  letter-spacing: -0.01em;
+}
+
+#ContAgendar {
+  max-width: 1100px;
+  margin: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  box-sizing: border-box;
+}
+
+.AgendarIzq, .AgendarDer {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.TitContenido {
+  font-size: 2rem;
+  font-weight: 800; /* Tipografía más pesada y contundente */
+  color: #0f172a;
+  letter-spacing: -0.03em;
+  margin-bottom: 20px;
+}
+
+.SubTitFormulario {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+/* ==========================================================================
+   El Módulo del Calendario Moderno
+   ========================================================================== */
+.calendar-card {
+  background-color: #ffffff;
+  border-radius: 24px;
+  border: 1px solid #f1f5f9;
+  box-shadow: 0 4px 20px -2px rgba(113, 96, 230, 0.02);
+  overflow: hidden;
+}
+
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 24px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.current-date {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+  text-transform: capitalize;
+  letter-spacing: -0.02em;
+}
+
+.nav-arrow {
+  background-color: #f8fafc;
+  color: #64748b;
+  border: 1px solid #ebdfff;
+  font-size: 0.9rem;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+.nav-arrow:hover { background-color: #f5f3ff; color: #7160e6; }
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  padding: 12px;
+}
+
+.weekday-label {
+  text-align: center;
+  font-weight: 700;
+  font-size: 0.7rem;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 12px 0;
+}
+
+.calendar-day, .day-empty {
+  aspect-ratio: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+  border-radius: 16px;
+  margin: 2px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.day-number {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.day-disabled .day-number { color: #cbd5e1; }
+.day-disabled:hover { background-color: #f8fafc; }
+
+/* Día seleccionado con un sutil aro de enfoque */
+.day-focused {
+  box-shadow: 0 0 0 2px #7160e6 !important;
+}
+
+.day-active {
+  background-color: #faf8ff;
+}
+.day-active .day-number {
+  color: #7160e6;
+}
+
+.slots-indicator {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 4px;
+  background-color: #ffffff;
+  padding: 2px 8px;
+  border-radius: 20px;
+  border: 1px solid #e2d9f3;
+}
+
+.indicator-dot {
+  width: 5px;
+  height: 5px;
+  background-color: #c860e6;
+  border-radius: 50%;
+}
+
+.slots-text {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #7160e6;
+}
+
+/* ==========================================================================
+   Panel de Control Derecho (Formulario + Auditoría)
+   ========================================================================== */
+.AgendarDer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.PanelSeccionFormulario, .PanelSeccionDetalleHoras {
+  background-color: #ffffff;
+  border-radius: 24px;
+  border: 1px solid #f1f5f9;
+  padding: 28px;
+  box-sizing: border-box;
+}
+
+.TitOpcion {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 14px;
+  margin-bottom: 6px;
+}
+
+.Opciones { display: flex; width: 100%; }
+.InputCompleto { width: 100% !important; border-radius: 12px !important; }
+
+.ContenedorHorasInline {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+.HoraInputGrupo { flex: 1; }
+
+.BotonOpcion {
+  height: 44px;
+  background-color: #f8fafc;
+  border: 1.5px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+.BotonOpcion input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #0f172a;
+  font-family: inherit;
+  height: 100%;
+}
+
+.BotonOpcion:focus-within {
+  background-color: #ffffff;
+  border-color: #7160e6;
+  box-shadow: 0 0 0 4px #f5f3ff;
+}
+
+.BotonCita {
+  width: 100%;
+  height: 44px;
+  background-color: #7160e6; 
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(113, 96, 230, 0.15);
+  transition: all 0.2s ease;
+  margin-top: 16px;
+}
+.BotonCita:hover { background-color: #5b4cc4; }
+.BotonCita:disabled { background-color: #e2e8f0; color: #94a3b8; cursor: not-allowed; box-shadow: none; }
+
+/* ==========================================================================
+   Listado de Auditoría Interna de Bloques
+   ========================================================================== */
+.MensajeDetalleInfo {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #94a3b8;
+  padding: 20px 0;
+  margin: 0;
+}
+
+.ListaBloquesAuditoria {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 200px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.ItemBloqueHora {
+  display: flex;
+  align-items: center;
+  background-color: #f8fafc;
+  border: 1px solid #f1f5f9;
+  padding: 10px 14px;
+  border-radius: 12px;
+  justify-content: space-between;
+}
+
+.BadgeTurno {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+.BadgeTurno[data-turno="Mat"] { background-color: #e0f2fe; color: #0369a1; }
+.BadgeTurno[data-turno="Ves"] { background-color: #fef3c7; color: #b45309; }
+
+.TextoHorasRango {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #334155;
+  flex-grow: 1;
+  margin-left: 12px;
+}
+
+.BtnBorrarBloqueSingle {
+  background-color: transparent;
+  border: none;
+  color: #94a3b8;
+  font-size: 0.8rem;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+.BtnBorrarBloqueSingle:hover {
+  background-color: #fef2f2;
+  color: #ef4444;
+}
+
+/* Alertas */
+.MensajeExito, .MensajeError {
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: center;
+}
+.MensajeExito { background-color: #f0fdf4; color: #16a34a; }
+.MensajeError { background-color: #fef2f2; color: #dc2626; }
+
+/* ==========================================================================
+   Responsivo
+   ========================================================================== */
+@media screen and (min-width: 1025px) {
+  #ContAgendar { flex-direction: row; align-items: flex-start; gap: 32px; }
+  .AgendarIzq { width: 55%; }
+  .AgendarDer { width: 45%; position: sticky; top: 24px; }
+}
+
+/* ==========================================================================
+   Estructura del Modal de Confirmación (ModalOverlay)
+   ========================================================================== */
+.ModalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(15, 23, 42, 0.3); /* Fondo oscuro translúcido */
+  backdrop-filter: blur(4px); /* Sutil desenfoque de fondo de alta fidelidad */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999; /* Asegura que se dibuje por encima de cualquier menú o tabla */
+  animation: fadeInOverlay 0.2s ease-out;
+}
+
+.ModalContenido {
+  background-color: #ffffff;
+  width: 90%;
+  max-width: 400px; /* Tamaño ideal y compacto para cuadros de diálogo */
+  border-radius: 24px;
+  border: 1px solid #f1f5f9;
+  padding: 28px;
+  box-sizing: border-box;
+  text-align: center;
+  box-shadow: 0 20px 25px -5px rgba(15, 23, 42, 0.08), 0 10px 10px -5px rgba(15, 23, 42, 0.04);
+  animation: scaleUpModal 0.25s cubic-bezier(0.34, 1.56, 0.64, 1); /* Efecto elástico sutil */
+}
+
+/* Elementos Internos del Diálogo */
+.ModalIcono {
+  font-size: 2rem;
+  margin-bottom: 14px;
+  display: inline-block;
+  line-height: 1;
+}
+
+.ModalTitulo {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+
+.ModalMensaje {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #64748b;
+  margin-bottom: 24px;
+  padding: 0 4px;
+}
+
+/* ==========================================================================
+   Botonera del Diálogo (.ModalBotones)
+   ========================================================================== */
+.ModalBotones {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+.BtnModalCancelar, 
+.BtnModalEliminar {
+  flex: 1;
+  height: 42px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+/* Botón Cancelar (Look Neutral Discreto) */
+.BtnModalCancelar {
+  background-color: #f1f5f9;
+  color: #475569;
+}
+
+.BtnModalCancelar:hover {
+  background-color: #e2e8f0;
+  color: #334155;
+}
+
+/* Botón Eliminar / Confirmar (Acento de Advertencia) */
+.BtnModalEliminar {
+  background-color: #ef4444; /* Rojo semántico de destrucción */
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.15);
+}
+
+.BtnModalEliminar:hover {
+  background-color: #dc2626;
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   Animaciones de Fluidez Visual
+   ========================================================================== */
+@keyframes fadeInOverlay {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleUpModal {
+  from {
+    transform: scale(0.92);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.BotonOpcion select {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 0.9rem;
+  color: #1f2937;
+  font-family: inherit;
+  height: 100%;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 24px;
+}
+
+.BotonOpcion {
+  position: relative;
+}
+
+.BotonOpcion::after {
+  content: "▼";
+  font-size: 10px;
+  color: #9ca3af;
+  position: absolute;
+  right: 14px;
+  pointer-events: none;
+}
+
+.BotonOpcion:focus-within {
+  background-color: #ffffff;
+  border-color: #c860e6;
+  box-shadow: 0 0 0 4px #fdf4ff;
+}
+
+.ContenedorHorasInline {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+}
+
+.HoraInputGrupo {
+  flex: 1;
+}

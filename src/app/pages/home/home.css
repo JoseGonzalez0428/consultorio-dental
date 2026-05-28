@@ -1,0 +1,436 @@
+.Pagina {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #faf9fe;
+  font-family: "Inter", "Geist Sans", -apple-system, sans-serif;
+}
+
+/* ==========================================================================
+   HERO
+   ========================================================================== */
+.HeroSection {
+  width: 100%;
+  padding: 60px 24px;
+  box-sizing: border-box;
+}
+
+.HeroContenido {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: center;
+}
+
+.HeroTexto {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-align: center;
+}
+
+.HeroBadge {
+  display: inline-block;
+  background-color: #f5f3ff;
+  color: #7160e6;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 6px 16px;
+  border-radius: 20px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.HeroTitulo {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.HeroSubtitulo {
+  font-size: 1rem;
+  color: #64748b;
+  line-height: 1.6;
+  margin: 0;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.HeroBotones {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.BtnHeroPrimario {
+  background-color: #7160e6;
+  color: #ffffff;
+  padding: 12px 28px;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.BtnHeroPrimario:hover {
+  background-color: #5d4ed4;
+}
+
+.BtnHeroSecundario {
+  background-color: #ffffff;
+  color: #7160e6;
+  padding: 12px 28px;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1.5px solid #e2e8f0;
+  transition: all 0.2s ease;
+}
+
+.BtnHeroSecundario:hover {
+  border-color: #7160e6;
+  background-color: #f5f3ff;
+}
+
+.HeroImagen {
+  width: 100%;
+  max-width: 600px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(113, 96, 230, 0.15);
+}
+
+.HeroImagen img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  display: block;
+}
+
+/* ==========================================================================
+   STATS
+   ========================================================================== */
+.StatsSection {
+  background-color: #ffffff;
+  padding: 48px 24px;
+  box-sizing: border-box;
+}
+
+.StatsGrid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.StatCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 24px;
+  border-radius: 16px;
+  background-color: #faf9fe;
+  border: 1px solid #f1f5f9;
+}
+
+.StatNumero {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #7160e6;
+  letter-spacing: -0.03em;
+}
+
+.StatLabel {
+  font-size: 0.85rem;
+  color: #64748b;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* ==========================================================================
+   TRATAMIENTOS
+   ========================================================================== */
+.TratamientosSection {
+  padding: 60px 24px;
+  box-sizing: border-box;
+}
+
+.SeccionHeader {
+  text-align: center;
+  margin-bottom: 40px;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.SeccionTitulo {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.03em;
+  margin: 0 0 8px 0;
+}
+
+.SeccionSubtitulo {
+  font-size: 0.95rem;
+  color: #64748b;
+  margin: 0;
+}
+
+.TratamientosGrid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+.TratamientoCard {
+  background-color: #ffffff;
+  border-radius: 20px;
+  border: 1px solid #f1f5f9;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(113, 96, 230, 0.04);
+}
+
+.TratamientoCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(113, 96, 230, 0.12);
+}
+
+.TratamientoCardImagen {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.TratamientoCardImagen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.TratamientoCard:hover .TratamientoCardImagen img {
+  transform: scale(1.05);
+}
+
+.TratamientoCardInfo {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.TratamientoCardNombre {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+}
+
+.TratamientoCardDesc {
+  font-size: 0.85rem;
+  color: #64748b;
+  line-height: 1.5;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.TratamientoCardPrecio {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #7160e6;
+  margin-top: 4px;
+}
+
+.VerTodosWrapper {
+  text-align: center;
+  margin-top: 32px;
+}
+
+.BtnVerTodos {
+  display: inline-block;
+  background-color: #ffffff;
+  color: #7160e6;
+  padding: 12px 32px;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1.5px solid #7160e6;
+  transition: all 0.2s ease;
+}
+
+.BtnVerTodos:hover {
+  background-color: #7160e6;
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   POR QUÉ ELEGIRNOS
+   ========================================================================== */
+.PorQueSection {
+  background-color: #ffffff;
+  padding: 60px 24px;
+  box-sizing: border-box;
+}
+
+.PorQueGrid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+.PorQueCard {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 28px;
+  border-radius: 20px;
+  background-color: #faf9fe;
+  border: 1px solid #f1f5f9;
+}
+
+.PorQueIcono {
+  width: 52px;
+  height: 52px;
+  background-color: #f5f3ff;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.PorQueTitulo {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+}
+
+.PorQueDesc {
+  font-size: 0.9rem;
+  color: #64748b;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ==========================================================================
+   CTA FINAL
+   ========================================================================== */
+.CTASection {
+  padding: 60px 24px;
+  box-sizing: border-box;
+  background: linear-gradient(135deg, #7160e6 0%, #c860e6 100%);
+}
+
+.CTAContenido {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+}
+
+.CTATitulo {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+
+.CTASubtitulo {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0;
+}
+
+.BtnCTA {
+  display: inline-block;
+  background-color: #ffffff;
+  color: #7160e6;
+  padding: 14px 32px;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  margin-top: 8px;
+}
+
+.BtnCTA:hover {
+  background-color: #f5f3ff;
+}
+
+/* ==========================================================================
+   DESKTOP
+   ========================================================================== */
+@media screen and (min-width: 1025px) {
+  .HeroContenido {
+    flex-direction: row;
+    text-align: left;
+    gap: 60px;
+  }
+
+  .HeroTexto {
+    text-align: left;
+    flex: 1;
+  }
+
+  .HeroBadge {
+    margin: 0;
+  }
+
+  .HeroSubtitulo {
+    margin: 0;
+  }
+
+  .HeroBotones {
+    justify-content: flex-start;
+  }
+
+  .HeroImagen {
+    flex: 1;
+  }
+
+  .StatsGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .TratamientosGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .PorQueGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .HeroTitulo {
+    font-size: 2.8rem;
+  }
+}

@@ -1,41 +1,41 @@
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { RouterModule, Router } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { AuthService } from '../../services/auth';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule, RouterModule],
+  standalone: true,
+  imports: [ReactiveFormsModule, RouterModule],
   templateUrl: './login.html',
-  styleUrl: './login.css',
+  styleUrl: './login.css'
 })
 export class Login {
-  correo: string = '';
-  contrasena: string = '';
-  mensajeError: string = '';
+  private readonly fb = inject(FormBuilder);
+  public readonly authService = inject(AuthService);
 
-  constructor(private router: Router){}
+  // Formulario reactivo con validaciones nativas básicas
+  readonly loginForm = this.fb.group({
+    correo: ['', [Validators.required, Validators.email]],
+    contrasena: ['', [Validators.required]]
+  });
 
-  iniciarSesion(): void {
-    if(!this.correo || !this.contrasena){
-      this.mensajeError = 'Por favor completa todos los campos.';
+  mostrarContrasena: boolean = false;
+
+  toggleContrasena(): void {
+    this.mostrarContrasena = !this.mostrarContrasena;
+  }
+
+  onSubmit(): void {
+    if (this.loginForm.invalid || this.authService.isLoading()) {
       return;
     }
 
-    // Simulación de autenticación
-    if(this.correo === 'admin@dental.com' && this.contrasena === 'admin123'){
-      localStorage.setItem('token', 'mock-token-admin');
-      localStorage.setItem('tipo_usuario', 'admin');
-      localStorage.setItem('nombre_usuario', 'Ana Luisa');
-      localStorage.setItem('sexo_usuario', 'Femenino');
-      this.router.navigate(['/gestionar-horarios']);
-    } else if(this.correo === 'cliente@dental.com' && this.contrasena === 'cliente123'){
-      localStorage.setItem('token','mock-token-cliente');
-      localStorage.setItem('tipo_usuario', 'cliente');
-      localStorage.setItem('nombre_usuario', 'José Carlos');
-      localStorage.setItem('sexo_usuario', 'Masculino');
-      this.router.navigate(['/inicio']);
-    } else {
-      this.mensajeError = 'Correo o contraseña incorrectos.';
+    // Extraemos los valores de manera segura limpiando posibles nulos o undefined
+    const { correo, contrasena } = this.loginForm.getRawValue();
+    
+    if (correo && contrasena) {
+      this.authService.login({ correo, contrasena });
     }
-  } 
+  }
 }

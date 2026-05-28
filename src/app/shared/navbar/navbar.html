@@ -1,49 +1,62 @@
-<div class="Menu" id="Menu">
-  <div id="LogoMenu">
-    <img src="Imagenes/logo.png" alt="Logo Consultorio">
+<nav class="navbar" [class.menu-abierto]="isMenuOpen()">
+  <div class="navbar-container">
+    
+    <a routerLink="/inicio" class="navbar-logo" (click)="closeMenu()">
+      <img src="Imagenes/logo.png" alt="Odontología Integral Flores">
+    </a>
+
+    <button class="hamburger-btn" (click)="toggleMenu()" aria-label="Abrir menú de navegación">
+      @if (isMenuOpen()) { ✕ } @else { ☰ }
+    </button>
+
+    <div class="navbar-menu">
+      
+      @if (!authService.isLoggedIn()) {
+        <a routerLink="/inicio" routerLinkActive="active" class="nav-link" (click)="closeMenu()">Inicio</a>
+        <a routerLink="/tratamientos" routerLinkActive="active" class="nav-link" (click)="closeMenu()">Tratamientos</a>
+        <a routerLink="/agendar" routerLinkActive="active" class="nav-link" (click)="closeMenu()">Agendar</a>
+        <a routerLink="/horarios" routerLinkActive="active" class="nav-link" (click)="closeMenu()">Horarios</a>
+        <a routerLink="/acerca" class="nav-link" routerLinkActive="active" (click)="closeMenu()">Acerca de nosotros</a>
+        
+        <div class="auth-buttons">
+          <a routerLink="/login" class="btn btn-secondary" (click)="closeMenu()">Iniciar sesión</a>
+          <a routerLink="/registro" class="btn btn-accent" (click)="closeMenu()">Registrarse</a>
+        </div>
+      }
+
+      @if (authService.isLoggedIn() && authService.tipoUsuario() === 'cliente') {
+        <span class="user-greeting">
+          {{ authService.saludo() }} <strong class="user-name">{{ authService.nombreUsuario() }}</strong>
+        </span>
+        
+        <a routerLink="/inicio" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link" (click)="closeMenu()">Inicio</a>
+        <a routerLink="/tratamientos" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link" (click)="closeMenu()">Tratamientos</a>
+        <a routerLink="/agendar" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link" (click)="closeMenu()">Agendar</a>
+        <a routerLink="/horarios" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link" (click)="closeMenu()">Horarios</a>
+        <a routerLink="/acerca" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link" (click)="closeMenu()">Acerca de nosotros</a>
+        <a routerLink="/mis-citas" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link" (click)="closeMenu()">Mis citas</a>
+        
+        <div class="auth-buttons">
+          <button (click)="cerrarSesion()" class="btn btn-logout">Cerrar sesión</button>
+        </div>
+      }
+
+      @if (authService.isLoggedIn() && authService.tipoUsuario() === 'admin') {
+        <span class="user-greeting admin-tag">
+          Panel Admin: <strong class="user-name">{{ authService.nombreUsuario() }}</strong>
+        </span>
+        
+        <a routerLink="/reportes" routerLinkActive="active" class="nav-link" (click)="closeMenu()">Reportes</a>
+        <a routerLink="/crear-reporte" routerLinkActive="active" class="nav-link" (click)="closeMenu()">Crear reporte</a>
+        <a routerLink="/gestionar-citas" routerLinkActive="active" class="nav-link" (click)="closeMenu()">Gestionar Citas</a>
+        <a routerLink="/gestionar-horarios" routerLinkActive="active" class="nav-link" (click)="closeMenu()">Gestionar Horarios</a>
+        <a routerLink="/gestionar-tratamientos" routerLinkActive="active" class="nav-link" (click)="closeMenu()">Gestionar Tratamientos</a>
+        
+        <div class="auth-buttons">
+          <button (click)="cerrarSesion()" class="btn btn-logout">Cerrar sesión</button>
+        </div>
+      }
+
+    </div>
   </div>
-
-  @if (!isAuthenticated) {
-    <div class="Hamburguesa" (click)="toggleMenu()">☰</div>
-    <div class="MenuItems">
-      <div class="Boton" routerLink="/inicio">Inicio</div>
-      <div class="Boton" routerLink="/tratamientos">Tratamientos</div>
-      <div class="Boton" routerLink="/agendar">Agendar</div>
-      <div class="Boton" routerLink="/horarios">Horarios</div>
-      <div class="Boton" routerLink="/acerca">Acerca de nosotros</div>
-      <div class="BotonSesion" routerLink="/login">Iniciar sesión</div>
-      <div class="BotonSesion" routerLink="/registro">Registrarse</div>
-    </div>
-  }
-
-  @if (isAuthenticated && tipoUsuario === 'cliente') {
-    <span style="font-family: Verdana; font-size: 14px;">
-      {{ saludo }} {{ nombreUsuario }}
-    </span>
-    <div class="Hamburguesa" (click)="toggleMenu()">☰</div>
-    <div class="MenuItems">
-      <div class="Boton" routerLink="/inicio">Inicio</div>
-      <div class="Boton" routerLink="/tratamientos">Tratamientos</div>
-      <div class="Boton" routerLink="/agendar">Agendar</div>
-      <div class="Boton" routerLink="/horarios">Horarios</div>
-      <div class="Boton" routerLink="/acerca">Acerca de nosotros</div>
-      <div class="Boton" routerLink="/mis-citas">Mis citas</div>
-      <div class="BotonSesion" (click)="cerrarSesion()">Cerrar sesión</div>
-    </div>
-  }
-
-  @if (isAuthenticated && tipoUsuario === 'admin') {
-    <span style="font-family: Verdana; font-size: 14px;">
-      {{ saludo }} {{ nombreUsuario }}
-    </span>
-    <div class="Hamburguesa" (click)="toggleMenu()">☰</div>
-    <div class="MenuItems">
-      <div class="Boton" routerLink="/reportes">Reportes</div>
-      <div class="Boton" routerLink="/crear-reporte">Crear reporte</div>
-      <div class="Boton" routerLink="/gestionar-citas">Gestionar Citas</div>
-      <div class="Boton" routerLink="/gestionar-horarios">Gestionar Horarios</div>
-      <div class="Boton" routerLink="/horarios">Horarios</div>
-      <div class="BotonSesion" (click)="cerrarSesion()">Cerrar sesión</div>
-    </div>
-  }
-</div>
+</nav>

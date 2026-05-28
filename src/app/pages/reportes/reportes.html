@@ -1,47 +1,105 @@
 <div class="Pagina">
   <div class="Contenido">
-    <div class="TitContenido">Reportes</div>
 
-    <div class="TablaReportes">
-      <div id="TituloCelda" class="CeldaReportes">Fecha</div>
-      <div id="TituloCelda" class="CeldaReportes">Tratamiento</div>
-      <div id="TituloCelda" class="CeldaReportes">Notas</div>
-      <div id="TituloCelda" class="CeldaReportes">Paciente</div>
+    <div class="ReportesHeader">
+      <div class="TitContenido">Reportes clínicos</div>
+      <div class="ReportesContador">
+        Total: <strong>{{ reportesService.totalReportes() }}</strong> reportes
+      </div>
+    </div>
 
-      @if (reportes.length === 0) {
-        <div class="CeldaReportes" style="grid-column: span 4; text-align:center;">
-          No hay reportes disponibles.
-        </div>
-      }
+    @if (reportesService.successMessage()) {
+      <div class="MensajeExito">{{ reportesService.successMessage() }}</div>
+    }
+    @if (reportesService.errorMessage()) {
+      <div class="MensajeError">{{ reportesService.errorMessage() }}</div>
+    }
 
-      @for (reporte of reportes; track reporte.id_reporte) {
-        <div class="CeldaReportes">
-          {{ reporte.fecha_cita }} {{ reporte.hora_cita }}
-        </div>
-        <div class="CeldaReportes">{{ reporte.nombre_tratamiento }}</div>
-        <div class="CeldaReportes">{{ reporte.notas }}</div>
-        <div class="CeldaReportes">
-          <div>{{ reporte.nombre_paciente }}</div>
-          <div>Tel: {{ reporte.telefono }}</div>
+    @if (reportesService.isLoading()) {
+      <div class="MensajeCargando">Cargando reportes...</div>
+    }
+
+    @if (reportesService.reportes().length === 0 && !reportesService.isLoading()) {
+      <div class="SinReportes">No hay reportes disponibles.</div>
+    }
+
+    <div class="ListaReportes">
+      @for (reporte of reportesService.reportes(); track reporte._id) {
+        <div class="TarjetaReporte">
+
+          <div class="TarjetaReporteHeader">
+            <div class="ReporteFechaHora">
+              <span class="ReporteIcono">📅</span>
+              <div>
+                <div class="ReporteFecha">{{ reporte.fecha_cita }}</div>
+                <div class="ReporteHora">{{ reporte.hora_cita }}</div>
+              </div>
+            </div>
+            <div class="ReporteTratamientoBadge">{{ reporte.nombre_tratamiento }}</div>
+          </div>
+
+          <div class="TarjetaReporteBody">
+            <div class="ReporteNotas">
+              <span class="ReporteNotasLabel">Notas clínicas</span>
+              @if (reporteEditandoId() === reporte._id) {
+                <textarea class="ReporteTextarea" [value]="notasEditando()" (input)="notasEditando.set($any($event.target).value)" rows="4"></textarea>
+                <div class="BotonesEdicion">
+                  <button class="BtnGuardar" (click)="guardarReporte(reporte._id!)">Guardar</button>
+                  <button class="BtnCancelarEdicion" (click)="cancelarEdicion()">Cancelar</button>
+                </div>
+              } @else {
+                <p class="ReporteNotasTexto">{{ reporte.notas }}</p>
+              }
+            </div>
+          </div>
+
+          <div class="TarjetaReporteFooter">
+            <span class="ReporteIcono">👤</span>
+            <div class="ReportePacienteInfo">
+              <span class="ReportePacienteNombre">{{ reporte.nombre_paciente }}</span>
+              <span class="ReportePacienteTelefono">{{ reporte.telefono }}</span>
+            </div>
+            @if (reporteEditandoId() !== reporte._id) {
+              <div class="ReporteAcciones">
+                <button class="BtnEditarReporte" (click)="editarReporte(reporte)">Editar</button>
+                <button class="BtnEliminarReporte" (click)="eliminarReporte(reporte._id!)">Eliminar</button>
+              </div>
+            }
+          </div>
+
         </div>
       }
     </div>
 
-    <!-- Paginación -->
-    @if (totalPaginas > 1) {
-      <div class="DesplazarReporte" style="justify-content:center; align-items:center; gap:10px; margin-top:20px;">
-        <img src="Imagenes/FlechaIzq.png" alt="Anterior"
-          [style.opacity]="paginaActual === 1 ? '0.3' : '1'"
-          [style.cursor]="paginaActual === 1 ? 'default' : 'pointer'"
+    @if (totalPaginas() > 1) {
+      <div class="DesplazarReporte">
+        <button type="button" class="BtnPagina"
+          [disabled]="paginaActual === 1"
           (click)="cambiarPagina(paginaActual - 1)">
-        <div id="NoReporte">
-          {{ paginaActual | number:'2.0-0' }}/{{ totalPaginas | number:'2.0-0' }}
-        </div>
-        <img src="Imagenes/FlechaDer.png" alt="Siguiente"
-          [style.opacity]="paginaActual === totalPaginas ? '0.3' : '1'"
-          [style.cursor]="paginaActual === totalPaginas ? 'default' : 'pointer'"
+          ← Anterior
+        </button>
+        <span class="PaginaInfo">{{ paginaActual }} / {{ totalPaginas() }}</span>
+        <button type="button" class="BtnPagina"
+          [disabled]="paginaActual === totalPaginas()"
           (click)="cambiarPagina(paginaActual + 1)">
+          Siguiente →
+        </button>
       </div>
     }
+
   </div>
+  @if (modalVisible()) {
+    <div class="ModalOverlay" (click)="cancelarModal()">
+      <div class="ModalContenido" (click)="$event.stopPropagation()">
+        <div class="ModalIcono">⚠️</div>
+        <div class="ModalTitulo">{{ modalTitulo() }}</div>
+        <div class="ModalMensaje">{{ modalMensaje() }}</div>
+        <div class="ModalBotones">
+          <button class="BtnModalCancelar" (click)="cancelarModal()">Cancelar</button>
+          <button class="BtnModalEliminar" (click)="confirmarModal()">{{ modalTextoConfirmar() }}</button>
+        </div>
+      </div>
+    </div>
+  }
 </div>
+

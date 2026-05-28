@@ -1,0 +1,116 @@
+<div class="SeccionResenas">
+  <div class="resenas-layout-container">
+
+    <div class="ResenasTitulo">Reseñas del tratamiento</div>
+
+    @if (resenasService.isLoading()) {
+      <div class="ResenasLoading">Cargando reseñas...</div>
+    }
+
+    @if (resenasService.resenas().length === 0 && !resenasService.isLoading()) {
+      <div class="SinResenas">Aún no hay reseñas para este tratamiento.</div>
+    }
+
+    <div class="ListaResenas">
+      @for (resena of resenasService.resenas(); track resena._id) {
+        <div class="TarjetaResena">
+          <div class="ResenaHeader">
+            <div class="ResenaEstrellas">
+              @for (estrella of [1,2,3,4,5]; track estrella) {
+                <span [class.estrella-llena]="estrella <= resena.calificacion"
+                      [class.estrella-vacia]="estrella > resena.calificacion">★</span>
+              }
+            </div>
+            <div class="ResenaMeta">
+              <span class="ResenaPaciente">{{ resena.nombre_paciente }}</span>
+              <span class="ResenaFecha">{{ formatearFecha(resena.fecha) }}</span>
+            </div>
+          </div>
+
+          @if (resenaEditandoId === resena._id) {
+            <div class="FormularioEdicionResena">
+              <div class="SelectorEstrellas">
+                @for (estrella of estrellas; track estrella) {
+                  <span class="EstrellaSelectorItem"
+                    [class.estrella-activa]="estrella <= calificacionEditando"
+                    (click)="seleccionarEstrellaEdicion(estrella)">★</span>
+                }
+              </div>
+              <textarea class="ResenaTextarea" [(ngModel)]="comentarioEditando" rows="3"></textarea>
+              <div class="BotonesEdicion">
+                <button class="BtnGuardarResena" (click)="guardarResena(resena._id!)">Guardar</button>
+                <button class="BtnCancelarEdicion" (click)="cancelarEdicionResena()">Cancelar</button>
+              </div>
+            </div>
+          } @else {
+            @if (resena.comentario) {
+              <div class="ResenaComentario">{{ resena.comentario }}</div>
+            }
+          }
+
+          @if (authService.isLoggedIn() && !authService.isAdmin() && esMiResena(resena) && resenaEditandoId !== resena._id) {
+            <div class="ResenaAcciones">
+              <button class="BtnEditarResena" (click)="editarResena(resena)">Editar</button>
+              <button class="BtnEliminarResena" (click)="eliminarResena(resena._id!)">Eliminar</button>
+            </div>
+          }
+
+        </div>
+      }
+    </div>
+
+    @if (authService.isLoggedIn() && !authService.isAdmin()) {
+      @if (resenasService.puedeResenar().puede) {
+        <div class="FormularioResena">
+          <div class="FormResenaTitle">Deja tu reseña</div>
+
+          <div class="SelectorEstrellas">
+            @for (estrella of estrellas; track estrella) {
+              <span class="EstrellaSelectorItem"
+                [class.estrella-activa]="estrella <= calificacionSeleccionada"
+                (click)="seleccionarEstrella(estrella)">★</span>
+            }
+          </div>
+
+          <textarea class="ResenaTextarea" [(ngModel)]="comentario"
+            rows="4" placeholder="Comparte tu experiencia (opcional)..."></textarea>
+
+          @if (resenasService.errorMessage()) {
+            <div class="RefMensaje ErrorColor">{{ resenasService.errorMessage() }}</div>
+          }
+          @if (resenasService.successMessage()) {
+            <div class="RefMensaje ExitoColor">{{ resenasService.successMessage() }}</div>
+          }
+
+          <button class="BtnEnviarResena" (click)="enviarResena()"
+            [disabled]="!calificacionSeleccionada || resenasService.isLoading()">
+            {{ resenasService.isLoading() ? 'Publicando...' : 'Publicar reseña' }}
+          </button>
+        </div>
+      } @else if (resenasService.puedeResenar().razon === 'ya_reseno') {
+        <div class="MensajeResenaEstado">Ya dejaste una reseña para este tratamiento.</div>
+      } @else if (resenasService.puedeResenar().razon === 'sin_cita') {
+        <div class="MensajeResenaEstado">Solo puedes reseñar tratamientos que hayas recibido.</div>
+      }
+    } @else if (!authService.isLoggedIn()) {
+      <div class="MensajeResenaEstado">
+        <a routerLink="/login">Inicia sesión</a> para dejar una reseña.
+      </div>
+    }
+
+  </div>
+</div>
+
+@if (modalVisible()) {
+  <div class="ModalOverlay" (click)="cancelarModal()">
+    <div class="ModalContenido" (click)="$event.stopPropagation()">
+      <div class="ModalIcono">⚠️</div>
+      <div class="ModalTitulo">{{ modalTitulo() }}</div>
+      <div class="ModalMensaje">{{ modalMensaje() }}</div>
+      <div class="ModalBotones">
+        <button class="BtnModalCancelar" (click)="cancelarModal()">Cancelar</button>
+        <button class="BtnModalEliminar" (click)="confirmarModal()">{{ modalTextoConfirmar() }}</button>
+      </div>
+    </div>
+  </div>
+}

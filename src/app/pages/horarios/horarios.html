@@ -1,58 +1,15 @@
-<div class="Pagina">
-  <div class="Contenido">
-    <div class="TitContenido" id="TitHor">Horarios disponibles</div>
-    <div id="ContenidoHorarios">
-      <div class="TablaHorarios">
-
-        <!-- Navegación del mes -->
-        <div class="CeldaMes">
-          <img src="Imagenes/FlechaIzq.png" style="cursor:pointer;" (click)="mesAnterior()">
-          <div class="Mes">{{ nombreMes }} {{ anioActual }}</div>
-          <img src="Imagenes/FlechaDer.png" style="cursor:pointer;" (click)="mesSiguiente()">
-        </div>
-
-        <!-- Días de la semana -->
-        @for (dia of diasSemana; track dia) {
-          <div class="CeldaDia">{{ dia }}</div>
-        }
-
-        <!-- Espacios vacíos antes del primer día -->
-        @for (vacio of vacios; track vacio) {
-          <div class="CeldaHorario sinHorario"></div>
-        }
-
-        <!-- Días del mes -->
-        @for (dia of diasDelMes; track dia.fecha) {
-          <div class="CeldaHorario" [class.sinHorario]="!dia.disponible" [class.disponible]="dia.disponible">
-            @if (!dia.disponible) {
-              <div class="DiaHorario">{{ dia.numero }}</div>
-            }
-            @if (dia.disponible && !isAdmin) {
-              <div style="cursor:pointer;" (click)="irAgendar(dia.fecha)">
-                <div class="DiaHorario">{{ dia.numero }}</div>
-                @for (bloque of dia.bloques; track bloque) {
-                  <div [class]="bloque.turno === 'Mat' ? 'CeldaHorarioMat' : 'CeldaHorarioVes'">
-                    {{ bloque.horaIni }}-{{ bloque.horaFin }}
-                  </div>
-                }
-              </div>
-            }
-            @if (dia.disponible && isAdmin) {
-              <div class="DiaHorario">{{ dia.numero }}</div>
-              @for (bloque of dia.bloques; track bloque) {
-                <div [class]="bloque.turno === 'Mat' ? 'CeldaHorarioMat' : 'CeldaHorarioVes'">
-                  {{ bloque.horaIni }}-{{ bloque.horaFin }}
-                </div>
-              }
-              <span style="color:red; font-weight:bold; cursor:pointer; font-size:12px;"
-                (click)="eliminarFecha(dia.fecha)">
-                Eliminar
-              </span>
-            }
-          </div>
-        }
-
-      </div>
-    </div>
-  </div>
+<div class="schedule-page">
+  <main class="schedule-container">
+    <h1 class="schedule-title">Horarios Disponibles</h1>
+    
+    <app-calendario
+        [dias]="diasConBadge()"
+        [vacios]="horariosService.vacios()"
+        [nombreMes]="horariosService.nombreMes()"
+        [anioActual]="horariosService.anioActual()"
+        (anteriorClic)="horariosService.mesAnterior()"
+        (siguienteClic)="horariosService.mesSiguiente()"
+        (diaClic)="irAgendar($event.fecha)">
+      </app-calendario>
+    </main>
 </div>

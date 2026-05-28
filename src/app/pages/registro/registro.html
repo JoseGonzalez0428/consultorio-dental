@@ -1,70 +1,69 @@
 <div class="Pagina">
   <div id="MenuDeLogin"></div>
   <div class="Contenido">
-    <div id="LogoLogin">
-      <img src="Imagenes/logo.png" alt="Logo">
-    </div>
+    <div id="LogoLogin"><img src="Imagenes/logo.png" alt="Logo"></div>
 
     <div class="CuadroLogin">
-      <div class="TitLogin">Nombres</div>
-      <div class="Campo">
-        <input type="text" [(ngModel)]="nombres" required>
-      </div>
+      <form [formGroup]="registroForm" (ngSubmit)="onSubmit()">
+        <div class="TitLogin">Nombres</div>
+        <div class="Campo"><input type="text" formControlName="nombres" placeholder="Tu nombre"></div>
 
-      <div class="TitLogin">Apellido Paterno</div>
-      <div class="Campo">
-        <input type="text" [(ngModel)]="apellidoPaterno" required>
-      </div>
+        <div class="TitLogin">Apellido Paterno</div>
+        <div class="Campo"><input type="text" formControlName="apellido_paterno" placeholder="Primer apellido"></div>
 
-      <div class="TitLogin">Apellido Materno</div>
-      <div class="Campo">
-        <input type="text" [(ngModel)]="apellidoMaterno">
-      </div>
+        <div class="TitLogin">Apellido Materno</div>
+        <div class="Campo"><input type="text" formControlName="apellido_materno" placeholder="Segundo apellido"></div>
 
-      <div class="TitLogin">Email</div>
-      <div class="Campo">
-        <input type="email" [(ngModel)]="correo" required>
-      </div>
+        <div class="TitLogin">Email</div>
+        <div class="Campo"><input type="email" formControlName="correo" placeholder="ejemplo@correo.com"></div>
 
-      <div class="TitLogin">Teléfono</div>
-      <div class="Campo">
-        <input type="text" [(ngModel)]="telefono" required>
-      </div>
+        <div class="TitLogin">Teléfono</div>
+        <div class="Campo"><input type="text" formControlName="telefono" placeholder="10 dígitos"></div>
 
-      <div class="TitLogin">Contraseña</div>
-      <div class="Campo">
-        <input type="password" [(ngModel)]="contrasena" required>
-      </div>
-
-      <div class="TitLogin">Fecha de Nacimiento</div>
-      <div class="Campo">
-        <input type="date" [(ngModel)]="fechaNacimiento" required>
-      </div>
-
-      <div class="TitLogin">Sexo</div>
-      <div class="Campo" id="CampoSexo">
-        <select [(ngModel)]="sexo" required>
-          <option value="">Selecciona</option>
-          <option value="Masculino">Masculino</option>
-          <option value="Femenino">Femenino</option>
-        </select>
-      </div>
-
-      <div id="BotonRegistrar">
-        <input type="submit" value="Registrarse" (click)="registrarse()">
-      </div>
-
-      @if (mensaje) {
-        <div style="margin-top: 10px; text-align: center; font-family: Verdana;"
-          [style.color]="esError ? 'red' : 'green'">
-          {{ mensaje }}
+        <div class="TitLogin">Contraseña</div>
+        <div class="Campo CampoPassword">
+          <input [type]="mostrarContrasena ? 'text' : 'password'" formControlName="contrasena" placeholder="Mínimo 6 caracteres">
+          <button type="button" class="BtnOjito" (click)="toggleContrasena()">
+            @if (mostrarContrasena) {
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+                <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+                <line x1="1" y1="1" x2="23" y2="23"/>
+              </svg>
+            } @else {
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                <circle cx="12" cy="12" r="3"/>
+              </svg>
+            }
+          </button>
         </div>
-      }
+
+        <div class="TitLogin">Fecha de Nacimiento</div>
+        <div class="Campo"><input type="date" formControlName="fecha_nacimiento"></div>
+
+        <div class="TitLogin">Sexo</div>
+        <div class="Campo" id="CampoSexo">
+          <select formControlName="sexo">
+            <option value="">Selecciona</option>
+            <option value="Masculino">Masculino</option>
+            <option value="Femenino">Femenino</option>
+          </select>
+        </div>
+
+        <div id="BotonRegistrar">
+          <button type="submit" [disabled]="registroForm.invalid || authService.isLoading()">
+            @if (authService.isLoading()) { Registrando... } @else { Registrarse }
+          </button>
+        </div>
+
+        @if (authService.errorMessage()) {
+          <div class="MensajeError">{{ authService.errorMessage() }}</div>
+        }
+      </form>
 
       <div id="Pregunta">¿Ya tienes una cuenta?</div>
-      <div id="IniciaSesion">
-        <a routerLink="/login">Inicia Sesión</a>
-      </div>
+      <div id="IniciaSesion"><a routerLink="/login">Inicia Sesión</a></div>
     </div>
   </div>
   <div id="PieDeLogin"></div>

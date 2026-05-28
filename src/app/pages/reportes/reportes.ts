@@ -1,92 +1,98 @@
-import { Component, OnInit } from '@angular/core';
-import { DecimalPipe } from '@angular/common';
-
-interface Reporte {
-  id_reporte: number;
-  fecha_cita: string;
-  hora_cita: string;
-  nombre_tratamiento: string;
-  notas: string;
-  nombre_paciente: string;
-  telefono: string;
-}
+import { Component, OnInit, inject, computed, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { ReportesService } from '../../services/reportes';
+import { Reporte } from '../../interfaces/reporte.interface';
 
 @Component({
   selector: 'app-reportes',
   standalone: true,
-  imports: [DecimalPipe],
+  imports: [FormsModule],
   templateUrl: './reportes.html',
-  styleUrls: ['./reportes.css']
+  styleUrl: './reportes.css'
 })
 export class Reportes implements OnInit {
 
-  reportes: Reporte[] = [];
-  paginaActual: number = 1;
-  reportesPorPagina: number = 3;
-  totalPaginas: number = 1;
+  public reportesService = inject(ReportesService);
 
-  // Datos mock — se reemplazarán con llamadas al backend
-  private todosLosReportes: Reporte[] = [
-    {
-      id_reporte: 1,
-      fecha_cita: '15/02/2025',
-      hora_cita: '12:00',
-      nombre_tratamiento: 'Extracción dental',
-      notas: 'Se realizó extracción simple bajo anestesia local con lidocaína al 2%. No se presentaron complicaciones. Se indicaron analgésicos y antibióticos.',
-      nombre_paciente: 'Mariana López Hernández',
-      telefono: '+52 485 123 4567'
-    },
-    {
-      id_reporte: 2,
-      fecha_cita: '15/02/2025',
-      hora_cita: '10:00',
-      nombre_tratamiento: 'Limpieza dental',
-      notas: 'Se realizó profilaxis con ultrasonido y pulido dental con pasta fluorada.',
-      nombre_paciente: 'Roberto Sánchez Ramírez',
-      telefono: '+52 485 987 6543'
-    },
-    {
-      id_reporte: 3,
-      fecha_cita: '14/02/2025',
-      hora_cita: '18:00',
-      nombre_tratamiento: 'Colocación de resina en caries',
-      notas: 'Se realizó eliminación de caries con turbina, aplicación de adhesivo y colocación de resina compuesta fotopolimerizable.',
-      nombre_paciente: 'Alejandra Torres Medina',
-      telefono: '+52 485 246 8109'
-    },
-    {
-      id_reporte: 4,
-      fecha_cita: '14/02/2025',
-      hora_cita: '14:00',
-      nombre_tratamiento: 'Colocación de corona de porcelana',
-      notas: 'Se realizó desgaste dental, toma de impresión y colocación de corona provisional. Se programó cita para la colocación de la corona definitiva en 7 días.',
-      nombre_paciente: 'Fernando Gutiérrez Castro',
-      telefono: '+52 485 765 4321'
-    },
-    {
-      id_reporte: 5,
-      fecha_cita: '13/02/2025',
-      hora_cita: '11:00',
-      nombre_tratamiento: 'Consulta general',
-      notas: 'Se realizó revisión general. Se detectaron dos caries incipientes. Se recomienda tratamiento preventivo con flúor.',
-      nombre_paciente: 'Sofía Ramírez Vega',
-      telefono: '+52 485 321 6547'
-    },
-  ];
+  paginaActual: number = 1;
+  reporteEditandoId = signal<string | null>(null);
+  notasEditando = signal<string>('');
+
+  modalVisible = signal(false);
+  modalTitulo = signal('');
+  modalMensaje = signal('');
+  modalTextoConfirmar = signal('');
+  private modalAccion: (() => void) | null = null;
+
+  totalPaginas = computed(() =>
+    Math.ceil(this.reportesService.totalReportes() / this.reportesService.reportesPorPagina)
+  );
 
   ngOnInit(): void {
-    this.totalPaginas = Math.ceil(this.todosLosReportes.length / this.reportesPorPagina);
-    this.cargarPagina(1);
-  }
-
-  cargarPagina(pagina: number): void {
-    if (pagina < 1 || pagina > this.totalPaginas) return;
-    this.paginaActual = pagina;
-    const offset = (pagina - 1) * this.reportesPorPagina;
-    this.reportes = this.todosLosReportes.slice(offset, offset + this.reportesPorPagina);
+    this.reportesService.fetchReportes(this.paginaActual);
   }
 
   cambiarPagina(pagina: number): void {
-    this.cargarPagina(pagina);
+    if (pagina < 1 || pagina > this.totalPaginas()) return;
+    this.paginaActual = pagina;
+    this.reportesService.fetchReportes(this.paginaActual);
+  }
+
+  editarReporte(reporte: Reporte): void {
+    console.log('editarReporte llamado', reporte);
+    this.reporteEditandoId.set(reporte._id!);
+    this.notasEditando.set(reporte.notas);
+  }
+
+  cancelarEdicion(): void {
+    this.reporteEditandoId.set(null);
+    this.notasEditando.set('');
+  }
+
+  guardarReporte(id: string): void {
+    if (!this.notasEditando().trim()) return;
+    this.abrirModal({
+      titulo: 'Actualizar reporte',
+      mensaje: '¿Confirmas que deseas guardar los cambios en este reporte?',
+      textoConfirmar: 'Guardar',
+      accion: () => {
+        this.reportesService.actualizarReporte(id, this.notasEditando());
+        this.cancelarEdicion();
+      }
+    });
+  }
+
+  eliminarReporte(id: string): void {
+    console.log('eliminarReporte llamado', id);
+    this.abrirModal({
+      titulo: 'Eliminar reporte',
+      mensaje: '¿Estás seguro de que deseas eliminar este reporte?',
+      textoConfirmar: 'Eliminar',
+      accion: () => this.reportesService.eliminarReporte(id)
+    });
+  }
+
+  abrirModal(opciones: {
+    titulo: string;
+    mensaje: string;
+    textoConfirmar: string;
+    accion: () => void;
+  }): void {
+    console.log('abrirModal llamado', opciones.titulo);
+    this.modalTitulo.set(opciones.titulo);
+    this.modalMensaje.set(opciones.mensaje);
+    this.modalTextoConfirmar.set(opciones.textoConfirmar);
+    this.modalAccion = opciones.accion;
+    this.modalVisible.set(true);
+  }
+
+  confirmarModal(): void {
+    console.log('confirmarModal llamado', this.modalAccion);
+    if (this.modalAccion) this.modalAccion();
+    this.modalVisible.set(false);
+  }
+
+  cancelarModal(): void {
+    this.modalVisible.set(false);
   }
 }

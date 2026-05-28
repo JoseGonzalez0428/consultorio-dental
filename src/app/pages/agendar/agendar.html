@@ -1,5 +1,6 @@
 <div class="Pagina">
-  <div class="Contenido" id="ContAgendar">
+  <div id="ContAgendar">
+    
     <div class="AgendarIzq">
       <div class="TitContenido">Agendar una cita</div>
       <div id="ImgAgendar">
@@ -8,56 +9,74 @@
     </div>
 
     <div class="AgendarDer">
-      <!-- Tratamiento -->
-      <div class="TitOpcion">Tratamiento:</div>
-      <div class="Opciones">
-        <div class="TipoOpcion">Tipo de tratamiento</div>
-        <div class="BotonOpcion">
-          <select [(ngModel)]="idTratamientoSeleccionado" required>
-            <option value="">Seleccione...</option>
-            @for (t of tratamientos; track t.id) {
-              <option [value]="t.id">{{ t.nombre }}</option>
-            }
-          </select>
+      <form [formGroup]="agendarForm" (ngSubmit)="onSubmit()">
+        
+        <div class="form-group-booking">
+          <label class="TitOpcion">Tratamiento:</label>
+          <div class="Opciones">
+            <div class="TipoOpcion">Tipo de tratamiento</div>
+            <div class="BotonOpcion InputCompleto">
+              <select formControlName="id_tratamiento">
+                <option value="">Seleccione...</option>
+                @for (t of tratamientosService.tratamientos(); track t._id) {
+                  <option [value]="t._id">{{ t.nombre }}</option>
+                }
+              </select>
+            </div>
+          </div>
         </div>
-      </div>
 
-      <!-- Fecha -->
-      <div class="TitOpcion">Fecha:</div>
-      <div class="Opciones">
-        <div class="TipoOpcion">Seleccione una fecha</div>
-        <div class="BotonOpcion">
-          <select [(ngModel)]="fechaSeleccionada" (ngModelChange)="cargarHoras($event)" required>
-            <option value="">Seleccione...</option>
-            @for (f of fechasDisponibles; track f) {
-              <option [value]="f">{{ formatearFecha(f) }}</option>
-            }
-          </select>
+        <div class="booking-datetime-row">
+          
+          <div class="datetime-field-wrapper">
+            <label class="TitOpcion">Fecha:</label>
+            <div class="Opciones">
+              <div class="TipoOpcion">Seleccione una fecha</div>
+              <div class="BotonOpcion InputCompleto">
+                <select formControlName="fecha" (change)="cargarHoras(agendarForm.controls.fecha.value ?? '')">
+                  <option value="">Seleccione...</option>
+                  @for (f of fechasDisponibles(); track f) {
+                    <option [value]="f">{{ formatearFecha(f) }}</option>
+                  }
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="datetime-field-wrapper">
+            <label class="TitOpcion">Hora:</label>
+            <div class="Opciones">
+              <div class="TipoOpcion">Seleccione una hora</div>
+              <div class="BotonOpcion InputCompleto">
+                <select formControlName="hora">
+                  <option value="">Seleccione una fecha primero</option>
+                  @for (h of horasDisponibles; track h.inicio) {
+                    <option [value]="h.inicio">{{ h.inicio }} - {{ h.fin }}</option>
+                  }
+                </select>
+              </div>
+            </div>
+          </div>
+
         </div>
-      </div>
 
-      <!-- Hora -->
-      <div class="TitOpcion">Hora:</div>
-      <div class="Opciones">
-        <div class="TipoOpcion">Seleccione una hora</div>
-        <div class="BotonOpcion">
-          <select [(ngModel)]="horaSeleccionada" [disabled]="!fechaSeleccionada" required>
-            <option value="">Seleccione una fecha primero</option>
-            @for (h of horasDisponibles; track h.inicio) {
-              <option [value]="h.inicio">{{ h.inicio }} - {{ h.fin }}</option>
-            }
-          </select>
-        </div>
-      </div>
+        <button type="submit" class="BotonCita" [disabled]="agendarForm.invalid || citasService.isLoading()">
+          @if (citasService.isLoading()) {
+            Procesando...
+          } @else {
+            Confirmar cita
+          }
+        </button>
+      </form>
 
-      <br>
-      <button class="BotonCita" (click)="confirmarCita()">Confirmar cita</button>
+      @if (citasService.successMessage()) {
+        <div class="MensajeExito">{{ citasService.successMessage() }}</div>
+      }
 
-      @if (mensaje) {
-        <p style="margin-top: 20px; font-family: Verdana; font-weight: bold;">
-          {{ mensaje }}
-        </p>
+      @if (citasService.errorMessage()) {
+        <div class="MensajeError">{{ citasService.errorMessage() }}</div>
       }
     </div>
+
   </div>
 </div>

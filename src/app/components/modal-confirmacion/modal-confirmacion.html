@@ -1,0 +1,15 @@
+@if (visible()) {
+  <div class="ModalOverlay" (click)="cancelar()">
+    <div class="ModalContenido" (click)="$event.stopPropagation()">
+      <div class="ModalIcono">⚠️</div>
+      <div class="ModalTitulo">{{ titulo() }}</div>
+      <div class="ModalMensaje">{{ mensaje() }}</div>
+      <div class="ModalBotones">
+        <button class="BtnModalCancelar" (click)="cancelar()">Cancelar</button>
+        <button class="BtnModalConfirmar" [class]="claseBoton()" (click)="confirmar()">
+          {{ textoConfirmar() }}
+        </button>
+      </div>
+    </div>
+  </div>
+}

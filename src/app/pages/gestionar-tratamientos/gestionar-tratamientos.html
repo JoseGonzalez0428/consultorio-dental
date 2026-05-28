@@ -1,0 +1,143 @@
+<div class="Pagina">
+  <div class="Contenido">
+
+    <div class="GestionHeader">
+      <div class="TitContenido">Gestionar Tratamientos</div>
+      <div class="GestionContador">
+        {{ tratamientosService.tratamientos().length }} tratamientos registrados
+      </div>
+    </div>
+
+    @if (tratamientosService.successMessage()) {
+      <div class="MensajeExito">{{ tratamientosService.successMessage() }}</div>
+    }
+    @if (tratamientosService.errorMessage()) {
+      <div class="MensajeError">{{ tratamientosService.errorMessage() }}</div>
+    }
+
+    <div class="GestionLayout">
+
+      <!-- Panel izquierdo: Formulario -->
+      <div class="PanelFormulario">
+        <div class="PanelTitulo">
+          {{ tratamientoEditando ? 'Editando tratamiento' : 'Nuevo tratamiento' }}
+        </div>
+
+        <form [formGroup]="tratamientoForm" (ngSubmit)="onSubmit()">
+          <div class="CampoGrupo">
+            <label class="CampoLabel">Nombre</label>
+            <input class="CampoInput" type="text" formControlName="nombre" placeholder="Ej: Limpieza dental">
+          </div>
+
+          <div class="CampoGrupo">
+            <label class="CampoLabel">Descripción</label>
+            <textarea class="CampoInput CampoTextarea" formControlName="descripcion" rows="3"
+              placeholder="Descripción del tratamiento..."></textarea>
+          </div>
+
+          
+            <div class="CampoGrupo">
+              <label class="CampoLabel">Precio</label>
+              <input class="CampoInput" type="text" formControlName="precio" placeholder="$250">
+            </div>
+
+            <div class="CampoGrupo">
+              <label class="CampoLabel">
+                Imagen
+                @if (tratamientoEditando) {
+                  <span class="CampoHint">(dejar vacío para mantener la actual)</span>
+                }
+              </label>
+              
+              <input 
+                #fileInput
+                class="InputFileOculto" 
+                type="file" 
+                accept="image/*" 
+                (change)="onImagenSeleccionada($event)">
+
+              <div class="ContenedorUploadFalso" (click)="fileInput.click()">
+                <span class="UploadIcono">↑</span>
+                <div class="UploadTextos">
+                  <span class="UploadTextoPrincipal">Seleccionar imagen del tratamiento</span>
+                  <span class="UploadTextoSecundario">Formatos admitidos: JPG, PNG, WEBP</span>
+                </div>
+              </div>
+
+              @if (imagenPreview) {
+                <div class="ImagenActual">
+                  <div class="ImagenActualMiniatura">
+                    <img [src]="imagenPreview" alt="Vista previa">
+                  </div>
+                  <div class="ImagenActualMeta">
+                    <span class="ImagenActualLabel">Nueva imagen seleccionada</span>
+                    <span class="ImagenActualNombre">{{ imagenSeleccionada?.name }}</span>
+                  </div>
+                </div>
+              } @else if (tratamientoEditando && tratamientoEditando.imagen) {
+                <div class="ImagenActual">
+                  <div class="ImagenActualMiniatura">
+                    <img [src]="tratamientoEditando.imagen" alt="Imagen actual">
+                  </div>
+                  <div class="ImagenActualMeta">
+                    <span class="ImagenActualLabel">Imagen actual en servidor</span>
+                    <span class="ImagenActualNombre">{{ tratamientoEditando.imagen }}</span>
+                  </div>
+                </div>
+              }
+            </div>
+
+
+          <div class="CampoGrupo">
+            <label class="CampoLabel">Recomendaciones <span class="CampoHint">(una por línea)</span></label>
+            <textarea class="CampoInput CampoTextarea" formControlName="recomendaciones" rows="5"
+              placeholder="Primera indicación&#10;Segunda indicación&#10;Tercera indicación"></textarea>
+          </div>
+
+          <div class="BotonesFormulario">
+            <button type="submit" class="BtnPrimario"
+              [disabled]="tratamientoForm.invalid || tratamientosService.isLoading()">
+              {{ tratamientosService.isLoading() ? 'Guardando...' : (tratamientoEditando ? 'Actualizar' : 'Crear tratamiento') }}
+            </button>
+            @if (tratamientoEditando) {
+              <button type="button" class="BtnSecundario" (click)="cancelarEdicion()">
+                Cancelar
+              </button>
+            }
+          </div>
+        </form>
+      </div>
+
+      <!-- Panel derecho: Lista de tratamientos -->
+      <div class="PanelLista">
+        <div class="PanelTitulo">Tratamientos existentes</div>
+
+        @if (tratamientosService.tratamientos().length === 0) {
+          <div class="SinTratamientos">No hay tratamientos registrados.</div>
+        }
+
+        <div class="ListaTratamientos">
+          @for (t of tratamientosService.tratamientos(); track t._id) {
+            <div class="TarjetaTratamiento" [class.TarjetaEditando]="tratamientoEditando?._id === t._id">
+              <div class="TratamientoInfo">
+                <div class="TratamientoNombre">{{ t.nombre }}</div>
+                <div class="TratamientoPrecio">{{ t.precio }}</div>
+              </div>
+              <div class="TratamientoAcciones">
+                @if (t.activo) {
+                  <button class="BtnEditar" (click)="editarTratamiento(t)">Editar</button>
+                  <button class="BtnEliminar" (click)="eliminarTratamiento(t._id!)">Desactivar</button>
+                } @else {
+                  <button class="BtnEditar" (click)="reactivarTratamiento(t._id!)">Reactivar</button>
+                }
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<app-modal-confirmacion #modal></app-modal-confirmacion>
